@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/cart_fragment.xml" value="0.20416666666666666" />
+        <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/category_fragment.xml" value="0.20416666666666666" />
+        <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/home_fragment.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Ebrah/AndroidStudioProjects/ECommerce/app/src/main/res/layout/activity_main.xml" value="0.2604166666666667" />
         <entry key="..\:/Users/Ebrah/AndroidStudioProjects/ECommerce/app/src/main/res/layout/cart_fragment.xml" value="0.27447916666666666" />
         <entry key="..\:/Users/Ebrah/AndroidStudioProjects/ECommerce/app/src/main/res/layout/category_fragment.xml" value="0.2604166666666667" />
