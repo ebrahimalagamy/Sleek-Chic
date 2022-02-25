@@ -1,7 +1,5 @@
 package com.hema.e_commerce.ui.profile
 
-import android.database.DatabaseUtils
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -17,9 +15,7 @@ class Profile : Fragment(R.layout.profile_fragment) {
 
     private lateinit var viewModel: ProfileViewModel
     private lateinit var binding:ProfileFragmentBinding
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater,R.layout.profile_fragment, container, false)
         return binding.root
