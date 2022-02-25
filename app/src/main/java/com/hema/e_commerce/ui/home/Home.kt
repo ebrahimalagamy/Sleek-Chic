@@ -1,9 +1,9 @@
 package com.hema.e_commerce.ui.home
 
 import android.os.Bundle
-import android.view.*
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.denzcoskun.imageslider.models.SlideModel
@@ -13,15 +13,17 @@ import com.hema.e_commerce.databinding.HomeFragmentBinding
 
 class Home : Fragment(R.layout.home_fragment) {
 
-    private lateinit var binding:HomeFragmentBinding
+    private lateinit var binding: HomeFragmentBinding
     private lateinit var viewModel: HomeViewModel
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater,R.layout.home_fragment, container, false)
-      //  (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
-       // setHasOptionsMenu(true)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = DataBindingUtil.inflate(inflater, R.layout.home_fragment, container, false)
+        //  (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
+        // setHasOptionsMenu(true)
         return binding.root
 
     }
@@ -38,7 +40,7 @@ class Home : Fragment(R.layout.home_fragment) {
 
     }
 */
-    private fun imageSlider(){
+    private fun imageSlider() {
         //function for image slider
         val imageList = ArrayList<SlideModel>()
         imageList.add(SlideModel(R.drawable.m))
