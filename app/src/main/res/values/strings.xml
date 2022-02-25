@@ -6,14 +6,6 @@
     <string name="category">Category</string>
     <string name="cart">Cart</string>
     <string name="profile">Profile</string>
-    <string name="featured_brands">Brands</string>
-    <string name="categories">Catagory</string>
-    <string name="best_selling">Best Selling</string>
-    <string name="see_all">See All</string>
-    <string name="recommended">Recomended</string>
-    <string name="total">total</string>
-    <string name="add_to_cart">Add To Cart</string>
-    <string name="price">Price</string>
     <string name="welcome_user">"Welcome, "</string>
     <string name="welcome_back">Welcome Back</string>
     <string name="read_it_together">Read it together</string>

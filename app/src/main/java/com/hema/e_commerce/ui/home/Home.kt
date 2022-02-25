@@ -1,52 +1,32 @@
 package com.hema.e_commerce.ui.home
 
+import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.view.*
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import com.denzcoskun.imageslider.models.SlideModel
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import com.hema.e_commerce.R
-import com.hema.e_commerce.databinding.HomeFragmentBinding
 
+class Home : Fragment() {
 
-class Home : Fragment(R.layout.home_fragment) {
+    companion object {
+        fun newInstance() = Home()
+    }
 
-    private lateinit var binding:HomeFragmentBinding
     private lateinit var viewModel: HomeViewModel
 
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?): View? {
-        binding = DataBindingUtil.inflate(inflater,R.layout.home_fragment, container, false)
-      //  (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
-       // setHasOptionsMenu(true)
-        return binding.root
-
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.home_fragment, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        imageSlider()
-
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+        // TODO: Use the ViewModel
     }
 
-    /*override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.menu,menu)
-
-    }
-*/
-    private fun imageSlider(){
-        //function for image slider
-        val imageList = ArrayList<SlideModel>()
-        imageList.add(SlideModel(R.drawable.m))
-        imageList.add(SlideModel(R.drawable.w1))
-        imageList.add(SlideModel(R.drawable.m2))
-        imageList.add(SlideModel(R.drawable.w2))
-        imageList.add(SlideModel(R.drawable.m3))
-        imageList.add(SlideModel(R.drawable.w3))
-        binding.imageSlider.setImageList(imageList)
-    }
 }

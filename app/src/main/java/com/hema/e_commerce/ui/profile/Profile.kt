@@ -14,7 +14,9 @@ class Profile : Fragment() {
 
     private lateinit var viewModel: ProfileViewModel
     private lateinit var binding:ProfileFragmentBinding
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater,R.layout.profile_fragment, container, false)
         return binding.root
