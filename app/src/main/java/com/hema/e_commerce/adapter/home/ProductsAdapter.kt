@@ -29,7 +29,7 @@ class ProductsAdapter() : RecyclerView.Adapter<ProductsAdapter.ViewHolder>() {
 
     ////////////////////////////////////////////////////////////////////////////////////
     /*
-    // util to see only change in articles to refresh it only not like we give list and we refresh all list
+    // util to see only change in  to refresh it only not like we give list and we refresh all list
     private val differCallBack = object : DiffUtil.ItemCallback</*product*/ >(){
         override fun areItemsTheSame(oldItem: /*product*/,newItem:/*product*/):Boolean{
             return oldItem.url == newItem.url

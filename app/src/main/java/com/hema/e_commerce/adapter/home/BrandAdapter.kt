@@ -22,5 +22,16 @@ class BrandAdapter: RecyclerView.Adapter<BrandAdapter.ViewHolder>()  {
     override fun getItemCount(): Int {
         TODO("Not yet implemented")
     }
+/*
+// util to see only change in  to refresh it only not like we give list and we refresh all list
+private val differCallBack = object : DiffUtil.ItemCallback</*product*/ >(){
+  override fun areItemsTheSame(oldItem: /*product*/,newItem:/*product*/):Boolean{
+      return oldItem.url == newItem.url
+  }
+  override fun areContentsTheSame(oldItem: /*product*/, newItem: /*product*/): Boolean {
+      return oldItem == newItem
+  }
+}
 
+*/
 }
