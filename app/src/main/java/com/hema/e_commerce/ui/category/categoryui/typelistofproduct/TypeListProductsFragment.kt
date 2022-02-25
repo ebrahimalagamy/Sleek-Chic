@@ -1,25 +1,22 @@
 package com.hema.e_commerce.ui.category.categoryui.typelistofproduct
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.hema.e_commerce.R
-import com.hema.e_commerce.databinding.FragmentContainerBinding
 import com.hema.e_commerce.databinding.FragmentTypeListProductBinding
-import com.hema.e_commerce.ui.category.categoryui.containerui.ContainerAdapter
 import com.hema.e_commerce.ui.category.repository.Repository
-import com.hema.e_commerce.ui.category.testmodels.ModelContainer
 import com.hema.e_commerce.ui.category.testmodels.TypeModelList
 
 
 class TypeListProductsFragment : Fragment() {
-  lateinit var binding:FragmentTypeListProductBinding
-    lateinit var adapter:TypeListAdapter
-    lateinit var arr:ArrayList<TypeModelList>
+    lateinit var binding: FragmentTypeListProductBinding
+    lateinit var adapter: TypeListAdapter
+    lateinit var arr: ArrayList<TypeModelList>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,7 +24,8 @@ class TypeListProductsFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
 
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_type_list_product, container, false)
+        binding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_type_list_product, container, false)
 
 
         return binding.root
@@ -36,13 +34,11 @@ class TypeListProductsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        arr= Repository().arrTypeList
+        arr = Repository().arrTypeList
         adapter = TypeListAdapter(arr, requireContext())
-        val layoutManager = GridLayoutManager(requireContext(), 2 )
-        binding.recListProduct.adapter=adapter
-        binding.recListProduct.layoutManager=layoutManager
-
-
+        val layoutManager = GridLayoutManager(requireContext(), 2)
+        binding.recListProduct.adapter = adapter
+        binding.recListProduct.layoutManager = layoutManager
 
 
     }

@@ -1,4 +1,4 @@
-package com.hema.e_commerce.ui.profile
+package com.hema.e_commerce.ui.settings
 
 import androidx.lifecycle.ViewModel
 

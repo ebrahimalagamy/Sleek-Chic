@@ -5,11 +5,9 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
-import androidx.navigation.NavController.OnDestinationChangedListener
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupWithNavController
 import com.hema.e_commerce.databinding.ActivityMainBinding
 
@@ -20,10 +18,19 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(
-            this, R.layout.activity_main
-        )
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
+        setNav()
+        setLocation()
+
+
+    }
+
+    private fun setLocation() {
+
+    }
+
+    private fun setNav() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragment_container_view) as NavHostFragment
         navController = navHostFragment.findNavController()
@@ -47,6 +54,7 @@ class MainActivity : AppCompatActivity() {
 
         )
     }
+
     override fun onBackPressed() {
         navController.navigateUp()
     }

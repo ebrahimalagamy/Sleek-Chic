@@ -7,18 +7,21 @@
 
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.hema.e_commerce.ui.profile.auth.SignUpFragment"
+        android:name="com.hema.e_commerce.ui.settings.auth.SignUpFragment"
         android:label="fragment_sign_up"
-        tools:layout="@layout/fragment_sign_up" >
+        tools:layout="@layout/fragment_sign_up">
         <action
             android:id="@+id/action_signUpFragment_to_signInFragment"
             app:destination="@id/signInFragment" />
+        <action
+            android:id="@+id/action_signUpFragment_to_profile"
+            app:destination="@id/profile" />
     </fragment>
     <fragment
         android:id="@+id/signInFragment"
-        android:name="com.hema.e_commerce.ui.profile.auth.SignInFragment"
+        android:name="com.hema.e_commerce.ui.settings.auth.SignInFragment"
         android:label="fragment_sign_in"
-        tools:layout="@layout/fragment_sign_in" >
+        tools:layout="@layout/fragment_sign_in">
         <action
             android:id="@+id/action_signInFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
@@ -40,26 +43,50 @@
         android:id="@+id/category"
         android:name="com.hema.e_commerce.ui.category.categoryui.maincategoryui.CategoryFragment"
         android:label="category_fragment"
-        tools:layout="@layout/category_fragment" >
+        tools:layout="@layout/category_fragment">
         <action
             android:id="@+id/action_category_to_typeListProductFragment2"
             app:destination="@id/typeListProductFragment2" />
     </fragment>
     <fragment
         android:id="@+id/profile"
-        android:name="com.hema.e_commerce.ui.profile.Profile"
+        android:name="com.hema.e_commerce.ui.settings.Profile"
         android:label="profile_fragment"
-        tools:layout="@layout/profile_fragment" >
+        tools:layout="@layout/profile_fragment">
         <action
             android:id="@+id/action_profile_to_signInFragment"
             app:destination="@id/signInFragment" />
         <action
             android:id="@+id/action_profile_to_signUpFragment"
             app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/action_profile_to_wishlist"
+            app:destination="@id/wishlist" />
+        <action
+            android:id="@+id/action_profile_to_editProfile"
+            app:destination="@id/editProfile" />
+        <action
+            android:id="@+id/action_profile_to_address"
+            app:destination="@id/address" />
     </fragment>
     <fragment
         android:id="@+id/typeListProductFragment2"
         android:name="com.hema.e_commerce.ui.category.categoryui.typelistofproduct.TypeListProductsFragment"
         android:label="TypeListProductFragment" />
+    <fragment
+        android:id="@+id/wishlist"
+        android:name="com.hema.e_commerce.ui.settings.wishlist.Wishlist"
+        android:label="fragment_wishlist"
+        tools:layout="@layout/fragment_wishlist" />
+    <fragment
+        android:id="@+id/editProfile"
+        android:name="com.hema.e_commerce.ui.settings.profile.EditProfile"
+        android:label="EditProfile"
+        tools:layout="@layout/fragment_edit_profile"/>
+    <fragment
+        android:id="@+id/address"
+        android:name="com.hema.e_commerce.ui.settings.address.Address"
+        android:label="Address"
+        tools:layout="@layout/fragment_address"/>
 
 </navigation>

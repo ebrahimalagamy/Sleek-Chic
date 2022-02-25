@@ -1,11 +1,11 @@
 package com.hema.e_commerce.ui.category.categoryui.containerui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.GridLayoutManager
 import com.hema.e_commerce.R
@@ -15,9 +15,9 @@ import com.hema.e_commerce.ui.category.testmodels.ModelContainer
 
 
 class FragmentContainer : Fragment() {
-    lateinit var binding:FragmentContainerBinding
+    lateinit var binding: FragmentContainerBinding
     lateinit var adapter: ContainerAdapter
-    lateinit var arr:ArrayList<ModelContainer>
+    lateinit var arr: ArrayList<ModelContainer>
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -61,18 +61,16 @@ class FragmentContainer : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var fragMan: FragmentManager? =fragmentManager
+        var fragMan: FragmentManager? = fragmentManager
 
-        arr= Repository().arrContainer
-        adapter = ContainerAdapter(fragMan,arr, requireContext())
-        val layoutManager = GridLayoutManager(requireContext(), 3 )
-        binding.recContainerItem.adapter=adapter
-        binding.recContainerItem.layoutManager=layoutManager
+        arr = Repository().arrContainer
+        adapter = ContainerAdapter(fragMan, arr, requireContext())
+        val layoutManager = GridLayoutManager(requireContext(), 3)
+        binding.recContainerItem.adapter = adapter
+        binding.recContainerItem.layoutManager = layoutManager
 
 
     }
-
-
 
 
 }

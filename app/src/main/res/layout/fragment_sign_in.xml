@@ -11,7 +11,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="30dp"
-        tools:context=".ui.profile.auth.SignInFragment">
+        tools:context=".ui.settings.auth.SignInFragment">
+
+        <ImageView
+            android:id="@+id/ivClose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_close"
+            app:layout_constraintEnd_toEndOf="@+id/WelcomeTextView"
+            app:layout_constraintTop_toTopOf="@+id/WelcomeTextView" />
 
 
         <TextView

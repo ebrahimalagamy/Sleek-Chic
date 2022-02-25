@@ -9,20 +9,18 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#8D999A"
-        >
+        android:background="#8D999A">
 
 
+        <TextView
+            android:id="@+id/product_type_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="product types"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/product_type_name"
-                android:text="product types"
-                android:padding="10dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-
-                />
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
