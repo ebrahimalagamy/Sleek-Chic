@@ -1,6 +1,7 @@
 package com.hema.e_commerce
 
 import android.os.Bundle
+import android.view.Menu
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -50,5 +51,6 @@ class MainActivity : AppCompatActivity() {
     override fun onBackPressed() {
         navController.navigateUp()
     }
+
 
 }
