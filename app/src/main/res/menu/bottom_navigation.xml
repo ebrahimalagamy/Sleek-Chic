@@ -16,6 +16,6 @@
         android:title="@string/cart" />
     <item
         android:id="@+id/profile"
-        android:icon="@drawable/ic_settings"
+        android:icon="@drawable/ic_user"
         android:title="@string/profile" />
 </menu>

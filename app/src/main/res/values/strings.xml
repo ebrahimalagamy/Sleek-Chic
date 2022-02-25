@@ -14,4 +14,18 @@
     <string name="total">total</string>
     <string name="add_to_cart">Add To Cart</string>
     <string name="price">Price</string>
+    <string name="welcome_user">"Welcome, "</string>
+    <string name="welcome_back">Welcome Back</string>
+    <string name="read_it_together">Read it together</string>
+    <string name="sign_in">Sign In</string>
+    <string name="don_t_have_account">Don\'t have account?</string>
+    <string name="sign_up">Sign up</string>
+    <string name="forget_password">Forget password</string>
+    <string name="create_new_account">Create new account</string>
+    <string name="lets_do_it_now">Lets do it now</string>
+    <string name="username">Username</string>
+    <string name="email">Email</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="password">Password</string>
+    <string name="already_have_an_account">Already have an account!?</string>
 </resources>

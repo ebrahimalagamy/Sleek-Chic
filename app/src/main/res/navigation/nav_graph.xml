@@ -38,9 +38,13 @@
         tools:layout="@layout/cart_fragment" />
     <fragment
         android:id="@+id/category"
-        android:name="com.hema.e_commerce.ui.category.Category"
+        android:name="com.hema.e_commerce.ui.category.categoryui.maincategoryui.CategoryFragment"
         android:label="category_fragment"
-        tools:layout="@layout/category_fragment" />
+        tools:layout="@layout/category_fragment" >
+        <action
+            android:id="@+id/action_category_to_typeListProductFragment2"
+            app:destination="@id/typeListProductFragment2" />
+    </fragment>
     <fragment
         android:id="@+id/profile"
         android:name="com.hema.e_commerce.ui.profile.Profile"
@@ -49,6 +53,13 @@
         <action
             android:id="@+id/action_profile_to_signInFragment"
             app:destination="@id/signInFragment" />
+        <action
+            android:id="@+id/action_profile_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/typeListProductFragment2"
+        android:name="com.hema.e_commerce.ui.category.categoryui.typelistofproduct.TypeListProductsFragment"
+        android:label="TypeListProductFragment" />
 
 </navigation>

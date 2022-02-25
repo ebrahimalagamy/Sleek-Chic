@@ -1,17 +1,16 @@
 package com.hema.e_commerce.ui.profile
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.hema.e_commerce.R
 import com.hema.e_commerce.databinding.ProfileFragmentBinding
 
-class Profile : Fragment(R.layout.profile_fragment) {
-
+class Profile : Fragment() {
 
     private lateinit var viewModel: ProfileViewModel
     private lateinit var binding:ProfileFragmentBinding
@@ -23,9 +22,18 @@ class Profile : Fragment(R.layout.profile_fragment) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.button.setOnClickListener{
+        bindUi()
+
+    }
+
+    private fun bindUi() {
+        binding.ivSignIn.setOnClickListener{
             findNavController().navigate(R.id.action_profile_to_signInFragment)
         }
+        binding.ivSignUp.setOnClickListener{
+            findNavController().navigate(R.id.action_profile_to_signUpFragment)
+        }
+
     }
 
 }

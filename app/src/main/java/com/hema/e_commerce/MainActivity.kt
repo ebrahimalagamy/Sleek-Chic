@@ -6,6 +6,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
+import androidx.navigation.NavController.OnDestinationChangedListener
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -23,23 +24,20 @@ class MainActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(
             this, R.layout.activity_main
         )
+
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragment_container_view) as NavHostFragment
         navController = navHostFragment.findNavController()
         binding.bottomNavView.setupWithNavController(navController)
-        navController.addOnDestinationChangedListener(
-            NavController.OnDestinationChangedListener
-            { controller, destination, arguments ->
-                if (destination.id == R.id.signInFragment || destination.id == R.id.signUpFragment)
-                {
-                    binding.bottomNavView.visibility = View.GONE
-                }else{
-                    binding.bottomNavView.visibility =
-                        View.VISIBLE
-                }
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            if (destination.id == R.id.signInFragment || destination.id == R.id.signUpFragment) {
+                binding.bottomNavView.visibility = View.GONE
+            } else {
+                binding.bottomNavView.visibility =
+                    View.VISIBLE
+            }
 
-        })
-
+        }
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.home,
