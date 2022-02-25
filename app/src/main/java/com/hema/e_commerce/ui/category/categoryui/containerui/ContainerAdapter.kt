@@ -1,4 +1,3 @@
-
 package com.hema.e_commerce.ui.category.categoryui.containerui
 
 import android.content.Context
@@ -15,40 +14,48 @@ import com.hema.e_commerce.databinding.ContainerItemBinding
 import com.hema.e_commerce.ui.category.testmodels.ModelContainer
 
 
-class ContainerAdapter(   var  fragMan: FragmentManager?,val productList: ArrayList<ModelContainer>, val context: Context) :
+class ContainerAdapter(
+    var fragMan: FragmentManager?,
+    val productList: ArrayList<ModelContainer>,
+    val context: Context
+) :
     RecyclerView.Adapter<ContainerAdapter.ViewHolder>() {
-    lateinit var navController:NavController
+    lateinit var navController: NavController
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         //  navController=Navigation.findNavController(parent)
-        navController= Navigation.findNavController(parent)
+        navController = Navigation.findNavController(parent)
 
-        return ViewHolder(DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.container_item, parent, false))
+        return ViewHolder(
+            DataBindingUtil.inflate(
+                LayoutInflater.from(parent.context),
+                R.layout.container_item,
+                parent,
+                false
+            )
+        )
 
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        Log.i("mmmmmmmmmmmmmmmmmmmmmm", "onBindViewHolder: "+productList.size)
+        Log.i("mmmmmmmmmmmmmmmmmmmmmm", "onBindViewHolder: " + productList.size)
         val products = productList.get(position)
-        holder.itemBinding.tvNameContainerItemProduct.text= products.name
+        holder.itemBinding.tvNameContainerItemProduct.text = products.name
         holder.itemBinding.imgItemContainerProduct.setImageResource(products.img)
 
 
-        holder.itemView.setOnClickListener{
-             navController.navigate(R.id.action_category_to_typeListProductFragment2)
+        holder.itemView.setOnClickListener {
+            navController.navigate(R.id.action_category_to_typeListProductFragment2)
 
         }
 
 
+        //  holder.itemBinding.tvNameContainerItemProduct.setOnClickListener{
 
+        // navController.navigate(R.id.action_category_to_fragmentContainer)
 
-      //  holder.itemBinding.tvNameContainerItemProduct.setOnClickListener{
-
-            // navController.navigate(R.id.action_category_to_fragmentContainer)
-
-            //       containerInterface.sendData("aya")
-
+        //       containerInterface.sendData("aya")
 
 
 //            var fragContainer :FragmentContainer=FragmentContainer()
@@ -60,7 +67,7 @@ class ContainerAdapter(   var  fragMan: FragmentManager?,val productList: ArrayL
 //            val  manager: FragmentManager
 //            fragMan!!.beginTransaction().replace(R.id.fram_cont, fragContainer).commit()
 //
-    //   }
+        //   }
 
 
     }
@@ -70,36 +77,14 @@ class ContainerAdapter(   var  fragMan: FragmentManager?,val productList: ArrayL
     }
 
 
-    class ViewHolder(itemBinding: ContainerItemBinding) : RecyclerView.ViewHolder(itemBinding.getRoot()) {
+    class ViewHolder(itemBinding: ContainerItemBinding) :
+        RecyclerView.ViewHolder(itemBinding.getRoot()) {
         var itemBinding: ContainerItemBinding
 
         init {
             this.itemBinding = itemBinding
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

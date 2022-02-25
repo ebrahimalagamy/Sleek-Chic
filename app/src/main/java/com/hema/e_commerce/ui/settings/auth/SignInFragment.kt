@@ -1,4 +1,4 @@
-package com.hema.e_commerce.ui.profile.auth
+package com.hema.e_commerce.ui.settings.auth
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -18,9 +18,10 @@ class SignInFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_sign_in, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_sign_in, container, false)
         return binding.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         bindUi()
@@ -30,6 +31,9 @@ class SignInFragment : Fragment() {
     private fun bindUi() {
         binding.tvSignUp.setOnClickListener {
             findNavController().navigate(R.id.action_signInFragment_to_signUpFragment)
+        }
+        binding.ivClose.setOnClickListener {
+            findNavController().navigate(R.id.action_signInFragment_to_profile)
         }
     }
 

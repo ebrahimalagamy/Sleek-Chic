@@ -32,7 +32,7 @@ android {
         jvmTarget = '1.8'
     }
 
-    buildFeatures{
+    buildFeatures {
         dataBinding = true
     }
 
@@ -66,5 +66,8 @@ dependencies {
 
     // CircleImageView
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+    // map
+    implementation 'com.google.android.gms:play-services-maps:18.0.2'
+
 
 }

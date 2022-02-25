@@ -1,10 +1,4 @@
-package com.example.weatherapplication.data.remote
-
-import android.telecom.Call
-import okhttp3.Response
-
-import retrofit2.http.GET
-import retrofit2.http.Query
+package com.hema.e_commerce.ui.category.remote
 
 interface ApiService {
 

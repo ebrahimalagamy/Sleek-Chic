@@ -1,10 +1,6 @@
 package com.hema.e_commerce.ui.category.categoryui.typelistofproduct
 
 
-
-
-
-
 import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,15 +9,13 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import com.hema.e_commerce.R
-import com.hema.e_commerce.databinding.ContainerItemBinding
 import com.hema.e_commerce.databinding.ItemProductListBinding
-import com.hema.e_commerce.ui.category.testmodels.ModelContainer
 import com.hema.e_commerce.ui.category.testmodels.TypeModelList
 
 
-class TypeListAdapter( val productList: ArrayList<TypeModelList>, val context: Context) :
+class TypeListAdapter(val productList: ArrayList<TypeModelList>, val context: Context) :
     RecyclerView.Adapter<TypeListAdapter.ViewHolder>() {
-    lateinit var navController:NavController
+    lateinit var navController: NavController
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -29,16 +23,23 @@ class TypeListAdapter( val productList: ArrayList<TypeModelList>, val context: C
         // navController.navigate(R.id.action_category_to_fragmentContainer)
 
 
-        return ViewHolder(DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_product_list, parent, false))
+        return ViewHolder(
+            DataBindingUtil.inflate(
+                LayoutInflater.from(parent.context),
+                R.layout.item_product_list,
+                parent,
+                false
+            )
+        )
 
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        Log.i("mmmmmmmmmmmmmmmmmmmmmm", "onBindViewHolder: "+productList.size)
+        Log.i("mmmmmmmmmmmmmmmmmmmmmm", "onBindViewHolder: " + productList.size)
         val products = productList.get(position)
-        holder.itemBinding.tvListPrice.text= products.price
+        holder.itemBinding.tvListPrice.text = products.price
         holder.itemBinding.imgListProduct.setImageResource(products.img)
-        holder.itemBinding.tvListShDesc.text= products.desc
+        holder.itemBinding.tvListShDesc.text = products.desc
 
 
         //  holder.itemBinding.tvNameContainerItemProduct.setOnClickListener{
@@ -46,7 +47,6 @@ class TypeListAdapter( val productList: ArrayList<TypeModelList>, val context: C
         // navController.navigate(R.id.action_category_to_fragmentContainer)
 
         //       containerInterface.sendData("aya")
-
 
 
 //            var fragContainer :FragmentContainer=FragmentContainer()
@@ -68,36 +68,14 @@ class TypeListAdapter( val productList: ArrayList<TypeModelList>, val context: C
     }
 
 
-    class ViewHolder(itemBinding: ItemProductListBinding) : RecyclerView.ViewHolder(itemBinding.getRoot()) {
+    class ViewHolder(itemBinding: ItemProductListBinding) :
+        RecyclerView.ViewHolder(itemBinding.getRoot()) {
         var itemBinding: ItemProductListBinding
 
         init {
             this.itemBinding = itemBinding
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

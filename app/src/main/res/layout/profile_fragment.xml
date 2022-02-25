@@ -10,9 +10,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.profile.Profile"
         android:padding="10dp"
-       >
+        tools:context=".ui.settings.Profile">
 
         <TextView
             android:id="@+id/tvWelcomeUser"
@@ -81,17 +80,17 @@
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Settings"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/settings"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
 
-        <androidx.cardview.widget.CardView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cardView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView2">
@@ -99,20 +98,91 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:paddingStart="10dp">
+                android:orientation="vertical">
 
-                <TextView
+                <Button
+                    android:id="@+id/btnLanguage"
+                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:clickable="true"
-                    android:focusable="true"
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_arrow_forward"
                     android:gravity="center_vertical"
-                    android:text="Language" />
+                    android:text="@string/language"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+
+
+                    tools:ignore="MissingConstraints" />
 
             </LinearLayout>
 
-        </androidx.cardview.widget.CardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/my_account"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                tools:ignore="MissingConstraints">
+
+                <Button
+                    android:id="@+id/btnWishlist"
+                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_arrow_forward"
+                    android:gravity="center_vertical"
+                    android:text="@string/wishlist"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    />
+
+                <Button
+                    android:id="@+id/btnAddress"
+                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_arrow_forward"
+                    android:gravity="center_vertical"
+                    android:text="@string/addresses"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    tools:ignore="MissingConstraints" />
+
+                <Button
+                    android:id="@+id/btnEditProfile"
+                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableEnd="@drawable/ic_arrow_forward"
+                    android:gravity="center_vertical"
+                    android:text="@string/profile"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    tools:ignore="MissingConstraints" />
+
+            </LinearLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

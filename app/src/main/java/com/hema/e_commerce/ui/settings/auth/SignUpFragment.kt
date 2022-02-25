@@ -1,4 +1,4 @@
-package com.hema.e_commerce.ui.profile
+package com.hema.e_commerce.ui.settings.auth
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,17 +8,17 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.hema.e_commerce.R
-import com.hema.e_commerce.databinding.ProfileFragmentBinding
+import com.hema.e_commerce.databinding.FragmentSignUpBinding
 
-class Profile : Fragment() {
+class SignUpFragment : Fragment() {
+    private lateinit var binding: FragmentSignUpBinding
 
-    private lateinit var viewModel: ProfileViewModel
-    private lateinit var binding:ProfileFragmentBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater,R.layout.profile_fragment, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_sign_up, container, false)
         return binding.root
     }
 
@@ -29,13 +29,12 @@ class Profile : Fragment() {
     }
 
     private fun bindUi() {
-        binding.ivSignIn.setOnClickListener{
-            findNavController().navigate(R.id.action_profile_to_signInFragment)
+        binding.tvSignIn.setOnClickListener {
+            findNavController().navigate(R.id.action_signUpFragment_to_signInFragment)
         }
-        binding.ivSignUp.setOnClickListener{
-            findNavController().navigate(R.id.action_profile_to_signUpFragment)
+        binding.ivClose.setOnClickListener {
+            findNavController().navigate(R.id.action_signUpFragment_to_profile)
         }
-
     }
 
 }
