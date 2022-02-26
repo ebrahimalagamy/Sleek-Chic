@@ -23,7 +23,7 @@ class MapFragment : Fragment() {
     private val connectivity = Connectivity
     private var markerLat: Double = 0.0
     private var markerLong: Double = 0.0
-    lateinit var binding: FragmentMapBinding
+    private lateinit var binding: FragmentMapBinding
 
     //    private lateinit var sharedPref: SharedPreferencesProvider
     private lateinit var viewModel: ProfileViewModel
