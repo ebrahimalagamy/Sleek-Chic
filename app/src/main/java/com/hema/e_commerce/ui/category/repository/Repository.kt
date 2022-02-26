@@ -1,6 +1,7 @@
 package com.hema.e_commerce.ui.category.repository
 
 import com.hema.e_commerce.R
+import com.hema.e_commerce.ui.cart.CartData
 import com.hema.e_commerce.ui.category.testmodels.ModelContainer
 import com.hema.e_commerce.ui.category.testmodels.TypeModelList
 import com.hema.e_commerce.ui.category.testmodels.model
@@ -51,5 +52,15 @@ class Repository {
         TypeModelList("hair", "hair black red", R.drawable.test2)
     )
 
+//for cart adapter
+    //class CartData(var cartIcon:Int,var cartDesc:String,var cartPrice:String,var cartCopoun:String)
+    val arrayList= arrayListOf<CartData>(
+     CartData(R.drawable.dress,"dress","33$","Deliver for free"),
+    CartData(R.drawable.dress,"dress","43$","Deliver for free"),
+    CartData(R.drawable.dress,"dress","55$","Deliver for free")
 
+
+
+
+)
 }
