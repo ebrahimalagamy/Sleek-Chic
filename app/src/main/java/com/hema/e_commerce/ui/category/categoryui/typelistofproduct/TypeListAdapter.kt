@@ -5,6 +5,8 @@ import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
@@ -16,6 +18,7 @@ import com.hema.e_commerce.ui.category.testmodels.TypeModelList
 class TypeListAdapter(val productList: ArrayList<TypeModelList>, val context: Context) :
     RecyclerView.Adapter<TypeListAdapter.ViewHolder>() {
     lateinit var navController: NavController
+
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -76,6 +79,8 @@ class TypeListAdapter(val productList: ArrayList<TypeModelList>, val context: Co
             this.itemBinding = itemBinding
         }
     }
+
+
 
 
 }

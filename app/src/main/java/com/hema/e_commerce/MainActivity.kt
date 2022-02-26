@@ -2,6 +2,7 @@ package com.hema.e_commerce
 
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuInflater
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -49,6 +50,15 @@ class MainActivity : AppCompatActivity() {
             )
 
         )
+
+        setSupportActionBar(binding.mytoolbar)
+
+    }
+
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu,menu)
+        return true
     }
     override fun onBackPressed() {
         navController.navigateUp()
