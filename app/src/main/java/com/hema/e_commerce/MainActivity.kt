@@ -2,6 +2,7 @@ package com.hema.e_commerce
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.location.Geocoder
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -16,6 +17,8 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.hema.e_commerce.databinding.ActivityMainBinding
+import com.hema.e_commerce.ui.settings.sharedpreferences.SharedPreferencesProvider
+import com.hema.e_commerce.ui.settings.sharedpreferences.SharedPreferencesProvider.Companion.PERMISSION_LOCATION_REQUEST_CODE
 import com.vmadalin.easypermissions.EasyPermissions
 
 class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
@@ -23,27 +26,41 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
     private lateinit var binding: ActivityMainBinding
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+    private lateinit var sharedPref: SharedPreferencesProvider
 
-    companion object {
-        const val PERMISSION_LOCATION_REQUEST_CODE = 1
-    }
 
-    @SuppressLint("MissingPermission")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        sharedPref = SharedPreferencesProvider(this)
 
+
+        bindLocation()
+        setNav()
+
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun bindLocation() {
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
         if (hasLocationPermission()) {
-            fusedLocationProviderClient.lastLocation.addOnSuccessListener { location->
-                Log.d("first",location.latitude.toString())
-                Log.d("first",location.longitude.toString())
+            fusedLocationProviderClient.lastLocation.addOnSuccessListener { location ->
+                val geoCoder = Geocoder(this)
+                val currentLocation =
+                    geoCoder.getFromLocation(location.latitude, location.longitude, 1)
+                Log.d("first", currentLocation[0].getAddressLine(0))
+                sharedPref.setLocation(
+                    location.latitude.toString(),
+                    location.longitude.toString(),
+                    currentLocation[0].getAddressLine(0)
+                )
+
+
             }
         } else {
             requestLocationPermission()
         }
-
-        setNav()
 
     }
 
@@ -65,7 +82,8 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
         navController = navHostFragment.findNavController()
         binding.bottomNavView.setupWithNavController(navController)
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.id == R.id.signInFragment || destination.id == R.id.signUpFragment) {
+            if (destination.id == R.id.signInFragment || destination.id == R.id.signUpFragment
+                || destination.id ==R.id.editAddress) {
                 binding.bottomNavView.visibility = View.GONE
             } else {
                 binding.bottomNavView.visibility =
