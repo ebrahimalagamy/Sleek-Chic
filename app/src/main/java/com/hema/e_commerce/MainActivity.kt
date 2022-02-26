@@ -4,10 +4,8 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.location.Geocoder
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
 import android.util.Log
-
+import android.view.Menu
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -30,7 +28,6 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var sharedPref: SharedPreferencesProvider
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,9 +81,11 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
             supportFragmentManager.findFragmentById(R.id.fragment_container_view) as NavHostFragment
         navController = navHostFragment.findNavController()
         binding.bottomNavView.setupWithNavController(navController)
+
         navController.addOnDestinationChangedListener { _, destination, _ ->
             if (destination.id == R.id.signInFragment || destination.id == R.id.signUpFragment
-                || destination.id ==R.id.editAddress) {
+                || destination.id == R.id.editAddress
+            ) {
                 binding.bottomNavView.visibility = View.GONE
             } else {
                 binding.bottomNavView.visibility =
@@ -110,7 +109,7 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
 
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu,menu)
+        menuInflater.inflate(R.menu.menu, menu)
         return true
     }
 
