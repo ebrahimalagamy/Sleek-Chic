@@ -98,7 +98,11 @@
         android:id="@+id/address"
         android:name="com.hema.e_commerce.ui.settings.address.Address"
         android:label="Address"
-        tools:layout="@layout/fragment_address"/>
+        tools:layout="@layout/fragment_address">
+        <action
+            android:id="@+id/action_address_to_editAddress"
+            app:destination="@id/editAddress" />
+    </fragment>
     <fragment
         android:id="@+id/singleProductFragment"
         android:name="com.hema.e_commerce.ui.product.SingleProductFragment"
@@ -110,5 +114,10 @@
             android:id="@+id/action_singleProductFragment_to_wishlist"
             app:destination="@id/wishlist" />
     </fragment>
+    <fragment
+        android:id="@+id/editAddress"
+        android:name="com.hema.e_commerce.ui.settings.address.editaddress.EditAddress"
+        android:label="EditAddress"
+        tools:layout="@layout/fragment_edit_address"/>
 
 </navigation>

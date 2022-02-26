@@ -11,14 +11,7 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
-<!--        <item name="android:buttonStyle">@style/Widget.AppCompat.Button.Colored</item>-->
 
     </style>
 
-
-<!--    <style name="FlatButton" parent="Theme.AppCompat.Light">-->
-<!--        <item name="android:textColor">@color/myPeach</item>-->
-<!--        <item name="colorControlHighlight">@color/myRed</item>-->
-<!--    </style>-->
 </resources>
