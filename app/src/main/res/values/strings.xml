@@ -34,4 +34,10 @@
     <string name="wishlist">Wishlist</string>
     <string name="addresses">Addresses</string>
     <string name="checkout">Checkout</string>
+    <string name="set_location">Set location</string>
+    <string name="save_information">Save Information</string>
+    <string name="name">NAME</string>
+    <string name="phone">Phone</string>
+    <string name="mobile_number">MOBILE NUMBER</string>
+    <string name="location_information">LOCATION INFORMATION</string>
 </resources>

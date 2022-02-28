@@ -32,7 +32,7 @@ android {
         jvmTarget = '1.8'
     }
 
-    buildFeatures{
+    buildFeatures {
         dataBinding = true
     }
 
@@ -67,7 +67,6 @@ dependencies {
     //ssp sdp
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
     implementation 'com.intuit.ssp:ssp-android:1.0.6'
-
 
 
     implementation 'androidx.core:core-ktx:1.7.0'

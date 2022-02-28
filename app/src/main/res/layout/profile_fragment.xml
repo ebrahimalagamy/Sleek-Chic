@@ -134,8 +134,7 @@
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView"
-            >
+            app:layout_constraintTop_toBottomOf="@+id/textView">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -152,8 +151,7 @@
                     android:gravity="center_vertical"
                     android:text="@string/wishlist"
                     android:textAllCaps="false"
-                    android:textColor="@color/black"
-                    />
+                    android:textColor="@color/black" />
 
                 <Button
                     android:id="@+id/btnAddress"

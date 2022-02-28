@@ -5,10 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.hema.e_commerce.databinding.RowBrandsBinding
 
-class BrandAdapter: RecyclerView.Adapter<BrandAdapter.ViewHolder>()  {
+class BrandAdapter : RecyclerView.Adapter<BrandAdapter.ViewHolder>() {
     private var binding: RowBrandsBinding? = null
 
-    inner class ViewHolder(private val binding: RowBrandsBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class ViewHolder(private val binding: RowBrandsBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         binding = RowBrandsBinding.inflate(LayoutInflater.from(parent.context), parent, false)

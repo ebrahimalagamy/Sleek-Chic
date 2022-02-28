@@ -5,7 +5,6 @@ import android.annotation.SuppressLint
 import android.location.Geocoder
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -33,30 +32,32 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+
         sharedPref = SharedPreferencesProvider(this)
-
-
         bindLocation()
-        setNav()
+        bindNav()
 
     }
 
     @SuppressLint("MissingPermission")
     private fun bindLocation() {
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
-        if (hasLocationPermission()) {
+        if (hasLocationPermission() && sharedPref.isFirstTimeLaunch) {
             fusedLocationProviderClient.lastLocation.addOnSuccessListener { location ->
+
                 val geoCoder = Geocoder(this)
                 val currentLocation =
                     geoCoder.getFromLocation(location.latitude, location.longitude, 1)
+
                 Log.d("first", currentLocation[0].getAddressLine(0))
                 sharedPref.setLocation(
                     location.latitude.toString(),
                     location.longitude.toString(),
                     currentLocation[0].getAddressLine(0)
+
                 )
-
-
+                // to get my location in first time only
+                sharedPref.setFirstTimeLaunch(false)
             }
         } else {
             requestLocationPermission()
@@ -76,15 +77,16 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
     }
 
 
-    private fun setNav() {
+    private fun bindNav() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragment_container_view) as NavHostFragment
         navController = navHostFragment.findNavController()
         binding.bottomNavView.setupWithNavController(navController)
 
+        // to remove bottom nav from this fragments
         navController.addOnDestinationChangedListener { _, destination, _ ->
             if (destination.id == R.id.signInFragment || destination.id == R.id.signUpFragment
-                || destination.id == R.id.editAddress
+                || destination.id == R.id.editAddress || destination.id == R.id.mapFragment
             ) {
                 binding.bottomNavView.visibility = View.GONE
             } else {
@@ -103,15 +105,15 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
 
         )
 
-        setSupportActionBar(binding.mytoolbar)
+//        setSupportActionBar(binding.mytoolbar)
 
     }
 
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu, menu)
-        return true
-    }
+//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+//        menuInflater.inflate(R.menu.menu, menu)
+//        return true
+//    }
 
     override fun onBackPressed() {
         navController.navigateUp()

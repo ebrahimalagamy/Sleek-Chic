@@ -8,10 +8,19 @@ class SharedPreferencesProvider(context: Context) {
         private lateinit var pref: SharedPreferences
         private lateinit var editor: SharedPreferences.Editor
         private const val PREF_NAME = "myPref"
+
         // Shared preferences for lat,lon and address
         private const val LAT_SHARED_PREF = "LAT_SHARED_PREF"
         private const val LONG_SHARED_PREF = "LONG_SHARED_PREF"
         private const val ADDRESS = "ADDRESS"
+        private const val IS_FIRST_TIME_LAUNCH = "IS_FIRST_TIME_LAUNCH"
+
+        // user Info
+        private const val USER_ADDRESS = "USER_ADDRESS"
+        private const val PHONE = "PHONE"
+        private const val NAME = "NAME"
+
+
         //location request
         const val PERMISSION_LOCATION_REQUEST_CODE = 1
     }
@@ -21,12 +30,14 @@ class SharedPreferencesProvider(context: Context) {
         editor = pref.edit()
     }
 
-    fun setLocation(latitude: String?, longitude: String?,address:String?) {
+    fun setLocation(latitude: String?, longitude: String?, address: String?) {
         editor.putString(LAT_SHARED_PREF, latitude)
         editor.putString(LONG_SHARED_PREF, longitude)
         editor.putString(ADDRESS, address)
         editor.commit()
     }
+
+
 
     val latLong: Array<String?>
         get() {
@@ -39,4 +50,30 @@ class SharedPreferencesProvider(context: Context) {
             location[2] = add
             return location
         }
+
+    fun setUserInfo(userAddress: String?, phone: String?, name: String?) {
+        editor.putString(USER_ADDRESS, userAddress)
+        editor.putString(PHONE, phone)
+        editor.putString(NAME, name)
+        editor.commit()
+    }
+
+    val getUserInfo: Array<String?>
+        get() {
+            val info = arrayOfNulls<String>(3)
+            val userAddress = pref.getString(USER_ADDRESS, null)
+            val phone = pref.getString(PHONE, null)
+            val name = pref.getString(NAME, null)
+            info[0] = userAddress
+            info[1] = phone
+            info[2] = name
+            return info
+        }
+
+    fun setFirstTimeLaunch(isFirstTime: Boolean) {
+        editor.putBoolean(IS_FIRST_TIME_LAUNCH, isFirstTime)
+        editor.commit()
+    }
+    val isFirstTimeLaunch: Boolean
+        get() = pref.getBoolean(IS_FIRST_TIME_LAUNCH, true)
 }

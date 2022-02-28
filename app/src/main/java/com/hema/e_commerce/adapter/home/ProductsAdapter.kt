@@ -3,8 +3,6 @@ package com.hema.e_commerce.adapter.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.AsyncListDiffer
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.hema.e_commerce.databinding.RowProductBinding
 
@@ -12,7 +10,8 @@ class ProductsAdapter() : RecyclerView.Adapter<ProductsAdapter.ViewHolder>() {
 
     private var binding: RowProductBinding? = null
 
-    inner class ViewHolder(private val binding: RowProductBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class ViewHolder(private val binding: RowProductBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         binding = RowProductBinding.inflate(LayoutInflater.from(parent.context), parent, false)

@@ -1,6 +1,5 @@
 package com.hema.e_commerce.ui.category.categoryui.typelistofproduct
 
-import android.app.ActionBar
 import android.os.Bundle
 import android.view.*
 import android.widget.SearchView
@@ -47,29 +46,28 @@ class TypeListProductsFragment : Fragment() {
     }
 
 
-
-
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
 
-        inflater.inflate(R.menu.menu,menu)
+        inflater.inflate(R.menu.menu, menu)
 
-        val item=menu?.findItem(R.id.app_bar_search)
-        val searchView=item?.actionView as SearchView
-        searchView.queryHint="type here to search"
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+        val item = menu?.findItem(R.id.app_bar_search)
+        val searchView = item?.actionView as SearchView
+        searchView.queryHint = "type here to search"
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?): Boolean {
 
-                return false            }
+                return false
+            }
 
             override fun onQueryTextChange(newText: String?): Boolean {
 
-            tempArray.clear()
-                val searchText=newText!!.toLowerCase(Locale.getDefault())
-                if(searchText.isNotEmpty()){
+                tempArray.clear()
+                val searchText = newText!!.toLowerCase(Locale.getDefault())
+                if (searchText.isNotEmpty()) {
 
-                    arr.forEach{
+                    arr.forEach {
 
-                        if(it.desc.toLowerCase(Locale.getDefault()).contains(searchText)){
+                        if (it.desc.toLowerCase(Locale.getDefault()).contains(searchText)) {
 
 
                             tempArray.add(it)
@@ -78,16 +76,11 @@ class TypeListProductsFragment : Fragment() {
                         }
 
 
-
                     }
-                binding.recListProduct.adapter!!.notifyDataSetChanged()
+                    binding.recListProduct.adapter!!.notifyDataSetChanged()
 
 
-
-
-
-                }
-                else{
+                } else {
 
                     tempArray.clear()
                     tempArray.addAll(arr)
@@ -95,20 +88,17 @@ class TypeListProductsFragment : Fragment() {
                     binding.recListProduct.adapter!!.notifyDataSetChanged()
 
 
-
                 }
 
-            return false
+                return false
             }
 
 
         })
-       return super.onCreateOptionsMenu(menu, inflater)
-
+        return super.onCreateOptionsMenu(menu, inflater)
 
 
     }
-
 
 
 }

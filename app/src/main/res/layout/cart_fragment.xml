@@ -7,133 +7,106 @@
 
     </data>
 
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="10dp"
-    >
-    <LinearLayout
-        android:id="@+id/layout_cart_rec"
+    <ScrollView
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="wrap_content"
-        tools:context=".ui.cart.Cart"
-        >
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:padding="10dp">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/cart_rec"
-                android:layout_width="0dp"
-                android:layout_height="400dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:listitem="@layout/item_cart"
-                />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
+            android:id="@+id/layout_cart_rec"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="20dp"
-            >
+            android:orientation="vertical"
+            tools:context=".ui.cart.Cart">
 
-            <Button
-                android:id="@+id/bt_copoun"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="code"
-                android:textSize="20sp"
-                android:textColor="@color/black"
-                android:background="@drawable/button_background"
-                android:backgroundTint="@color/white"
-                android:layout_marginLeft="10dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/edtex_copoun"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="write copoun code here  "
-                android:minHeight="48dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/bt_copoun"
-                app:layout_constraintTop_toTopOf="parent" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/cart_rec"
+                    android:layout_width="0dp"
+                    android:layout_height="400dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:listitem="@layout/item_cart" />
 
-            <TextView
-                android:id="@+id/txt_total"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/bt_copoun"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="50dp"
-                android:text="@string/total"
-                android:textSize="20sp"
-                android:textColor="@color/black"
-                />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <TextView
-                android:id="@+id/text_totalprice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:layout_marginLeft="8dp"
-                app:layout_constraintStart_toEndOf="@id/txt_total"
-                app:layout_constraintTop_toBottomOf="@id/bt_copoun"
-                android:hint="Total Price Equal"
-                android:textSize="20sp"
-                android:textColor="@color/black"
 
-                />
-            <Button
-                android:id="@+id/bt_checkout"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_totalprice"
-                android:text="@string/checkout"
-                android:textSize="20sp"
-                android:textColor="@color/black"
-                android:background="@drawable/button_background"
+                android:paddingTop="20dp">
+
+                <Button
+                    android:id="@+id/bt_copoun"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/button_background"
+                    android:backgroundTint="@color/white"
+                    android:text="code"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/edtex_copoun"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="write copoun code here  "
+                    android:minHeight="48dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/bt_copoun"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/txt_total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="50dp"
+                    android:text="@string/total"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/bt_copoun" />
+
+                <TextView
+                    android:id="@+id/text_totalprice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="50dp"
+                    android:hint="Total Price Equal"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toEndOf="@id/txt_total"
+                    app:layout_constraintTop_toBottomOf="@id/bt_copoun"
+
+                    />
+
+                <Button
+                    android:id="@+id/bt_checkout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp"
+                    android:background="@drawable/button_background"
+                    android:text="@string/checkout"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_totalprice"
 
 
-                />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </LinearLayout>
-</ScrollView>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                    />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </ScrollView>
 
 
 </layout>

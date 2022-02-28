@@ -5,5 +5,4 @@ interface ShopifyApi {
     //@GET / @POST FUNCTIONS
 
 
-
 }

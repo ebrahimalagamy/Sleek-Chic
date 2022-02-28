@@ -55,7 +55,7 @@ class CategoriesProductAdapter(
 //                fragContainer.arguments=bundle
             //    FragmentManager().beginTransaction().replace(R.id.fram_cont, fragContainer)
             val manager: FragmentManager
-          fragMan!!.beginTransaction().replace(R.id.fram_cont, fragContainer).commit()
+            fragMan!!.beginTransaction().replace(R.id.fram_cont, fragContainer).commit()
 
 
         }

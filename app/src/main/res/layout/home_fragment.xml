@@ -4,8 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-    </data>
+    <data></data>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -78,8 +77,8 @@
                 android:id="@+id/bestSellingHeadLineText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
                 android:text="@string/best_selling"
                 app:layout_constraintEnd_toStartOf="@+id/seeMoreHeadLineText"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -154,7 +153,6 @@
                 tools:itemCount="2"
                 tools:listitem="@layout/row_product"
                 tools:orientation="horizontal" />
-
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

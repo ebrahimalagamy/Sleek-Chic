@@ -18,14 +18,24 @@
             android:layout_height="match_parent" />
 
         <Button
-            android:id="@+id/openLocation"
+            android:id="@+id/btnLocation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerInParent="true"
             android:layout_marginBottom="24dp"
             android:backgroundTint="@color/dark_gray"
-            android:text="Location" />
+            android:text="@string/set_location" />
+        <Button
+            android:id="@+id/relocate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="24dp"
+            android:backgroundTint="@color/dark_gray"
+
+            android:text="relocate"/>
+
 
     </RelativeLayout>
 </layout>

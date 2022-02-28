@@ -52,15 +52,13 @@ class Repository {
         TypeModelList("hair", "hair black red", R.drawable.test2)
     )
 
-//for cart adapter
+    //for cart adapter
     //class CartData(var cartIcon:Int,var cartDesc:String,var cartPrice:String,var cartCopoun:String)
-    val arrayList= arrayListOf<CartData>(
-     CartData(R.drawable.dress,"dress","33$","Deliver for free"),
-    CartData(R.drawable.dress,"dress","43$","Deliver for free"),
-    CartData(R.drawable.dress,"dress","55$","Deliver for free")
+    val arrayList = arrayListOf<CartData>(
+        CartData(R.drawable.dress, "dress", "33$", "Deliver for free"),
+        CartData(R.drawable.dress, "dress", "43$", "Deliver for free"),
+        CartData(R.drawable.dress, "dress", "55$", "Deliver for free")
 
 
-
-
-)
+    )
 }

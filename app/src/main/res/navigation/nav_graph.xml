@@ -33,7 +33,7 @@
         android:id="@+id/home"
         android:name="com.hema.e_commerce.ui.home.Home"
         android:label="home_fragment"
-        tools:layout="@layout/home_fragment" >
+        tools:layout="@layout/home_fragment">
         <action
             android:id="@+id/action_home_to_typeListProductFragment2"
             app:destination="@id/typeListProductFragment2" />
@@ -79,7 +79,7 @@
     <fragment
         android:id="@+id/typeListProductFragment2"
         android:name="com.hema.e_commerce.ui.category.categoryui.typelistofproduct.TypeListProductsFragment"
-        android:label="TypeListProductFragment" >
+        android:label="TypeListProductFragment">
         <action
             android:id="@+id/action_typeListProductFragment2_to_singleProductFragment"
             app:destination="@id/singleProductFragment" />
@@ -93,7 +93,7 @@
         android:id="@+id/editProfile"
         android:name="com.hema.e_commerce.ui.settings.profile.EditProfile"
         android:label="EditProfile"
-        tools:layout="@layout/fragment_edit_profile"/>
+        tools:layout="@layout/fragment_edit_profile" />
     <fragment
         android:id="@+id/address"
         android:name="com.hema.e_commerce.ui.settings.address.Address"
@@ -102,11 +102,14 @@
         <action
             android:id="@+id/action_address_to_editAddress"
             app:destination="@id/editAddress" />
+        <action
+            android:id="@+id/action_address_to_profile"
+            app:destination="@id/profile" />
     </fragment>
     <fragment
         android:id="@+id/singleProductFragment"
         android:name="com.hema.e_commerce.ui.product.SingleProductFragment"
-        android:label="SingleProductFragment" >
+        android:label="SingleProductFragment">
         <action
             android:id="@+id/action_singleProductFragment_to_cart"
             app:destination="@id/cart" />
@@ -118,6 +121,22 @@
         android:id="@+id/editAddress"
         android:name="com.hema.e_commerce.ui.settings.address.editaddress.EditAddress"
         android:label="EditAddress"
-        tools:layout="@layout/fragment_edit_address"/>
+        tools:layout="@layout/fragment_edit_address">
+        <action
+            android:id="@+id/action_editAddress_to_address"
+            app:destination="@id/address" />
+        <action
+            android:id="@+id/action_editAddress_to_mapFragment"
+            app:destination="@id/mapFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.hema.e_commerce.ui.settings.map.MapFragment"
+        android:label="MapFragment"
+        tools:layout="@layout/fragment_map">
+        <action
+            android:id="@+id/action_mapFragment_to_editAddress"
+            app:destination="@id/editAddress" />
+    </fragment>
 
 </navigation>
