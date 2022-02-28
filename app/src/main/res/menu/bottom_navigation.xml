@@ -14,7 +14,7 @@
         android:icon="@drawable/ic_add_shopping"
         android:title="@string/cart" />
     <item
-        android:id="@+id/profile"
+        android:id="@+id/Settings"
         android:icon="@drawable/ic_settings"
-        android:title="@string/profile" />
+        android:title="@string/setting" />
 </menu>

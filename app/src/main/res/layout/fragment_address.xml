@@ -28,8 +28,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Shopping"
-
+                    android:text="@string/address_information"
                     android:layout_marginStart="10dp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -51,16 +50,16 @@
                     android:layout_marginEnd="5dp"
                     android:src="@drawable/ic_edit"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/tvEditAddres"
+                    app:layout_constraintEnd_toStartOf="@+id/tvEditAddress"
                     app:layout_constraintTop_toTopOf="parent" />
 
 
                 <TextView
-                    android:id="@+id/tvEditAddres"
+                    android:id="@+id/tvEditAddress"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
-                    android:text="Edit"
+                    android:text="@string/edit"
                     android:textSize="15sp"
                     android:layout_marginEnd="10dp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -110,7 +109,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:text="Name" />
+                    android:text="@string/name" />
 
                 <TextView
                     android:id="@+id/tvName"
@@ -118,7 +117,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="2"
                     android:gravity="center_vertical"
-                    android:text="Name"
+                    android:text="@string/empty"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -137,7 +136,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:text="Address" />
+                    android:text="@string/address" />
 
                 <TextView
                     android:id="@+id/tvAddress"
@@ -146,7 +145,7 @@
                     android:layout_weight="2"
                     android:textStyle="bold"
                     android:gravity="center_vertical"
-                    android:text="Address" />
+                    android:text="@string/empty" />
             </LinearLayout>
 
             <LinearLayout
@@ -164,7 +163,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:text="Phone" />
+                    android:text="@string/phone" />
 
                 <TextView
                     android:id="@+id/tvPhone"
@@ -173,7 +172,7 @@
                     android:layout_weight="2"
                     android:textStyle="bold"
                     android:gravity="center_vertical"
-                    android:text="Phone" />
+                    android:text="@string/empty" />
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

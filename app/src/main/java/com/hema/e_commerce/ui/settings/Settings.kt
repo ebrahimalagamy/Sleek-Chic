@@ -1,5 +1,6 @@
 package com.hema.e_commerce.ui.settings
 
+import android.opengl.Visibility
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,17 +9,16 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.hema.e_commerce.R
-import com.hema.e_commerce.databinding.ProfileFragmentBinding
+import com.hema.e_commerce.databinding.SettingsFragmentBinding
 
-class Profile : Fragment() {
+class Settings : Fragment() {
 
-    private lateinit var viewModel: ProfileViewModel
-    private lateinit var binding: ProfileFragmentBinding
+    private lateinit var binding: SettingsFragmentBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.profile_fragment, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.settings_fragment, container, false)
         return binding.root
     }
 
@@ -39,11 +39,12 @@ class Profile : Fragment() {
             findNavController().navigate(R.id.action_profile_to_wishlist)
         }
         binding.btnEditProfile.setOnClickListener {
-            findNavController().navigate(R.id.action_profile_to_editProfile)
+            findNavController().navigate(R.id.action_Settings_to_profile)
         }
         binding.btnAddress.setOnClickListener {
             findNavController().navigate(R.id.action_profile_to_address)
         }
+//        binding.myAccountConstraint.visibility = View.GONE
     }
 
 }

@@ -13,7 +13,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.hema.e_commerce.Connectivity
 import com.hema.e_commerce.R
@@ -81,6 +80,7 @@ class MapFragment : Fragment() {
                     geoCoder.getFromLocation(it.latitude, it.longitude, 1)
                 address = currentLocation[0].getAddressLine(0)
                 Log.d("Address", currentLocation[0].getAddressLine(0))
+
 
                 googleMap.clear()
                 googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(it, 15f))

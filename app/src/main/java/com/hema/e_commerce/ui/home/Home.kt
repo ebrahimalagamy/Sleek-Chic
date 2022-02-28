@@ -31,6 +31,7 @@ class Home : Fragment(R.layout.home_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         imageSlider()
+//        binding.searchView.queryHint = "Custom Search Hint"
 
     }
 

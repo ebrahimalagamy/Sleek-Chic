@@ -39,7 +39,7 @@ class SharedPreferencesProvider(context: Context) {
 
 
 
-    val latLong: Array<String?>
+    val getLocation: Array<String?>
         get() {
             val location = arrayOfNulls<String>(3)
             val lat = pref.getString(LAT_SHARED_PREF, null)

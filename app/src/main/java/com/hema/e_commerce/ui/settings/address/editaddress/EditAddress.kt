@@ -30,7 +30,7 @@ class EditAddress : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         sharedPref = SharedPreferencesProvider(requireActivity())
-        binding.tvAddress.text = sharedPref.latLong[2]
+        binding.tvAddress.text = sharedPref.getLocation[2]
         binding.etPhoneNumber.text =
             Editable.Factory.getInstance().newEditable(sharedPref.getUserInfo[1])
         binding.etName.text = Editable.Factory.getInstance().newEditable(sharedPref.getUserInfo[2])

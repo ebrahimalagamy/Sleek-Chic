@@ -87,6 +87,7 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             if (destination.id == R.id.signInFragment || destination.id == R.id.signUpFragment
                 || destination.id == R.id.editAddress || destination.id == R.id.mapFragment
+                || destination.id == R.id.editProfile
             ) {
                 binding.bottomNavView.visibility = View.GONE
             } else {
@@ -100,7 +101,7 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
                 R.id.home,
                 R.id.category,
                 R.id.cart,
-                R.id.profile
+                R.id.Settings
             )
 
         )

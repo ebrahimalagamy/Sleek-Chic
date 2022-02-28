@@ -15,7 +15,7 @@
             app:destination="@id/signInFragment" />
         <action
             android:id="@+id/action_signUpFragment_to_profile"
-            app:destination="@id/profile" />
+            app:destination="@id/Settings" />
     </fragment>
     <fragment
         android:id="@+id/signInFragment"
@@ -27,7 +27,7 @@
             app:destination="@id/signUpFragment" />
         <action
             android:id="@+id/action_signInFragment_to_profile"
-            app:destination="@id/profile" />
+            app:destination="@id/Settings" />
     </fragment>
     <fragment
         android:id="@+id/home"
@@ -56,10 +56,10 @@
             app:destination="@id/typeListProductFragment2" />
     </fragment>
     <fragment
-        android:id="@+id/profile"
-        android:name="com.hema.e_commerce.ui.settings.Profile"
+        android:id="@+id/Settings"
+        android:name="com.hema.e_commerce.ui.settings.Settings"
         android:label="profile_fragment"
-        tools:layout="@layout/profile_fragment">
+        tools:layout="@layout/settings_fragment">
         <action
             android:id="@+id/action_profile_to_signInFragment"
             app:destination="@id/signInFragment" />
@@ -70,11 +70,11 @@
             android:id="@+id/action_profile_to_wishlist"
             app:destination="@id/wishlist" />
         <action
-            android:id="@+id/action_profile_to_editProfile"
-            app:destination="@id/editProfile" />
-        <action
             android:id="@+id/action_profile_to_address"
             app:destination="@id/address" />
+        <action
+            android:id="@+id/action_Settings_to_profile"
+            app:destination="@id/profile" />
     </fragment>
     <fragment
         android:id="@+id/typeListProductFragment2"
@@ -91,9 +91,13 @@
         tools:layout="@layout/fragment_wishlist" />
     <fragment
         android:id="@+id/editProfile"
-        android:name="com.hema.e_commerce.ui.settings.profile.EditProfile"
+        android:name="com.hema.e_commerce.ui.settings.profile.editprofile.EditProfile"
         android:label="EditProfile"
-        tools:layout="@layout/fragment_edit_profile" />
+        tools:layout="@layout/fragment_edit_profile" >
+        <action
+            android:id="@+id/action_editProfile_to_profile"
+            app:destination="@id/profile" />
+    </fragment>
     <fragment
         android:id="@+id/address"
         android:name="com.hema.e_commerce.ui.settings.address.Address"
@@ -104,7 +108,7 @@
             app:destination="@id/editAddress" />
         <action
             android:id="@+id/action_address_to_profile"
-            app:destination="@id/profile" />
+            app:destination="@id/Settings" />
     </fragment>
     <fragment
         android:id="@+id/singleProductFragment"
@@ -137,6 +141,15 @@
         <action
             android:id="@+id/action_mapFragment_to_editAddress"
             app:destination="@id/editAddress" />
+    </fragment>
+    <fragment
+        android:id="@+id/profile"
+        android:name="com.hema.e_commerce.ui.settings.profile.Profile"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profile_to_editProfile"
+            app:destination="@id/editProfile" />
     </fragment>
 
 </navigation>
