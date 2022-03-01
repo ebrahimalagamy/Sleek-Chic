@@ -31,16 +31,11 @@ class Home : Fragment(R.layout.home_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         imageSlider()
-//        binding.searchView.queryHint = "Custom Search Hint"
+
 
     }
 
-    /*override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.menu,menu)
 
-    }
-*/
     private fun imageSlider() {
         //function for image slider
         val imageList = ArrayList<SlideModel>()
