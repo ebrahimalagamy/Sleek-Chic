@@ -19,7 +19,7 @@
         android:theme="@style/Theme.ECommerce">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyD8tVyGsuvIU31CL3SojqhsgtFvbrtN6hk"/>
+            android:value="AIzaSyDZ9WlW-NbYYo4MUIU3Refmxs8A2qxbdnc"/>
         <activity
             android:name=".MainActivity"
             android:exported="true">
