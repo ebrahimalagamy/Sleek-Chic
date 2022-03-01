@@ -42,17 +42,18 @@ class SharedPreferencesProvider(context: Context) {
     val getLocation: Array<String?>
         get() {
             val location = arrayOfNulls<String>(3)
-            val lat = pref.getString(LAT_SHARED_PREF, null)
-            val lng = pref.getString(LONG_SHARED_PREF, null)
-            val add = pref.getString(ADDRESS, null)
+            val lat = pref.getString(LAT_SHARED_PREF, "null")
+            val lng = pref.getString(LONG_SHARED_PREF, "null")
+            val add = pref.getString(ADDRESS, "Address")
             location[0] = lat
             location[1] = lng
             location[2] = add
             return location
         }
 
-    fun setUserInfo(userAddress: String?, phone: String?, name: String?) {
-        editor.putString(USER_ADDRESS, userAddress)
+    fun setUserInfo(//userAddress: String?,
+                    phone: String?, name: String?) {
+//        editor.putString(USER_ADDRESS, userAddress)
         editor.putString(PHONE, phone)
         editor.putString(NAME, name)
         editor.commit()
@@ -60,13 +61,13 @@ class SharedPreferencesProvider(context: Context) {
 
     val getUserInfo: Array<String?>
         get() {
-            val info = arrayOfNulls<String>(3)
-            val userAddress = pref.getString(USER_ADDRESS, null)
-            val phone = pref.getString(PHONE, null)
-            val name = pref.getString(NAME, null)
-            info[0] = userAddress
-            info[1] = phone
-            info[2] = name
+            val info = arrayOfNulls<String>(2)
+//            val userAddress = pref.getString(USER_ADDRESS, null)
+            val phone = pref.getString(PHONE,"Phone")
+            val name = pref.getString(NAME, "Username")
+//            info[0] = userAddress
+            info[0] = phone
+            info[1] = name
             return info
         }
 

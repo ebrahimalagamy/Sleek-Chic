@@ -50,7 +50,12 @@ class MapFragment : Fragment() {
             if (!connectivity.isOnline(this.requireContext())) {
                 return@setOnClickListener
             }
-            sharedPref.setLocation(markerLat.toString(), markerLong.toString(), address)
+            sharedPref.setLocation(
+                markerLat.toString(),
+                markerLong.toString(),
+                address
+
+            )
             findNavController().navigate(R.id.action_mapFragment_to_editAddress)
 
         }

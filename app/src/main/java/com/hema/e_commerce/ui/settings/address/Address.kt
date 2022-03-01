@@ -28,9 +28,9 @@ class Address : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         sharedPref = SharedPreferencesProvider(requireActivity())
-        binding.tvAddress.text = sharedPref.getUserInfo[0]
-        binding.tvPhone.text = sharedPref.getUserInfo[1]
-        binding.tvName.text = sharedPref.getUserInfo[2]
+        binding.tvAddress.text = sharedPref.getLocation[2]
+        binding.tvPhone.text = sharedPref.getUserInfo[0]
+        binding.tvName.text = sharedPref.getUserInfo[1]
 
         bindUi()
 

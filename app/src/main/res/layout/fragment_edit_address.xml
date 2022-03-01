@@ -109,7 +109,7 @@
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
                     android:inputType="number"
-                    android:focusable="false">
+                    >
 
                 </com.google.android.material.textfield.TextInputEditText>
 
@@ -139,7 +139,6 @@
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
                     android:inputType="text"
-                    android:focusable="false"
                     android:textSize="15sp">
 
                 </com.google.android.material.textfield.TextInputEditText>

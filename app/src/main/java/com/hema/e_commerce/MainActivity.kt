@@ -53,8 +53,7 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
                 sharedPref.setLocation(
                     location.latitude.toString(),
                     location.longitude.toString(),
-                    currentLocation[0].getAddressLine(0)
-
+                    currentLocation[0].getAddressLine(0),
                 )
                 // to get my location in first time only
                 sharedPref.setFirstTimeLaunch(false)

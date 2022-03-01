@@ -30,10 +30,11 @@ class EditAddress : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         sharedPref = SharedPreferencesProvider(requireActivity())
+
         binding.tvAddress.text = sharedPref.getLocation[2]
         binding.etPhoneNumber.text =
-            Editable.Factory.getInstance().newEditable(sharedPref.getUserInfo[1])
-        binding.etName.text = Editable.Factory.getInstance().newEditable(sharedPref.getUserInfo[2])
+            Editable.Factory.getInstance().newEditable(sharedPref.getUserInfo[0])
+        binding.etName.text = Editable.Factory.getInstance().newEditable(sharedPref.getUserInfo[1])
 
 
 
@@ -44,10 +45,10 @@ class EditAddress : Fragment() {
             findNavController().navigate(R.id.action_editAddress_to_mapFragment)
         }
         binding.btnSaveAddressInfo.setOnClickListener {
-            val address = binding.tvAddress.text.toString()
+//            val address = binding.tvAddress.text.toString()
             val phone = binding.etPhoneNumber.text.toString()
             val name = binding.etName.text.toString()
-            sharedPref.setUserInfo(address, phone, name)
+            sharedPref.setUserInfo(phone, name)
             findNavController().navigate(R.id.action_editAddress_to_address)
         }
 
