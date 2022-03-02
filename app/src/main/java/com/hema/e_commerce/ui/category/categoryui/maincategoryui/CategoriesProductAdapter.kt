@@ -11,13 +11,13 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.hema.e_commerce.R
 import com.hema.e_commerce.databinding.CategoriesProductsItemsBinding
+import com.hema.e_commerce.model.dataclass.listofcustomcollections.CustomCollection
 import com.hema.e_commerce.ui.category.categoryui.containerui.FragmentContainer
-import com.hema.e_commerce.ui.category.testmodels.model
 
 
 class CategoriesProductAdapter(
     var fragMan: FragmentManager?,
-    val productList: ArrayList<model>,
+    val productList: List<CustomCollection>,
     val context: Context
 ) :
     RecyclerView.Adapter<CategoriesProductAdapter.ViewHolder>() {
@@ -39,9 +39,8 @@ class CategoriesProductAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        Log.i("mmmmmmmmmmmmmmmmmmmmmm", "onBindViewHolder: " + productList.size)
         val products = productList.get(position)
-        holder.itemBinding.productTypeName.text = products.name
+        holder.itemBinding.productTypeName.text = products.title
 
         holder.itemBinding.productTypeName.setOnClickListener {
 

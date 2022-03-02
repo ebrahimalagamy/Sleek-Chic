@@ -1,30 +1,53 @@
 package com.hema.e_commerce.ui.category.repository
 
+import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import com.hema.e_commerce.R
+import com.hema.e_commerce.model.remote.RetrofitInstance
 import com.hema.e_commerce.ui.cart.CartData
+import com.hema.e_commerce.model.dataclass.listofcustomcollections.CustomCollectionsResponse
 import com.hema.e_commerce.ui.category.testmodels.ModelContainer
 import com.hema.e_commerce.ui.category.testmodels.TypeModelList
-import com.hema.e_commerce.ui.category.testmodels.model
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class Repository {
-    // for side recycler
-    val arr = arrayListOf(
-        model("man"),
-        model("woman"),
-        model("child"),
-        model("bags"),
-        model("T-shirt"),
-        model("jacket"),
-        model("man"),
-        model("woman"), model("child"),
-        model("man"),
-        model("woman"),
-        model("child"),
-        model("man"),
-        model("woman"),
-        model("child"),
-        model("man")
-    )
+
+
+    private val TAG = "CollectionsRepo"
+    val collectionsLiveData = MutableLiveData<CustomCollectionsResponse>()
+    fun getCollections() {
+
+
+        GlobalScope.launch(Dispatchers.IO) {
+            val response =RetrofitInstance.api.getAllCollections()
+            withContext(Dispatchers.Main) {
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        Log.d(TAG, "onResponse: ${it}")
+                        Log.i(TAG, "getCollections:size " +it.custom_collections.size)
+                        collectionsLiveData.value = it
+                        Log.i("TAG", "getCollections: " + it.custom_collections.size)
+
+                    }
+                } else {
+                    Log.i(TAG, "getCollections: error " + response.errorBody())
+
+
+                }
+            }
+
+        }
+    }
+
+
+
+
+
+
+
 
     // for container
     val arrContainer = arrayListOf<ModelContainer>(

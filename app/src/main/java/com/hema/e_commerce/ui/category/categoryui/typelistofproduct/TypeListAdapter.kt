@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.hema.e_commerce.R
 import com.hema.e_commerce.databinding.ItemProductListBinding
@@ -19,7 +20,7 @@ class TypeListAdapter(val productList: ArrayList<TypeModelList>, val context: Co
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        //  navController=Navigation.findNavController(parent)
+         navController= Navigation.findNavController(parent)
         // navController.navigate(R.id.action_category_to_fragmentContainer)
 
 
@@ -40,6 +41,20 @@ class TypeListAdapter(val productList: ArrayList<TypeModelList>, val context: Co
         holder.itemBinding.tvListPrice.text = products.price
         holder.itemBinding.imgListProduct.setImageResource(products.img)
         holder.itemBinding.tvListShDesc.text = products.desc
+        holder.itemView.setOnClickListener{
+
+            navController.navigate(R.id.action_typeListProductFragment2_to_singleProductFragment)
+
+
+
+
+
+        }
+
+
+
+
+
 
 
         //  holder.itemBinding.tvNameContainerItemProduct.setOnClickListener{

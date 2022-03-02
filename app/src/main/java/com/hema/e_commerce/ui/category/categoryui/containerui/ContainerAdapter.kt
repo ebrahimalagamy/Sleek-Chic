@@ -24,7 +24,6 @@ class ContainerAdapter(
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        //  navController=Navigation.findNavController(parent)
         navController = Navigation.findNavController(parent)
 
         return ViewHolder(
