@@ -1,4 +1,4 @@
-package com.hema.e_commerce.ui.settings.sharedpreferences
+package com.hema.e_commerce.util
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -20,9 +20,6 @@ class SharedPreferencesProvider(context: Context) {
         private const val PHONE = "PHONE"
         private const val NAME = "NAME"
 
-
-        //location request
-        const val PERMISSION_LOCATION_REQUEST_CODE = 1
     }
 
     init {

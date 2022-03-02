@@ -1,4 +1,4 @@
-package com.hema.e_commerce
+package com.hema.e_commerce.util
 
 import android.content.Context
 import android.net.ConnectivityManager

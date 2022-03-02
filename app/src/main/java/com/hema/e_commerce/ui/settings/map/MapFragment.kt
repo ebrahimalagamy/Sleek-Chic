@@ -14,10 +14,10 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.MarkerOptions
-import com.hema.e_commerce.Connectivity
+import com.hema.e_commerce.util.Connectivity
 import com.hema.e_commerce.R
 import com.hema.e_commerce.databinding.FragmentMapBinding
-import com.hema.e_commerce.ui.settings.sharedpreferences.SharedPreferencesProvider
+import com.hema.e_commerce.util.SharedPreferencesProvider
 
 
 class MapFragment : Fragment() {
@@ -56,7 +56,7 @@ class MapFragment : Fragment() {
                 address
 
             )
-            findNavController().navigate(R.id.action_mapFragment_to_editAddress)
+            findNavController().navigate(R.id.editAddress)
 
         }
 

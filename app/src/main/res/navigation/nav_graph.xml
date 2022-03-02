@@ -9,14 +9,7 @@
         android:id="@+id/signUpFragment"
         android:name="com.hema.e_commerce.ui.settings.auth.SignUpFragment"
         android:label="fragment_sign_up"
-        tools:layout="@layout/fragment_sign_up">
-        <action
-            android:id="@+id/action_signUpFragment_to_signInFragment"
-            app:destination="@id/signInFragment" />
-        <action
-            android:id="@+id/action_signUpFragment_to_profile"
-            app:destination="@id/Settings" />
-    </fragment>
+        tools:layout="@layout/fragment_sign_up"/>
     <fragment
         android:id="@+id/signInFragment"
         android:name="com.hema.e_commerce.ui.settings.auth.SignInFragment"
@@ -25,9 +18,6 @@
         <action
             android:id="@+id/action_signInFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
-        <action
-            android:id="@+id/action_signInFragment_to_profile"
-            app:destination="@id/Settings" />
     </fragment>
     <fragment
         android:id="@+id/home"
@@ -61,19 +51,19 @@
         android:label="profile_fragment"
         tools:layout="@layout/settings_fragment">
         <action
-            android:id="@+id/action_profile_to_signInFragment"
+            android:id="@+id/action_settings_to_signInFragment"
             app:destination="@id/signInFragment" />
         <action
-            android:id="@+id/action_profile_to_signUpFragment"
+            android:id="@+id/action_settings_to_signUpFragment"
             app:destination="@id/signUpFragment" />
         <action
-            android:id="@+id/action_profile_to_wishlist"
+            android:id="@+id/action_settings_to_wishlist"
             app:destination="@id/wishlist" />
         <action
-            android:id="@+id/action_profile_to_address"
+            android:id="@+id/action_settings_to_address"
             app:destination="@id/address" />
         <action
-            android:id="@+id/action_Settings_to_profile"
+            android:id="@+id/action_settings_to_profile"
             app:destination="@id/profile" />
     </fragment>
     <fragment
@@ -93,11 +83,7 @@
         android:id="@+id/editProfile"
         android:name="com.hema.e_commerce.ui.settings.profile.editprofile.EditProfile"
         android:label="EditProfile"
-        tools:layout="@layout/fragment_edit_profile" >
-        <action
-            android:id="@+id/action_editProfile_to_profile"
-            app:destination="@id/profile" />
-    </fragment>
+        tools:layout="@layout/fragment_edit_profile" />
     <fragment
         android:id="@+id/address"
         android:name="com.hema.e_commerce.ui.settings.address.Address"
@@ -106,9 +92,6 @@
         <action
             android:id="@+id/action_address_to_editAddress"
             app:destination="@id/editAddress" />
-        <action
-            android:id="@+id/action_address_to_profile"
-            app:destination="@id/Settings" />
     </fragment>
     <fragment
         android:id="@+id/singleProductFragment"
@@ -127,9 +110,6 @@
         android:label="EditAddress"
         tools:layout="@layout/fragment_edit_address">
         <action
-            android:id="@+id/action_editAddress_to_address"
-            app:destination="@id/address" />
-        <action
             android:id="@+id/action_editAddress_to_mapFragment"
             app:destination="@id/mapFragment" />
     </fragment>
@@ -137,11 +117,7 @@
         android:id="@+id/mapFragment"
         android:name="com.hema.e_commerce.ui.settings.map.MapFragment"
         android:label="MapFragment"
-        tools:layout="@layout/fragment_map">
-        <action
-            android:id="@+id/action_mapFragment_to_editAddress"
-            app:destination="@id/editAddress" />
-    </fragment>
+        tools:layout="@layout/fragment_map"/>
     <fragment
         android:id="@+id/profile"
         android:name="com.hema.e_commerce.ui.settings.profile.Profile"

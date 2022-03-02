@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.hema.e_commerce.R
 import com.hema.e_commerce.databinding.FragmentEditAddressBinding
-import com.hema.e_commerce.ui.settings.sharedpreferences.SharedPreferencesProvider
+import com.hema.e_commerce.util.SharedPreferencesProvider
 
 class EditAddress : Fragment() {
     private lateinit var binding: FragmentEditAddressBinding
@@ -39,7 +39,7 @@ class EditAddress : Fragment() {
 
 
         binding.tvCancel.setOnClickListener {
-            findNavController().navigate(R.id.action_editAddress_to_address)
+            findNavController().navigate(R.id.address)
         }
         binding.ibOpenMap.setOnClickListener {
             findNavController().navigate(R.id.action_editAddress_to_mapFragment)
@@ -49,7 +49,7 @@ class EditAddress : Fragment() {
             val phone = binding.etPhoneNumber.text.toString()
             val name = binding.etName.text.toString()
             sharedPref.setUserInfo(phone, name)
-            findNavController().navigate(R.id.action_editAddress_to_address)
+            findNavController().navigate(R.id.address)
         }
 
 

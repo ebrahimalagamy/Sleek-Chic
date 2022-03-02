@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.hema.e_commerce.R
 import com.hema.e_commerce.databinding.FragmentAddressBinding
-import com.hema.e_commerce.ui.settings.sharedpreferences.SharedPreferencesProvider
+import com.hema.e_commerce.util.SharedPreferencesProvider
 
 
 class Address : Fragment() {
@@ -41,7 +41,7 @@ class Address : Fragment() {
             findNavController().navigate(R.id.action_address_to_editAddress)
         }
         binding.ivBack.setOnClickListener {
-            findNavController().navigate(R.id.action_address_to_profile)
+            findNavController().navigate(R.id.Settings)
         }
     }
 

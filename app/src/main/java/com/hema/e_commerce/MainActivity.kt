@@ -17,8 +17,8 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.hema.e_commerce.databinding.ActivityMainBinding
-import com.hema.e_commerce.ui.settings.sharedpreferences.SharedPreferencesProvider
-import com.hema.e_commerce.ui.settings.sharedpreferences.SharedPreferencesProvider.Companion.PERMISSION_LOCATION_REQUEST_CODE
+import com.hema.e_commerce.util.Constant.PERMISSION_LOCATION_REQUEST_CODE
+import com.hema.e_commerce.util.SharedPreferencesProvider
 import com.vmadalin.easypermissions.EasyPermissions
 
 class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
@@ -75,7 +75,6 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
         )
     }
 
-
     private fun bindNav() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragment_container_view) as NavHostFragment
@@ -104,16 +103,8 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
             )
 
         )
-
-//        setSupportActionBar(binding.mytoolbar)
-
     }
 
-
-//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-//        menuInflater.inflate(R.menu.menu, menu)
-//        return true
-//    }
 
     override fun onBackPressed() {
         navController.navigateUp()

@@ -30,7 +30,7 @@ class EditProfile : Fragment() {
 
     private fun bindUi() {
         binding.tvCancel.setOnClickListener {
-            findNavController().navigate(R.id.action_editProfile_to_profile)
+            findNavController().navigate(R.id.profile)
         }
     }
 

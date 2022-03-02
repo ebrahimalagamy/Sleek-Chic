@@ -1,6 +1,5 @@
 package com.hema.e_commerce.ui.settings
 
-import android.opengl.Visibility
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -30,19 +29,19 @@ class Settings : Fragment() {
 
     private fun bindUi() {
         binding.ivSignIn.setOnClickListener {
-            findNavController().navigate(R.id.action_profile_to_signInFragment)
+            findNavController().navigate(R.id.action_settings_to_signInFragment)
         }
         binding.ivSignUp.setOnClickListener {
-            findNavController().navigate(R.id.action_profile_to_signUpFragment)
+            findNavController().navigate(R.id.action_settings_to_signUpFragment)
         }
         binding.btnWishlist.setOnClickListener {
-            findNavController().navigate(R.id.action_profile_to_wishlist)
+            findNavController().navigate(R.id.action_settings_to_wishlist)
         }
         binding.btnEditProfile.setOnClickListener {
-            findNavController().navigate(R.id.action_Settings_to_profile)
+            findNavController().navigate(R.id.action_settings_to_profile)
         }
         binding.btnAddress.setOnClickListener {
-            findNavController().navigate(R.id.action_profile_to_address)
+            findNavController().navigate(R.id.action_settings_to_address)
         }
 //        binding.myAccountConstraint.visibility = View.GONE
     }

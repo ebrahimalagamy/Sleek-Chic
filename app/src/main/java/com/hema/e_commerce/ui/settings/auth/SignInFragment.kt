@@ -33,7 +33,7 @@ class SignInFragment : Fragment() {
             findNavController().navigate(R.id.action_signInFragment_to_signUpFragment)
         }
         binding.ivClose.setOnClickListener {
-            findNavController().navigate(R.id.action_signInFragment_to_profile)
+            findNavController().navigate(R.id.profile)
         }
     }
 

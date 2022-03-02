@@ -30,10 +30,10 @@ class SignUpFragment : Fragment() {
 
     private fun bindUi() {
         binding.tvSignIn.setOnClickListener {
-            findNavController().navigate(R.id.action_signUpFragment_to_signInFragment)
+            findNavController().navigate(R.id.signInFragment)
         }
         binding.ivClose.setOnClickListener {
-            findNavController().navigate(R.id.action_signUpFragment_to_profile)
+            findNavController().navigate(R.id.profile)
         }
     }
 
