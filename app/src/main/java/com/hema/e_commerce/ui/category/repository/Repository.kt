@@ -18,9 +18,8 @@ class Repository {
 
     private val TAG = "CollectionsRepo"
     val collectionsLiveData = MutableLiveData<CustomCollectionsResponse>()
+
     fun getCollections() {
-
-
         GlobalScope.launch(Dispatchers.IO) {
             val response =RetrofitInstance.api.getAllCollections()
             withContext(Dispatchers.Main) {
