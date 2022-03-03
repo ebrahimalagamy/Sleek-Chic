@@ -1,5 +1,5 @@
 package com.hema.e_commerce.model.dataclass.allProducts
 
-data class AllProducts(
+data class ProductsResponse(
     val products: List<Product>
 )

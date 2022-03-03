@@ -11,13 +11,13 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.hema.e_commerce.R
 import com.hema.e_commerce.databinding.ContainerItemBinding
-import com.hema.e_commerce.ui.category.testmodels.ModelContainer
+import com.hema.e_commerce.model.dataclass.allProducts.Product
 
 
 class ContainerAdapter(
     var fragMan: FragmentManager?,
-    val productList: ArrayList<ModelContainer>,
-    val context: Context
+    val productList: List<Product>,
+    val context: Context,
 ) :
     RecyclerView.Adapter<ContainerAdapter.ViewHolder>() {
     lateinit var navController: NavController
@@ -39,9 +39,15 @@ class ContainerAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         Log.i("mmmmmmmmmmmmmmmmmmmmmm", "onBindViewHolder: " + productList.size)
+
+
         val products = productList.get(position)
-        holder.itemBinding.tvNameContainerItemProduct.text = products.name
-        holder.itemBinding.imgItemContainerProduct.setImageResource(products.img)
+
+
+
+
+        holder.itemBinding.tvNameContainerItemProduct.text = products.product_type
+            // holder.itemBinding.imgItemContainerProduct.setImageResource(products.)
 
 
         holder.itemView.setOnClickListener {

@@ -3,10 +3,10 @@ package com.hema.e_commerce.ui.category.repository
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.hema.e_commerce.R
+import com.hema.e_commerce.model.dataclass.allProducts.ProductsResponse
 import com.hema.e_commerce.model.remote.RetrofitInstance
 import com.hema.e_commerce.ui.cart.CartData
 import com.hema.e_commerce.model.dataclass.listofcustomcollections.CustomCollectionsResponse
-import com.hema.e_commerce.ui.category.testmodels.ModelContainer
 import com.hema.e_commerce.ui.category.testmodels.TypeModelList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -41,6 +41,29 @@ class Repository {
 
         }
     }
+//
+    val collectionProductsLiveData = MutableLiveData<ProductsResponse>()
+    fun getProducts(categoryId:Long) {
+
+
+        GlobalScope.launch(Dispatchers.IO) {
+            val response =RetrofitInstance.api.getCollectionProducts(categoryId)
+            withContext(Dispatchers.Main) {
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        Log.d(TAG, "onResponse: ${it}")
+                        collectionProductsLiveData.value = it
+
+                    }
+                } else {
+                    Log.i(TAG, "getProducts: error " + response.errorBody())
+
+
+                }
+            }
+
+        }
+    }
 
 
 
@@ -48,18 +71,6 @@ class Repository {
 
 
 
-
-    // for container
-    val arrContainer = arrayListOf<ModelContainer>(
-        ModelContainer("man", R.drawable.test2),
-        ModelContainer("woman", R.drawable.test2),
-        ModelContainer("bags", R.drawable.test2),
-        ModelContainer("dresses", R.drawable.test2),
-        ModelContainer("suits", R.drawable.test2),
-        ModelContainer("shose", R.drawable.test2),
-        ModelContainer("accessories", R.drawable.test2),
-        ModelContainer("hair", R.drawable.test2)
-    )
 
 // for type list
 
