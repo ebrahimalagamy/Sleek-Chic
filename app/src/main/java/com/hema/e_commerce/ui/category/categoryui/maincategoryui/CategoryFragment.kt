@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hema.e_commerce.R
 import com.hema.e_commerce.databinding.CategoryFragmentBinding
-import com.hema.e_commerce.ui.category.viewmodel.CategoryViewModel
+import com.hema.e_commerce.model.viewmodels.CategoryViewModel
 
 class CategoryFragment : Fragment() {
     lateinit var productAdapter: CategoriesProductAdapter

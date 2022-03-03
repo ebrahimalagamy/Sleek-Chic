@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.hema.e_commerce.R
 import com.hema.e_commerce.databinding.FragmentTypeListProductBinding
-import com.hema.e_commerce.ui.category.repository.Repository
+import com.hema.e_commerce.model.repository.Repository
 import com.hema.e_commerce.ui.category.testmodels.TypeModelList
 import java.util.*
 
