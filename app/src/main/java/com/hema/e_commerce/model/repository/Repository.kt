@@ -1,4 +1,4 @@
-package com.hema.e_commerce.ui.category.repository
+package com.hema.e_commerce.model.repository
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
@@ -22,12 +22,12 @@ class Repository {
 
 
         GlobalScope.launch(Dispatchers.IO) {
-            val response =RetrofitInstance.api.getAllCollections()
+            val response = RetrofitInstance.api.getAllCollections()
             withContext(Dispatchers.Main) {
                 if (response.isSuccessful) {
                     response.body()?.let {
                         Log.d(TAG, "onResponse: ${it}")
-                        Log.i(TAG, "getCollections:size " +it.custom_collections.size)
+                        Log.i(TAG, "getCollections:size " + it.custom_collections.size)
                         collectionsLiveData.value = it
                         Log.i("TAG", "getCollections: " + it.custom_collections.size)
 
@@ -41,13 +41,14 @@ class Repository {
 
         }
     }
-//
+
+    //
     val collectionProductsLiveData = MutableLiveData<ProductsResponse>()
-    fun getProducts(categoryId:Long) {
+    fun getProducts(categoryId: Long) {
 
 
         GlobalScope.launch(Dispatchers.IO) {
-            val response =RetrofitInstance.api.getCollectionProducts(categoryId)
+            val response = RetrofitInstance.api.getCollectionProducts(categoryId)
             withContext(Dispatchers.Main) {
                 if (response.isSuccessful) {
                     response.body()?.let {
@@ -64,12 +65,6 @@ class Repository {
 
         }
     }
-
-
-
-
-
-
 
 
 // for type list

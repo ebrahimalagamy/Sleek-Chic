@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hema.e_commerce.R
 import com.hema.e_commerce.databinding.CartFragmentBinding
-import com.hema.e_commerce.ui.category.repository.Repository
+import com.hema.e_commerce.model.repository.Repository
 
 class Cart : Fragment() {
 

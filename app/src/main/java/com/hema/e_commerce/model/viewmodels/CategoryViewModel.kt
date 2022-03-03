@@ -1,9 +1,9 @@
-package com.hema.e_commerce.ui.category.viewmodel
+package com.hema.e_commerce.model.viewmodels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.hema.e_commerce.model.dataclass.listofcustomcollections.CustomCollectionsResponse
-import com.hema.e_commerce.ui.category.repository.Repository
+import com.hema.e_commerce.model.repository.Repository
 
 class CategoryViewModel : ViewModel() {
 
