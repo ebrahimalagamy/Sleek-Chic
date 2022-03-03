@@ -1,6 +1,7 @@
 package com.hema.e_commerce.ui.category.categoryui.maincategoryui
 
 import android.content.Context
+import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -48,11 +49,10 @@ class CategoriesProductAdapter(
 
 
             var fragContainer: FragmentContainer = FragmentContainer()
-//                var  bundle:Bundle= Bundle()
-//                bundle.putString("selected data",products.name)
-//
-//                fragContainer.arguments=bundle
-            //    FragmentManager().beginTransaction().replace(R.id.fram_cont, fragContainer)
+                var  bundle: Bundle = Bundle()
+              bundle.putString("title",products.title)
+
+                fragContainer.arguments=bundle
             val manager: FragmentManager
             fragMan!!.beginTransaction().replace(R.id.fram_cont, fragContainer).commit()
 
