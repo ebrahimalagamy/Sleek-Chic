@@ -13,12 +13,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.hema.e_commerce.R
 import com.hema.e_commerce.databinding.FragmentContainerBinding
+import com.hema.e_commerce.model.repository.Repository
 import com.hema.e_commerce.model.viewmodels.CollectionProductsViewModel
-import com.hema.e_commerce.util.Constant.HOME_PAGE_ID
-import com.hema.e_commerce.util.Constant.KIDS_ID
-import com.hema.e_commerce.util.Constant.MEN_ID
-import com.hema.e_commerce.util.Constant.SALE_ID
-import com.hema.e_commerce.util.Constant.WOMAN_ID
+import com.hema.e_commerce.ui.category.testmodels.SubCollections
 
 
 class FragmentContainer : Fragment() {
@@ -26,6 +23,7 @@ class FragmentContainer : Fragment() {
     lateinit var adapter: ContainerAdapter
     private lateinit var viewModel: CollectionProductsViewModel
     lateinit var collectionName:String
+    var fragMan: FragmentManager? = fragmentManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -66,17 +64,26 @@ class FragmentContainer : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var collectionId: Long=
-        when(collectionName){
+        var collectionPosition: Int=
+            when(collectionName){
 
-            "Home Page"->  HOME_PAGE_ID
-            "KID"-> KIDS_ID
-            "MEN"->MEN_ID
-            "SALE"-> SALE_ID
-            "WOMEN"-> WOMAN_ID
-            else -> 0
-        }
-        initViews(collectionId)
+                "Home Page"->  0
+                "KID"-> 1
+                "MEN"->2
+                "SALE"-> 3
+                "WOMEN"-> 4
+                else -> 0
+            }
+        var subCollectionsListHome = arrayListOf<SubCollections>(
+
+            //home 0
+            SubCollections("T-SHIRTS", R.drawable.tshirthome),
+            SubCollections("SHOES", R.drawable.homeshoes),
+            SubCollections("ACCESSORIES", R.drawable.accessorieswoman)
+        )
+
+
+        initViews(collectionPosition)
         observe()
 
     }
@@ -84,19 +91,18 @@ class FragmentContainer : Fragment() {
 
     fun observe() {
         viewModel.productsLiveData.observe(viewLifecycleOwner, Observer {
-            var fragMan: FragmentManager? = fragmentManager
-            var ProductList = it.products
+            var ProductList = it
 
             Log.i("ggggg", "onActivityCreated: " + ProductList.size)
             adapter = ContainerAdapter(fragMan, ProductList, requireContext())
-            val layoutManager = GridLayoutManager(requireContext(), 3)
+            val layoutManager = GridLayoutManager(requireContext(), 2)
             binding.recContainerItem.adapter = adapter
             binding.recContainerItem.layoutManager = layoutManager
         })
     }
 
-    private fun initViews(categoryId:Long) {
-        viewModel.getProducts(categoryId)
+    private fun initViews(position:Int) {
+        viewModel.getProducts(position)
     }
 
 }

@@ -12,11 +12,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hema.e_commerce.R
 import com.hema.e_commerce.databinding.ContainerItemBinding
 import com.hema.e_commerce.model.dataclass.allProducts.Product
+import com.hema.e_commerce.ui.category.testmodels.SubCollections
 
 
 class ContainerAdapter(
     var fragMan: FragmentManager?,
-    val productList: List<Product>,
+    val productList: ArrayList<SubCollections>,
     val context: Context,
 ) :
     RecyclerView.Adapter<ContainerAdapter.ViewHolder>() {
@@ -46,8 +47,8 @@ class ContainerAdapter(
 
 
 
-        holder.itemBinding.tvNameContainerItemProduct.text = products.product_type
-            // holder.itemBinding.imgItemContainerProduct.setImageResource(products.)
+        holder.itemBinding.tvNameContainerItemProduct.text = products.subName
+             holder.itemBinding.imgItemContainerProduct.setImageResource(products.image)
 
 
         holder.itemView.setOnClickListener {
