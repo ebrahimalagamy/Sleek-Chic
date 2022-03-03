@@ -18,9 +18,8 @@ class Repository {
 
     private val TAG = "CollectionsRepo"
     val collectionsLiveData = MutableLiveData<CustomCollectionsResponse>()
+
     fun getCollections() {
-
-
         GlobalScope.launch(Dispatchers.IO) {
             val response = RetrofitInstance.api.getAllCollections()
             withContext(Dispatchers.Main) {
@@ -44,8 +43,8 @@ class Repository {
 
     //
     val collectionProductsLiveData = MutableLiveData<ProductsResponse>()
-    fun getProducts(categoryId: Long) {
 
+    fun getProducts(categoryId: Long) {
 
         GlobalScope.launch(Dispatchers.IO) {
             val response = RetrofitInstance.api.getCollectionProducts(categoryId)
