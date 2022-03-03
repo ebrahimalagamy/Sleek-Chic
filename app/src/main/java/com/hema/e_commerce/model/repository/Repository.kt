@@ -43,8 +43,8 @@ class Repository {
 
     //
     val collectionProductsLiveData = MutableLiveData<ProductsResponse>()
-    fun getProducts(categoryId: Long) {
 
+    fun getProducts(categoryId: Long) {
 
         GlobalScope.launch(Dispatchers.IO) {
             val response = RetrofitInstance.api.getCollectionProducts(categoryId)

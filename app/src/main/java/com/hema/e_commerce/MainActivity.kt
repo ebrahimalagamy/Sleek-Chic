@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         sharedPref = SharedPreferencesProvider(this)
-        bindLocation()
+        //bindLocation()
         bindNav()
 
     }
@@ -48,7 +48,6 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
                 val geoCoder = Geocoder(this)
                 val currentLocation =
                     geoCoder.getFromLocation(location.latitude, location.longitude, 1)
-
                 Log.d("first", currentLocation[0].getAddressLine(0))
                 sharedPref.setLocation(
                     location.latitude.toString(),

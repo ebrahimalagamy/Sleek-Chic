@@ -3,6 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/fragment_type_list_product.xml" value="0.25" />
+        <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/home_fragment.xml" value="0.20416666666666666" />
+        <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/item_product_list.xml" value="0.20416666666666666" />
+        <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/row_brands.xml" value="0.33" />
+        <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/row_product.xml" value="0.33" />
         <entry key="..\:/Users/Ebrah/AndroidStudioProjects/ECommerce/app/src/main/res/drawable-v24/facebook_icon.xml" value="0.1655" />
         <entry key="..\:/Users/Ebrah/AndroidStudioProjects/ECommerce/app/src/main/res/drawable-v24/google_icon.xml" value="0.1655" />
         <entry key="..\:/Users/Ebrah/AndroidStudioProjects/ECommerce/app/src/main/res/drawable-v24/login_button.xml" value="0.1865" />

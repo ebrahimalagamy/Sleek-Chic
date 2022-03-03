@@ -5,7 +5,7 @@ data class Product(
     val body_html: String,
     val created_at: String,
     val handle: String,
-    val id: Int,
+    val id: Double,
     val image: Image,
     val images: List<Image>,
     val options: List<Option>,

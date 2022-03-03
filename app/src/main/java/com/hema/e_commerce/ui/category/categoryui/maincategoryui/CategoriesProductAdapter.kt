@@ -75,6 +75,4 @@ class CategoriesProductAdapter(
             this.itemBinding = itemBinding
         }
     }
-
-
-}
+    }

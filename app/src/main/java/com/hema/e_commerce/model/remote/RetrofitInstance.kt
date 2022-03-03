@@ -1,5 +1,6 @@
 package com.hema.e_commerce.model.remote
 
+import com.google.gson.GsonBuilder
 import com.hema.e_commerce.util.Constant.BASE_URL
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -15,6 +16,9 @@ class RetrofitInstance {
       /*   // in addInterceptor to see call in run
               val logging = HttpLoggingInterceptor()
            logging.setLevel(HttpLoggingInterceptor.Level.BODY)*/
+            var gson = GsonBuilder()
+                .setLenient()
+                .create()
 
             val client = OkHttpClient.Builder()
                 .addInterceptor(BasciInterceptor("bfe73f4cd7e7f8737d5928b2a439022e","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"))
@@ -22,7 +26,7 @@ class RetrofitInstance {
 
             Retrofit.Builder()
                 .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .client(client)
                 .build()
         }
