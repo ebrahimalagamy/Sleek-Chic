@@ -1,9 +1,9 @@
 package com.hema.e_commerce.model.dataclass.allProducts
 
 data class Option(
-    val id: Double,
+    val id: Long,
     val name: String,
     val position: Int,
-    val product_id: Double,
+    val product_id: Long,
     val values: List<String>
 )

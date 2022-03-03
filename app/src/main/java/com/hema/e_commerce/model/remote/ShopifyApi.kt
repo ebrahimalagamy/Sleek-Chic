@@ -3,7 +3,6 @@ package com.hema.e_commerce.model.remote
 import com.hema.e_commerce.model.dataclass.allProducts.ProductsResponse
 import com.hema.e_commerce.model.dataclass.listofcustomcollections.CustomCollectionsResponse
 import com.hema.e_commerce.model.dataclass.smartCollection.BrandsResponce
-import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path

@@ -1,4 +1,4 @@
-package com.hema.e_commerce.model.viewmodels
+package com.hema.e_commerce.ui.category.viewmodels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

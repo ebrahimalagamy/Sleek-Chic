@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.hema.e_commerce.databinding.RowProductBinding
 import com.hema.e_commerce.model.dataclass.allProducts.Product
-import com.hema.e_commerce.model.dataclass.smartCollection.SmartCollection
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -29,7 +28,7 @@ class ProductsAdapter(val productList:ArrayList<Product>) : RecyclerView.Adapter
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.tvBrand.text=productList[position].vendor
-      //  holder.binding.tvPrice.text=productList[position].variants[0].price
+//        holder.binding.tvPrice.text= productList[position].variants[0].price
         holder.binding.tvProductName.text=productList[position].title
         CoroutineScope(Dispatchers.Main).launch{
             Glide.with(holder.binding.ImageProduct.context).load(productList[position].image.src).into(holder.binding.ImageProduct)

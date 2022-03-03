@@ -3,15 +3,12 @@ package com.hema.e_commerce.ui.home
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.hema.e_commerce.model.dataclass.allProducts.ProductsResponse
-import com.hema.e_commerce.model.dataclass.listofcustomcollections.CustomCollectionsResponse
 import com.hema.e_commerce.model.dataclass.smartCollection.BrandsResponce
 import com.hema.e_commerce.model.remote.RetrofitInstance
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import retrofit2.Response
-import retrofit2.http.GET
 
 
 class Repository {
