@@ -7,11 +7,11 @@ import com.hema.e_commerce.ui.category.repository.Repository
 
 class CategoryViewModel : ViewModel() {
 
-     var categoriesLiveData = MutableLiveData<CustomCollectionsResponse>()
+    var categoriesLiveData = MutableLiveData<CustomCollectionsResponse>()
     private val repo = Repository();
 
     fun getCollections() {
-       repo.getCollections()
+        repo.getCollections()
         categoriesLiveData = repo.collectionsLiveData
 
     }
