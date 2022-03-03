@@ -4,8 +4,10 @@ import com.hema.e_commerce.model.dataclass.allProducts.ProductsResponse
 import com.hema.e_commerce.model.dataclass.listofcustomcollections.CustomCollectionsResponse
 import com.hema.e_commerce.model.dataclass.smartCollection.BrandsResponce
 import retrofit2.Response
+import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 
 
@@ -19,7 +21,7 @@ interface ShopifyApi {
     suspend fun getProducts(): Response<ProductsResponse>
 
     @GET("collections/{collection_id}/products.json")
-    suspend fun getCollectionProducts(@Path("collection_id") collection_id:Long):Response<ProductsResponse>
+    suspend fun getCollectionProducts(  @Path("collection_id") collection_id:Long):Response<ProductsResponse>
 
 
 

@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#EDEDED">
+        >
 
 
         <TextView
@@ -18,8 +18,11 @@
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:text="product types"
+            android:gravity="center"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginBottom="@dimen/_65sdp"
+            android:layout_marginTop="@dimen/_65sdp"
 
             />
     </androidx.constraintlayout.widget.ConstraintLayout>
