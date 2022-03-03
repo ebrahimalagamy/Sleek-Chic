@@ -6,6 +6,9 @@ import com.hema.e_commerce.model.dataclass.smartCollection.BrandsResponce
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
+import com.hema.e_commerce.model.dataclass.listofcustomcollections.CustomCollectionsResponse
+import retrofit2.Response
+import retrofit2.http.GET
 
 
 interface ShopifyApi {
@@ -33,3 +36,4 @@ interface ShopifyApi {
 
 
 }
+

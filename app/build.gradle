@@ -54,8 +54,8 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0'
 
     // Coroutine Lifecycle Scopes
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.1"
 
 
     // Retrofit
@@ -92,6 +92,9 @@ dependencies {
     implementation 'com.vmadalin:easypermissions-ktx:1.0.0'
     // location
     implementation "com.google.android.gms:play-services-location:19.0.1"
+    //preference
+    implementation "androidx.preference:preference-ktx:1.2.0"
+
 
 
 }
