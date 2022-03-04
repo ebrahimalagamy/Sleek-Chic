@@ -43,30 +43,10 @@ class TypeListProductsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        subCollectionsName = arguments?.getString("subCollectionsName").toString()
+        collectionsId= arguments?.getLong("collectionsId")!!
 
 
-        var bundle:Bundle?= arguments
-        if(bundle!=null){
-            Log.i("ccccc", "onCreateView: bundel ! null")
-
-            if(bundle.getLong("subCollectionId")!=null && bundle.getString("subName")!=null) {
-                bundle.getLong("subCollectionId")
-                Log.i("ccc", "onCreateView: "+bundle.getLong("subCollectionId")+"-------"+bundle.getString("subName"))
-                collectionsId=bundle.getLong("subCollectionId")
-                subCollectionsName= bundle.getString("subName")!!
-
-            }
-            else{
-                Log.i("ccc", "onCreateView: empty string ")
-            }
-        }
-
-        else{
-
-            Log.i("ssssssssssssssssss", "onCreateView:bundel = null ")
-
-
-        }
         initViews(collectionsId)
         observe()
 
@@ -90,20 +70,6 @@ class TypeListProductsFragment : Fragment() {
             val layoutManager = GridLayoutManager(requireContext(), 2)
             binding.recListProduct.adapter = adapter
             binding.recListProduct.layoutManager = layoutManager
-
-
-
-
-//            var fragMan: FragmentManager? = fragmentManager
-//            var categoriesList = it.custom_collections
-//
-//            Log.i(TAG, "onActivityCreated: " + categoriesList.size)
-//            productAdapter = CategoriesProductAdapter(fragMan, categoriesList, requireContext())
-//            val layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
-//            binding.recProduct.adapter = productAdapter
-//            binding.recProduct.layoutManager = layoutManager
-
-
 
         })
     }

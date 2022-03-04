@@ -1,5 +1,6 @@
 package com.hema.e_commerce.model.remote
 
+import com.hema.e_commerce.model.dataclass.allProducts.Product
 import com.hema.e_commerce.model.dataclass.allProducts.ProductsResponse
 import com.hema.e_commerce.model.dataclass.listofcustomcollections.CustomCollectionsResponse
 import com.hema.e_commerce.model.dataclass.smartCollection.BrandsResponce
@@ -32,6 +33,11 @@ interface ShopifyApi {
 
     @GET("collections/398033617127/products.json")
     suspend  fun getOnHomeProductsList(): Response<ProductsResponse>
+
+    //retrieve Single product
+    @GET("products/{product_id}.json")
+    suspend fun getSingleProduct( @Path("product_id") product_id:Long):Response<Product>
+
 
 
 }
