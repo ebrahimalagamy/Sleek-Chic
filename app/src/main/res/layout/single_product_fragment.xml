@@ -38,6 +38,7 @@
             app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/ic_favorite_border" />
         <!--Do not How many review gonna come to but inside recycle view-->
+
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -46,10 +47,10 @@
             android:paddingEnd="16dp"
             app:layout_constraintBottom_toTopOf="@id/addToCartCard"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/productDetailsImage"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintVertical_bias="0.0" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/addToCartCard"

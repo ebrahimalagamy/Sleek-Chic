@@ -3,10 +3,13 @@ package com.hema.e_commerce.model.repository
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.hema.e_commerce.R
+import com.hema.e_commerce.model.dataclass.allProducts.Product
 import com.hema.e_commerce.model.dataclass.allProducts.ProductsResponse
 import com.hema.e_commerce.model.remote.RetrofitInstance
 import com.hema.e_commerce.ui.cart.CartData
 import com.hema.e_commerce.model.dataclass.listofcustomcollections.CustomCollectionsResponse
+import com.hema.e_commerce.ui.category.testmodels.SubCollectionResponse
+import com.hema.e_commerce.ui.category.testmodels.SubCollections
 import com.hema.e_commerce.ui.category.testmodels.TypeModelList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -41,10 +44,10 @@ class Repository {
         }
     }
 
-    //
+
     val collectionProductsLiveData = MutableLiveData<ProductsResponse>()
 
-    fun getProducts(categoryId: Long) {
+    fun getSubCollectionsProducts(categoryId: Long) {
 
         GlobalScope.launch(Dispatchers.IO) {
             val response = RetrofitInstance.api.getCollectionProducts(categoryId)
@@ -65,21 +68,42 @@ class Repository {
         }
     }
 
+//sub collections
 
-// for type list
+    var subCollectionProductsLiveData = MutableLiveData<ArrayList<SubCollections>>()
+
+    fun getSubCollections(position: Int) {
+        subCollectionProductsLiveData.value = ShowSubCollections().showSub(position)
+    }
+
+//Single product
+
+    val singleProductsLiveData = MutableLiveData<Product>()
+    fun getSingleProduct(productId: Long) {
+
+        GlobalScope.launch(Dispatchers.IO) {
+            val response = RetrofitInstance.api.getSingleProduct(productId)
+            withContext(Dispatchers.Main) {
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        Log.d(TAG, "onResponse single: ${it}")
+                        singleProductsLiveData.value = it
+
+                    }
+                } else {
+                    Log.i(TAG, "getProduct: error " + response.errorBody())
 
 
-    val arrTypeList = arrayListOf<TypeModelList>(
-        TypeModelList("man", "shirt black red ", R.drawable.test2),
-        TypeModelList("woman", "dress black red ", R.drawable.test2),
-        TypeModelList("bags", "bag black red", R.drawable.test2),
-        TypeModelList("dresses", "dress black red ", R.drawable.test2),
-        TypeModelList("suits", "suits black red", R.drawable.test2),
-        TypeModelList("shose", "shose black red ", R.drawable.test2),
-        TypeModelList("accessories", "accessories black red", R.drawable.test2),
-        TypeModelList("hair", "hair black red", R.drawable.test2)
-    )
+                }
+            }
 
+        }
+    }
+
+
+
+
+//
     //for cart adapter
     //class CartData(var cartIcon:Int,var cartDesc:String,var cartPrice:String,var cartCopoun:String)
     val arrayList = arrayListOf<CartData>(

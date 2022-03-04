@@ -41,12 +41,13 @@ class CategoriesProductAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val products = productList.get(position)
-        holder.itemBinding.productTypeName.text = products.title
+            holder.itemBinding.productTypeName.text = products.title
+
+
 
         holder.itemBinding.productTypeName.setOnClickListener {
 
             // navController.navigate(R.id.action_category_to_fragmentContainer)
-
 
             var fragContainer: FragmentContainer = FragmentContainer()
                 var  bundle: Bundle = Bundle()

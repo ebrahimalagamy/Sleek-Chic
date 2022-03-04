@@ -7,12 +7,13 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.hema.e_commerce.R
-import com.hema.e_commerce.databinding.HomeFragmentBinding
+import com.hema.e_commerce.databinding.SingleProductFragmentBinding
+import com.hema.e_commerce.model.viewmodels.SingleProductViewModel
 
 class SingleProductFragment : Fragment(R.layout.single_product_fragment) {
 
     private lateinit var viewModel: SingleProductViewModel
-    private lateinit var binding: HomeFragmentBinding
+    private lateinit var binding: SingleProductFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
