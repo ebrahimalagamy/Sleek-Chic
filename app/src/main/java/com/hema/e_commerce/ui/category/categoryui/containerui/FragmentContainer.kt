@@ -13,15 +13,18 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.hema.e_commerce.R
 import com.hema.e_commerce.databinding.FragmentContainerBinding
-import com.hema.e_commerce.model.repository.Repository
-import com.hema.e_commerce.model.viewmodels.CollectionProductsViewModel
-import com.hema.e_commerce.ui.category.testmodels.SubCollections
+import com.hema.e_commerce.model.viewmodels.SubCollectionViewModel
+import com.hema.e_commerce.util.Constant.HOME_PAGE_ID
+import com.hema.e_commerce.util.Constant.KIDS_ID
+import com.hema.e_commerce.util.Constant.MEN_ID
+import com.hema.e_commerce.util.Constant.SALE_ID
+import com.hema.e_commerce.util.Constant.WOMAN_ID
 
 
 class FragmentContainer : Fragment() {
     lateinit var binding: FragmentContainerBinding
     lateinit var adapter: ContainerAdapter
-    private lateinit var viewModel: CollectionProductsViewModel
+    private lateinit var viewModel: SubCollectionViewModel
     lateinit var collectionName:String
     var fragMan: FragmentManager? = fragmentManager
 
@@ -32,7 +35,7 @@ class FragmentContainer : Fragment() {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_container, container, false)
 
-        viewModel = ViewModelProvider(this).get(CollectionProductsViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(SubCollectionViewModel::class.java)
 
 
 
@@ -74,14 +77,6 @@ class FragmentContainer : Fragment() {
                 "WOMEN"-> 4
                 else -> 0
             }
-        var subCollectionsListHome = arrayListOf<SubCollections>(
-
-            //home 0
-            SubCollections("T-SHIRTS", R.drawable.tshirthome),
-            SubCollections("SHOES", R.drawable.homeshoes),
-            SubCollections("ACCESSORIES", R.drawable.accessorieswoman)
-        )
-
 
         initViews(collectionPosition)
         observe()
@@ -94,7 +89,17 @@ class FragmentContainer : Fragment() {
             var ProductList = it
 
             Log.i("ggggg", "onActivityCreated: " + ProductList.size)
-            adapter = ContainerAdapter(fragMan, ProductList, requireContext())
+            var collectionId: Long=
+                when(collectionName){
+
+                    "Home Page"-> HOME_PAGE_ID
+                    "KID"-> KIDS_ID
+                    "MEN"-> MEN_ID
+                    "SALE"-> SALE_ID
+                    "WOMEN"-> WOMAN_ID
+                    else -> HOME_PAGE_ID
+                }
+            adapter = ContainerAdapter(collectionId,fragMan, ProductList, requireContext())
             val layoutManager = GridLayoutManager(requireContext(), 2)
             binding.recContainerItem.adapter = adapter
             binding.recContainerItem.layoutManager = layoutManager

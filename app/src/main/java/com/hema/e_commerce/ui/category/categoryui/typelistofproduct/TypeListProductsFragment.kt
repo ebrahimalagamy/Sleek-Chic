@@ -1,14 +1,18 @@
 package com.hema.e_commerce.ui.category.categoryui.typelistofproduct
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
-import android.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.hema.e_commerce.R
 import com.hema.e_commerce.databinding.FragmentTypeListProductBinding
+import com.hema.e_commerce.model.dataclass.allProducts.Product
+import com.hema.e_commerce.model.dataclass.allProducts.ProductsResponse
 import com.hema.e_commerce.model.repository.Repository
+import com.hema.e_commerce.model.viewmodels.ListOfProductsViewModel
 import com.hema.e_commerce.ui.category.testmodels.TypeModelList
 import java.util.*
 
@@ -16,8 +20,12 @@ import java.util.*
 class TypeListProductsFragment : Fragment() {
     lateinit var binding: FragmentTypeListProductBinding
     lateinit var adapter: TypeListAdapter
-    lateinit var arr: ArrayList<TypeModelList>
+    lateinit var arr: ArrayList<ProductsResponse>
     lateinit var tempArray: ArrayList<TypeModelList>
+    lateinit var viewModel:ListOfProductsViewModel
+     var collectionsId:Long =398033617127
+    lateinit var subCollectionsName:String
+
 
 
     override fun onCreateView(
@@ -28,77 +36,82 @@ class TypeListProductsFragment : Fragment() {
 
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_type_list_product, container, false)
+        viewModel = ViewModelProvider(this).get(ListOfProductsViewModel::class.java)
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        arr = Repository().arrTypeList
-        tempArray = Repository().arrTypeList
-        tempArray.addAll(arr)
-        adapter = TypeListAdapter(tempArray, requireContext())
-        val layoutManager = GridLayoutManager(requireContext(), 2)
-        binding.recListProduct.adapter = adapter
-        binding.recListProduct.layoutManager = layoutManager
 
+        var bundle:Bundle?= arguments
+        if(bundle!=null){
+            Log.i("ccccc", "onCreateView: bundel ! null")
+
+            if(bundle.getLong("subCollectionId")!=null && bundle.getString("subName")!=null) {
+                bundle.getLong("subCollectionId")
+                Log.i("ccc", "onCreateView: "+bundle.getLong("subCollectionId")+"-------"+bundle.getString("subName"))
+                collectionsId=bundle.getLong("subCollectionId")
+                subCollectionsName= bundle.getString("subName")!!
+
+            }
+            else{
+                Log.i("ccc", "onCreateView: empty string ")
+            }
+        }
+
+        else{
+
+            Log.i("ssssssssssssssssss", "onCreateView:bundel = null ")
+
+
+        }
+        initViews(collectionsId)
+        observe()
 
     }
+    fun observe() {
+        viewModel.SubCollectionsProductsLiveData.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
 
+           var productList = it.products
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-
-        inflater.inflate(R.menu.menu, menu)
-
-        val item = menu?.findItem(R.id.app_bar_search)
-        val searchView = item?.actionView as SearchView
-        searchView.queryHint = "type here to search"
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(p0: String?): Boolean {
-
-                return false
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-
-                tempArray.clear()
-                val searchText = newText!!.toLowerCase(Locale.getDefault())
-                if (searchText.isNotEmpty()) {
-
-                    arr.forEach {
-
-                        if (it.desc.toLowerCase(Locale.getDefault()).contains(searchText)) {
-
-
-                            tempArray.add(it)
-
-
-                        }
-
-
-                    }
-                    binding.recListProduct.adapter!!.notifyDataSetChanged()
-
-
-                } else {
-
-                    tempArray.clear()
-                    tempArray.addAll(arr)
-
-                    binding.recListProduct.adapter!!.notifyDataSetChanged()
-
+            var list: MutableList<Product> = mutableListOf<Product>()
+            for(i in productList){
+                if(i.product_type.equals(subCollectionsName)){
+                    list.add(i)
 
                 }
 
-                return false
+
             }
+
+            adapter = TypeListAdapter(list, requireContext())
+            val layoutManager = GridLayoutManager(requireContext(), 2)
+            binding.recListProduct.adapter = adapter
+            binding.recListProduct.layoutManager = layoutManager
+
+
+
+
+//            var fragMan: FragmentManager? = fragmentManager
+//            var categoriesList = it.custom_collections
+//
+//            Log.i(TAG, "onActivityCreated: " + categoriesList.size)
+//            productAdapter = CategoriesProductAdapter(fragMan, categoriesList, requireContext())
+//            val layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
+//            binding.recProduct.adapter = productAdapter
+//            binding.recProduct.layoutManager = layoutManager
+
 
 
         })
-        return super.onCreateOptionsMenu(menu, inflater)
-
-
     }
+
+    private fun initViews(idSubCollections:Long) {
+        viewModel.getSubCollectionsProducts(idSubCollections)
+    }
+
 
 
 }

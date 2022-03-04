@@ -11,10 +11,11 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.hema.e_commerce.R
 import com.hema.e_commerce.databinding.ItemProductListBinding
+import com.hema.e_commerce.model.dataclass.allProducts.Product
 import com.hema.e_commerce.ui.category.testmodels.TypeModelList
 
 
-class TypeListAdapter(val productList: ArrayList<TypeModelList>, val context: Context) :
+class TypeListAdapter(val productList: List<Product>, val context: Context) :
     RecyclerView.Adapter<TypeListAdapter.ViewHolder>() {
     lateinit var navController: NavController
 
@@ -38,9 +39,9 @@ class TypeListAdapter(val productList: ArrayList<TypeModelList>, val context: Co
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         Log.i("mmmmmmmmmmmmmmmmmmmmmm", "onBindViewHolder: " + productList.size)
         val products = productList.get(position)
-        holder.itemBinding.tvListPrice.text = products.price
-        holder.itemBinding.imgListProduct.setImageResource(products.img)
-        holder.itemBinding.tvListShDesc.text = products.desc
+        holder.itemBinding.tvListPrice.text = products.variants.get(0).price
+      //  holder.itemBinding.imgListProduct.setImageResource(products.image.src)
+        holder.itemBinding.tvListShDesc.text = products.handle
         holder.itemView.setOnClickListener{
 
             navController.navigate(R.id.action_typeListProductFragment2_to_singleProductFragment)

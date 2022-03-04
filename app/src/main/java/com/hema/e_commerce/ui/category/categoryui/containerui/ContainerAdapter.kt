@@ -1,6 +1,7 @@
 package com.hema.e_commerce.ui.category.categoryui.containerui
 
 import android.content.Context
+import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -12,10 +13,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hema.e_commerce.R
 import com.hema.e_commerce.databinding.ContainerItemBinding
 import com.hema.e_commerce.model.dataclass.allProducts.Product
+import com.hema.e_commerce.ui.category.categoryui.typelistofproduct.TypeListProductsFragment
 import com.hema.e_commerce.ui.category.testmodels.SubCollections
 
 
-class ContainerAdapter(
+class ContainerAdapter(var subCollectionsId:Long,
     var fragMan: FragmentManager?,
     val productList: ArrayList<SubCollections>,
     val context: Context,
@@ -52,7 +54,16 @@ class ContainerAdapter(
 
 
         holder.itemView.setOnClickListener {
+
+            var fragTypeList: TypeListProductsFragment = TypeListProductsFragment()
+            var  bundle: Bundle = Bundle()
+            bundle.putString("subName",products.subName)
+            bundle.putLong("subCollectionId",subCollectionsId)
+            fragTypeList.arguments=bundle
+
+
             navController.navigate(R.id.action_category_to_typeListProductFragment2)
+
 
         }
 

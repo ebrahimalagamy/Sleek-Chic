@@ -43,29 +43,29 @@ class Repository {
         }
     }
 
-    //
-//    val collectionProductsLiveData = MutableLiveData<ProductsResponse>()
-//
-//    fun getProducts(categoryId: Long) {
-//
-//        GlobalScope.launch(Dispatchers.IO) {
-//            val response = RetrofitInstance.api.getCollectionProducts(categoryId)
-//            withContext(Dispatchers.Main) {
-//                if (response.isSuccessful) {
-//                    response.body()?.let {
-//                        Log.d(TAG, "onResponse: ${it}")
-//                        collectionProductsLiveData.value = it
-//
-//                    }
-//                } else {
-//                    Log.i(TAG, "getProducts: error " + response.errorBody())
-//
-//
-//                }
-//            }
-//
-//        }
-//    }
+
+    val collectionProductsLiveData = MutableLiveData<ProductsResponse>()
+
+    fun getSubCollectionsProducts(categoryId: Long) {
+
+        GlobalScope.launch(Dispatchers.IO) {
+            val response = RetrofitInstance.api.getCollectionProducts(categoryId)
+            withContext(Dispatchers.Main) {
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        Log.d(TAG, "onResponse: ${it}")
+                        collectionProductsLiveData.value = it
+
+                    }
+                } else {
+                    Log.i(TAG, "getProducts: error " + response.errorBody())
+
+
+                }
+            }
+
+        }
+    }
 
 //sub collections
 

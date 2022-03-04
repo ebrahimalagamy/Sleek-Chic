@@ -24,7 +24,6 @@ interface ShopifyApi {
     suspend fun getCollectionProducts(  @Path("collection_id") collection_id:Long):Response<ProductsResponse>
 
 
-
     @GET("smart_collections.json")
     suspend fun getBrands(): Response<BrandsResponce>
 

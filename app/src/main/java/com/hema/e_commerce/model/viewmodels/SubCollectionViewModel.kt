@@ -7,7 +7,7 @@ import com.hema.e_commerce.model.repository.Repository
 import com.hema.e_commerce.ui.category.testmodels.SubCollectionResponse
 import com.hema.e_commerce.ui.category.testmodels.SubCollections
 
-class CollectionProductsViewModel : ViewModel() {
+class SubCollectionViewModel : ViewModel() {
 
     var productsLiveData = MutableLiveData<ArrayList<SubCollections>>()
     private val repo = Repository()
