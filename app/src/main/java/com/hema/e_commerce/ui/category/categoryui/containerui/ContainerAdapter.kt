@@ -1,8 +1,6 @@
 package com.hema.e_commerce.ui.category.categoryui.containerui
 
 import android.content.Context
-import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
@@ -13,10 +11,7 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.hema.e_commerce.R
 import com.hema.e_commerce.databinding.ContainerItemBinding
-import com.hema.e_commerce.model.dataclass.allProducts.Product
-import com.hema.e_commerce.ui.category.categoryui.maincategoryui.CategoryFragmentDirections
-import com.hema.e_commerce.ui.category.categoryui.typelistofproduct.TypeListProductsFragment
-import com.hema.e_commerce.ui.category.testmodels.SubCollections
+import com.hema.e_commerce.ui.category.subcollectionsmodel.SubCollections
 
 
 class ContainerAdapter(

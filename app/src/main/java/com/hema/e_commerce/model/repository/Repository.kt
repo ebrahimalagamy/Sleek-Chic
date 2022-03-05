@@ -8,9 +8,8 @@ import com.hema.e_commerce.model.dataclass.allProducts.ProductsResponse
 import com.hema.e_commerce.model.remote.RetrofitInstance
 import com.hema.e_commerce.ui.cart.CartData
 import com.hema.e_commerce.model.dataclass.listofcustomcollections.CustomCollectionsResponse
-import com.hema.e_commerce.ui.category.testmodels.SubCollectionResponse
-import com.hema.e_commerce.ui.category.testmodels.SubCollections
-import com.hema.e_commerce.ui.category.testmodels.TypeModelList
+import com.hema.e_commerce.ui.category.singleproduct.ProductCollectionResponse
+import com.hema.e_commerce.ui.category.subcollectionsmodel.SubCollections
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -78,7 +77,7 @@ class Repository {
 
 //Single product
 
-    val singleProductsLiveData = MutableLiveData<Product>()
+    val singleProductsLiveData = MutableLiveData<ProductCollectionResponse>()
     fun getSingleProduct(productId: Long) {
 
         GlobalScope.launch(Dispatchers.IO) {
