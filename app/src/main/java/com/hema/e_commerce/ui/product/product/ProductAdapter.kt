@@ -26,7 +26,7 @@ import com.hema.e_commerce.ui.category.categoryui.containerui.FragmentContainer
 
 
 class ProductAdapter(
-    var context:Context, var images: List<Image>
+    var context:Context, var images: List<com.hema.e_commerce.ui.category.singleproduct.Image>
 
 
 ) : PagerAdapter (){

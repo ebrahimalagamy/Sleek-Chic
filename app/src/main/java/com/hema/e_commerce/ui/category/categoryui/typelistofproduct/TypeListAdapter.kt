@@ -2,7 +2,6 @@ package com.hema.e_commerce.ui.category.categoryui.typelistofproduct
 
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
@@ -14,7 +13,6 @@ import com.bumptech.glide.Glide
 import com.hema.e_commerce.R
 import com.hema.e_commerce.databinding.ItemProductListBinding
 import com.hema.e_commerce.model.dataclass.allProducts.Product
-import com.hema.e_commerce.ui.category.testmodels.TypeModelList
 
 
 class TypeListAdapter(val productList: List<Product>, val context: Context) :

@@ -54,7 +54,6 @@ class CategoriesProductAdapter(
               bundle.putString("title",products.title)
 
                 fragContainer.arguments=bundle
-            val manager: FragmentManager
             fragMan!!.beginTransaction().replace(R.id.fram_cont, fragContainer).commit()
 
 

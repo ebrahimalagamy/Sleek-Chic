@@ -41,24 +41,13 @@ class FragmentContainer : Fragment() {
 
         var bundle:Bundle?= arguments
        if(bundle!=null){
-            Log.i("ssssssssssssssssss", "onCreateView: bundel ! null")
-
             if(bundle.getString("title")!=null) {
                 bundle.getString("title")
-                Log.i("ssssssssssssssssss", "onCreateView: "+bundle.getString("title"))
                 collectionName=bundle.getString("title").toString()
             }
-            else{
-                Log.i("ssssssssssssssssss", "onCreateView: empty string ")
-            }
-        }
-
-        else{
-
-            Log.i("ssssssssssssssssss", "onCreateView:bundel = null ")
-
 
         }
+
 
         return binding.root
 
@@ -67,6 +56,7 @@ class FragmentContainer : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.subcollectionName.text=collectionName
         var collectionPosition: Int=
             when(collectionName){
 
