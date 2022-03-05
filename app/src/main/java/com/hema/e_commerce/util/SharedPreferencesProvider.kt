@@ -20,6 +20,9 @@ class SharedPreferencesProvider(context: Context) {
         private const val PHONE = "PHONE"
         private const val NAME = "NAME"
 
+        // Shared preferences for location
+        private const val IS_LOCATION_ENABLED = "IS_LOCATION_ENABLED"
+
     }
 
     init {
@@ -74,4 +77,9 @@ class SharedPreferencesProvider(context: Context) {
     }
     val isFirstTimeLaunch: Boolean
         get() = pref.getBoolean(IS_FIRST_TIME_LAUNCH, true)
+
+    fun setFirstTimeLocationenabled(isFirstTime: Boolean) {
+        editor.putBoolean(IS_LOCATION_ENABLED, isFirstTime)
+        editor.commit()
+    }
 }

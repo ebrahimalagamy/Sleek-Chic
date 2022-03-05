@@ -6,7 +6,9 @@ object Constant {
     const val CUSTOMER_END = "customers.json"
 
     //location request
-    const val PERMISSION_LOCATION_REQUEST_CODE = 1
+  //  const val PERMISSION_LOCATION_REQUEST_CODE = 1
+    const val LOCATION_REQUEST_CODE = 0
+
 
     //sub collections id
     const val HOME_PAGE_ID:Long = 398033617127

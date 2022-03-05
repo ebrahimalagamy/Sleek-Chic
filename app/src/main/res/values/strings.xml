@@ -55,4 +55,15 @@
     <string name="add_to_cart">Add To Cart</string>
     <string name="description">Description</string>
     <string name="eg">EG</string>
+    <string name="enable_location">Enable Location</string>
+    <string name="exit">Exit</string>
+    <string name="check_internet">Please check the Internet to proceed further</string>
+    <string name="connect">Connect</string>
+    <string name="connection_failed">Connection Failed</string>
+    <string name="location">Location</string>
+    <string name="gpsOff">Your GPS is turned off, please turn it on if you want to see the weather data for your current location</string>
+    <string name="No">No</string>
+    <string name="ok">Ok</string>
+    <string name="offline">You\'re offline, please check your internet connection to be able to choose a location</string>
+
 </resources>
