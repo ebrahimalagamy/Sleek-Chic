@@ -1,7 +1,6 @@
 package com.hema.e_commerce.ui.category.categoryui.typelistofproduct
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -10,18 +9,12 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.hema.e_commerce.R
 import com.hema.e_commerce.databinding.FragmentTypeListProductBinding
 import com.hema.e_commerce.model.dataclass.allProducts.Product
-import com.hema.e_commerce.model.dataclass.allProducts.ProductsResponse
-import com.hema.e_commerce.model.repository.Repository
 import com.hema.e_commerce.model.viewmodels.ListOfProductsViewModel
-import com.hema.e_commerce.ui.category.testmodels.TypeModelList
-import java.util.*
 
 
 class TypeListProductsFragment : Fragment() {
     lateinit var binding: FragmentTypeListProductBinding
     lateinit var adapter: TypeListAdapter
-    lateinit var arr: ArrayList<ProductsResponse>
-    lateinit var tempArray: ArrayList<TypeModelList>
     lateinit var viewModel:ListOfProductsViewModel
      var collectionsId:Long =398033617127
     lateinit var subCollectionsName:String

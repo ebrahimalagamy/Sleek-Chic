@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hema.e_commerce.R
 import com.hema.e_commerce.databinding.CategoryFragmentBinding
 import com.hema.e_commerce.model.viewmodels.CategoryViewModel
+import com.hema.e_commerce.ui.category.categoryui.containerui.FragmentContainer
 
 class CategoryFragment : Fragment() {
     lateinit var productAdapter: CategoriesProductAdapter
@@ -39,6 +40,20 @@ class CategoryFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(CategoryViewModel::class.java)
         initViews()
         observe()
+
+
+        var fragContainer: FragmentContainer = FragmentContainer()
+        var  bundle: Bundle = Bundle()
+        bundle.putString("title","Home Page")
+        var fragMan: FragmentManager? = fragmentManager
+
+        fragContainer.arguments=bundle
+        fragMan!!.beginTransaction().replace(R.id.fram_cont, fragContainer).commit()
+
+
+
+
+
 
     }
 
