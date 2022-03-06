@@ -14,4 +14,11 @@ class ListOfProductsViewModel : ViewModel() {
         repo.getSubCollectionsProducts(id)
         SubCollectionsProductsLiveData = repo.collectionProductsLiveData
     }
+    var allProduct = MutableLiveData<ProductsResponse>()
+    fun getProducts(){
+        repo.getallProduct()
+        allProduct=repo.allProduct
+    }
+
+
 }

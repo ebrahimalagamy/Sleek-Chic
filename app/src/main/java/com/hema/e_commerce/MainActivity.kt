@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         sharedPref = SharedPreferencesProvider(this)
-        bindLocation()
+      //  bindLocation()
         bindNav()
 
     }

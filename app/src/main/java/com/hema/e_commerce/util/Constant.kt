@@ -15,5 +15,11 @@ object Constant {
     const val SALE_ID:Long=398034665703
     const val KIDS_ID:Long=398034632935
 
+    //Bundle Keys
+    const val BRAND_KEY = "BrandList"
+    const val SUB_COLLECTION_NAME = "subCollectionsName"
+    const val SUB_COLLECTION_ID =  "collectionsId"
+    const val FLAG = "Flag"
+    const val PRODUCT = "Product"
 
 }

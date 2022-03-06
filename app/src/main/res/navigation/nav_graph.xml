@@ -28,8 +28,8 @@
             android:id="@+id/action_home_to_typeListProductFragment2"
             app:destination="@id/typeListProductFragment2" />
         <action
-            android:id="@+id/action_home_to_singleProductFragment"
-            app:destination="@id/singleProductFragment" />
+            android:id="@+id/action_home_to_productFragment"
+            app:destination="@id/productFragment" />
     </fragment>
     <fragment
         android:id="@+id/cart"
@@ -68,7 +68,7 @@
     </fragment>
     <fragment
         android:id="@+id/typeListProductFragment2"
-        android:name="com.hema.e_commerce.ui.category.categoryui.typelistofproduct.TypeListProductsFragment"
+        android:name="com.hema.e_commerce.ui.typelistofproduct.TypeListProductsFragment"
         android:label="TypeListProductFragment">
         <action
             android:id="@+id/action_typeListProductFragment2_to_productFragment"
@@ -92,17 +92,6 @@
         <action
             android:id="@+id/action_address_to_editAddress"
             app:destination="@id/editAddress" />
-    </fragment>
-    <fragment
-        android:id="@+id/singleProductFragment"
-        android:name="com.hema.e_commerce.ui.product.SingleProductFragment"
-        android:label="SingleProductFragment">
-        <action
-            android:id="@+id/action_singleProductFragment_to_cart"
-            app:destination="@id/cart" />
-        <action
-            android:id="@+id/action_singleProductFragment_to_wishlist"
-            app:destination="@id/wishlist" />
     </fragment>
     <fragment
         android:id="@+id/editAddress"
@@ -129,7 +118,11 @@
     </fragment>
     <fragment
         android:id="@+id/productFragment"
-        android:name="com.hema.e_commerce.ui.product.product.ProductFragment"
-        android:label="ProductFragment" />
+        android:name="com.hema.e_commerce.ui.product.ProductFragment"
+        android:label="ProductFragment" >
+        <action
+            android:id="@+id/action_productFragment_to_cart"
+            app:destination="@id/cart" />
+    </fragment>
 
 </navigation>

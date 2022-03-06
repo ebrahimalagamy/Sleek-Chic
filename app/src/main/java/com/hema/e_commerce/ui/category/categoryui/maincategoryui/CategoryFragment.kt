@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hema.e_commerce.R
+import com.hema.e_commerce.adapter.catagory.CategoriesProductAdapter
 import com.hema.e_commerce.databinding.CategoryFragmentBinding
 import com.hema.e_commerce.model.viewmodels.CategoryViewModel
 import com.hema.e_commerce.ui.category.categoryui.containerui.FragmentContainer

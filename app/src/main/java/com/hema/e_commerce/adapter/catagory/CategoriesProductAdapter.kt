@@ -1,8 +1,7 @@
-package com.hema.e_commerce.ui.category.categoryui.maincategoryui
+package com.hema.e_commerce.adapter.catagory
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -17,12 +16,12 @@ import com.hema.e_commerce.ui.category.categoryui.containerui.FragmentContainer
 
 
 class CategoriesProductAdapter(
-    var fragMan: FragmentManager?,
-    val productList: List<CustomCollection>,
+    private var fragMan: FragmentManager?,
+    private val productList: List<CustomCollection>,
     val context: Context
 ) :
     RecyclerView.Adapter<CategoriesProductAdapter.ViewHolder>() {
-    lateinit var navController: NavController
+    private lateinit var navController: NavController
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -40,7 +39,7 @@ class CategoriesProductAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val products = productList.get(position)
+        val products = productList[position]
             holder.itemBinding.productTypeName.text = products.title
 
 
@@ -49,8 +48,8 @@ class CategoriesProductAdapter(
 
             // navController.navigate(R.id.action_category_to_fragmentContainer)
 
-            var fragContainer: FragmentContainer = FragmentContainer()
-                var  bundle: Bundle = Bundle()
+            val fragContainer = FragmentContainer()
+                val bundle = Bundle()
               bundle.putString("title",products.title)
 
                 fragContainer.arguments=bundle
@@ -68,7 +67,7 @@ class CategoriesProductAdapter(
 
 
     class ViewHolder(itemBinding: CategoriesProductsItemsBinding) :
-        RecyclerView.ViewHolder(itemBinding.getRoot()) {
+        RecyclerView.ViewHolder(itemBinding.root) {
         var itemBinding: CategoriesProductsItemsBinding
 
         init {

@@ -1,4 +1,4 @@
-package com.hema.e_commerce.ui.product.product
+package com.hema.e_commerce.ui.product
 
 import android.os.Bundle
 import android.util.Log
@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.PagerAdapter
 import com.hema.e_commerce.R
+import com.hema.e_commerce.adapter.singleProduct.ProductAdapter
 import com.hema.e_commerce.databinding.FragmentProductBinding
 import com.hema.e_commerce.model.viewmodels.SingleProductViewModel
 
@@ -43,7 +44,7 @@ class ProductFragment : Fragment() {
     fun observe() {
         viewModel.singleProductLiveData.observe(viewLifecycleOwner, Observer {
 
-            var adapter:PagerAdapter=ProductAdapter(requireContext(),it.product.images)
+            var adapter:PagerAdapter= ProductAdapter(requireContext(),it.product.images)
 
             binding.viewPager.adapter = adapter
             it.product.handle

@@ -4,10 +4,15 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/categories_products_items.xml" value="0.20416666666666666" />
-        <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/category_fragment.xml" value="0.1" />
+        <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/category_fragment.xml" value="0.22" />
+        <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/fragment_product.xml" value="0.20416666666666666" />
+        <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/fragment_type_list_product.xml" value="0.20416666666666666" />
         <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/home_fragment.xml" value="0.33" />
+        <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/item_product_list.xml" value="0.20416666666666666" />
+        <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/item_slider_view.xml" value="0.20416666666666666" />
         <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/row_brands.xml" value="0.20416666666666666" />
         <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/row_product.xml" value="0.33" />
+        <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/settings_fragment.xml" value="0.20416666666666666" />
         <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/single_product_fragment.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/CompuTouch/Documents/GitHub/E-Commerce/app/src/main/res/drawable/button_background.xml" value="0.116" />
         <entry key="..\:/Users/CompuTouch/Documents/GitHub/E-Commerce/app/src/main/res/drawable/heart.xml" value="0.116" />
@@ -55,9 +60,6 @@
         <entry key="..\:/iti program/courses/graduation project/project/Second pull/E-Commerce/app/src/main/res/layout/item_slider_view.xml" value="0.1" />
         <entry key="..\:/iti program/courses/graduation project/project/Second pull/E-Commerce/app/src/main/res/layout/item_wishlist.xml" value="0.25416666666666665" />
         <entry key="..\:/iti program/courses/graduation project/project/Second pull/E-Commerce/app/src/main/res/layout/single_product_fragment.xml" value="0.2" />
-        <entry key="..\:/iti program/courses/graduation project/project/Second pull/current/E-Commerce/app/src/main/res/layout/container_item.xml" value="0.25416666666666665" />
-        <entry key="..\:/iti program/courses/graduation project/project/Second pull/current/E-Commerce/app/src/main/res/layout/fragment_container.xml" value="0.25416666666666665" />
-        <entry key="..\:/iti program/courses/graduation project/project/Second pull/current/E-Commerce/app/src/main/res/layout/fragment_product.xml" value="0.2" />
       </map>
     </option>
   </component>
