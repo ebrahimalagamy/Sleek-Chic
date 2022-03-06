@@ -20,34 +20,37 @@ class SearchFragment : Fragment() {
     lateinit var binding: FragmentTypeListProductBinding
     lateinit var adapter: SearchAdapter
     lateinit var viewModel: ListOfProductsViewModel
-    lateinit var products:MutableList<Product>
+    lateinit var products:List<Product>
      var searchProducts:ArrayList<Product> = arrayListOf()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?, ): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View? {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_type_list_product, container, false)
         binding.searchView.isIconified = false
-        viewModel = ViewModelProvider(this).get(ListOfProductsViewModel::class.java)
+        viewModel = ViewModelProvider(this)[ListOfProductsViewModel::class.java]
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        BrandList()
-
+        brandList()
         binding.searchView.setOnQueryTextListener(object :SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
                 //win press on search not to crush so repeat the logic of text change
                 searchProducts.clear()
-                val searchText= query!!.toLowerCase(Locale.getDefault())
+                val searchText= query!!.lowercase(Locale.getDefault())
                 if (searchText.isNotEmpty()){
                     products.forEach {
-                        if (it.title.toLowerCase(Locale.getDefault()).contains(searchText)
-                            || it.vendor.toLowerCase(Locale.getDefault()).contains(searchText)){
+                        if (it.title.lowercase(Locale.getDefault()).contains(searchText)
+                            || it.vendor.lowercase(Locale.getDefault()).contains(searchText)){
                             searchProducts.add(it)
                         }
                     }
-                    BrandList()
+                    brandList()
                 }else{
                     searchProducts.clear()
                 }
@@ -58,15 +61,15 @@ class SearchFragment : Fragment() {
             override fun onQueryTextChange(newText: String?): Boolean {
                 //change when writing this the main logic
                 searchProducts.clear()
-                val searchText= newText!!.toLowerCase(Locale.getDefault())
+                val searchText= newText!!.lowercase(Locale.getDefault())
                 if (searchText.isNotEmpty()){
                     products.forEach {
-                        if (it.title.toLowerCase(Locale.getDefault()).contains(searchText)
-                            || it.vendor.toLowerCase(Locale.getDefault()).contains(searchText)){
+                        if (it.title.lowercase(Locale.getDefault()).contains(searchText)
+                            || it.vendor.lowercase(Locale.getDefault()).contains(searchText)){
                             searchProducts.add(it)
                         }
                     }
-                    BrandList()
+                    brandList()
                 }else{
                     searchProducts.clear()
                 }
@@ -80,14 +83,14 @@ class SearchFragment : Fragment() {
 
 
 //call all product
-    fun BrandList(){
+    fun brandList(){
         initViews()
         observeSearchProduct()
     }
 
-    fun observeSearchProduct() {
+    private fun observeSearchProduct() {
         viewModel.allProduct .observe(viewLifecycleOwner, Observer {
-            products= it.products as MutableList<Product>
+            products= it.products
             adapter = SearchAdapter(searchProducts)
             val layoutManager = GridLayoutManager(requireContext(), 2)
             binding.recListProduct.adapter = adapter
