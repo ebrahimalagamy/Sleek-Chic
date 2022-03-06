@@ -7,7 +7,9 @@ import com.hema.e_commerce.model.dataclass.listofcustomcollections.CustomCollect
 import com.hema.e_commerce.model.dataclass.smartCollection.BrandsResponce
 import com.hema.e_commerce.model.dataclass.singleproduct.ProductCollectionResponse
 import retrofit2.Response
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Path
 
 
