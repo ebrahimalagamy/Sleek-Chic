@@ -67,13 +67,6 @@ class MapFragment : Fragment() {
 
             var googleMap = it
 
-//            val latlng = LatLng(
-//                sharedPref.latLong[1]?.toDouble() ?: 30.033333,
-//                sharedPref.latLong[2]?.toDouble() ?:31.233334
-//            )
-//            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latlng, 20F))
-
-
             it.setOnMapClickListener {
                 var markerOptions = MarkerOptions()
                 markerOptions.position(it)
@@ -93,17 +86,6 @@ class MapFragment : Fragment() {
 
 
             }
-
-//            binding.relocate.setOnClickListener {
-//                it.isMyLocationEnabled = true
-//
-////                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(googleMap, 10F))
-//
-//            }
-//            it.setOnMyLocationButtonClickListener {
-//                it.isMyLocationEnabled = true
-//                var markerOptions = MarkerOptions()
-//            }
             it.isMyLocationEnabled = true
 
 

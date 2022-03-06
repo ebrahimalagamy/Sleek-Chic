@@ -1,6 +1,7 @@
 package com.hema.e_commerce.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +11,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
 import com.hema.e_commerce.R
@@ -20,11 +22,11 @@ import com.hema.e_commerce.databinding.HomeFragmentBinding
 
 
 class Home : Fragment() {
-
     private lateinit var binding: HomeFragmentBinding
     private lateinit var viewModel: HomeViewModel
     private lateinit var brandAdapter: BrandAdapter
     private lateinit var productAdapter: ProductsAdapter
+    private lateinit var navController: NavController
 
 
     override fun onCreateView(
@@ -39,15 +41,18 @@ class Home : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this)[HomeViewModel::class.java]
+        navController= Navigation.findNavController(requireView())
+
         imageSlider()
+
         initViews()
         obesrvers()
 
-
-
+        onClickSearch()
     }
 
-
+////////////////////////////////////////////////////////////////////////////////////////////////
+    //product and brand logic
     fun obesrvers(){
         observeBrand()
        // observeSaleProduct()
@@ -83,11 +88,10 @@ class Home : Fragment() {
       //   viewModel.getOnHomeProducts()
          viewModel.getOnSaleProducts()
     }
-
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+// image slide view
     private fun imageSlider() {
         //function for image slider
-
         val imageList = ArrayList<SlideModel>()
         imageList.add(SlideModel(R.drawable.cubon1, ScaleTypes.FIT))
         imageList.add(SlideModel(R.drawable.cubon3, ScaleTypes.FIT))
@@ -105,4 +109,19 @@ class Home : Fragment() {
 
         binding.imageSlider.setImageList(imageList)
     }
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+//search
+    fun onClickSearch(){
+        binding.searchView.setOnSearchClickListener(View.OnClickListener {
+            Log.i("Searchh","yyyyyyyyyyyyyyyyyyyyy")
+            binding.searchView.isIconified = true
+            navController.navigate(
+                R.id.action_home_to_searchFragment
+            )
+        })
+    }
+
+
+
+
 }
