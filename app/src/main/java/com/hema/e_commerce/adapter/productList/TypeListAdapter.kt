@@ -12,6 +12,8 @@ import com.bumptech.glide.Glide
 import com.hema.e_commerce.R
 import com.hema.e_commerce.databinding.ItemProductListBinding
 import com.hema.e_commerce.model.dataclass.allProducts.Product
+import com.hema.e_commerce.util.Constant.FLAG
+import com.hema.e_commerce.util.Constant.PRODUCT
 
 
 class TypeListAdapter(private val productList: List<Product>) : RecyclerView.Adapter<TypeListAdapter.ViewHolder>() {
@@ -39,7 +41,7 @@ class TypeListAdapter(private val productList: List<Product>) : RecyclerView.Ada
         holder.itemBinding.tvListShDesc.text = products.title
 
         holder.itemView.setOnClickListener{
-            val bundle = bundleOf("productId" to  products.id)
+            val bundle = bundleOf(PRODUCT to  products.id, FLAG to 1)
             navController.navigate(R.id.action_typeListProductFragment2_to_productFragment,bundle)
 
         }
