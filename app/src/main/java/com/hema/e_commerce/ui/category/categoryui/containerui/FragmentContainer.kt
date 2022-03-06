@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.GridLayoutManager
 import com.hema.e_commerce.R
+import com.hema.e_commerce.adapter.catagory.ContainerAdapter
 import com.hema.e_commerce.databinding.FragmentContainerBinding
 import com.hema.e_commerce.ui.category.repository.Repository
 import com.hema.e_commerce.ui.category.testmodels.ModelContainer

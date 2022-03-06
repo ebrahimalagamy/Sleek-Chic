@@ -1,7 +1,11 @@
-package com.hema.e_commerce.ui.category.categoryui.maincategoryui
+package com.hema.e_commerce.adapter.catagory
 
 import android.content.Context
+<<<<<<< Updated upstream:app/src/main/java/com/hema/e_commerce/ui/category/categoryui/maincategoryui/CategoriesProductAdapter.kt
 import android.util.Log
+=======
+import android.os.Bundle
+>>>>>>> Stashed changes:app/src/main/java/com/hema/e_commerce/adapter/catagory/CategoriesProductAdapter.kt
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -16,12 +20,17 @@ import com.hema.e_commerce.ui.category.testmodels.model
 
 
 class CategoriesProductAdapter(
+<<<<<<< Updated upstream:app/src/main/java/com/hema/e_commerce/ui/category/categoryui/maincategoryui/CategoriesProductAdapter.kt
     var fragMan: FragmentManager?,
     val productList: ArrayList<model>,
+=======
+    private var fragMan: FragmentManager?,
+    private val productList: List<CustomCollection>,
+>>>>>>> Stashed changes:app/src/main/java/com/hema/e_commerce/adapter/catagory/CategoriesProductAdapter.kt
     val context: Context
 ) :
     RecyclerView.Adapter<CategoriesProductAdapter.ViewHolder>() {
-    lateinit var navController: NavController
+    private lateinit var navController: NavController
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -39,14 +48,27 @@ class CategoriesProductAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+<<<<<<< Updated upstream:app/src/main/java/com/hema/e_commerce/ui/category/categoryui/maincategoryui/CategoriesProductAdapter.kt
         Log.i("mmmmmmmmmmmmmmmmmmmmmm", "onBindViewHolder: " + productList.size)
         val products = productList.get(position)
         holder.itemBinding.productTypeName.text = products.name
+=======
+        val products = productList[position]
+            holder.itemBinding.productTypeName.text = products.title
+
+
+>>>>>>> Stashed changes:app/src/main/java/com/hema/e_commerce/adapter/catagory/CategoriesProductAdapter.kt
 
         holder.itemBinding.productTypeName.setOnClickListener {
 
             // navController.navigate(R.id.action_category_to_fragmentContainer)
 
+<<<<<<< Updated upstream:app/src/main/java/com/hema/e_commerce/ui/category/categoryui/maincategoryui/CategoriesProductAdapter.kt
+=======
+            val fragContainer = FragmentContainer()
+                val bundle = Bundle()
+              bundle.putString("title",products.title)
+>>>>>>> Stashed changes:app/src/main/java/com/hema/e_commerce/adapter/catagory/CategoriesProductAdapter.kt
 
             var fragContainer: FragmentContainer = FragmentContainer()
 //                var  bundle:Bundle= Bundle()
@@ -69,7 +91,7 @@ class CategoriesProductAdapter(
 
 
     class ViewHolder(itemBinding: CategoriesProductsItemsBinding) :
-        RecyclerView.ViewHolder(itemBinding.getRoot()) {
+        RecyclerView.ViewHolder(itemBinding.root) {
         var itemBinding: CategoriesProductsItemsBinding
 
         init {

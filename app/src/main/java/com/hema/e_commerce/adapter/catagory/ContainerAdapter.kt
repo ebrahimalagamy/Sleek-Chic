@@ -1,4 +1,4 @@
-package com.hema.e_commerce.ui.category.categoryui.containerui
+package com.hema.e_commerce.adapter.catagory
 
 import android.content.Context
 import android.util.Log
@@ -11,7 +11,14 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.hema.e_commerce.R
 import com.hema.e_commerce.databinding.ContainerItemBinding
+<<<<<<< Updated upstream:app/src/main/java/com/hema/e_commerce/ui/category/categoryui/containerui/ContainerAdapter.kt
 import com.hema.e_commerce.ui.category.testmodels.ModelContainer
+=======
+import com.hema.e_commerce.ui.category.subcollectionsmodel.SubCollections
+import com.hema.e_commerce.util.Constant.FLAG
+import com.hema.e_commerce.util.Constant.SUB_COLLECTION_ID
+import com.hema.e_commerce.util.Constant.SUB_COLLECTION_NAME
+>>>>>>> Stashed changes:app/src/main/java/com/hema/e_commerce/adapter/catagory/ContainerAdapter.kt
 
 
 class ContainerAdapter(
@@ -46,10 +53,17 @@ class ContainerAdapter(
 
 
         holder.itemView.setOnClickListener {
+<<<<<<< Updated upstream:app/src/main/java/com/hema/e_commerce/ui/category/categoryui/containerui/ContainerAdapter.kt
             navController.navigate(R.id.action_category_to_typeListProductFragment2)
+=======
+            val bundle = bundleOf(SUB_COLLECTION_NAME to  products.subName,SUB_COLLECTION_ID to subCollectionsId
+                ,FLAG to 0)
+           navController.navigate(R.id.action_category_to_typeListProductFragment2,bundle)
+>>>>>>> Stashed changes:app/src/main/java/com/hema/e_commerce/adapter/catagory/ContainerAdapter.kt
 
         }
 
+<<<<<<< Updated upstream:app/src/main/java/com/hema/e_commerce/ui/category/categoryui/containerui/ContainerAdapter.kt
 
         //  holder.itemBinding.tvNameContainerItemProduct.setOnClickListener{
 
@@ -57,6 +71,9 @@ class ContainerAdapter(
 
         //       containerInterface.sendData("aya")
 
+=======
+        }
+>>>>>>> Stashed changes:app/src/main/java/com/hema/e_commerce/adapter/catagory/ContainerAdapter.kt
 
 //            var fragContainer :FragmentContainer=FragmentContainer()
 //            var  bundle:Bundle= Bundle()

@@ -12,6 +12,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
@@ -20,17 +21,32 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.hema.e_commerce.databinding.ActivityMainBinding
+<<<<<<< Updated upstream
 import com.hema.e_commerce.ui.settings.sharedpreferences.SharedPreferencesProvider
 import com.hema.e_commerce.ui.settings.sharedpreferences.SharedPreferencesProvider.Companion.PERMISSION_LOCATION_REQUEST_CODE
 import com.vmadalin.easypermissions.EasyPermissions
+=======
+import com.hema.e_commerce.util.Connectivity
+import com.hema.e_commerce.util.LocationProvider
+import com.hema.e_commerce.util.SharedPreferencesProvider
+>>>>>>> Stashed changes
 
 class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
     private lateinit var navController: NavController
     private lateinit var binding: ActivityMainBinding
     private lateinit var appBarConfiguration: AppBarConfiguration
+<<<<<<< Updated upstream
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var sharedPref: SharedPreferencesProvider
 
+=======
+    private lateinit var locationManager: LocationManager
+    private val locationProvider = LocationProvider
+    private val connectivity = Connectivity
+    private lateinit var sharedPref: SharedPreferencesProvider
+
+
+>>>>>>> Stashed changes
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,9 +55,15 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
         sharedPref = SharedPreferencesProvider(this)
 
 
+<<<<<<< Updated upstream
         bindLocation()
         setNav()
 
+=======
+        sharedPref = SharedPreferencesProvider(this)
+       // bindLocation()
+        bindNav()
+>>>>>>> Stashed changes
     }
 
     @SuppressLint("MissingPermission")
@@ -133,8 +155,11 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
 
     }
 
+<<<<<<< Updated upstream
     override fun onPermissionsGranted(requestCode: Int, perms: List<String>) {
         Toast.makeText(this, "permission granted", Toast.LENGTH_LONG).show()
     }
+=======
+>>>>>>> Stashed changes
 
 }

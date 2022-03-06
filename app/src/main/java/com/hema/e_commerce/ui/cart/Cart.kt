@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hema.e_commerce.R
 import com.hema.e_commerce.databinding.CartFragmentBinding
+<<<<<<< Updated upstream
 import com.hema.e_commerce.ui.category.repository.Repository
 
 class Cart : Fragment() {
@@ -19,10 +20,22 @@ class Cart : Fragment() {
 lateinit var cartAdapter: CartAdapter
 lateinit var cartFragmentBinding: CartFragmentBinding
 lateinit var arrayCart:ArrayList<CartData>
+=======
+import com.hema.e_commerce.model.repository.Repository
+import com.hema.e_commerce.model.room.cartroom.CartProductData
 
-    companion object {
-        fun newInstance() = Cart()
-    }
+class Cart : Fragment() {
+
+    lateinit var cartAdapter: CartAdapter
+    lateinit var cartFragmentBinding: CartFragmentBinding
+    lateinit var arrayCart: ArrayList<CartProductData>
+
+
+    private var customerID = ""
+    private var totalPrice = 0.0
+
+>>>>>>> Stashed changes
+
 
     private lateinit var viewModel: CartViewModel
 
@@ -31,6 +44,7 @@ lateinit var arrayCart:ArrayList<CartData>
         savedInstanceState: Bundle?
     ): View? {
 
+<<<<<<< Updated upstream
         cartFragmentBinding=DataBindingUtil.inflate(inflater,R.layout.cart_fragment,container,false)
        // cartFragmentBinding.btCheckout.setOnClickListener {  }
       //  cartFragmentBinding.btCopoun.setOnClickListener {  }
@@ -38,9 +52,19 @@ lateinit var arrayCart:ArrayList<CartData>
      //   cartFragmentBinding.textTotalprice.text=
 
     return cartFragmentBinding.root
+=======
+        cartFragmentBinding =
+            DataBindingUtil.inflate(inflater, R.layout.cart_fragment, container, false)
+        viewModel =
+            ViewModelProvider(this,ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application)).
+            get(CartViewModel::class.java)
+        return cartFragmentBinding.root
+
+
+>>>>>>> Stashed changes
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
+ /*   override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(CartViewModel::class.java)
         var fragMana: FragmentManager? = fragmentManager
@@ -50,6 +74,17 @@ lateinit var arrayCart:ArrayList<CartData>
         cartFragmentBinding.cartRec.adapter=cartAdapter
         cartFragmentBinding.cartRec.layoutManager=layoutManager
 
+    }*/
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        cartAdapter = CartAdapter(arrayListOf(),viewModel)
+        cartFragmentBinding.cartRec.apply {
+            layoutManager=LinearLayoutManager(context)
+            adapter=cartAdapter
+        }
+
     }
+
 
 }

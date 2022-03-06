@@ -82,6 +82,12 @@ class MapFragment : Fragment() {
                 googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(it, 10F))
                 googleMap.addMarker(markerOptions)
             }
+<<<<<<< Updated upstream
+=======
+            it.isMyLocationEnabled = true
+
+
+>>>>>>> Stashed changes
         }
     }
 
