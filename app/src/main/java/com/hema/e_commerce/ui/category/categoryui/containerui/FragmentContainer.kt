@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.hema.e_commerce.R
+import com.hema.e_commerce.adapter.catagory.ContainerAdapter
 import com.hema.e_commerce.databinding.FragmentContainerBinding
 import com.hema.e_commerce.model.viewmodels.SubCollectionViewModel
 import com.hema.e_commerce.util.Constant.HOME_PAGE_ID

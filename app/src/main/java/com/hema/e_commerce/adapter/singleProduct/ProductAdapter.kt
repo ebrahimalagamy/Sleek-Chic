@@ -1,32 +1,17 @@
-package com.hema.e_commerce.ui.product.product
+package com.hema.e_commerce.adapter.singleProduct
 import android.content.Context
-import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RelativeLayout
-import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.FragmentManager
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
-import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.PagerAdapter
 import com.bumptech.glide.Glide
 import com.hema.e_commerce.R
-import com.hema.e_commerce.databinding.CategoriesProductsItemsBinding
-import com.hema.e_commerce.databinding.FragmentProductBinding
-import com.hema.e_commerce.databinding.ItemSliderViewBinding
-import com.hema.e_commerce.model.dataclass.allProducts.Image
-import com.hema.e_commerce.model.dataclass.listofcustomcollections.CustomCollection
-import com.hema.e_commerce.ui.category.categoryui.containerui.FragmentContainer
-
-
 
 
 class ProductAdapter(
-    var context:Context, var images: List<com.hema.e_commerce.ui.category.singleproduct.Image>
+    var context:Context, var images: List<com.hema.e_commerce.model.dataclass.singleproduct.Image>
 
 
 ) : PagerAdapter (){

@@ -1,7 +1,6 @@
-package com.hema.e_commerce.ui.category.categoryui.typelistofproduct
+package com.hema.e_commerce.adapter.productList
 
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
@@ -13,11 +12,12 @@ import com.bumptech.glide.Glide
 import com.hema.e_commerce.R
 import com.hema.e_commerce.databinding.ItemProductListBinding
 import com.hema.e_commerce.model.dataclass.allProducts.Product
+import com.hema.e_commerce.util.Constant.FLAG
+import com.hema.e_commerce.util.Constant.PRODUCT
 
 
-class TypeListAdapter(val productList: List<Product>, val context: Context) :
-    RecyclerView.Adapter<TypeListAdapter.ViewHolder>() {
-    lateinit var navController: NavController
+class TypeListAdapter(private val productList: List<Product>) : RecyclerView.Adapter<TypeListAdapter.ViewHolder>() {
+    private lateinit var navController: NavController
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -35,13 +35,13 @@ class TypeListAdapter(val productList: List<Product>, val context: Context) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val products = productList.get(position)
+        val products = productList[position]
 //        holder.itemBinding.tvListPrice.text = products.variants.get(0).price
-        Glide.with(context).load(products.image.src).into(holder.itemBinding.imgListProduct)
-
+        Glide.with(holder.itemBinding.imgListProduct.context).load(products.image.src).into(holder.itemBinding.imgListProduct)
         holder.itemBinding.tvListShDesc.text = products.title
+
         holder.itemView.setOnClickListener{
-            val bundle = bundleOf("productId" to  products.id)
+            val bundle = bundleOf(PRODUCT to  products.id, FLAG to 1)
             navController.navigate(R.id.action_typeListProductFragment2_to_productFragment,bundle)
 
         }
@@ -56,12 +56,9 @@ class TypeListAdapter(val productList: List<Product>, val context: Context) :
 
 
     class ViewHolder(itemBinding: ItemProductListBinding) :
-        RecyclerView.ViewHolder(itemBinding.getRoot()) {
-        var itemBinding: ItemProductListBinding
+        RecyclerView.ViewHolder(itemBinding.root) {
+        var itemBinding: ItemProductListBinding = itemBinding
 
-        init {
-            this.itemBinding = itemBinding
-        }
     }
 
 

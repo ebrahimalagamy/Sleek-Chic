@@ -13,7 +13,7 @@
         android:id="@+id/frag_list_product"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".ui.category.categoryui.typelistofproduct.TypeListProductsFragment">
+        tools:context=".ui.typelistofproduct.TypeListProductsFragment">
 
         <Toolbar
             android:layout_width="match_parent"

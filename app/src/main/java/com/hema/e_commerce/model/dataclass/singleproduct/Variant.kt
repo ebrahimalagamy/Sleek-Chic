@@ -1,4 +1,4 @@
-package com.hema.e_commerce.ui.category.singleproduct
+package com.hema.e_commerce.model.dataclass.singleproduct
 
 data class Variant(
     val admin_graphql_api_id: String,

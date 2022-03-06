@@ -18,5 +18,11 @@ object Constant {
     const val KIDS_ID:Long=398034632935
     const val ALL_DATA_ROUTE ="ALL_DATA_ROUTE"
 
+    //Bundle Keys
+    const val BRAND_KEY = "BrandList"
+    const val SUB_COLLECTION_NAME = "subCollectionsName"
+    const val SUB_COLLECTION_ID =  "collectionsId"
+    const val FLAG = "Flag"
+    const val PRODUCT = "Product"
 
 }

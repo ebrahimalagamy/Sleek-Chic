@@ -1,14 +1,15 @@
 package com.hema.e_commerce.model.remote
 
-import com.hema.e_commerce.model.dataclass.allProducts.Product
 import com.hema.e_commerce.model.dataclass.allProducts.ProductsResponse
 import com.hema.e_commerce.model.dataclass.customer.CustomerLoginModel
 import com.hema.e_commerce.model.dataclass.customer.CustomerModel
 import com.hema.e_commerce.model.dataclass.listofcustomcollections.CustomCollectionsResponse
 import com.hema.e_commerce.model.dataclass.smartCollection.BrandsResponce
-import com.hema.e_commerce.ui.category.singleproduct.ProductCollectionResponse
+import com.hema.e_commerce.model.dataclass.singleproduct.ProductCollectionResponse
 import retrofit2.Response
-import retrofit2.http.*
+import retrofit2.http.GET
+import retrofit2.http.Path
+
 
 
 interface ShopifyApi {
