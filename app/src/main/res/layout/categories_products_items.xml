@@ -19,6 +19,7 @@
             android:padding="10dp"
             android:text="product types"
             android:gravity="center"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginBottom="@dimen/_65sdp"

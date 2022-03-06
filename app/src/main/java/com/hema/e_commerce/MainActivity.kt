@@ -19,6 +19,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.hema.e_commerce.databinding.ActivityMainBinding
 import com.hema.e_commerce.util.Connectivity
 import com.hema.e_commerce.util.LocationProvider
+import com.hema.e_commerce.util.SharedPreferencesProvider
 
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
@@ -27,7 +28,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var locationManager: LocationManager
     private val locationProvider = LocationProvider
     private val connectivity = Connectivity
-
+    private lateinit var sharedPref: SharedPreferencesProvider
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {

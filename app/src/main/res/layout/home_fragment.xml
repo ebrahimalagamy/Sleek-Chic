@@ -48,12 +48,13 @@
 
                 <com.denzcoskun.imageslider.ImageSlider
                     android:id="@+id/imageSlider"
-                    android:layout_width="0dp"
-                    android:layout_height="150dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_190sdp"
                     app:iss_auto_cycle="true"
                     app:iss_delay="0"
+
+
                     app:iss_period="3000"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -62,11 +63,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="12dp"
-                    android:background="#D38A8A"
+                    android:padding="@dimen/_10sdp"
+                    android:background="#EDEDED"
                     android:text="GET COUPON"
                     app:layout_constraintBottom_toBottomOf="@+id/imageSlider"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.498"
+                    app:layout_constraintTop_toTopOf="@+id/imageSlider"
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <TextView
@@ -76,59 +78,64 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:text="@string/featured_brands"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/bestSellingRecyclerView" />
+                    app:layout_constraintTop_toBottomOf="@id/imageSlider" />
+
+
+
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/brandsRecycler"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_margin="@dimen/_10sdp"
                     android:orientation="horizontal"
+
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/brandsHeadLine"
                     tools:listitem="@layout/row_brands" />
 
-                <TextView
-                    android:id="@+id/bestSellingHeadLineText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="10dp"
-                    android:text="@string/best_selling"
-                    app:layout_constraintEnd_toStartOf="@+id/seeMoreHeadLineText"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageSlider" />
+<!--                <TextView-->
+<!--                    android:id="@+id/bestSellingHeadLineText"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="16dp"-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    android:text="@string/best_selling"-->
+<!--                    app:layout_constraintEnd_toStartOf="@+id/seeMoreHeadLineText"-->
+<!--                    app:layout_constraintHorizontal_bias="0.0"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/brandsRecycler" />-->
 
-                <TextView
-                    android:id="@+id/seeMoreHeadLineText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:text="@string/see_all"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/bestSellingHeadLineText"
-                    app:layout_constraintEnd_toEndOf="parent" />
+<!--                <TextView-->
+<!--                    android:id="@+id/seeMoreHeadLineText"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginEnd="16dp"-->
+<!--                    android:background="?android:attr/selectableItemBackground"-->
+<!--                    android:clickable="true"-->
+<!--                    android:focusable="true"-->
+<!--                    android:text="@string/see_all"-->
+<!--                    android:textSize="12sp"-->
+<!--                    app:layout_constraintBottom_toBottomOf="@+id/brandsRecycler"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent" />-->
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/bestSellingRecyclerView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/bestSellingHeadLineText"
-                    tools:itemCount="2"
-                    tools:listitem="@layout/row_product"
-                    tools:orientation="horizontal" />
+<!--                <androidx.recyclerview.widget.RecyclerView-->
+<!--                    android:id="@+id/bestSellingRecyclerView"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="16dp"-->
+<!--                    android:layout_marginTop="8dp"-->
+<!--                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/bestSellingHeadLineText"-->
+<!--                    tools:itemCount="2"-->
+<!--                    tools:listitem="@layout/row_product"-->
+<!--                    tools:orientation="horizontal" />-->
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

@@ -32,6 +32,7 @@
             android:layout_margin="@dimen/_15sdp"
             android:text="@string/reviews"
             android:id="@+id/tv_reviews"
+            android:textStyle="bold"
             />
 
         <TextView
@@ -51,6 +52,7 @@
             android:text="120$"
             android:layout_margin="@dimen/_15sdp"
             android:id="@+id/tv_price"
+            android:textStyle="bold"
 
 
 
