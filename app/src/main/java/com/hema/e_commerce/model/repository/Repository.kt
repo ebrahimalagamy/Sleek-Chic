@@ -1,14 +1,21 @@
 package com.hema.e_commerce.model.repository
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.hema.e_commerce.R
 import com.hema.e_commerce.model.dataclass.allProducts.ProductsResponse
+import com.hema.e_commerce.model.dataclass.getOrder.GetOrderResponce
+import com.hema.e_commerce.model.dataclass.getOrder.Order
 import com.hema.e_commerce.model.remote.RetrofitInstance
 import com.hema.e_commerce.ui.cart.CartData
 import com.hema.e_commerce.model.dataclass.listofcustomcollections.CustomCollectionsResponse
 import com.hema.e_commerce.model.dataclass.smartCollection.BrandsResponce
 import com.hema.e_commerce.model.dataclass.singleproduct.ProductCollectionResponse
+import com.hema.e_commerce.model.room.cartroom.CartProductData
+import com.hema.e_commerce.model.room.cartroom.LocalDataDao
+import com.hema.e_commerce.model.room.orderroom.OrderDao
+import com.hema.e_commerce.model.room.orderroom.OrderData
 import com.hema.e_commerce.ui.category.subcollectionsmodel.SubCollections
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -183,5 +190,102 @@ val brandsLiveData = MutableLiveData<BrandsResponce>()
         }
 
     }
+    val oneOrder= MutableLiveData<Order>()
+    fun getcreatAnOrder(){
 
+        GlobalScope.launch(Dispatchers.IO) {
+
+            val response=RetrofitInstance.api.creatAnOrder()
+            withContext(Dispatchers.Main){
+                if (response.isSuccessful){
+                    response.body()?.let {
+                        Log.d(TAG,"OnResponce Order:${it}")
+                        oneOrder.value= it
+                    }
+                }else{
+
+                    Log.i(TAG, "postOrder: error " + response.errorBody())
+
+
+                }
+
+            }
+        }
+
+
+    }
+    val listOfOrder= MutableLiveData<GetOrderResponce>()
+
+    fun getListOfOrderOpen(){
+        GlobalScope.launch(Dispatchers.IO) {
+
+            val response=RetrofitInstance.api.getListOfOrderOpen()
+            withContext(Dispatchers.Main){
+                if (response.isSuccessful){
+                    response.body()?.let {
+                        Log.d(TAG,"OnResponce Order:${it}")
+                        listOfOrder.value= it
+                    }
+                }else{
+
+                    Log.i(TAG, "getOrder: error " + response.errorBody())
+
+
+                }
+
+            }
+        }
+
+
+    }
+    val getOneOrder= MutableLiveData<Order>()
+
+    fun getAnOrder(orderId:Long){
+
+        GlobalScope.launch(Dispatchers.IO) {
+
+            val response=RetrofitInstance.api.getAnOrder(orderId)
+            withContext(Dispatchers.Main){
+                if (response.isSuccessful){
+                    response.body()?.let {
+                        Log.d(TAG,"OnResponce Order:${it}")
+                        getOneOrder.value= it
+                    }
+                }else{
+
+                    Log.i(TAG, "getAnOrder: error " + response.errorBody())
+
+
+                }
+
+            }
+        }
+
+    }
+    ///////////////////
+    lateinit var localDaoCart: LocalDataDao
+    lateinit var localDaoOrder: OrderDao
+    lateinit var cartProduct: CartProductData
+
+    fun saveCartList(){
+        localDaoCart.saveAllCartList(cartProduct)
+
+    }
+    fun getAllCartProduct(): LiveData<List<CartProductData>> {
+        return localDaoCart.getAllCartList()
+
+    }
+
+    fun deleteOnCartItem(cartProduct: CartProductData){
+        localDaoCart.deleteOnCartItem(cartProduct)
+    }
+
+    fun deleteAllFromCart(){
+        localDaoCart.deleteAllFromCart()
+    }
+
+    ///order//
+    fun getAllOrderList(): LiveData<List<OrderData>> {
+        return  localDaoOrder.getAllOrderList()
+    }
 }
