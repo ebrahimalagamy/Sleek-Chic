@@ -145,21 +145,21 @@
                 app:layout_constraintVertical_bias="0.0" />
 
             <ImageButton
-                android:id="@+id/imageButton4"
+                android:id="@+id/incre_count"
                 android:layout_width="39dp"
                 android:layout_height="33dp"
                 android:layout_marginTop="75dp"
                 android:background="#F8F6F6"
                 android:backgroundTint="#FAF4F4"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/textView6"
+                app:layout_constraintEnd_toStartOf="@+id/count"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView"
                 app:layout_constraintVertical_bias="1.0"
                 app:srcCompat="@drawable/ic_add" />
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/count"
                 android:layout_width="21dp"
                 android:layout_height="23dp"
                 android:layout_marginTop="76dp"
@@ -170,12 +170,12 @@
                 android:textColorHint="#070707"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/imageButton5"
-                app:layout_constraintStart_toEndOf="@+id/imageButton4"
+                app:layout_constraintEnd_toStartOf="@+id/min_count"
+                app:layout_constraintStart_toEndOf="@+id/incre_count"
                 app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
             <ImageButton
-                android:id="@+id/imageButton5"
+                android:id="@+id/min_count"
                 android:layout_width="36dp"
                 android:layout_height="32dp"
                 android:layout_marginTop="76dp"
@@ -184,7 +184,7 @@
                 android:backgroundTint="#FDFAFA"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/imageButton"
-                app:layout_constraintStart_toEndOf="@+id/textView6"
+                app:layout_constraintStart_toEndOf="@+id/count"
                 app:layout_constraintTop_toBottomOf="@+id/imageView"
                 app:srcCompat="@drawable/ic_min" />
 

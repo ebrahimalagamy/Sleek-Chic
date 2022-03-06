@@ -13,43 +13,36 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hema.e_commerce.R
 import com.hema.e_commerce.databinding.CartFragmentBinding
 import com.hema.e_commerce.model.repository.Repository
+import com.hema.e_commerce.model.room.cartroom.CartProductData
 
 class Cart : Fragment() {
 
-    lateinit var cartAdapter: CartAdapter
+   lateinit var   cartAdapter: CartAdapter
     lateinit var cartFragmentBinding: CartFragmentBinding
-    lateinit var arrayCart: ArrayList<CartData>
-
-    companion object {
-        fun newInstance() = Cart()
-    }
-
+    lateinit var arrayCart: ArrayList<CartProductData>
+    private var customerID = ""
+    private var totalPrice = 0.0
     private lateinit var viewModel: CartViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         cartFragmentBinding =
             DataBindingUtil.inflate(inflater, R.layout.cart_fragment, container, false)
-        // cartFragmentBinding.btCheckout.setOnClickListener {  }
-        //  cartFragmentBinding.btCopoun.setOnClickListener {  }
-        //    cartFragmentBinding.edtexCopoun.setOnClickListener {  }
-        //   cartFragmentBinding.textTotalprice.text=
-
+        viewModel =
+            ViewModelProvider(this,ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application)).
+            get(CartViewModel::class.java)
         return cartFragmentBinding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(CartViewModel::class.java)
-        var fragMana: FragmentManager? = fragmentManager
-        arrayCart = Repository().arrayList
-        cartAdapter = CartAdapter(fragMana, arrayCart, requireContext())
-        val layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
-        cartFragmentBinding.cartRec.adapter = cartAdapter
-        cartFragmentBinding.cartRec.layoutManager = layoutManager
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        cartAdapter = CartAdapter(arrayListOf(),viewModel)
+        cartFragmentBinding.cartRec.apply {
+            layoutManager=LinearLayoutManager(context)
+            adapter=cartAdapter
+        }
 
     }
 

@@ -3,15 +3,13 @@ package com.hema.e_commerce.model.remote
 import com.hema.e_commerce.model.dataclass.allProducts.ProductsResponse
 import com.hema.e_commerce.model.dataclass.customer.CustomerLoginModel
 import com.hema.e_commerce.model.dataclass.customer.CustomerModel
+import com.hema.e_commerce.model.dataclass.getOrder.GetOrderResponce
+import com.hema.e_commerce.model.dataclass.getOrder.Order
 import com.hema.e_commerce.model.dataclass.listofcustomcollections.CustomCollectionsResponse
 import com.hema.e_commerce.model.dataclass.smartCollection.BrandsResponce
 import com.hema.e_commerce.model.dataclass.singleproduct.ProductCollectionResponse
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
-
+import retrofit2.http.*
 
 
 interface ShopifyApi {
@@ -46,6 +44,23 @@ interface ShopifyApi {
 
     @GET("customers.json")
     suspend fun login(): Response<CustomerLoginModel>
+
+
+    //creat an order in api web
+    @POST("Orders.json")
+    suspend fun creatAnOrder():Response<Order>
+    @POST("orders/{order_id}/cancel.json")
+    suspend fun canceledOneOrder(@Path("order_id") id:Long):Response<Order>
+
+    //retrive list of order
+    @GET("orders.json?status=any")
+    suspend fun getListOfOrderOpen():Response<GetOrderResponce>
+
+    @GET("orders/{order_id}.json")
+    suspend fun getAnOrder(@Path("order_id") id:Long):Response<Order>
+
+    @DELETE("orders/{order_id}.json")
+    suspend fun deleteAnOrder(@Path("order_id") id:Long):Response<String>
 
 }
 
