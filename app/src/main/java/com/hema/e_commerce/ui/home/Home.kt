@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -20,6 +19,7 @@ import com.hema.e_commerce.R
 import com.hema.e_commerce.adapter.home.BrandAdapter
 import com.hema.e_commerce.adapter.home.ProductsAdapter
 import com.hema.e_commerce.databinding.HomeFragmentBinding
+import com.hema.e_commerce.model.viewmodels.HomeViewModel
 
 
 class Home : Fragment() {
@@ -45,10 +45,8 @@ class Home : Fragment() {
         navController= Navigation.findNavController(requireView())
 
         imageSlider()
-
         initViews()
         obesrvers()
-
         onClickSearch()
     }
 
@@ -73,15 +71,17 @@ class Home : Fragment() {
             binding.brandsRecycler.adapter = brandAdapter
         })
     }
-//    fun observeSaleProduct() {
-//        viewModel.onSaleProducts .observe(viewLifecycleOwner, Observer {
-//            var productList=it.products
-//            productAdapter= ProductsAdapter(arrayListOf())
-//            productAdapter.updateproduct(productList)
-//            binding.bestSellingRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false)
-//            binding.bestSellingRecyclerView.adapter=productAdapter
-//        })
-//    }
+
+   /*
+   fun observeSaleProduct() {
+        viewModel.onSaleProducts .observe(viewLifecycleOwner, Observer {
+            var productList=it.products
+            productAdapter= ProductsAdapter(arrayListOf())
+            productAdapter.updateproduct(productList)
+            binding.bestSellingRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false)
+            binding.bestSellingRecyclerView.adapter=productAdapter
+        })
+    }*/
 
 
      private fun initViews() {
