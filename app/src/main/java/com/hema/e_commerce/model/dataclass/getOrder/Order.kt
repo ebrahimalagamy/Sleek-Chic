@@ -1,5 +1,7 @@
 package com.hema.e_commerce.model.dataclass.getOrder
 
+import com.hema.e_commerce.model.dataclass.customer.Customer
+
 data class Order(
     val admin_graphql_api_id: String,
     val app_id: Any,

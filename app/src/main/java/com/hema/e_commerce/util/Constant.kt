@@ -16,6 +16,7 @@ object Constant {
     const val WOMAN_ID:Long=398034600167
     const val SALE_ID:Long=398034665703
     const val KIDS_ID:Long=398034632935
+    const val ALL_DATA_ROUTE ="ALL_DATA_ROUTE"
 
 
 }

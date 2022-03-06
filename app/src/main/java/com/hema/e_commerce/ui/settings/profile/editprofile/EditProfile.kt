@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.hema.e_commerce.R
 import com.hema.e_commerce.databinding.FragmentEditProfileBinding
@@ -30,7 +31,7 @@ class EditProfile : Fragment() {
 
     private fun bindUi() {
         binding.tvCancel.setOnClickListener {
-            findNavController().navigate(R.id.profile)
+            it.findNavController().popBackStack()
         }
     }
 

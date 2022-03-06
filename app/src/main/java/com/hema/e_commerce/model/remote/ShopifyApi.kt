@@ -2,15 +2,13 @@ package com.hema.e_commerce.model.remote
 
 import com.hema.e_commerce.model.dataclass.allProducts.Product
 import com.hema.e_commerce.model.dataclass.allProducts.ProductsResponse
+import com.hema.e_commerce.model.dataclass.customer.CustomerLoginModel
+import com.hema.e_commerce.model.dataclass.customer.CustomerModel
 import com.hema.e_commerce.model.dataclass.listofcustomcollections.CustomCollectionsResponse
 import com.hema.e_commerce.model.dataclass.smartCollection.BrandsResponce
 import com.hema.e_commerce.ui.category.singleproduct.ProductCollectionResponse
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.http.Query
-
+import retrofit2.http.*
 
 
 interface ShopifyApi {
@@ -39,7 +37,12 @@ interface ShopifyApi {
     @GET("products/{product_id}.json")
     suspend fun getSingleProduct( @Path("product_id") product_id:Long):Response<ProductCollectionResponse>
 
+    @POST("customers.json")
+    suspend fun register(@Body customer: CustomerModel):
+            Response<CustomerModel>
 
+    @GET("customers.json")
+    suspend fun login(): Response<CustomerLoginModel>
 
 }
 

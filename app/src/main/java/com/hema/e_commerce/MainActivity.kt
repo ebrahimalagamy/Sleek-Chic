@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
@@ -27,6 +28,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var locationManager: LocationManager
     private val locationProvider = LocationProvider
     private val connectivity = Connectivity
+
 
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -113,4 +115,6 @@ class MainActivity : AppCompatActivity() {
             grantResults = grantResults
         )
     }
+
+
 }

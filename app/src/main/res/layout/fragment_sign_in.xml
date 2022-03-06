@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="30dp"
-        tools:context=".ui.settings.auth.SignInFragment">
+        tools:context=".ui.settings.auth.login.SignInFragment">
 
         <ImageView
             android:id="@+id/ivClose"
@@ -55,7 +55,6 @@
             app:layout_constraintTop_toBottomOf="@+id/readItTogetherTextView">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/emailEdit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/email"
@@ -116,7 +115,7 @@
                 android:orientation="vertical">
 
                 <Button
-                    android:id="@+id/btnSaveAddressInfo"
+                    android:id="@+id/btnSignIn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/yellow"

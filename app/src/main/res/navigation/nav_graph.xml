@@ -7,17 +7,20 @@
 
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.hema.e_commerce.ui.settings.auth.SignUpFragment"
+        android:name="com.hema.e_commerce.ui.settings.auth.signup.SignUpFragment"
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up"/>
     <fragment
         android:id="@+id/signInFragment"
-        android:name="com.hema.e_commerce.ui.settings.auth.SignInFragment"
+        android:name="com.hema.e_commerce.ui.settings.auth.login.SignInFragment"
         android:label="fragment_sign_in"
         tools:layout="@layout/fragment_sign_in">
         <action
             android:id="@+id/action_signInFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/action_signInFragment_to_completeLoginFragment"
+            app:destination="@id/completeLoginFragment" />
     </fragment>
     <fragment
         android:id="@+id/home"
@@ -131,5 +134,10 @@
         android:id="@+id/productFragment"
         android:name="com.hema.e_commerce.ui.product.product.ProductFragment"
         android:label="ProductFragment" />
+    <fragment
+        android:id="@+id/completeLoginFragment"
+        android:name="com.hema.e_commerce.ui.settings.auth.CompleteLoginFragment"
+        android:label="CompleteLoginFragment"
+        tools:layout="@layout/complete_login_fragment"/>
 
 </navigation>
