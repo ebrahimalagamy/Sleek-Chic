@@ -29,9 +29,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var locationManager: LocationManager
     private val locationProvider = LocationProvider
     private val connectivity = Connectivity
-    private lateinit var sharedPref: SharedPreferencesProvider
-
-
 
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -39,8 +36,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        sharedPref = SharedPreferencesProvider(this)
-       // bindLocation()
+        bindLocation()
         bindNav()
     }
 

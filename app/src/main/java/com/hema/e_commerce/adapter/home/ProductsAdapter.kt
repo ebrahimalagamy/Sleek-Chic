@@ -40,11 +40,11 @@ class ProductsAdapter(private val productList:ArrayList<Product>) : RecyclerView
         val bundle= Bundle().apply {
             putLong(PRODUCT,productList[position].id)
         }
-        holder.binding.tvBrand.text=productList[position].vendor
+//        holder.binding.tvBrand.text=productList[position].vendor
 //        holder.binding.tvPrice.text= productList[position].variants[0].price
-        holder.binding.tvProductName.text=productList[position].title
+        holder.binding.tvProductname.text=productList[position].title
         CoroutineScope(Dispatchers.Main).launch{
-            Glide.with(holder.binding.ImageProduct.context).load(productList[position].image.src).into(holder.binding.ImageProduct)
+            Glide.with(holder.binding.imgProduct.context).load(productList[position].image.src).into(holder.binding.imgProduct)
         }
         holder.binding.root.setOnClickListener(View.OnClickListener {
             navController.navigate(

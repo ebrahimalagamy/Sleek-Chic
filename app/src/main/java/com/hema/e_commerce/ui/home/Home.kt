@@ -5,13 +5,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.recyclerview.widget.LinearLayoutManager
+import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
 import com.hema.e_commerce.R
 import com.hema.e_commerce.adapter.home.BrandAdapter
@@ -29,7 +31,7 @@ class Home : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.home_fragment, container, false)
         return binding.root
@@ -53,7 +55,7 @@ class Home : Fragment() {
     //product and brand logic
     fun obesrvers(){
         observeBrand()
-        observeSaleProduct()
+       // observeSaleProduct()
     }
 
     fun observeBrand() {
@@ -63,18 +65,22 @@ class Home : Fragment() {
             brandAdapter.updateBrand(brandList)
             binding.brandsRecycler.layoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+
+            binding.brandsRecycler.layoutManager = GridLayoutManager(context, 2, LinearLayoutManager.HORIZONTAL,false)
+
+
             binding.brandsRecycler.adapter = brandAdapter
         })
     }
-    fun observeSaleProduct() {
-        viewModel.onSaleProducts .observe(viewLifecycleOwner, Observer {
-            var productList=it.products
-            productAdapter= ProductsAdapter(arrayListOf())
-            productAdapter.updateproduct(productList)
-            binding.bestSellingRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false)
-            binding.bestSellingRecyclerView.adapter=productAdapter
-        })
-    }
+//    fun observeSaleProduct() {
+//        viewModel.onSaleProducts .observe(viewLifecycleOwner, Observer {
+//            var productList=it.products
+//            productAdapter= ProductsAdapter(arrayListOf())
+//            productAdapter.updateproduct(productList)
+//            binding.bestSellingRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false)
+//            binding.bestSellingRecyclerView.adapter=productAdapter
+//        })
+//    }
 
 
      private fun initViews() {
@@ -87,12 +93,20 @@ class Home : Fragment() {
     private fun imageSlider() {
         //function for image slider
         val imageList = ArrayList<SlideModel>()
-        imageList.add(SlideModel(R.drawable.m))
-        imageList.add(SlideModel(R.drawable.w1))
-        imageList.add(SlideModel(R.drawable.m2))
-        imageList.add(SlideModel(R.drawable.w2))
-        imageList.add(SlideModel(R.drawable.m3))
-        imageList.add(SlideModel(R.drawable.w3))
+        imageList.add(SlideModel(R.drawable.cubon1, ScaleTypes.FIT))
+        imageList.add(SlideModel(R.drawable.cubon3, ScaleTypes.FIT))
+        imageList.add(SlideModel(R.drawable.cubon4, ScaleTypes.FIT))
+        imageList.add(SlideModel(R.drawable.nike1, ScaleTypes.FIT))
+        imageList.add(SlideModel(R.drawable.cubonkids, ScaleTypes.FIT))
+        imageList.add(SlideModel(R.drawable.cubontshirt, ScaleTypes.FIT))
+        imageList.add(SlideModel(R.drawable.shoes2, ScaleTypes.FIT))
+
+
+        binding.imageSlider.setImageList(imageList, ScaleTypes.FIT)
+
+
+
+
         binding.imageSlider.setImageList(imageList)
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
