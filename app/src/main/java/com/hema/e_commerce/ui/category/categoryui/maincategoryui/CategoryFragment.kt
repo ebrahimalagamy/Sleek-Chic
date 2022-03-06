@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hema.e_commerce.R
@@ -22,6 +24,7 @@ class CategoryFragment : Fragment() {
     lateinit var productAdapter: CategoriesProductAdapter
     lateinit var binding: CategoryFragmentBinding
     val TAG = "Category"
+    private lateinit var navController: NavController
 
 
     private lateinit var viewModel: CategoryViewModel
@@ -38,6 +41,8 @@ class CategoryFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        navController= Navigation.findNavController(requireView())
+
         viewModel = ViewModelProvider(this).get(CategoryViewModel::class.java)
         initViews()
         observe()
@@ -51,10 +56,7 @@ class CategoryFragment : Fragment() {
         fragContainer.arguments=bundle
         fragMan!!.beginTransaction().replace(R.id.fram_cont, fragContainer).commit()
 
-
-
-
-
+        onClickSearch()
 
     }
 
@@ -74,6 +76,17 @@ class CategoryFragment : Fragment() {
     private fun initViews() {
         viewModel.getCollections()
     }
+    //search
+    fun onClickSearch(){
+        binding.searchView.setOnSearchClickListener(View.OnClickListener {
+            binding.searchView.isIconified = true
+            navController.navigate(
+                R.id.action_category_to_searchFragment
+            )
+        })
+    }
+
+
 
 
 }
