@@ -6,7 +6,7 @@ import android.net.NetworkCapabilities
 import android.os.Build
 import androidx.annotation.RequiresApi
 
-class Connectivity() {
+class Connectivity {
 
     companion object {
         @RequiresApi(Build.VERSION_CODES.M)
