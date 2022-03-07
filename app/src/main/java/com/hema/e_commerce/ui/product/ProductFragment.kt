@@ -45,12 +45,13 @@ class ProductFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val productId= arguments?.getLong(PRODUCT)!!
-        Log.i("idarg", "onViewCreated: "+productId)
 
-    initViews(productId)
+        val productId= arguments?.getLong(PRODUCT)
 
-        observe()
+        if (productId!=null){
+                 initViews(productId)
+                    observe()
+                }
     }
 
     fun observe() {

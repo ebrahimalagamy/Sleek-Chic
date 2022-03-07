@@ -30,7 +30,6 @@ class MainActivity : AppCompatActivity() {
     private val locationProvider = LocationProvider
     private val connectivity = Connectivity
 
-
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,7 +61,8 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             if (destination.id == R.id.signInFragment || destination.id == R.id.signUpFragment
                 || destination.id == R.id.editAddress || destination.id == R.id.mapFragment
-                || destination.id == R.id.editProfile
+                || destination.id == R.id.editProfile || destination.id == R.id.productFragment
+                || destination.id == R.id.typeListProductFragment2  || destination.id == R.id.searchFragment
             ) {
                 binding.bottomNavView.visibility = View.GONE
             } else {

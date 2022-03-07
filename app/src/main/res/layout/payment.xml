@@ -227,14 +227,9 @@
 <!--                        android:textStyle="bold" />-->
 <!--                </LinearLayout>-->
 
-<!--                <com.stash.shopeklobek.utils.customviews.SingleBigButton-->
-<!--                    android:id="@+id/btn_to_finish"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginBottom="8dp"-->
-<!--                    app:title="Proceed to Finish" />-->
+<!--
 
-<!--            </LinearLayout>-->
+         </LinearLayout>-->
 <!--        </androidx.cardview.widget.CardView>-->
 
 <!--        <androidx.cardview.widget.CardView-->

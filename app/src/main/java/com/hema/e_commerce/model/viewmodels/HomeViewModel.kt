@@ -9,6 +9,7 @@ import com.hema.e_commerce.model.dataclass.smartCollection.BrandsResponce
 import com.hema.e_commerce.model.repository.Repository
 
 class HomeViewModel(private val repository: Repository,app:Application) : AndroidViewModel(app) {
+
     var brandsLiveData = MutableLiveData<BrandsResponce>()
     var onSaleProducts = MutableLiveData<ProductsResponse>()
     var onHomeProducts = MutableLiveData<ProductsResponse>()

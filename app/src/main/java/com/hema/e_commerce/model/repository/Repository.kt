@@ -31,6 +31,7 @@ class Repository(val db:RoomData) {
     val productDetails = MutableLiveData<ProductItem>()
 
     val collectionsLiveData = MutableLiveData<CustomCollectionsResponse>()
+
     fun getCollections() {
         GlobalScope.launch(Dispatchers.IO) {
             val response = RetrofitInstance.api.getAllCollections()
@@ -52,7 +53,6 @@ class Repository(val db:RoomData) {
 
         }
     }
-
 
     val collectionProductsLiveData = MutableLiveData<ProductsResponse>()
     fun getSubCollectionsProducts(categoryId: Long) {

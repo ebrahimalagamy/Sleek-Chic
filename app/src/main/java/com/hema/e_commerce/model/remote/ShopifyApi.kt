@@ -24,7 +24,6 @@ interface ShopifyApi {
     @GET("collections/{collection_id}/products.json")
     suspend fun getCollectionProducts(  @Path("collection_id") collection_id:Long):Response<ProductsResponse>
 
-
     @GET("smart_collections.json")
     suspend fun getBrands(): Response<BrandsResponce>
 
@@ -38,6 +37,7 @@ interface ShopifyApi {
     @GET("products/{product_id}.json")
     suspend fun getSingleProduct( @Path("product_id") product_id:Long):Response<ProductCollectionResponse>
 
+    // customer get/post
     @POST("customers.json")
     suspend fun register(@Body customer: CustomerModel):
             Response<CustomerModel>

@@ -22,6 +22,7 @@ import com.hema.e_commerce.databinding.HomeFragmentBinding
 import com.hema.e_commerce.model.repository.Repository
 import com.hema.e_commerce.model.room.cartroom.RoomData
 import com.hema.e_commerce.model.viewModelFactory.HomeViewModelFactory
+
 import com.hema.e_commerce.model.viewmodels.HomeViewModel
 
 
@@ -50,10 +51,8 @@ class Home : Fragment() {
         navController= Navigation.findNavController(requireView())
 
         imageSlider()
-
         initViews()
         obesrvers()
-
         onClickSearch()
     }
 
@@ -78,15 +77,17 @@ class Home : Fragment() {
             binding.brandsRecycler.adapter = brandAdapter
         })
     }
-//    fun observeSaleProduct() {
-//        viewModel.onSaleProducts .observe(viewLifecycleOwner, Observer {
-//            var productList=it.products
-//            productAdapter= ProductsAdapter(arrayListOf())
-//            productAdapter.updateproduct(productList)
-//            binding.bestSellingRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false)
-//            binding.bestSellingRecyclerView.adapter=productAdapter
-//        })
-//    }
+
+   /*
+   fun observeSaleProduct() {
+        viewModel.onSaleProducts .observe(viewLifecycleOwner, Observer {
+            var productList=it.products
+            productAdapter= ProductsAdapter(arrayListOf())
+            productAdapter.updateproduct(productList)
+            binding.bestSellingRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false)
+            binding.bestSellingRecyclerView.adapter=productAdapter
+        })
+    }*/
 
 
      private fun initViews() {
