@@ -7,8 +7,8 @@ import androidx.room.*
 interface LocalDataDao {
     // query of  cart table
 
-    @Insert
-    fun saveAllCartList(cartProduct:CartProductData)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun saveAllCartList(cartProduct: CartProductData)
 
     @Query("SELECT * FROM ProductCart")
     fun getAllCartList(): LiveData<List<CartProductData>>

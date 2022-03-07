@@ -1,10 +1,8 @@
-package com.hema.e_commerce.ui.cart
+package com.hema.e_commerce.adapter.cart
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.hema.e_commerce.R
@@ -13,14 +11,13 @@ import com.hema.e_commerce.model.room.cartroom.CartProductData
 
 class CartAdapter(
     val cartList: ArrayList<CartProductData>,
-    val cartViewModel: CartViewModel
 ) : RecyclerView.Adapter<CartAdapter.ViewHolder>() {
-    private val lastPosition=-1
 
 
     fun addNewList(orderNewList: List<CartProductData>) {
         cartList.clear()
         cartList.addAll(orderNewList)
+
         notifyDataSetChanged()
 
     }
@@ -59,7 +56,7 @@ class CartAdapter(
             .into(holder.itemCartBinding.imageView)
 
 
-        holder.itemCartBinding.minCount.setOnClickListener {
+       /* holder.itemCartBinding.minCount.setOnClickListener {
             var num =((holder.itemCartBinding.count.text.toString().toInt())-1)
             if(num>0){
                 cartList[position].price
@@ -81,7 +78,7 @@ class CartAdapter(
             holder.itemCartBinding.count.text=num.toString()
             cartViewModel.onChangeQuntity()
 
-        }
+        }*/
     }
 
     override fun getItemCount(): Int {

@@ -4,8 +4,6 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/categories_products_items.xml" value="0.20416666666666666" />
-        <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/category_fragment.xml" value="0.1" />
-        <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/home_fragment.xml" value="0.33" />
         <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/category_fragment.xml" value="0.22" />
         <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/fragment_product.xml" value="0.20416666666666666" />
         <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/fragment_type_list_product.xml" value="0.20416666666666666" />
@@ -23,6 +21,7 @@
         <entry key="..\:/Users/CompuTouch/Documents/GitHub/E-Commerce/app/src/main/res/layout/categories_products_items.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/CompuTouch/Documents/GitHub/E-Commerce/app/src/main/res/layout/category_fragment.xml" value="0.17222222222222222" />
         <entry key="..\:/Users/CompuTouch/Documents/GitHub/E-Commerce/app/src/main/res/layout/container_item.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/CompuTouch/Documents/GitHub/E-Commerce/app/src/main/res/layout/fragment_product.xml" value="0.17592592592592593" />
         <entry key="..\:/Users/CompuTouch/Documents/GitHub/E-Commerce/app/src/main/res/layout/fragment_wishlist.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/CompuTouch/Documents/GitHub/E-Commerce/app/src/main/res/layout/item_cart.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Ebrah/AndroidStudioProjects/ECommerce/app/src/main/res/drawable-v24/facebook_icon.xml" value="0.1655" />

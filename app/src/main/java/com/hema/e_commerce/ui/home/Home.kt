@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -20,6 +19,10 @@ import com.hema.e_commerce.R
 import com.hema.e_commerce.adapter.home.BrandAdapter
 import com.hema.e_commerce.adapter.home.ProductsAdapter
 import com.hema.e_commerce.databinding.HomeFragmentBinding
+import com.hema.e_commerce.model.repository.Repository
+import com.hema.e_commerce.model.room.cartroom.RoomData
+import com.hema.e_commerce.model.viewModelFactory.HomeViewModelFactory
+import com.hema.e_commerce.model.viewmodels.HomeViewModel
 
 
 class Home : Fragment() {
@@ -41,7 +44,9 @@ class Home : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this)[HomeViewModel::class.java]
+        val repository= Repository(RoomData(requireContext()))
+        val homeViewModelProviderFactory = HomeViewModelFactory(requireActivity().application,repository)
+        viewModel = ViewModelProvider(this,homeViewModelProviderFactory)[HomeViewModel::class.java]
         navController= Navigation.findNavController(requireView())
 
         imageSlider()

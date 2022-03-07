@@ -17,6 +17,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hema.e_commerce.R
 import com.hema.e_commerce.adapter.catagory.CategoriesProductAdapter
 import com.hema.e_commerce.databinding.CategoryFragmentBinding
+import com.hema.e_commerce.model.repository.Repository
+import com.hema.e_commerce.model.room.cartroom.RoomData
+import com.hema.e_commerce.model.viewModelFactory.CatagoryViewModelFactory
 import com.hema.e_commerce.model.viewmodels.CategoryViewModel
 import com.hema.e_commerce.ui.category.categoryui.containerui.FragmentContainer
 
@@ -42,8 +45,9 @@ class CategoryFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         navController= Navigation.findNavController(requireView())
-
-        viewModel = ViewModelProvider(this).get(CategoryViewModel::class.java)
+        val repository= Repository(RoomData(requireContext()))
+        val catagoryViewModelProviderFactory =CatagoryViewModelFactory(requireActivity().application,repository)
+        viewModel = ViewModelProvider(this,catagoryViewModelProviderFactory)[CategoryViewModel::class.java]
         initViews()
         observe()
 

@@ -4,6 +4,8 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.hema.e_commerce.R
+import com.hema.e_commerce.model.dataclass.allProducts.Product
+import com.hema.e_commerce.model.dataclass.allProducts.ProductItem
 import com.hema.e_commerce.model.dataclass.allProducts.ProductsResponse
 import com.hema.e_commerce.model.dataclass.getOrder.GetOrderResponce
 import com.hema.e_commerce.model.dataclass.getOrder.Order
@@ -14,6 +16,7 @@ import com.hema.e_commerce.model.dataclass.smartCollection.BrandsResponce
 import com.hema.e_commerce.model.dataclass.singleproduct.ProductCollectionResponse
 import com.hema.e_commerce.model.room.cartroom.CartProductData
 import com.hema.e_commerce.model.room.cartroom.LocalDataDao
+import com.hema.e_commerce.model.room.cartroom.RoomData
 import com.hema.e_commerce.model.room.orderroom.OrderDao
 import com.hema.e_commerce.model.room.orderroom.OrderData
 import com.hema.e_commerce.ui.category.subcollectionsmodel.SubCollections
@@ -22,9 +25,11 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class Repository {
+class Repository(val db:RoomData) {
     //Aya
     private val TAG = "CollectionsRepo"
+    val productDetails = MutableLiveData<ProductItem>()
+
     val collectionsLiveData = MutableLiveData<CustomCollectionsResponse>()
     fun getCollections() {
         GlobalScope.launch(Dispatchers.IO) {
@@ -262,30 +267,31 @@ val brandsLiveData = MutableLiveData<BrandsResponce>()
         }
 
     }
-    ///////////////////
-    lateinit var localDaoCart: LocalDataDao
-    lateinit var localDaoOrder: OrderDao
-    lateinit var cartProduct: CartProductData
 
-    fun saveCartList(){
-        localDaoCart.saveAllCartList(cartProduct)
+
+
+    ///////////////////
+
+
+    fun saveCartList(cartlist: CartProductData){
+        db.getLocalDataObject().saveAllCartList(cartlist)
 
     }
     fun getAllCartProduct(): LiveData<List<CartProductData>> {
-        return localDaoCart.getAllCartList()
+        return db.getLocalDataObject().getAllCartList()
 
     }
 
     fun deleteOnCartItem(cartProduct: CartProductData){
-        localDaoCart.deleteOnCartItem(cartProduct)
+        db.getLocalDataObject().deleteOnCartItem(cartProduct)
     }
 
     fun deleteAllFromCart(){
-        localDaoCart.deleteAllFromCart()
+        db.getLocalDataObject().deleteAllFromCart()
     }
 
     ///order//
-    fun getAllOrderList(): LiveData<List<OrderData>> {
-        return  localDaoOrder.getAllOrderList()
-    }
+  /*  fun getAllOrderList(): LiveData<List<OrderData>> {
+        return  db.getLocalDataObject().getAllOrderList()
+    }*/
 }
