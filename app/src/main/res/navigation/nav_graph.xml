@@ -141,8 +141,8 @@
         android:label="ProductFragment" />
     <fragment
         android:id="@+id/completeLoginFragment"
-        android:name="com.hema.e_commerce.ui.settings.auth.CompleteLoginFragment"
+        android:name="com.hema.e_commerce.ui.settings.auth.password.SignInPasswordFragment"
         android:label="CompleteLoginFragment"
-        tools:layout="@layout/complete_login_fragment"/>
+        tools:layout="@layout/signin_password_fragment"/>
 
 </navigation>

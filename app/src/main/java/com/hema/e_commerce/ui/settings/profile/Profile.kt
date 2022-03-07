@@ -9,10 +9,12 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.hema.e_commerce.R
 import com.hema.e_commerce.databinding.FragmentProfileBinding
+import com.hema.e_commerce.util.SharedPreferencesProvider
 
 
 class Profile : Fragment() {
     private lateinit var binding: FragmentProfileBinding
+    private lateinit var sharedPref: SharedPreferencesProvider
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,6 +25,7 @@ class Profile : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        sharedPref = SharedPreferencesProvider(requireActivity())
         bindUi()
 
     }
@@ -34,6 +37,8 @@ class Profile : Fragment() {
         binding.ivBack.setOnClickListener {
             findNavController().navigate(R.id.Settings)
         }
+
+        binding.email.text = sharedPref.getSettings().customer?.firstName ?: "null"
     }
 
 }

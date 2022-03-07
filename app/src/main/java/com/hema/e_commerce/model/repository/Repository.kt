@@ -26,6 +26,7 @@ class Repository {
     //Aya
     private val TAG = "CollectionsRepo"
     val collectionsLiveData = MutableLiveData<CustomCollectionsResponse>()
+
     fun getCollections() {
         GlobalScope.launch(Dispatchers.IO) {
             val response = RetrofitInstance.api.getAllCollections()
@@ -47,7 +48,6 @@ class Repository {
 
         }
     }
-
 
     val collectionProductsLiveData = MutableLiveData<ProductsResponse>()
     fun getSubCollectionsProducts(categoryId: Long) {

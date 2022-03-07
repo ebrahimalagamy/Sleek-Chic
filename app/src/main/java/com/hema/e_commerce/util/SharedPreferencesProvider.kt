@@ -2,6 +2,11 @@ package com.hema.e_commerce.util
 
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.core.content.edit
+import androidx.lifecycle.MutableLiveData
+import androidx.preference.PreferenceManager
+import com.google.gson.Gson
+import com.hema.e_commerce.model.dataclass.customer.Customer
 
 class SharedPreferencesProvider(context: Context) {
     companion object {
@@ -16,18 +21,24 @@ class SharedPreferencesProvider(context: Context) {
         private const val IS_FIRST_TIME_LAUNCH = "IS_FIRST_TIME_LAUNCH"
 
         // user Info
-        private const val USER_ADDRESS = "USER_ADDRESS"
         private const val PHONE = "PHONE"
         private const val NAME = "NAME"
 
-        // Shared preferences for location
-        private const val IS_LOCATION_ENABLED = "IS_LOCATION_ENABLED"
 
     }
 
     init {
         pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
         editor = pref.edit()
+    }
+    private val preferences: SharedPreferences by lazy {
+        PreferenceManager.getDefaultSharedPreferences(context.applicationContext)
+    }
+
+    val settings: MutableLiveData<CustomerInfo> by lazy {
+        MutableLiveData<CustomerInfo>().apply {
+            postValue(CustomerInfo.getDefault())
+        }
     }
 
     fun setLocation(latitude: String?, longitude: String?, address: String?) {
@@ -36,7 +47,6 @@ class SharedPreferencesProvider(context: Context) {
         editor.putString(ADDRESS, address)
         editor.commit()
     }
-
 
 
     val getLocation: Array<String?>
@@ -52,7 +62,8 @@ class SharedPreferencesProvider(context: Context) {
         }
 
     fun setUserInfo(//userAddress: String?,
-                    phone: String?, name: String?) {
+        phone: String?, name: String?
+    ) {
 //        editor.putString(USER_ADDRESS, userAddress)
         editor.putString(PHONE, phone)
         editor.putString(NAME, name)
@@ -62,10 +73,8 @@ class SharedPreferencesProvider(context: Context) {
     val getUserInfo: Array<String?>
         get() {
             val info = arrayOfNulls<String>(2)
-//            val userAddress = pref.getString(USER_ADDRESS, null)
-            val phone = pref.getString(PHONE,"Phone")
+            val phone = pref.getString(PHONE, "Phone")
             val name = pref.getString(NAME, "Username")
-//            info[0] = userAddress
             info[0] = phone
             info[1] = name
             return info
@@ -75,11 +84,39 @@ class SharedPreferencesProvider(context: Context) {
         editor.putBoolean(IS_FIRST_TIME_LAUNCH, isFirstTime)
         editor.commit()
     }
+
     val isFirstTimeLaunch: Boolean
         get() = pref.getBoolean(IS_FIRST_TIME_LAUNCH, true)
 
-    fun setFirstTimeLocationenabled(isFirstTime: Boolean) {
-        editor.putBoolean(IS_LOCATION_ENABLED, isFirstTime)
-        editor.commit()
+
+    private fun settingsToJson(settings: CustomerInfo): String {
+        val json = Gson()
+        return json.toJson(settings)
+    }
+
+    private fun settingsFromJson(settings: String): CustomerInfo {
+        val json = Gson()
+        return json.fromJson(settings, CustomerInfo::class.java)
+    }
+
+    fun update(update: (CustomerInfo) -> CustomerInfo) {
+        preferences.edit {
+            putString(
+                Constant.ALL_DATA_ROUTE,
+                settingsToJson(update(settings.value ?: CustomerInfo.getDefault()))
+            )
+            apply()
+        }
+    }
+
+    fun getSettings(): CustomerInfo {
+        return preferences.getString(Constant.ALL_DATA_ROUTE, null)?.let { settingsFromJson(it) }
+            ?: CustomerInfo.getDefault()
+    }
+}
+
+data class CustomerInfo(var customer: Customer?) {
+    companion object {
+        fun getDefault(): CustomerInfo = CustomerInfo(null)
     }
 }

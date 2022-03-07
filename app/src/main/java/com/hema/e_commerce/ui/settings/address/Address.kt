@@ -17,7 +17,6 @@ class Address : Fragment() {
     private lateinit var binding: FragmentAddressBinding
     private lateinit var sharedPref: SharedPreferencesProvider
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

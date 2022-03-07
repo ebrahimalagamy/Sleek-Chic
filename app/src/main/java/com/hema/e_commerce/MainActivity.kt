@@ -30,7 +30,6 @@ class MainActivity : AppCompatActivity() {
     private val locationProvider = LocationProvider
     private val connectivity = Connectivity
 
-
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
