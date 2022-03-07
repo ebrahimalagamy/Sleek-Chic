@@ -1,4 +1,4 @@
-package com.hema.e_commerce.adapter.productList
+package com.hema.e_commerce.adapter.search
 
 
 import android.view.LayoutInflater
@@ -16,7 +16,7 @@ import com.hema.e_commerce.util.Constant.FLAG
 import com.hema.e_commerce.util.Constant.PRODUCT
 
 
-class TypeListAdapter(private val productList: List<Product>) : RecyclerView.Adapter<TypeListAdapter.ViewHolder>() {
+class SearchAdapter(private val productList: List<Product>) : RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
     private lateinit var navController: NavController
 
 
@@ -42,7 +42,7 @@ class TypeListAdapter(private val productList: List<Product>) : RecyclerView.Ada
 
         holder.itemView.setOnClickListener{
             val bundle = bundleOf(PRODUCT to  products.id)
-            navController.navigate(R.id.action_typeListProductFragment2_to_productFragment,bundle)
+            navController.navigate(R.id.action_searchFragment_to_productFragment,bundle)
 
         }
 
