@@ -1,5 +1,6 @@
 package com.hema.e_commerce.ui.product
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -53,7 +54,25 @@ class ProductFragment : Fragment() {
             it.product.handle
             Log.i("n", "observe: "+  it.product.handle)
             binding.tvDescProduct.text=  it.product.body_html
-            binding.tvPrice.text=it.product.variants.get(0).price+" "+getString(R.string.eg)
+
+            val sharedPreferences: SharedPreferences =requireContext().getSharedPreferences("currency", 0)
+            var value = sharedPreferences.getString("currency","EGP")
+            when(value){
+                "EGP"->  binding.tvPrice.text=it.product.variants.get(0).price+" "+getString(R.string.eg)
+                "USA"-> {
+                    var usCurrancy=   ((it.product.variants.get(0).price).toDouble() / (15.71))
+                    val number:Double=String.format("%.2f",usCurrancy).toDouble()
+                    binding.tvPrice.text = number.toString() + " " + getString(R.string.us)
+
+                }
+                "EUR"->      {
+                    var ureCurrancy=   ((it.product.variants.get(0).price).toDouble() / (17.10))
+                    val number:Double=String.format("%.2f",ureCurrancy).toDouble()
+                    binding.tvPrice.text=number.toString()+" "+getString(R.string.eur)
+                    }
+                else->  binding.tvPrice.text=it.product.variants.get(0).price+" "+getString(R.string.eg)
+
+            }
             binding.tvTitle.text=it.product.title
 
 

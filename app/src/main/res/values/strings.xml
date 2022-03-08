@@ -65,5 +65,7 @@
     <string name="No">No</string>
     <string name="ok">Ok</string>
     <string name="offline">You\'re offline, please check your internet connection to be able to choose a location</string>
+    <string name="us">$</string>
+    <string name="eur">EUR</string>
 
 </resources>

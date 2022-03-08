@@ -1,6 +1,9 @@
 package com.hema.e_commerce.ui.settings
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,11 +48,22 @@ class Settings : Fragment() {
 
 
         binding.btnCurrency.setOnClickListener {
+
+            val sharedPreferences: SharedPreferences =requireContext().getSharedPreferences("currency", 0)
+             selectedItemIndex = sharedPreferences.getInt("currencyindex",0)
+
             MaterialAlertDialogBuilder(requireActivity())
                 .setTitle("Currency")
                 .setSingleChoiceItems(arrayItems,selectedItemIndex){ _,which ->
                     selectedItemIndex=which
                     selectedItem =arrayItems[which]
+                    val editor: SharedPreferences.Editor = sharedPreferences.edit()
+                    editor.putString("currency", selectedItem)
+                    editor.putInt("currencyindex", selectedItemIndex)
+                    editor.apply()
+                    editor.commit()
+
+
                 }
                 .setPositiveButton("Ok"){ _,_ ->
                     Toast.makeText(requireActivity(),"$selectedItem Selected",Toast.LENGTH_SHORT).show()
