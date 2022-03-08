@@ -45,6 +45,10 @@ interface ShopifyApi {
     @GET("customers.json")
     suspend fun login(): Response<CustomerLoginModel>
 
+    @PUT("customers/{customer_id}.json")
+    suspend fun update(@Path("customer_id") customer_id:Long):
+            Response<CustomerModel>
+
 
     //creat an order in api web
     @POST("Orders.json")

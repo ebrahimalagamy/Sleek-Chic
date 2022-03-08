@@ -53,7 +53,7 @@ object LocationProvider {
             )
             return
         } else {
-            mFusedLocationClient.lastLocation.addOnSuccessListener {
+            mFusedLocationClient.lastLocation.addOnSuccessListener { it ->
                 if (it != null) {
                     if (sharedPref.isFirstTimeLaunch) {
                         val geoCoder = Geocoder(context)
@@ -65,6 +65,9 @@ object LocationProvider {
                             it.longitude.toString(),
                             currentLocation[0].getAddressLine(0),
                         )
+//                        sharedPref.update {
+//                            it.copy(customer = it.customer.lastName)
+//                        }
                         // to get my location in first time only
                         sharedPref.setFirstTimeLaunch(false)
                     }
