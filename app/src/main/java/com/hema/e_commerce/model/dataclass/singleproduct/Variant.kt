@@ -12,7 +12,7 @@ data class Variant(
     val inventory_item_id: Long,
     val inventory_management: String,
     val inventory_policy: String,
-    val inventory_quantity: Int,
+    var inventory_quantity: Int,
     val old_inventory_quantity: Int,
     val option1: String,
     val option2: String,

@@ -5,5 +5,5 @@ data class Option(
     val name: String,
     val position: Int,
     val product_id: Long,
-    val values: List<String>
+    var values: List<String>
 )

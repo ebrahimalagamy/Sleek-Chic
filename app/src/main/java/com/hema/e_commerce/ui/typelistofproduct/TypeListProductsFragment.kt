@@ -12,6 +12,9 @@ import com.hema.e_commerce.R
 import com.hema.e_commerce.adapter.productList.TypeListAdapter
 import com.hema.e_commerce.databinding.FragmentTypeListProductBinding
 import com.hema.e_commerce.model.dataclass.allProducts.Product
+import com.hema.e_commerce.model.repository.Repository
+import com.hema.e_commerce.model.room.cartroom.RoomData
+import com.hema.e_commerce.model.viewModelFactory.ListOfProductViewModelFactory
 import com.hema.e_commerce.model.viewmodels.ListOfProductsViewModel
 import com.hema.e_commerce.util.Constant.BRAND_KEY
 import com.hema.e_commerce.util.Constant.FLAG
@@ -32,7 +35,12 @@ class TypeListProductsFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?, ): View? {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_type_list_product, container, false)
-        viewModel = ViewModelProvider(this).get(ListOfProductsViewModel::class.java)
+        val repository= Repository(RoomData(requireContext()))
+        val listOfProductsViewModelProviderFactory =
+            ListOfProductViewModelFactory(requireActivity().application,repository)
+        viewModel = ViewModelProvider(this, listOfProductsViewModelProviderFactory)[ListOfProductsViewModel::class.java]
+
+
         return binding.root
     }
 

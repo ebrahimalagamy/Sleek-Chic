@@ -12,6 +12,7 @@ import com.hema.e_commerce.util.*
 
 class AuthRepo(
     val ShopifyServices: ShopifyApi,
+//    val settingsPreferences: SettingsPreferences,
     var sharedPref: SharedPreferencesProvider,
     val application: Application
 ) {
@@ -29,7 +30,7 @@ class AuthRepo(
                         )
                     }
 
-                    Log.d("body", res.body()?.customer.toString())
+                    Log.d("body",res.body()?.customer.toString())
 
                     Either.Success(res.body()!!)
                 } else
@@ -69,26 +70,5 @@ class AuthRepo(
             Either.Error(LoginErrors.ServerError, t.message)
         }
     }
-
-    @RequiresApi(Build.VERSION_CODES.M)
-    suspend fun updateCustomer(customer_id: Long) {
-
-        if (Connectivity.isOnline(application.applicationContext)) {
-            val res = api.updateCustomer(customer_id)
-            if (res.isSuccessful) {
-
-                val customer = res.body()?.customer?.customerId
-                Log.d("dd0",customer.toString())
-
-
-//                    sharedPref.update {
-//                        it.copy(
-//                            customer = customer
-//                        )
-//                    }
-            }
-        }
-    }
-
 
 }

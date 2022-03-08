@@ -12,6 +12,9 @@ import com.hema.e_commerce.R
 import com.hema.e_commerce.adapter.search.SearchAdapter
 import com.hema.e_commerce.databinding.FragmentTypeListProductBinding
 import com.hema.e_commerce.model.dataclass.allProducts.Product
+import com.hema.e_commerce.model.repository.Repository
+import com.hema.e_commerce.model.room.cartroom.RoomData
+import com.hema.e_commerce.model.viewModelFactory.ListOfProductViewModelFactory
 import com.hema.e_commerce.model.viewmodels.ListOfProductsViewModel
 import java.util.*
 import kotlin.collections.ArrayList
@@ -31,7 +34,10 @@ class SearchFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_type_list_product, container, false)
         binding.searchView.isIconified = false
-        viewModel = ViewModelProvider(this)[ListOfProductsViewModel::class.java]
+        val repository= Repository(RoomData(requireContext()))
+        val listOfProductsViewModelProviderFactory =
+            ListOfProductViewModelFactory(requireActivity().application,repository)
+        viewModel = ViewModelProvider(this, listOfProductsViewModelProviderFactory)[ListOfProductsViewModel::class.java]
         return binding.root
     }
 

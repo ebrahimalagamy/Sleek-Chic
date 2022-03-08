@@ -29,7 +29,7 @@
                 app:srcCompat="@drawable/dress" />
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/title"
                 android:layout_width="188dp"
                 android:layout_height="47dp"
                 android:layout_marginTop="32dp"
@@ -48,7 +48,7 @@
                 app:layout_constraintVertical_bias="0.0" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/price"
                 android:layout_width="185dp"
                 android:layout_height="47dp"
                 android:fontFamily="sans-serif-medium"
@@ -61,11 +61,11 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.768"
                 app:layout_constraintStart_toEndOf="@+id/imageView"
-                app:layout_constraintTop_toBottomOf="@+id/textView"
+                app:layout_constraintTop_toBottomOf="@+id/title"
                 app:layout_constraintVertical_bias="0.0" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/copoun"
                 android:layout_width="183dp"
                 android:layout_height="43dp"
                 android:fontFamily="sans-serif-medium"
@@ -77,7 +77,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.565"
                 app:layout_constraintStart_toEndOf="@+id/imageView"
-                app:layout_constraintTop_toBottomOf="@+id/textView2"
+                app:layout_constraintTop_toBottomOf="@+id/price"
                 app:layout_constraintVertical_bias="0.13" />
 
             <ImageButton
