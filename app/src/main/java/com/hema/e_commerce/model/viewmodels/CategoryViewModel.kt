@@ -1,14 +1,14 @@
 package com.hema.e_commerce.model.viewmodels
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.hema.e_commerce.model.dataclass.listofcustomcollections.CustomCollectionsResponse
 import com.hema.e_commerce.model.repository.Repository
 
-class CategoryViewModel : ViewModel() {
+class CategoryViewModel(private val repo: Repository,app: Application) : AndroidViewModel(app) {
 
     var categoriesLiveData = MutableLiveData<CustomCollectionsResponse>()
-    private val repo = Repository();
 
     fun getCollections() {
         repo.getCollections()

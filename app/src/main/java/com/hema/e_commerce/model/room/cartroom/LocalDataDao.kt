@@ -7,8 +7,8 @@ import androidx.room.*
 interface LocalDataDao {
     // query of  cart table
 
-    @Insert
-    fun saveAllCartList(cartProduct:CartProductData)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+     fun saveAllCartList(cartProduct: CartProductData)
 
     @Query("SELECT * FROM ProductCart")
     fun getAllCartList(): LiveData<List<CartProductData>>
@@ -24,12 +24,16 @@ interface LocalDataDao {
  /*   @Query("DELETE FROM productcart WHERE id = :id")
     suspend fun deleteOneCartItem(id: Long)*/
 
-  @Delete
-  fun deleteOnCartItem(cartProduct: CartProductData)
+     /* @Delete
+      fun deleteAllFromCart()*/
 
-    @Query("DELETE FROM ProductCart")
+    @Delete
+        fun deleteOnCartItem(cartProduct: CartProductData)
 
-    fun deleteAllFromCart()
+/*    @Query("DELETE FROM ProductCart")
+      fun deleteOnCartItem(cartProduct: CartProductData)*/
+
+
 
 
 

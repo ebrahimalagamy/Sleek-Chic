@@ -14,6 +14,9 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.hema.e_commerce.R
 import com.hema.e_commerce.adapter.catagory.ContainerAdapter
 import com.hema.e_commerce.databinding.FragmentContainerBinding
+import com.hema.e_commerce.model.repository.Repository
+import com.hema.e_commerce.model.room.cartroom.RoomData
+import com.hema.e_commerce.model.viewModelFactory.SubCollectionViewModelFactory
 import com.hema.e_commerce.model.viewmodels.SubCollectionViewModel
 import com.hema.e_commerce.util.Constant.HOME_PAGE_ID
 import com.hema.e_commerce.util.Constant.KIDS_ID
@@ -35,8 +38,11 @@ class FragmentContainer : Fragment() {
     ): View? {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_container, container, false)
+        val repository= Repository(RoomData(requireContext()))
+        val subCollectionViewModelProviderFactory =
+            SubCollectionViewModelFactory(requireActivity().application,repository)
+        viewModel = ViewModelProvider(this, subCollectionViewModelProviderFactory)[SubCollectionViewModel::class.java]
 
-        viewModel = ViewModelProvider(this).get(SubCollectionViewModel::class.java)
 
 
 

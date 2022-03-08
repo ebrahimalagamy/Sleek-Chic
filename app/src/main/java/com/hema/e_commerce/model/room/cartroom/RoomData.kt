@@ -12,7 +12,7 @@ import androidx.room.RoomDatabase
 abstract class RoomData:RoomDatabase() {
 
     abstract fun getLocalDataObject(): LocalDataDao
-    companion object {
+   /* companion object {
         // Singleton prevents multiple instances of database opening at the
         // same time.
         @Volatile
@@ -33,9 +33,9 @@ abstract class RoomData:RoomDatabase() {
                 instance
             }
         }
-    }
+    }*/
     //fallbackToDestructiveMigration()
-   /* companion object {
+    companion object {
         @Volatile
         private var INSTANCE: RoomData? = null
         private val LOCk=Any()
@@ -54,7 +54,6 @@ abstract class RoomData:RoomDatabase() {
     }
 
 
-*/
     }
 
 

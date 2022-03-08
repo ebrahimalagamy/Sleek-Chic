@@ -1,13 +1,14 @@
 package com.hema.e_commerce.model.viewmodels
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.hema.e_commerce.model.dataclass.allProducts.ProductsResponse
 import com.hema.e_commerce.model.dataclass.smartCollection.BrandsResponce
 import com.hema.e_commerce.model.repository.Repository
 
-class HomeViewModel : ViewModel() {
-    val repository: Repository = Repository()
+class HomeViewModel(private val repository: Repository,app:Application) : AndroidViewModel(app) {
     var brandsLiveData = MutableLiveData<BrandsResponce>()
     var onSaleProducts = MutableLiveData<ProductsResponse>()
     var onHomeProducts = MutableLiveData<ProductsResponse>()

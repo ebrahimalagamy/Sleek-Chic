@@ -14,8 +14,13 @@ import androidx.viewpager.widget.PagerAdapter
 import com.hema.e_commerce.R
 import com.hema.e_commerce.adapter.singleProduct.ProductAdapter
 import com.hema.e_commerce.databinding.FragmentProductBinding
+import com.hema.e_commerce.model.repository.Repository
+import com.hema.e_commerce.model.room.cartroom.CartProductData
+import com.hema.e_commerce.model.room.cartroom.RoomData
+import com.hema.e_commerce.model.viewModelFactory.SingleProductViewModelFactory
 import com.hema.e_commerce.model.viewmodels.SingleProductViewModel
 import com.hema.e_commerce.util.Constant.PRODUCT
+
 
 
 class ProductFragment : Fragment() {
@@ -27,10 +32,11 @@ class ProductFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_product, container, false)
-        viewModel = ViewModelProvider(this).get(SingleProductViewModel::class.java)
-
+        val repository= Repository(RoomData(requireContext()))
+        val singleProductsViewModelProviderFactory =
+            SingleProductViewModelFactory(requireActivity().application,repository)
+        viewModel = ViewModelProvider(this, singleProductsViewModelProviderFactory)[SingleProductViewModel::class.java]
         return binding.root
     }
 
@@ -40,16 +46,16 @@ class ProductFragment : Fragment() {
         val productId= arguments?.getLong(PRODUCT)
 
         if (productId!=null){
-                 initViews(productId)
-                    observe()
-                }
+            initViews(productId)
+            observe()
+        }
     }
 
     fun observe() {
         viewModel.singleProductLiveData.observe(viewLifecycleOwner, Observer {
 
             var adapter:PagerAdapter= ProductAdapter(requireContext(),it.product.images)
-
+            var product=it.product
             binding.viewPager.adapter = adapter
             it.product.handle
             Log.i("n", "observe: "+  it.product.handle)
@@ -69,11 +75,19 @@ class ProductFragment : Fragment() {
                     var ureCurrancy=   ((it.product.variants.get(0).price).toDouble() / (17.10))
                     val number:Double=String.format("%.2f",ureCurrancy).toDouble()
                     binding.tvPrice.text=number.toString()+" "+getString(R.string.eur)
-                    }
+                }
                 else->  binding.tvPrice.text=it.product.variants.get(0).price+" "+getString(R.string.eg)
 
             }
             binding.tvTitle.text=it.product.title
+
+            binding.addToCart.setOnClickListener {
+                //befor that we will check if user login or not
+                val cartitem= CartProductData(
+                  product.id,product.image.src,product.title,product.variants.get(0).price+" "+"EG",product.variants.get(0).inventory_quantity
+                )
+                viewModel.saveCartList(cartitem)
+            }
 
 
         })
@@ -91,12 +105,12 @@ class ProductFragment : Fragment() {
 
 
 
- }
+    }
 
 
-fun setRating() {
+    fun setRating() {
 
-}
+    }
 
 
 

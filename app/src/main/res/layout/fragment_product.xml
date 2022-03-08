@@ -116,6 +116,7 @@
             android:src="@drawable/ic_favorite_border" />
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/add_to_cart"
             android:layout_width="0dp"
             android:layout_weight="3.5"
             android:layout_height="wrap_content"
