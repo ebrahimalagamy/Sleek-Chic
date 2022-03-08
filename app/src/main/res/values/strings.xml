@@ -67,5 +67,12 @@
     <string name="offline">You\'re offline, please check your internet connection to be able to choose a location</string>
     <string name="us">$</string>
     <string name="eur">EUR</string>
+    <string name="ayareview">good product</string>
+    <string name="doaareview">expensive</string>
+    <string name="mohammedreview">bad</string>
+    <string name="ibrahimreview">Why don\'t you reply?</string>
+    <string name="fayzareview">beautiful</string>
+    <string name="ayahreview"> Can I pay with Vodafone Cash?</string>
+    <string name="enasreview">The product is more beautiful than the picture</string>
 
 </resources>
