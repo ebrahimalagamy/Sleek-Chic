@@ -45,6 +45,8 @@ class RegisterViewModel(application: Application, private val authenticationRepo
         }
     }
 
+//    fun update()
+
 
     class Factory(
         private val application: Application,

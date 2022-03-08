@@ -25,15 +25,17 @@ class ThirdScreen : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.tvNext.setOnClickListener {
-            findNavController().navigate(R.id.action_viewPagerFragment_to_home)
             onBoardFinished()
+            findNavController().navigate(R.id.action_viewPagerFragment_to_home)
+
+
         }
     }
     private fun onBoardFinished(){
         val sharedPref = requireActivity().getSharedPreferences("onBoard",Context.MODE_PRIVATE)
         val editor = sharedPref.edit()
         editor.putBoolean("Finished",true)
-        editor.commit()
+        editor.apply()
     }
 
 }
