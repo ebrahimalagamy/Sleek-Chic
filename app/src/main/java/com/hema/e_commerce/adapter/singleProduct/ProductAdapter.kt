@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RelativeLayout
+import androidx.navigation.NavController
 import androidx.viewpager.widget.PagerAdapter
 import com.bumptech.glide.Glide
 import com.hema.e_commerce.R

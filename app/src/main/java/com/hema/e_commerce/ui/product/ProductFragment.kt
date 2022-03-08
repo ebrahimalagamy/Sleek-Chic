@@ -10,6 +10,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.viewpager.widget.PagerAdapter
 import com.hema.e_commerce.R
 import com.hema.e_commerce.adapter.singleProduct.ProductAdapter
@@ -24,6 +26,7 @@ import com.hema.e_commerce.util.Constant.PRODUCT
 
 
 class ProductFragment : Fragment() {
+    lateinit var navController: NavController
 
     private lateinit var viewModel: SingleProductViewModel
     lateinit var binding:FragmentProductBinding
@@ -91,6 +94,25 @@ class ProductFragment : Fragment() {
 
 
         })
+
+
+        reviewAction()
+    }
+
+
+    fun reviewAction(){
+        navController = Navigation.findNavController(binding.root)
+
+        binding.tvReviews.setOnClickListener{
+
+            navController.navigate(R.id.action_productFragment_to_reviewFragment)
+
+
+
+        }
+
+
+
     }
 
     private fun initViews(productId:Long) {
