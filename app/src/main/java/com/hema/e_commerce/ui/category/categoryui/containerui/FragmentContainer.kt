@@ -15,7 +15,7 @@ import com.hema.e_commerce.R
 import com.hema.e_commerce.adapter.catagory.ContainerAdapter
 import com.hema.e_commerce.databinding.FragmentContainerBinding
 import com.hema.e_commerce.model.repository.Repository
-import com.hema.e_commerce.model.room.cartroom.RoomData
+import com.hema.e_commerce.model.room.RoomData
 import com.hema.e_commerce.model.viewModelFactory.SubCollectionViewModelFactory
 import com.hema.e_commerce.model.viewmodels.SubCollectionViewModel
 import com.hema.e_commerce.util.Constant.HOME_PAGE_ID

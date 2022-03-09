@@ -13,7 +13,7 @@ import com.hema.e_commerce.adapter.productList.TypeListAdapter
 import com.hema.e_commerce.databinding.FragmentTypeListProductBinding
 import com.hema.e_commerce.model.dataclass.allProducts.Product
 import com.hema.e_commerce.model.repository.Repository
-import com.hema.e_commerce.model.room.cartroom.RoomData
+import com.hema.e_commerce.model.room.RoomData
 import com.hema.e_commerce.model.viewModelFactory.ListOfProductViewModelFactory
 import com.hema.e_commerce.model.viewmodels.ListOfProductsViewModel
 import com.hema.e_commerce.util.Constant.BRAND_KEY
@@ -96,7 +96,9 @@ fun BrandList(){
     fun observeBrandProduct() {
         viewModel.allProduct .observe(viewLifecycleOwner, Observer {
             var productList = it.products
+
             var list: MutableList<Product> = mutableListOf()
+
             for(i in productList){
                 if(i.vendor.equals(brandName)){
                     list.add(i)

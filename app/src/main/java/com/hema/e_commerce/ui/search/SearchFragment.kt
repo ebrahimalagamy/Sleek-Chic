@@ -13,7 +13,7 @@ import com.hema.e_commerce.adapter.search.SearchAdapter
 import com.hema.e_commerce.databinding.FragmentTypeListProductBinding
 import com.hema.e_commerce.model.dataclass.allProducts.Product
 import com.hema.e_commerce.model.repository.Repository
-import com.hema.e_commerce.model.room.cartroom.RoomData
+import com.hema.e_commerce.model.room.RoomData
 import com.hema.e_commerce.model.viewModelFactory.ListOfProductViewModelFactory
 import com.hema.e_commerce.model.viewmodels.ListOfProductsViewModel
 import java.util.*

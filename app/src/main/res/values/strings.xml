@@ -69,10 +69,16 @@
     <string name="eur">EUR</string>
     <string name="ayareview">good product</string>
     <string name="doaareview">expensive</string>
-    <string name="mohammedreview">bad</string>
+    <string name="mohammedreview">So bad</string>
     <string name="ibrahimreview">Why don\'t you reply?</string>
     <string name="fayzareview">beautiful</string>
-    <string name="ayahreview"> Can I pay with Vodafone Cash?</string>
+    <string name="ayahreview"> Can I pay with Paypal?</string>
     <string name="enasreview">The product is more beautiful than the picture</string>
+
+    <!-- favorite -->
+    <string name="caution">Caution</string>
+    <string name="alertDeleteMessage">Do You Want To Delete This Product From Favorite</string>
+    <string name="yes">yes</string>
+    <string name="no">no</string>
 
 </resources>

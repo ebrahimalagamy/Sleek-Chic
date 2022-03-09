@@ -19,5 +19,6 @@ object Constant {
     const val SUB_COLLECTION_ID =  "collectionsId"
     const val FLAG = "Flag"
     const val PRODUCT = "Product"
+    const val FAVORITE = "FAVORITE"
 
 }

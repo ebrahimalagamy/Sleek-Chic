@@ -85,7 +85,7 @@
     </fragment>
     <fragment
         android:id="@+id/wishlist"
-        android:name="com.hema.e_commerce.ui.settings.wishlist.Wishlist"
+        android:name="com.hema.e_commerce.ui.wishlist.Wishlist"
         android:label="fragment_wishlist"
         tools:layout="@layout/fragment_wishlist" />
     <fragment

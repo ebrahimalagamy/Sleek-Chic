@@ -119,4 +119,5 @@ data class CustomerInfo(var customer: Customer?) {
     companion object {
         fun getDefault(): CustomerInfo = CustomerInfo(null)
     }
+
 }
