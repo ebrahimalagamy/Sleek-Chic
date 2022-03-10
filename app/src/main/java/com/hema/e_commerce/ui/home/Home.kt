@@ -20,7 +20,7 @@ import com.hema.e_commerce.adapter.home.BrandAdapter
 import com.hema.e_commerce.adapter.home.ProductsAdapter
 import com.hema.e_commerce.databinding.HomeFragmentBinding
 import com.hema.e_commerce.model.repository.Repository
-import com.hema.e_commerce.model.room.cartroom.RoomData
+import com.hema.e_commerce.model.room.RoomData
 import com.hema.e_commerce.model.viewModelFactory.HomeViewModelFactory
 import com.hema.e_commerce.model.viewmodels.HomeViewModel
 

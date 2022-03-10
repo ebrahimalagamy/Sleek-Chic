@@ -18,7 +18,7 @@ import com.hema.e_commerce.R
 import com.hema.e_commerce.adapter.catagory.CategoriesProductAdapter
 import com.hema.e_commerce.databinding.CategoryFragmentBinding
 import com.hema.e_commerce.model.repository.Repository
-import com.hema.e_commerce.model.room.cartroom.RoomData
+import com.hema.e_commerce.model.room.RoomData
 import com.hema.e_commerce.model.viewModelFactory.CatagoryViewModelFactory
 import com.hema.e_commerce.model.viewmodels.CategoryViewModel
 import com.hema.e_commerce.ui.category.categoryui.containerui.FragmentContainer

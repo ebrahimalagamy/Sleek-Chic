@@ -46,6 +46,7 @@ class ProductsAdapter(private val productList:ArrayList<Product>) : RecyclerView
         CoroutineScope(Dispatchers.Main).launch{
             Glide.with(holder.binding.imgProduct.context).load(productList[position].image.src).into(holder.binding.imgProduct)
         }
+
         holder.binding.root.setOnClickListener(View.OnClickListener {
             navController.navigate(
                 R.id.action_home_to_productFragment,bundle

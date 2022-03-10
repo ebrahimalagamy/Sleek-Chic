@@ -133,6 +133,7 @@ data class CustomerInfo(var customer: Customer?) {
     companion object {
         fun getDefault(): CustomerInfo = CustomerInfo(null)
     }
+
 }
 
 data class CustomerAddress(var address: Address?) {

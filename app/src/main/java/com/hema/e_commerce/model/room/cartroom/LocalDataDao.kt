@@ -8,10 +8,16 @@ interface LocalDataDao {
     // query of  cart table
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-     fun saveAllCartList(cartProduct: CartProductData)
+    suspend fun saveAllCartList(cartProduct: CartProductData)
 
     @Query("SELECT * FROM ProductCart")
     fun getAllCartList(): LiveData<List<CartProductData>>
+
+    @Delete
+    suspend  fun deleteOnCartItem(cartProduct: CartProductData)
+
+    @Query("DELETE FROM ProductCart")
+    suspend fun deleteAll()
 
 /*
     @Query("SELECT * FROM OrderTable")
@@ -27,8 +33,7 @@ interface LocalDataDao {
      /* @Delete
       fun deleteAllFromCart()*/
 
-    @Delete
-        fun deleteOnCartItem(cartProduct: CartProductData)
+
 
 /*    @Query("DELETE FROM ProductCart")
       fun deleteOnCartItem(cartProduct: CartProductData)*/
