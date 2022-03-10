@@ -14,13 +14,12 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.hema.e_commerce.R
 import com.hema.e_commerce.databinding.FragmentSignInBinding
-import com.hema.e_commerce.model.dataclass.customer.Address
-import com.hema.e_commerce.model.dataclass.customer.AddressModel
 
 
 class SignInFragment : Fragment() {
     private lateinit var binding: FragmentSignInBinding
     private lateinit var userEmail: String
+    private lateinit var pass: String
     val viewModel by lazy {
         LoginViewModel.create(this)
     }
@@ -39,12 +38,10 @@ class SignInFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         bindUi()
-
-
         binding.btnSignIn.setOnClickListener {
             if (validteForm()) {
                 Log.d("email", "" + userEmail)
-                viewModel.getData(userEmail)
+                viewModel.getData(userEmail,pass)
                 viewModel.loginSuccess.observe(viewLifecycleOwner) {
                     if (it!!) {
                         Toast.makeText(requireContext(), "Successfully Login", Toast.LENGTH_LONG)
@@ -55,43 +52,51 @@ class SignInFragment : Fragment() {
             }
         }
 
-        binding.button2.setOnClickListener {
-            var name = binding.editTextTextPersonName.text.toString()
-            var id: Long? = viewModel.AuthRepo.sharedPref.getUserInfo().customer?.customerId
-            val address = AddressModel(
-                Address(
-                    address1 = name,
-                )
-            )
-            if (id != null) {
-                viewModel.address(id, address)
-            }
-            viewModel.address.observe(viewLifecycleOwner) {
-                if (it!!) {
-                    Toast.makeText(
-                        requireContext(),
-                        "updated",
-                        Toast.LENGTH_LONG
-                    ).show()
-                } else Toast.makeText(
-                    requireContext(),
-                    "update faild",
-                    Toast.LENGTH_LONG
-                ).show()
-            }
-        }
-        var body = viewModel.AuthRepo.sharedPref.getUserInfo().customer
-        Log.d("bogyjj", body.toString())
+//        binding.button2.setOnClickListener {
+//            var name = binding.editTextTextPersonName.text.toString()
+//            var id: Long? = viewModel.AuthRepo.sharedPref.getUserInfo().customer?.customerId
+//            val address = AddressModel(
+//                Address(
+//                    address1 = name,
+//                )
+//            )
+//            if (id != null) {
+//                viewModel.address(id, address)
+//            }
+//            viewModel.address.observe(viewLifecycleOwner) {
+//                if (it!!) {
+//                    Toast.makeText(
+//                        requireContext(),
+//                        "updated",
+//                        Toast.LENGTH_LONG
+//                    ).show()
+//                } else Toast.makeText(
+//                    requireContext(),
+//                    "update faild",
+//                    Toast.LENGTH_LONG
+//                ).show()
+//            }
+//        }
+//        var body = viewModel.AuthRepo.sharedPref.getUserInfo().customer
+//        Log.d("bogyjj", body.toString())
 
     }
 
     private fun validteForm(): Boolean {
         userEmail = binding.emailEditText.text.toString()
+        pass =binding.passwordEditText.text.toString()
+
         if (userEmail.isEmpty()) {
             binding.emailEditText.requestFocus()
             binding.emailEditText.error = "Required"
             return false
         }
+        if (pass.isEmpty()) {
+            binding.passwordEditText.requestFocus()
+            binding.passwordEditText.error = "Required"
+            return false
+        }
+
         return true
 
     }

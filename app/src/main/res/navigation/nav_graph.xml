@@ -9,7 +9,7 @@
         android:id="@+id/signUpFragment"
         android:name="com.hema.e_commerce.ui.settings.auth.signup.SignUpFragment"
         android:label="fragment_sign_up"
-        tools:layout="@layout/fragment_sign_up"/>
+        tools:layout="@layout/fragment_sign_up" />
     <fragment
         android:id="@+id/signInFragment"
         android:name="com.hema.e_commerce.ui.settings.auth.login.SignInFragment"
@@ -104,6 +104,9 @@
         <action
             android:id="@+id/action_address_to_editAddress"
             app:destination="@id/editAddress" />
+        <action
+            android:id="@+id/action_address_to_addAddressFragment"
+            app:destination="@id/addAddressFragment" />
     </fragment>
     <fragment
         android:id="@+id/editAddress"
@@ -118,12 +121,12 @@
         android:id="@+id/mapFragment"
         android:name="com.hema.e_commerce.ui.settings.map.MapFragment"
         android:label="MapFragment"
-        tools:layout="@layout/fragment_map"/>
+        tools:layout="@layout/fragment_map" />
     <fragment
         android:id="@+id/profile"
         android:name="com.hema.e_commerce.ui.settings.profile.Profile"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" >
+        tools:layout="@layout/fragment_profile">
         <action
             android:id="@+id/action_profile_to_editProfile"
             app:destination="@id/editProfile" />
@@ -131,7 +134,7 @@
     <fragment
         android:id="@+id/productFragment"
         android:name="com.hema.e_commerce.ui.product.ProductFragment"
-        android:label="ProductFragment" >
+        android:label="ProductFragment">
         <action
             android:id="@+id/action_productFragment_to_cart"
             app:destination="@id/cart" />
@@ -142,22 +145,22 @@
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.hema.e_commerce.ui.search.SearchFragment"
-        android:label="SearchFragment" >
+        android:label="SearchFragment">
         <action
             android:id="@+id/action_searchFragment_to_productFragment"
             app:destination="@id/productFragment" />
     </fragment>
-        android:name="com.hema.e_commerce.ui.product.product.ProductFragment"
-        android:label="ProductFragment" />
+    android:name="com.hema.e_commerce.ui.product.product.ProductFragment"
+    android:label="ProductFragment" />
     <fragment
         android:id="@+id/completeLoginFragment"
         android:name="com.hema.e_commerce.ui.settings.auth.password.SignInPasswordFragment"
         android:label="CompleteLoginFragment"
-        tools:layout="@layout/signin_password_fragment"/>
+        tools:layout="@layout/signin_password_fragment" />
     <fragment
         android:id="@+id/splashFragment"
         android:name="com.hema.e_commerce.ui.splash.SplashFragment"
-        android:label="SplashFragment" >
+        android:label="SplashFragment">
         <action
             android:id="@+id/action_splashFragment_to_viewPagerFragment"
             app:destination="@id/viewPagerFragment"
@@ -172,7 +175,7 @@
     <fragment
         android:id="@+id/viewPagerFragment"
         android:name="com.hema.e_commerce.ui.splash.onBoard.ViewPagerFragment"
-        android:label="ViewPagerFragment" >
+        android:label="ViewPagerFragment">
         <action
             android:id="@+id/action_viewPagerFragment_to_home"
             app:destination="@id/home"
@@ -189,5 +192,17 @@
         android:name="com.hema.e_commerce.ui.settings.checkout.Checkout"
         android:label="fragment_checkout"
         tools:layout="@layout/fragment_checkout" />
+    <fragment
+        android:id="@+id/addAddressFragment"
+        android:name="com.hema.e_commerce.ui.settings.address.AddAddressFragment"
+        android:label="fragment_add_address"
+        tools:layout="@layout/fragment_add_address">
+
+
+        <argument
+            android:name="isDefault"
+            android:defaultValue="false"
+            app:argType="boolean" />
+    </fragment>
 
 </navigation>

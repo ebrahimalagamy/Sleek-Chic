@@ -9,7 +9,8 @@ sealed class Either<S, E> {
 
 enum class RepoErrors {
     NoInternetConnection,
-    ServerError
+    ServerError,
+    EmptyBody
 }
 
 
@@ -17,4 +18,5 @@ enum class LoginErrors {
     NoInternetConnection,
     ServerError,
     CustomerNotFound,
+    IncorrectEmailOrPassword
 }

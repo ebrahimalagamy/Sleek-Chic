@@ -1,7 +1,6 @@
 package com.hema.e_commerce.model.remote
 
 import com.hema.e_commerce.model.dataclass.allProducts.ProductsResponse
-import com.hema.e_commerce.model.dataclass.customer.Address
 import com.hema.e_commerce.model.dataclass.customer.AddressModel
 import com.hema.e_commerce.model.dataclass.customer.CustomerModel
 import com.hema.e_commerce.model.dataclass.customer.CustomersModel
@@ -10,6 +9,7 @@ import com.hema.e_commerce.model.dataclass.getOrder.Order
 import com.hema.e_commerce.model.dataclass.listofcustomcollections.CustomCollectionsResponse
 import com.hema.e_commerce.model.dataclass.singleproduct.ProductCollectionResponse
 import com.hema.e_commerce.model.dataclass.smartCollection.BrandsResponce
+import com.stash.shopeklobek.model.entities.CustomerAddressModel
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -52,8 +52,24 @@ interface ShopifyApi {
             Response<CustomerModel>
 
     @POST("customers/{customer_id}/addresses.json")
-    suspend fun postAddress(id: Long, @Body address: AddressModel):
-            Response<AddressModel>
+    suspend fun addAddress(id: Long, @Body address: AddressModel):
+            Response<CustomerAddressModel>
+
+    @PUT("customers/{customer_id}/addresses/{address_id}.json")
+    suspend fun updateAddress(@Path("customer_id") customerId:Long,
+                              @Path("address_id") addressId:Long,
+                              @Body address:AddressModel):
+            Response<CustomerAddressModel>
+
+
+    @PUT("customers/{customer_id}/addresses/{address_id}/default.json")
+    suspend fun setDefault(@Path("customer_id") customerId:Long,
+                           @Path("address_id") addressId:Long):
+            Response<CustomerAddressModel>
+
+    @GET("customers/{customer_id}.json")
+    suspend fun getAddress(@Path("customer_id") customerId:Long):
+            Response<CustomerModel>
 
 
     //creat an order in api web

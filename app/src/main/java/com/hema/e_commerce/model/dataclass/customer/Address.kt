@@ -1,57 +1,41 @@
 package com.hema.e_commerce.model.dataclass.customer
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+
+@Parcelize
 data class Address(
 
-	@field:SerializedName("zip")
-	val zip: String? = null,
+    @SerializedName( "id")
+    val id: Long? = 0,
 
-	@field:SerializedName("country")
-	val country: Any? = null,
+    @SerializedName( "address1")
+    val address: String? = "",
 
-	@field:SerializedName("address2")
-	val address2: Any? = null,
+    @SerializedName( "city")
+    val city: String? = "",
 
-	@field:SerializedName("city")
-	val city: String? = null,
+    @SerializedName( "first_name")
+    val firstName: String? = "",
 
-	@field:SerializedName("address1")
-	val address1: String? = null,
+    @SerializedName( "last_name")
+    val lastName: String? = "",
 
-	@field:SerializedName("last_name")
-	val lastName: String? = null,
+    @SerializedName( "zip")
+    val zip: String? = "",
 
-	@field:SerializedName("province_code")
-	val provinceCode: Any? = null,
+    @SerializedName( "default")
+    val default: Boolean = false,
 
-	@field:SerializedName("country_code")
-	val countryCode: Any? = null,
+    @SerializedName( "phone")
+    val phone: String? = "",
 
-	@field:SerializedName("default")
-	val jsonMemberDefault: Boolean? = null,
+): Parcelable {
+    fun generateAddressLine():String{
+        return "$city, $address"
+    }
 
-	@field:SerializedName("province")
-	val province: Any? = null,
 
-	@field:SerializedName("phone")
-	val phone: String? = null,
-
-	@field:SerializedName("name")
-	val name: String? = null,
-
-	@field:SerializedName("country_name")
-	val countryName: Any? = null,
-
-	@field:SerializedName("company")
-	val company: Any? = null,
-
-	@field:SerializedName("id")
-	val id: Long? = null,
-
-	@field:SerializedName("customer_id")
-	val customerId: Long? = null,
-
-	@field:SerializedName("first_name")
-	val firstName: String? = null
-)
+}

@@ -1,22 +1,26 @@
 package com.hema.e_commerce.util
 
+import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.core.content.edit
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModelProvider.NewInstanceFactory.Companion.instance
 import androidx.preference.PreferenceManager
 import com.google.gson.Gson
-import com.hema.e_commerce.model.dataclass.customer.Address
 import com.hema.e_commerce.model.dataclass.customer.Customer
+import java.util.concurrent.locks.Lock
 
 class SharedPreferencesProvider(context: Context) {
     companion object {
+        private var instance: SharedPreferencesProvider? = null
+        private val Lock = Any()
         private lateinit var pref: SharedPreferences
         private lateinit var editor: SharedPreferences.Editor
         private const val PREF_NAME = "myPref"
 
         // Shared preferences for lat,lon and address
-        private const val LAT_SHARED_PREF = "LAT_SHARED_PREF"
+        private const val LAT_SHARED_PREF = "LAT_SHA.0,RED_PREF"
         private const val LONG_SHARED_PREF = "LONG_SHARED_PREF"
         private const val ADDRESS = "ADDRESS"
         private const val IS_FIRST_TIME_LAUNCH = "IS_FIRST_TIME_LAUNCH"
@@ -25,6 +29,13 @@ class SharedPreferencesProvider(context: Context) {
         // user Info
         private const val PHONE = "PHONE"
         private const val NAME = "NAME"
+        fun getInstance(application: Application):SharedPreferencesProvider{
+            return instance ?:synchronized(Lock){
+                instance ?: SharedPreferencesProvider(application).also {
+                    instance = it
+                }
+            }
+        }
 
     }
 
@@ -135,9 +146,9 @@ data class CustomerInfo(var customer: Customer?) {
     }
 
 }
-
-data class CustomerAddress(var address: Address?) {
-    companion object {
-        fun getDefault(): CustomerAddress = CustomerAddress(null)
-    }
-}
+//
+//data class CustomerAddress(var address: Address?) {
+//    companion object {
+//        fun getDefault(): CustomerAddress = CustomerAddress(null)
+//    }
+//}

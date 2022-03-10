@@ -1,6 +1,7 @@
 package com.hema.e_commerce.ui.settings.address
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,6 +48,10 @@ class Address : Fragment() {
         binding.tvAddress.text = sharedPref.getLocation[2]
         binding.tvPhone.text = sharedPref.getUserInfo().customer?.phone ?: "Phone"
         binding.tvName.text = sharedPref.getUserInfo().customer?.firstName ?: "Username"
+        binding.button3.setOnClickListener {
+            findNavController().navigate(R.id.action_address_to_addAddressFragment)
+        }
+
 
     }
 

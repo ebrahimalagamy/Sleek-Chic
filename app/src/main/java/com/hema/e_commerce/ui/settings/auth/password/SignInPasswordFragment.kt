@@ -33,7 +33,6 @@ class SignInPasswordFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.btnLogin.setOnClickListener {
             userPass = binding.edtpassword.text.toString()
-            Log.d("hemaaaaa", "" + viewModel.authenticationRepo.sharedPref.getUserInfo().customer!!.lastName)
 
             if (viewModel.authenticationRepo.sharedPref.getUserInfo().customer!!.lastName.equals(userPass)
             ) {
