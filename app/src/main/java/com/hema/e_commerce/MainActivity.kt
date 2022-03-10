@@ -64,6 +64,7 @@ class MainActivity : AppCompatActivity() {
                 || destination.id == R.id.editProfile || destination.id == R.id.productFragment
                 || destination.id == R.id.typeListProductFragment2  || destination.id == R.id.searchFragment
                 || destination.id == R.id.splashFragment|| destination.id == R.id.viewPagerFragment
+                || destination.id == R.id.Checkout
             ) {
                 binding.bottomNavView.visibility = View.GONE
             } else {

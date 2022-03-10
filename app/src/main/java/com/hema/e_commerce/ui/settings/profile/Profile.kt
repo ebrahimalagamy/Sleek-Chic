@@ -23,22 +23,28 @@ class Profile : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false)
         return binding.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         sharedPref = SharedPreferencesProvider(requireActivity())
         bindUi()
+        bindNav()
 
     }
 
-    private fun bindUi() {
+    private fun bindNav() {
         binding.tvEditProfile.setOnClickListener {
             findNavController().navigate(R.id.action_profile_to_editProfile)
         }
         binding.ivBack.setOnClickListener {
             findNavController().navigate(R.id.Settings)
         }
+    }
 
-        binding.email.text = sharedPref.getSettings().customer?.firstName ?: "null"
+    private fun bindUi() {
+        binding.email.text = sharedPref.getUserInfo().customer?.email ?: "email@gmail.com"
+        binding.tvUsername.text = sharedPref.getUserInfo().customer?.firstName ?: "Username"
+
     }
 
 }

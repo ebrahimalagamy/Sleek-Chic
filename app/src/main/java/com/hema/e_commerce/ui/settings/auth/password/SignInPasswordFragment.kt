@@ -33,13 +33,13 @@ class SignInPasswordFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.btnLogin.setOnClickListener {
             userPass = binding.edtpassword.text.toString()
-            Log.d("hemaaaaa", "" + viewModel.authenticationRepo.sharedPref.getSettings().customer!!.lastName)
+            Log.d("hemaaaaa", "" + viewModel.authenticationRepo.sharedPref.getUserInfo().customer!!.lastName)
 
-            if (viewModel.authenticationRepo.sharedPref.getSettings().customer!!.lastName.equals(userPass)
+            if (viewModel.authenticationRepo.sharedPref.getUserInfo().customer!!.lastName.equals(userPass)
             ) {
                 Toast.makeText(requireContext(), "Logged in successfully", Toast.LENGTH_LONG).show()
             }
         }
-       viewModel.authenticationRepo.sharedPref.getSettings()
+       viewModel.authenticationRepo.sharedPref.getUserInfo()
     }
 }

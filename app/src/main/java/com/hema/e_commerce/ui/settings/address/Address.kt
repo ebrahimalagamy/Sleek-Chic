@@ -28,15 +28,13 @@ class Address : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         sharedPref = SharedPreferencesProvider(requireActivity())
-        binding.tvAddress.text = sharedPref.getLocation[2]
-        binding.tvPhone.text = sharedPref.getUserInfo[0]
-        binding.tvName.text = sharedPref.getUserInfo[1]
 
         bindUi()
+        bindNav()
 
     }
 
-    private fun bindUi() {
+    private fun bindNav() {
         binding.tvEditAddress.setOnClickListener {
             findNavController().navigate(R.id.action_address_to_editAddress)
         }
@@ -45,5 +43,11 @@ class Address : Fragment() {
         }
     }
 
+    private fun bindUi() {
+        binding.tvAddress.text = sharedPref.getLocation[2]
+        binding.tvPhone.text = sharedPref.getUserInfo().customer?.phone ?: "Phone"
+        binding.tvName.text = sharedPref.getUserInfo().customer?.firstName ?: "Username"
+
+    }
 
 }

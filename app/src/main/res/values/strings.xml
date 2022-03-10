@@ -74,6 +74,10 @@
     <string name="fayzareview">beautiful</string>
     <string name="ayahreview"> Can I pay with Paypal?</string>
     <string name="enasreview">The product is more beautiful than the picture</string>
+    <string name="user_name">USER NAME</string>
+    <string name="email_">EMAIL</string>
+    <string name="security_information">SECURITY INFORMATION</string>
+    <string name="change_password">change password</string>
 
     <!-- favorite -->
     <string name="caution">Caution</string>
