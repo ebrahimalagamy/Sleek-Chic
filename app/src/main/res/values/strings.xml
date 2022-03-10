@@ -91,6 +91,16 @@
         <item>price: Low to High</item>
         <item>price: High to Low</item>
     </string-array>
+    <!-- filter -->
+    <string-array name="sortArr">
+        <item>Price</item>
+        <item>price From 0 to 100</item>
+        <item>price to 150</item>
+        <item>price to 200</item>
+        <item>price to 500</item>
+        <item>price to 1000</item>
+        <item>price bigger than 1000</item>
+    </string-array>
 
 
 
