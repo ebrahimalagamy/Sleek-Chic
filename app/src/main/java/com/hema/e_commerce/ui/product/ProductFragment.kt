@@ -93,14 +93,21 @@ class ProductFragment : Fragment() {
 
             binding.addToCart.setOnClickListener {
                 //befor that we will check if user login or not
+
                 val cartitem= CartProductData(
-                  product.id,product.image.src,product.title,product.variants.get(0).price+" "+"EG",product.variants.get(0).inventory_quantity
+                  product.id,product.image.src,product.title,product.variants.get(0).price,product.variants.get(0).inventory_quantity,1
                 )
+                if (product.variants.get(0).inventory_quantity>0){
                 viewModel.saveCartList(cartitem)
+            }
+                else{
+                    Toast.makeText(requireContext(), "this product not available in  stor now", Toast.LENGTH_SHORT).show()
+                }
+
             }
 
             //favorite function
-            favProduct= FavoriteProduct(product.id,product.image.src,product.title,product.variants.get(0).price,product.body_html,product.variants[0].inventory_quantity)
+            favProduct= FavoriteProduct(product.id,product.image.src,product.title,product.variants.get(0).price,product.variants[0].inventory_quantity,1)
              setFav(savedInstanceState)
         })
 

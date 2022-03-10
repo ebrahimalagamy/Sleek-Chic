@@ -12,32 +12,14 @@ interface LocalDataDao {
 
     @Query("SELECT * FROM ProductCart")
     fun getAllCartList(): LiveData<List<CartProductData>>
+    @Update
+    suspend fun getCountUpdate(cartProduct: CartProductData)
 
     @Delete
     suspend  fun deleteOnCartItem(cartProduct: CartProductData)
 
     @Query("DELETE FROM ProductCart")
     suspend fun deleteAll()
-
-/*
-    @Query("SELECT * FROM OrderTable")
-    fun getAllOrderList(): LiveData<List<OneOrderdata>>
-*/
-
-   /* @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun saveCartList(withItem: CartProductData?)*/
-
- /*   @Query("DELETE FROM productcart WHERE id = :id")
-    suspend fun deleteOneCartItem(id: Long)*/
-
-     /* @Delete
-      fun deleteAllFromCart()*/
-
-
-
-/*    @Query("DELETE FROM ProductCart")
-      fun deleteOnCartItem(cartProduct: CartProductData)*/
-
 
 
 

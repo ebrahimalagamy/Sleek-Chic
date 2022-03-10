@@ -18,6 +18,9 @@ val id: Long,
     @ColumnInfo(name="price")
     val price: String,
     @ColumnInfo(name="variants")
-var inventory_quantity: Int
+var inventory_quantity: Int,
+    @ColumnInfo(name = "count")
+    var count:Int
+
 
 )
