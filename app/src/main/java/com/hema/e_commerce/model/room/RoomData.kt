@@ -19,7 +19,6 @@ abstract class RoomData:RoomDatabase() {
 
     abstract fun getLocalDataObject(): LocalDataDao
     abstract fun getOrder(): OrderDao
-
     abstract fun getFavoriteData(): FavoriteDao
 
     companion object {

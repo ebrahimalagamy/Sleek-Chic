@@ -80,5 +80,14 @@
     <string name="alertDeleteMessage">Do You Want To Delete This Product From Favorite</string>
     <string name="yes">yes</string>
     <string name="no">no</string>
+    <!-- filter -->
+    <string-array name="filterArr">
+        <item>Filter</item>
+        <item>ByName</item>
+        <item>price: Low to High</item>
+        <item>price: High to Low</item>
+    </string-array>
+
+
 
 </resources>

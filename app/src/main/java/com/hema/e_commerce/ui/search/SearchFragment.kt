@@ -1,5 +1,6 @@
 package com.hema.e_commerce.ui.search
 
+import android.opengl.Visibility
 import android.os.Bundle
 import android.view.*
 import androidx.databinding.DataBindingUtil
@@ -10,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.hema.e_commerce.R
 import com.hema.e_commerce.adapter.search.SearchAdapter
-import com.hema.e_commerce.databinding.FragmentTypeListProductBinding
+import com.hema.e_commerce.databinding.FragmentSearchBinding
 import com.hema.e_commerce.model.dataclass.allProducts.Product
 import com.hema.e_commerce.model.repository.Repository
 import com.hema.e_commerce.model.room.RoomData
@@ -20,7 +21,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class SearchFragment : Fragment() {
-    lateinit var binding: FragmentTypeListProductBinding
+    lateinit var binding: FragmentSearchBinding
     lateinit var adapter: SearchAdapter
     lateinit var viewModel: ListOfProductsViewModel
     lateinit var products:List<Product>
@@ -32,8 +33,9 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
         // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_type_list_product, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search, container, false)
         binding.searchView.isIconified = false
+
         val repository= Repository(RoomData(requireContext()))
         val listOfProductsViewModelProviderFactory =
             ListOfProductViewModelFactory(requireActivity().application,repository)
@@ -86,6 +88,7 @@ class SearchFragment : Fragment() {
         })
 
     }
+
 
 
 //call all product

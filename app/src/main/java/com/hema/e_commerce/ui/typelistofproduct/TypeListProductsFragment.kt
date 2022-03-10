@@ -3,6 +3,7 @@ package com.hema.e_commerce.ui.typelistofproduct
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.AdapterView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -16,6 +17,7 @@ import com.hema.e_commerce.model.repository.Repository
 import com.hema.e_commerce.model.room.RoomData
 import com.hema.e_commerce.model.viewModelFactory.ListOfProductViewModelFactory
 import com.hema.e_commerce.model.viewmodels.ListOfProductsViewModel
+import com.hema.e_commerce.util.Constant
 import com.hema.e_commerce.util.Constant.BRAND_KEY
 import com.hema.e_commerce.util.Constant.FLAG
 import com.hema.e_commerce.util.Constant.SUB_COLLECTION_ID
@@ -29,6 +31,10 @@ class TypeListProductsFragment : Fragment() {
      var collectionsId:Long =398033617127
     lateinit var subCollectionsName:String
     lateinit var brandName:String
+
+    lateinit  var productList:List<Product>
+    lateinit   var list: MutableList<Product>
+       var filterlist: MutableList<Product> = mutableListOf()
 
 
 
@@ -51,11 +57,9 @@ class TypeListProductsFragment : Fragment() {
         if (flag==0){
             catagoryList()
 
-        }else{
+        }else if(flag == 1){
             BrandList()
-
         }
-
 
 
     }
@@ -69,8 +73,8 @@ fun catagoryList(){
 }
     fun observe() {
         viewModel.SubCollectionsProductsLiveData.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-           var productList = it.products
-            var list: MutableList<Product> = mutableListOf()
+           productList = it.products
+             list = mutableListOf()
             for(i in productList){
                 if(i.product_type.equals(subCollectionsName)){
                     list.add(i)
@@ -82,12 +86,15 @@ fun catagoryList(){
             binding.recListProduct.layoutManager = layoutManager
 
         })
+        filterf()
+
     }
 
     private fun initViews(idSubCollections:Long) {
         viewModel.getSubCollectionsProducts(idSubCollections)
     }
 ////////////////////////////////////////////////////////////////////////////////////
+    //Mohamed
 fun BrandList(){
     brandName = arguments?.getString(BRAND_KEY).toString()
     initViews()
@@ -95,9 +102,9 @@ fun BrandList(){
 }
     fun observeBrandProduct() {
         viewModel.allProduct .observe(viewLifecycleOwner, Observer {
-            var productList = it.products
+             productList = it.products
 
-            var list: MutableList<Product> = mutableListOf()
+             list= mutableListOf()
 
             for(i in productList){
                 if(i.vendor.equals(brandName)){
@@ -110,10 +117,40 @@ fun BrandList(){
             binding.recListProduct.layoutManager = layoutManager
 
         })
+        filterf()
+
     }
 
     private fun initViews() {
         viewModel.getProducts()
+    }
+
+//////////////////////////////////////////////////////////
+    fun filterf(){
+    binding.spinner2.onItemSelectedListener=object : AdapterView.OnItemSelectedListener{
+        override fun onItemSelected(
+            parent: AdapterView<*>?,
+            view: View?,
+            position: Int,
+            id: Long
+        ) {
+            filterlist.clear()
+            if (parent!!.getItemAtPosition(position).equals("ByName")){
+                filterlist = list.sortedBy { it.title }.toMutableList()
+            }else if (parent!!.getItemAtPosition(position).equals("price: Low to High")){
+                filterlist = list.sortedBy { it.variants!![0].price}.toMutableList()
+            }else if(parent!!.getItemAtPosition(position).equals("price: High to Low")){
+                filterlist = list.sortedByDescending { it.variants!![0].price }.toMutableList()
+            }
+            binding.recListProduct.adapter=TypeListAdapter(filterlist)
+
+        }
+
+        override fun onNothingSelected(parent: AdapterView<*>?) {
+            Log.d("yaaaaaaaa","NOTHING")
+        }
+
+    }
     }
 
 }
