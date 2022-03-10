@@ -118,7 +118,7 @@ class ProductFragment : Fragment() {
     }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//favorite Logic
+//favorite Logic Mohamed
     private fun setFav(savedInstanceState: Bundle?) {
         val activity = activity
         if (activity != null && isAdded) {

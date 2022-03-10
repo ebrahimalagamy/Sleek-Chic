@@ -36,7 +36,6 @@ class SearchAdapter(private val productList: List<Product>) : RecyclerView.Adapt
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val products = productList[position]
-//        holder.itemBinding.tvListPrice.text = products.variants.get(0).price
         Glide.with(holder.itemBinding.imgListProduct.context).load(products.image.src).into(holder.itemBinding.imgListProduct)
         holder.itemBinding.tvListShDesc.text = products.title
 

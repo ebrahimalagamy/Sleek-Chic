@@ -12,6 +12,7 @@ import com.hema.e_commerce.R
 import com.hema.e_commerce.databinding.RowBrandsBinding
 import com.hema.e_commerce.model.dataclass.smartCollection.SmartCollection
 import com.hema.e_commerce.util.Constant.BRAND_KEY
+import com.hema.e_commerce.util.Constant.FLAG
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -32,6 +33,7 @@ class BrandAdapter(val brandList:ArrayList<SmartCollection>) : RecyclerView.Adap
         //bundle  to save brand name
         val brandBundle=Bundle().apply {
             putString(BRAND_KEY,brandList[position].title)
+            putInt(FLAG,1)
         }
 
         holder.binding.brandTitle.text=brandList[position].title
