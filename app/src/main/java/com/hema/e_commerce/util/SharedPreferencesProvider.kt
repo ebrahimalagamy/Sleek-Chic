@@ -6,6 +6,7 @@ import androidx.core.content.edit
 import androidx.lifecycle.MutableLiveData
 import androidx.preference.PreferenceManager
 import com.google.gson.Gson
+import com.hema.e_commerce.model.dataclass.customer.Address
 import com.hema.e_commerce.model.dataclass.customer.Customer
 
 class SharedPreferencesProvider(context: Context) {
@@ -19,11 +20,11 @@ class SharedPreferencesProvider(context: Context) {
         private const val LONG_SHARED_PREF = "LONG_SHARED_PREF"
         private const val ADDRESS = "ADDRESS"
         private const val IS_FIRST_TIME_LAUNCH = "IS_FIRST_TIME_LAUNCH"
+        private const val IS_SIGN_IN = "IS_SIGN_IN"
 
         // user Info
         private const val PHONE = "PHONE"
         private const val NAME = "NAME"
-
 
     }
 
@@ -31,6 +32,7 @@ class SharedPreferencesProvider(context: Context) {
         pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
         editor = pref.edit()
     }
+
     private val preferences: SharedPreferences by lazy {
         PreferenceManager.getDefaultSharedPreferences(context.applicationContext)
     }
@@ -88,6 +90,14 @@ class SharedPreferencesProvider(context: Context) {
     val isFirstTimeLaunch: Boolean
         get() = pref.getBoolean(IS_FIRST_TIME_LAUNCH, true)
 
+    fun checkSignIn(isSignIn: Boolean) {
+        editor.putBoolean(IS_SIGN_IN, isSignIn)
+        editor.commit()
+    }
+
+    val isSignIn: Boolean
+        get() = pref.getBoolean(IS_SIGN_IN, true)
+
 
     private fun settingsToJson(settings: CustomerInfo): String {
         val json = Gson()
@@ -109,10 +119,14 @@ class SharedPreferencesProvider(context: Context) {
         }
     }
 
-    fun getSettings(): CustomerInfo {
+    fun getUserInfo(): CustomerInfo {
         return preferences.getString(Constant.ALL_DATA_ROUTE, null)?.let { settingsFromJson(it) }
             ?: CustomerInfo.getDefault()
     }
+//    fun getUserAddress(): CustomerAddress {
+//        return preferences.getString(Constant.ALL_DATA_ROUTE, null)?.let { settingsFromJson(it) }
+//            ?: CustomerAddress.getDefault()
+//    }
 }
 
 data class CustomerInfo(var customer: Customer?) {
@@ -120,4 +134,10 @@ data class CustomerInfo(var customer: Customer?) {
         fun getDefault(): CustomerInfo = CustomerInfo(null)
     }
 
+}
+
+data class CustomerAddress(var address: Address?) {
+    companion object {
+        fun getDefault(): CustomerAddress = CustomerAddress(null)
+    }
 }

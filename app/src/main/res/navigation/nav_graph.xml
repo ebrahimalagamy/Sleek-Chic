@@ -74,6 +74,9 @@
         <action
             android:id="@+id/action_settings_to_profile"
             app:destination="@id/profile" />
+        <action
+            android:id="@+id/action_Settings_to_checkout"
+            app:destination="@id/checkout" />
     </fragment>
     <fragment
         android:id="@+id/typeListProductFragment2"
@@ -181,5 +184,10 @@
         android:name="com.hema.e_commerce.ui.category.reviews.ReviewFragment"
         android:label="fragment_review"
         tools:layout="@layout/fragment_review" />
+    <fragment
+        android:id="@+id/checkout"
+        android:name="com.hema.e_commerce.ui.settings.checkout.Checkout"
+        android:label="fragment_checkout"
+        tools:layout="@layout/fragment_checkout" />
 
 </navigation>

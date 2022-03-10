@@ -14,11 +14,16 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.hema.e_commerce.R
 import com.hema.e_commerce.databinding.FragmentSignInBinding
+import com.hema.e_commerce.model.dataclass.customer.Address
+import com.hema.e_commerce.model.dataclass.customer.AddressModel
 
 
 class SignInFragment : Fragment() {
     private lateinit var binding: FragmentSignInBinding
     private lateinit var userEmail: String
+    val viewModel by lazy {
+        LoginViewModel.create(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,14 +33,13 @@ class SignInFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_sign_in, container, false)
         return binding.root
     }
+
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         bindUi()
-        val viewModel by lazy {
-            LoginViewModel.create(this)
-        }
+
 
         binding.btnSignIn.setOnClickListener {
             if (validteForm()) {
@@ -43,13 +47,41 @@ class SignInFragment : Fragment() {
                 viewModel.getData(userEmail)
                 viewModel.loginSuccess.observe(viewLifecycleOwner) {
                     if (it!!) {
-                        Toast.makeText(requireContext(), "Logged in sccesfully", Toast.LENGTH_LONG)
+                        Toast.makeText(requireContext(), "Successfully Login", Toast.LENGTH_LONG)
                             .show()
                         findNavController().navigate(R.id.action_signInFragment_to_completeLoginFragment)
                     }
                 }
             }
         }
+
+        binding.button2.setOnClickListener {
+            var name = binding.editTextTextPersonName.text.toString()
+            var id: Long? = viewModel.AuthRepo.sharedPref.getUserInfo().customer?.customerId
+            val address = AddressModel(
+                Address(
+                    address1 = name,
+                )
+            )
+            if (id != null) {
+                viewModel.address(id, address)
+            }
+            viewModel.address.observe(viewLifecycleOwner) {
+                if (it!!) {
+                    Toast.makeText(
+                        requireContext(),
+                        "updated",
+                        Toast.LENGTH_LONG
+                    ).show()
+                } else Toast.makeText(
+                    requireContext(),
+                    "update faild",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        }
+        var body = viewModel.AuthRepo.sharedPref.getUserInfo().customer
+        Log.d("bogyjj", body.toString())
 
     }
 
