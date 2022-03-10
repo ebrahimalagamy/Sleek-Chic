@@ -82,7 +82,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="EMAIL"
+                android:text="@string/email_"
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
@@ -91,7 +91,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="Ebrahimalagamy@gmail.com"
                 android:textColor="@color/black" />
 
             <View
@@ -106,15 +105,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="USER NAME"
+                android:text="@string/user_name"
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/tvUsername"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="Ebrahim Hussein"
                 android:textColor="@color/black" />
 
             <View
@@ -128,7 +127,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="SECURITY INFORMATION"
+                android:text="@string/security_information"
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
@@ -138,7 +137,7 @@
                 android:layout_height="40dp"
                 android:layout_marginTop="10dp"
                 android:backgroundTint="@color/yellow"
-                android:text="change password"
+                android:text="@string/change_password"
                 android:textSize="12dp" />
         </LinearLayout>
 

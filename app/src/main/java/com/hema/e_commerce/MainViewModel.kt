@@ -1,4 +1,4 @@
-package com.hema.e_commerce.ui.settings.auth.login
+package com.hema.e_commerce
 
 import android.app.Application
 import android.os.Build
@@ -7,31 +7,26 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
-import com.hema.e_commerce.model.dataclass.customer.Address
-import com.hema.e_commerce.model.dataclass.customer.AddressModel
+import com.hema.e_commerce.model.dataclass.customer.CustomerModel
 import com.hema.e_commerce.model.dataclass.customer.CustomersModel
 import com.hema.e_commerce.model.remote.RetrofitInstance.Companion.api
 import com.hema.e_commerce.model.repository.AuthRepo
 import com.hema.e_commerce.util.Either
 import com.hema.e_commerce.util.LoginErrors
-import com.hema.e_commerce.util.RepoErrors
 import com.hema.e_commerce.util.SharedPreferencesProvider
 import kotlinx.coroutines.launch
 
 
-class LoginViewModel(application: Application, val AuthRepo: AuthRepo) :
+class MainViewModel(application: Application, private val AuthRepo: AuthRepo) :
     AndroidViewModel(application) {
 
-    val loginSuccess: MutableLiveData<Boolean?> = MutableLiveData()
-    val address: MutableLiveData<Boolean?> = MutableLiveData()
-
+    val updateUser: MutableLiveData<Boolean?> = MutableLiveData()
 
     @RequiresApi(Build.VERSION_CODES.M)
-    fun getData(email: String) {
+    fun update(id: Long, customer: CustomerModel) {
         viewModelScope.launch {
-            val response: Either<CustomersModel, LoginErrors> = AuthRepo.signIn(email)
 
-            when (response) {
+            when (val response: Either<CustomerModel, LoginErrors> = AuthRepo.update(id, customer)) {
                 is Either.Error -> when (response.errorCode) {
                     LoginErrors.NoInternetConnection -> {
                         Toast.makeText(
@@ -58,51 +53,22 @@ class LoginViewModel(application: Application, val AuthRepo: AuthRepo) :
                 }
                 is Either.Success -> {
                     Log.d("singin", "" + response.data)
-                    loginSuccess.postValue(true)
+                    updateUser.postValue(true)
                 }
             }
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
-    fun address(id: Long, address: AddressModel) {
-        viewModelScope.launch {
-
-            when (val response: Either<AddressModel, RepoErrors> = AuthRepo.postAddress(id, address)) {
-                is Either.Error -> when (response.errorCode) {
-                    RepoErrors.NoInternetConnection -> {
-                        Toast.makeText(
-                            getApplication(),
-                            "NoInternet Connection" + response.message,
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                    RepoErrors.ServerError -> {
-
-                        Toast.makeText(
-                            getApplication(),
-                            "Server Error" + response.message,
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                }
-                is Either.Success -> {
-                    Log.d("address", "" + response.data)
-                    this@LoginViewModel.address.postValue(true)
-                }
-            }
-        }
-    }
 
     class Factory(private val application: Application, val AuthRepo: AuthRepo) :
         ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return LoginViewModel(application, AuthRepo) as T
+            return MainViewModel(application, AuthRepo) as T
         }
     }
 
     companion object {
-        fun create(context: Fragment): LoginViewModel {
+        fun create(context: Fragment): MainViewModel {
             return ViewModelProvider(
                 context,
                 Factory(
@@ -114,7 +80,7 @@ class LoginViewModel(application: Application, val AuthRepo: AuthRepo) :
                         context.context?.applicationContext as Application
                     )
                 )
-            )[LoginViewModel::class.java]
+            )[MainViewModel::class.java]
         }
     }
 }

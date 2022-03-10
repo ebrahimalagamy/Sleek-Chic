@@ -1,9 +1,7 @@
 package com.hema.e_commerce.ui.settings
 
-import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -44,8 +42,8 @@ class Settings : Fragment() {
     }
 
     private fun bindUi() {
-        binding.tvWelcomeUser.text = sharedPref.getSettings().customer?.email ?: "empty"
-
+        binding.tvWelcomeUser.text = sharedPref.getUserInfo().customer?.email ?: "Email"
+        binding.tvUserName.text = sharedPref.getUserInfo().customer?.firstName ?: "User name"
 
         binding.btnCurrency.setOnClickListener {
 
@@ -89,6 +87,9 @@ class Settings : Fragment() {
         }
         binding.btnAddress.setOnClickListener {
             findNavController().navigate(R.id.action_settings_to_address)
+        }
+        binding.Checkout.setOnClickListener {
+            findNavController().navigate(R.id.action_Settings_to_checkout)
         }
 //        binding.myAccountConstraint.visibility = View.GONE
     }
