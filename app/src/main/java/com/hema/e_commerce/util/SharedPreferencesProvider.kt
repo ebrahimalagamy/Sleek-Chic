@@ -37,6 +37,9 @@ class SharedPreferencesProvider(context: Context) {
             }
         }
 
+        private const val USER_STATS="user-state"
+
+
     }
 
     init {
@@ -114,7 +117,11 @@ class SharedPreferencesProvider(context: Context) {
         val json = Gson()
         return json.toJson(settings)
     }
-
+    ///////////////
+    fun getUserStatus(): Boolean {
+        return pref!!.getBoolean(USER_STATS, false)
+    }
+//////////////
     private fun settingsFromJson(settings: String): CustomerInfo {
         val json = Gson()
         return json.fromJson(settings, CustomerInfo::class.java)

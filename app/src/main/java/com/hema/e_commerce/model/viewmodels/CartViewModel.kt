@@ -8,30 +8,18 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.hema.e_commerce.model.repository.Repository
 import com.hema.e_commerce.model.room.cartroom.CartProductData
+import com.hema.e_commerce.model.room.favoriteRoom.FavoriteProduct
 
 
 class CartViewModel(private val repo: Repository,app: Application) : AndroidViewModel(app) {
-    var cartProductLiveData = MutableLiveData<CartProductData>()
-    private val ChangeQuntityListener = MutableLiveData<Boolean>()
-    private val delOrder = MutableLiveData<Long>()
+
+    fun getCartProducts()= repo.getAllCartProduct()
+
+    fun deleteOneItemCart(cartItem: CartProductData)=repo.deleteOneCartItem(cartItem)
+
+    fun updateItemCount(cartItem: CartProductData)=repo.updateCountChange(cartItem)
+    fun insertFav(favoriteProduct: FavoriteProduct)=repo.insert(favoriteProduct)
 
 
-  /*  fun getOrderQuntity(): LiveData<Boolean> {
-        return ChangeQuntityListener
-    }*/
-
- /*   fun getAllCartList(){
-
-   }*/
-    fun getPostOrder()= repo.getcreatAnOrder()
-/*    fun onChangeQuntity() {
-        ChangeQuntityListener.postValue(true)
-    }
-    fun onDelClick(id: Long) {
-        delOrder.postValue(id)
-    }*/
-
-
-fun getCartProducts()=repo.getAllCartProduct()
 
 }

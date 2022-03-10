@@ -16,10 +16,11 @@ data class FavoriteProduct(
     val title: String,
     @ColumnInfo(name="price")
     val price: String,
-    @ColumnInfo(name="body_html")
-    val body_html: String,
+
     @ColumnInfo(name="variants")
-    var inventory_quantity: Int
+    var inventory_quantity: Int,
+    @ColumnInfo(name = "count")
+    var count:Int
 
 
 

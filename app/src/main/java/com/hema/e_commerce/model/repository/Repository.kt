@@ -277,13 +277,16 @@ val brandsLiveData = MutableLiveData<BrandsResponce>()
         db.getLocalDataObject().saveAllCartList(cartlist)
     }
 
+    suspend  fun updateCount(cartlist: CartProductData){
+        db.getLocalDataObject().getCountUpdate(cartlist)
+    }
     fun getAllCartProduct(): LiveData<List<CartProductData>> {
         return db.getLocalDataObject().getAllCartList()
 
     }
 
-    suspend fun deleteOnCartItem(cartProduct: CartProductData){
-        db.getLocalDataObject().deleteOnCartItem(cartProduct)
+     suspend fun deleteOneItemOnCart(cartlist: CartProductData){
+        db.getLocalDataObject().deleteOnCartItem(cartlist )
     }
 
 
@@ -294,9 +297,17 @@ val brandsLiveData = MutableLiveData<BrandsResponce>()
         }
     }
 
-    fun deleteOnItemOnCart(cartlist: CartProductData){
+    fun updateCountChange(cartlist: CartProductData){
         GlobalScope.launch(Dispatchers.IO) {
-            deleteOnCartItem(cartlist)
+         updateCount(cartlist)
+        }
+    }
+
+
+
+    fun deleteOneCartItem(cartlist: CartProductData){
+        GlobalScope.launch(Dispatchers.IO) {
+            deleteOneItemOnCart(cartlist)
         }
     }
 

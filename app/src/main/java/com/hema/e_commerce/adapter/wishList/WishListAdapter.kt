@@ -84,8 +84,7 @@ class WishListAdapter(val context:Context,var viewModel:WishListViewModel) : Rec
         holder.binding.btnAddToCart.setOnClickListener(View.OnClickListener {
         val cart=CartProductData(
                 differ.currentList[position].id,differ.currentList[position].image,differ.currentList[position].title
-        ,differ.currentList[position].price,differ.currentList[position].inventory_quantity
-            )
+        ,differ.currentList[position].price,differ.currentList[position].inventory_quantity, 1)
         viewModel.saveCartList(cart)
             //todo delete from fav after add to cart
 

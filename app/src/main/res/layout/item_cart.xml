@@ -13,13 +13,13 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="272dp">
+            android:layout_height="match_parent">
 
 
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="143dp"
-                android:layout_height="164dp"
+                android:layout_width="150dp"
+                android:layout_height="170dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.057"
@@ -31,7 +31,7 @@
             <TextView
                 android:id="@+id/title"
                 android:layout_width="188dp"
-                android:layout_height="47dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:layout_marginBottom="193dp"
                 android:fontFamily="sans-serif-medium"
@@ -81,30 +81,31 @@
                 app:layout_constraintVertical_bias="0.13" />
 
             <ImageButton
-                android:id="@+id/imageButton"
+                android:id="@+id/fav_bt"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:background="#FAF4F4"
-                android:backgroundTint="#FDFCFC"
+                android:backgroundTint="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.517"
+                app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView"
                 app:layout_constraintVertical_bias="1.0"
                 app:srcCompat="@drawable/heart" />
 
             <ImageButton
-                android:id="@+id/imageButton3"
+                android:id="@+id/cancel"
                 android:layout_width="52dp"
                 android:layout_height="48dp"
                 android:layout_marginTop="49dp"
                 android:background="#FAF4F4"
-                android:backgroundTint="#FDFCFC"
+                android:backgroundTint="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/textView5"
                 app:layout_constraintStart_toEndOf="@+id/textView4"
-                app:layout_constraintTop_toBottomOf="@+id/textView3"
+                app:layout_constraintTop_toBottomOf="@+id/copoun"
+                app:layout_constraintVertical_bias="1.0"
                 app:srcCompat="@drawable/ic_delete_forever_24" />
 
             <TextView
@@ -120,17 +121,16 @@
                 android:textColorHint="#252424"
                 android:textSize="10sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/imageButton3"
+                app:layout_constraintEnd_toStartOf="@+id/cancel"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/imageButton"
-                app:layout_constraintTop_toBottomOf="@+id/textView3"
+                app:layout_constraintStart_toEndOf="@+id/fav_bt"
+                app:layout_constraintTop_toBottomOf="@+id/copoun"
                 app:layout_constraintVertical_bias="1.0" />
 
             <TextView
                 android:id="@+id/textView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="55dp"
                 android:layout_marginBottom="16dp"
                 android:fontFamily="sans-serif-condensed"
                 android:text="Remove"
@@ -140,15 +140,16 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/imageButton3"
-                app:layout_constraintTop_toBottomOf="@+id/textView3"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintStart_toEndOf="@+id/cancel"
+                app:layout_constraintTop_toBottomOf="@+id/copoun"
+                app:layout_constraintVertical_bias="1.0" />
 
             <ImageButton
                 android:id="@+id/incre_count"
                 android:layout_width="39dp"
                 android:layout_height="33dp"
                 android:layout_marginTop="75dp"
+                android:layout_marginLeft="20dp"
                 android:background="#F8F6F6"
                 android:backgroundTint="#FAF4F4"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -160,15 +161,14 @@
 
             <TextView
                 android:id="@+id/count"
-                android:layout_width="21dp"
-                android:layout_height="23dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="76dp"
                 android:fontFamily="sans-serif-light"
-                android:text="3"
-                android:textColor="#151515"
-                android:textColorHighlight="#131313"
-                android:textColorHint="#070707"
+                android:text="1"
                 android:textSize="14sp"
+                android:textColor="#0C0C0C"
+                android:padding="15dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/min_count"
                 app:layout_constraintStart_toEndOf="@+id/incre_count"
@@ -183,9 +183,10 @@
                 android:background="#FBFBFB"
                 android:backgroundTint="#FDFAFA"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/imageButton"
+                app:layout_constraintEnd_toStartOf="@+id/fav_bt"
                 app:layout_constraintStart_toEndOf="@+id/count"
                 app:layout_constraintTop_toBottomOf="@+id/imageView"
+                app:layout_constraintVertical_bias="1.0"
                 app:srcCompat="@drawable/ic_min" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
