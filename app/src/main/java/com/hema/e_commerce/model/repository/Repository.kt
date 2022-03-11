@@ -263,7 +263,7 @@ class Repository(val db: RoomData) {
         db.getOrder().getCanceledOrder(state)
     }
 
-    suspend fun updateOrder(id: Int, state: String) {
+    suspend fun updateOrder(id: Long, state: String) {
         db.getOrder().updateOrder(id, state)
     }
 

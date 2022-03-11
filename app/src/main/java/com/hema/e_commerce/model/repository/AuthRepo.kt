@@ -16,7 +16,6 @@ class AuthRepo(
     val application: Application
 ) {
 
-
     @RequiresApi(Build.VERSION_CODES.M)
     suspend fun signUp(customer: CustomerModel): Either<CustomerModel, RepoErrors> {
         return try {
@@ -96,7 +95,6 @@ class AuthRepo(
             Either.Error(LoginErrors.ServerError, t.message)
         }
     }
-
 
     private fun getCustomerFromSettings() = sharedPref.getUserInfo().customer
 
