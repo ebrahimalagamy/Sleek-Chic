@@ -70,12 +70,12 @@ class Cart : Fragment() {
                         var usCurrancy = ((totalCalc(product).toString()).toDouble() / (15.71))
                         val number: Double = String.format("%.2f", usCurrancy).toDouble()
                         cartFragmentBinding.textTotalprice.text =
-                            number.toString() + " " + getString(R.string.us)
+                            number.toString()+ " " + getString(R.string.us)
                         //
                         var usCurrancySub = ((totalCalc(product).toString()).toDouble() / (15.71))
-                        val numberSub: Double = String.format("%.2f", usCurrancy).toDouble()
+                        val numberSub: Double = String.format("%.2f", usCurrancySub).toDouble()
                         cartFragmentBinding.tvSubTotal.text =
-                            number.toString() + " " + getString(R.string.us)
+                            numberSub.toString() + " " + getString(R.string.us)
 
                     }
                     "EUR" -> {
@@ -86,9 +86,9 @@ class Cart : Fragment() {
                         //
 
                         var ureCurrancySub = ((totalCalc(product).toString()).toDouble() / (17.10))
-                        val numberSub: Double = String.format("%.2f", ureCurrancy).toDouble()
+                        val numberSub: Double = String.format("%.2f", ureCurrancySub).toDouble()
                         cartFragmentBinding.tvSubTotal.text =
-                            number.toString() + " " + getString(R.string.eur)
+                            numberSub.toString() + " " + getString(R.string.eur)
                     }
                     else -> {
                         cartFragmentBinding.textTotalprice.text =

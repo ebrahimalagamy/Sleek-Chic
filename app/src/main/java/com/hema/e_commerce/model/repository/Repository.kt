@@ -3,6 +3,7 @@ package com.hema.e_commerce.model.repository
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.hema.e_commerce.MainActivity
 import com.hema.e_commerce.model.dataclass.allProducts.ProductItem
 import com.hema.e_commerce.model.dataclass.allProducts.ProductsResponse
 import com.hema.e_commerce.model.dataclass.getOrder.GetOrderResponce
@@ -64,11 +65,7 @@ class Repository(val db: RoomData) {
         }
     }
 
-    //sub collections
-    var subCollectionProductsLiveData = MutableLiveData<ArrayList<SubCollections>>()
-    fun getSubCollections(position: Int) {
-        subCollectionProductsLiveData.value = ShowSubCollections().showSub(position)
-    }
+
 
     //Single product
     val singleProductsLiveData = MutableLiveData<ProductCollectionResponse>()

@@ -67,11 +67,11 @@ class FragmentContainer : Fragment() {
         var collectionPosition: Int=
             when(collectionName){
 
-                "Home Page"->  0
-                "KID"-> 1
-                "MEN"->2
-                "SALE"-> 3
-                "WOMEN"-> 4
+                getString(R.string.home_page)->  0
+                getString(R.string.kid)-> 1
+                getString(R.string.men)->2
+                getString(R.string.sale)-> 3
+                getString(R.string.woman)-> 4
                 else -> 0
             }
 
@@ -89,11 +89,11 @@ class FragmentContainer : Fragment() {
             var collectionId: Long=
                 when(collectionName){
 
-                    "Home Page"-> HOME_PAGE_ID
-                    "KID"-> KIDS_ID
-                    "MEN"-> MEN_ID
-                    "SALE"-> SALE_ID
-                    "WOMEN"-> WOMAN_ID
+                    getString(R.string.home_page)-> HOME_PAGE_ID
+                    getString(R.string.kid)-> KIDS_ID
+                    getString(R.string.men)-> MEN_ID
+                    getString(R.string.sale)-> SALE_ID
+                    getString(R.string.woman)-> WOMAN_ID
                     else -> HOME_PAGE_ID
                 }
             adapter = ContainerAdapter(collectionId,fragMan, ProductList, requireContext())
