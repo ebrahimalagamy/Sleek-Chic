@@ -67,7 +67,8 @@
             android:layout_margin="@dimen/_5sdp"
             android:stepSize="1"
             android:rating="5"
-            android:theme="@style/RatingBar"
+
+
             />
     <TextView
     android:layout_width="wrap_content"
@@ -110,7 +111,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:background="@drawable/circle_view"
-            android:backgroundTint="@color/yellow"
+            android:backgroundTint="@color/teal_200"
             android:visibility="visible"
             android:src="@drawable/ic_favorite_border" />
 
