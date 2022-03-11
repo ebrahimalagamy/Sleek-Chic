@@ -1,4 +1,4 @@
-package com.hema.e_commerce.ui.settings.auth.login
+package com.hema.e_commerce.ui.settings.auth.signin
 
 import android.os.Build
 import android.os.Bundle
@@ -21,7 +21,7 @@ class SignInFragment : Fragment() {
     private lateinit var userEmail: String
     private lateinit var pass: String
     val viewModel by lazy {
-        LoginViewModel.create(this)
+        SignInViewModel.create(this)
     }
 
     override fun onCreateView(
@@ -40,45 +40,17 @@ class SignInFragment : Fragment() {
         bindUi()
         binding.btnSignIn.setOnClickListener {
             if (validteForm()) {
-                Log.d("email", "" + userEmail)
+                Log.d("email", "" + userEmail+"pass"+pass)
                 viewModel.getData(userEmail,pass)
-                viewModel.loginSuccess.observe(viewLifecycleOwner) {
+                viewModel.mldSignIn.observe(viewLifecycleOwner) {
                     if (it!!) {
                         Toast.makeText(requireContext(), "Successfully Login", Toast.LENGTH_LONG)
                             .show()
-                        findNavController().navigate(R.id.action_signInFragment_to_completeLoginFragment)
+                        findNavController().popBackStack()
                     }
                 }
             }
         }
-
-//        binding.button2.setOnClickListener {
-//            var name = binding.editTextTextPersonName.text.toString()
-//            var id: Long? = viewModel.AuthRepo.sharedPref.getUserInfo().customer?.customerId
-//            val address = AddressModel(
-//                Address(
-//                    address1 = name,
-//                )
-//            )
-//            if (id != null) {
-//                viewModel.address(id, address)
-//            }
-//            viewModel.address.observe(viewLifecycleOwner) {
-//                if (it!!) {
-//                    Toast.makeText(
-//                        requireContext(),
-//                        "updated",
-//                        Toast.LENGTH_LONG
-//                    ).show()
-//                } else Toast.makeText(
-//                    requireContext(),
-//                    "update faild",
-//                    Toast.LENGTH_LONG
-//                ).show()
-//            }
-//        }
-//        var body = viewModel.AuthRepo.sharedPref.getUserInfo().customer
-//        Log.d("bogyjj", body.toString())
 
     }
 

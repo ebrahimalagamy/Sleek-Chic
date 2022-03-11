@@ -94,6 +94,7 @@ class Settings : Fragment() {
         binding.btnOrder.setOnClickListener {
             findNavController().navigate(R.id.action_Settings_to_orderFragment)
         }
+
 //        binding.myAccountConstraint.visibility = View.GONE
     }
 

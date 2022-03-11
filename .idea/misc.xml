@@ -43,13 +43,15 @@
         <entry key="..\:/Users/Ebrah/AndroidStudioProjects/ECommerce/app/src/main/res/drawable/ic_home.xml" value="0.226" />
         <entry key="..\:/Users/Ebrah/AndroidStudioProjects/ECommerce/app/src/main/res/layout-v31/profile_fragment.xml" value="0.25" />
         <entry key="..\:/Users/Ebrah/AndroidStudioProjects/ECommerce/app/src/main/res/layout/activity_main.xml" value="0.2604166666666667" />
-        <entry key="..\:/Users/Ebrah/AndroidStudioProjects/ECommerce/app/src/main/res/layout/cart_fragment.xml" value="0.27447916666666666" />
+        <entry key="..\:/Users/Ebrah/AndroidStudioProjects/ECommerce/app/src/main/res/layout/cart_fragment.xml" value="0.264" />
         <entry key="..\:/Users/Ebrah/AndroidStudioProjects/ECommerce/app/src/main/res/layout/categories_products_items.xml" value="0.25" />
         <entry key="..\:/Users/Ebrah/AndroidStudioProjects/ECommerce/app/src/main/res/layout/category_fragment.xml" value="0.2604166666666667" />
         <entry key="..\:/Users/Ebrah/AndroidStudioProjects/ECommerce/app/src/main/res/layout/complete_login.xml" value="0.25" />
         <entry key="..\:/Users/Ebrah/AndroidStudioProjects/ECommerce/app/src/main/res/layout/complete_login_fragment.xml" value="0.15462962962962962" />
         <entry key="..\:/Users/Ebrah/AndroidStudioProjects/ECommerce/app/src/main/res/layout/container_item.xml" value="0.25" />
+        <entry key="..\:/Users/Ebrah/AndroidStudioProjects/ECommerce/app/src/main/res/layout/fragment_add_address.xml" value="0.2359375" />
         <entry key="..\:/Users/Ebrah/AndroidStudioProjects/ECommerce/app/src/main/res/layout/fragment_address.xml" value="0.264" />
+        <entry key="..\:/Users/Ebrah/AndroidStudioProjects/ECommerce/app/src/main/res/layout/fragment_checkout.xml" value="0.25" />
         <entry key="..\:/Users/Ebrah/AndroidStudioProjects/ECommerce/app/src/main/res/layout/fragment_edit_address.xml" value="0.264" />
         <entry key="..\:/Users/Ebrah/AndroidStudioProjects/ECommerce/app/src/main/res/layout/fragment_edit_profile.xml" value="0.25" />
         <entry key="..\:/Users/Ebrah/AndroidStudioProjects/ECommerce/app/src/main/res/layout/fragment_first_screen.xml" value="0.25" />
@@ -64,6 +66,7 @@
         <entry key="..\:/Users/Ebrah/AndroidStudioProjects/ECommerce/app/src/main/res/layout/fragment_welcome.xml" value="0.25" />
         <entry key="..\:/Users/Ebrah/AndroidStudioProjects/ECommerce/app/src/main/res/layout/fragment_wishlist.xml" value="0.25" />
         <entry key="..\:/Users/Ebrah/AndroidStudioProjects/ECommerce/app/src/main/res/layout/home_fragment.xml" value="0.27447916666666666" />
+        <entry key="..\:/Users/Ebrah/AndroidStudioProjects/ECommerce/app/src/main/res/layout/item_cart.xml" value="0.25" />
         <entry key="..\:/Users/Ebrah/AndroidStudioProjects/ECommerce/app/src/main/res/layout/item_product_list.xml" value="0.25" />
         <entry key="..\:/Users/Ebrah/AndroidStudioProjects/ECommerce/app/src/main/res/layout/item_wishlist.xml" value="0.16944444444444445" />
         <entry key="..\:/Users/Ebrah/AndroidStudioProjects/ECommerce/app/src/main/res/layout/main_fragemnt.xml" value="0.176" />
@@ -89,6 +92,7 @@
         <entry key="..\:/iti program/courses/graduation project/project/Second pull/current/E-Commerce/app/src/main/res/layout/container_item.xml" value="0.25416666666666665" />
         <entry key="..\:/iti program/courses/graduation project/project/Second pull/current/E-Commerce/app/src/main/res/layout/fragment_container.xml" value="0.25416666666666665" />
         <entry key="..\:/iti program/courses/graduation project/project/Second pull/current/E-Commerce/app/src/main/res/layout/fragment_product.xml" value="0.2" />
+        <entry key="..\:/iti program/courses/graduation project/project/Second pull/current/E-Commerce/app/src/main/res/layout/fragment_type_list_product.xml" value="0.25416666666666665" />
       </map>
     </option>
   </component>

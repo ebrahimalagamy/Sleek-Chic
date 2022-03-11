@@ -6,14 +6,13 @@
     <data>
 
     </data>
-
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="10dp">
+        android:layout_height="wrap_content"
+        >
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
             <LinearLayout
                 android:id="@+id/notLoged"
                 android:visibility="gone"
@@ -54,12 +53,12 @@
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/cart_rec"
-                        android:layout_width="399dp"
-                        android:layout_height="377dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        tools:listitem="@layout/item_cart" />
+                        android:padding="10dp"/>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -68,73 +67,120 @@
                     android:id="@+id/group"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingTop="20dp">
+                    android:background="#f1f4fc"
+                    android:padding="10dp">
 
                     <Button
                         android:id="@+id/bt_copoun"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:backgroundTint="@color/yellow"
-                        android:text="code"
-                        android:textColor="@color/black"
-                        android:textSize="20sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:backgroundTint="@color/myBlue"
+                        android:text="Apply"
+                        android:textColor="@color/white"
+                        app:layout_constraintBottom_toBottomOf="@+id/edtex_copoun"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/edtex_copoun"
+                        app:layout_constraintTop_toTopOf="@+id/edtex_copoun" />
 
                     <EditText
                         android:id="@+id/edtex_copoun"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:hint="write copoun code here  "
-                        android:minHeight="48dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/bt_copoun"
+                        app:layout_constraintEnd_toStartOf="@+id/bt_copoun"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
-
                     <TextView
                         android:id="@+id/txt_total"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="50dp"
-                        android:text="Total Price :"
-                        android:textColor="@color/black"
-                        android:textSize="20sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/bt_copoun" />
+                        android:text="SubTotal"
+                        android:layout_marginTop="10dp"
+                        app:layout_constraintStart_toStartOf="@+id/edtex_copoun"
+                        app:layout_constraintTop_toBottomOf="@+id/edtex_copoun" />
 
                     <TextView
                         android:id="@+id/text_totalprice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginTop="50dp"
-                        android:hint="Total Price Equal"
+                        android:text="0"
                         android:textColor="@color/black"
-                        android:textSize="20sp"
-                        app:layout_constraintStart_toEndOf="@id/txt_total"
-                        app:layout_constraintTop_toBottomOf="@id/bt_copoun"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView21"
+                        app:layout_constraintEnd_toEndOf="@+id/bt_copoun"
+                        app:layout_constraintTop_toTopOf="@+id/textView21" />
 
-                        />
-
-                    <Button
-                        android:id="@+id/bt_checkout"
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:id="@+id/textView17"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="50dp"
-                        android:text="@string/checkout"
-                        android:backgroundTint="@color/yellow"
+                        android:text="Shipping Fee"
+                        android:layout_marginTop="5dp"
+                        app:layout_constraintStart_toStartOf="@+id/txt_total"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_total" />
+
+                    <TextView
+                        android:id="@+id/tvSubTotal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="450"
+                        app:layout_constraintBottom_toBottomOf="@+id/txt_total"
+                        app:layout_constraintEnd_toEndOf="@+id/text_totalprice"
+                        app:layout_constraintTop_toTopOf="@+id/txt_total" />
+
+                    <TextView
+                        android:id="@+id/textView21"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Total"
                         android:textColor="@color/black"
-                        android:textSize="20sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/text_totalprice"
+                        android:layout_marginTop="10dp"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="@+id/textView17"
+                        app:layout_constraintTop_toBottomOf="@+id/textView23" />
+
+                    <TextView
+                        android:id="@+id/textView20"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Free"
+                        android:textColor="@color/yellow"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView17"
+                        app:layout_constraintEnd_toEndOf="@+id/tvSubTotal"
+                        app:layout_constraintTop_toBottomOf="@+id/txt_total" />
 
 
-                        />
+                    <TextView
+                        android:id="@+id/tvDiscount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="0"
+                        app:layout_constraintEnd_toEndOf="@+id/textView20"
+                        app:layout_constraintTop_toBottomOf="@+id/textView20" />
+
+                    <TextView
+                        android:id="@+id/textView23"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Discount"
+                        android:layout_marginTop="5dp"
+                        app:layout_constraintStart_toStartOf="@+id/textView17"
+                        app:layout_constraintTop_toBottomOf="@+id/textView17" />
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
+
+            <Button
+                android:id="@+id/bt_checkout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="@color/myBlue"
+                android:text="@string/checkout"
+                app:layout_constraintTop_toBottomOf="@+id/layout_cart_rec" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 

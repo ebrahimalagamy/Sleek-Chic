@@ -78,13 +78,16 @@
     <string name="email_">EMAIL</string>
     <string name="security_information">SECURITY INFORMATION</string>
     <string name="change_password">change password</string>
+      <string name="cancelled_orders">Cancelled Orders</string>
+    <string name="emptylist">Products Not Available Now</string>
 
     <!-- favorite -->
     <string name="caution">Caution</string>
     <string name="alertDeleteMessage">Do You Want To Delete This Product From Favorite</string>
     <string name="yes">yes</string>
     <string name="no">no</string>
-    <string name="cancelled_orders">Cancelled Orders</string>
+  
+
     <!-- filter -->
     <string-array name="filterArr">
         <item>Filter</item>

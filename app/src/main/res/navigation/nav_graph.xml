@@ -12,15 +12,12 @@
         tools:layout="@layout/fragment_sign_up" />
     <fragment
         android:id="@+id/signInFragment"
-        android:name="com.hema.e_commerce.ui.settings.auth.login.SignInFragment"
+        android:name="com.hema.e_commerce.ui.settings.auth.signin.SignInFragment"
         android:label="fragment_sign_in"
         tools:layout="@layout/fragment_sign_in">
         <action
             android:id="@+id/action_signInFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
-        <action
-            android:id="@+id/action_signInFragment_to_completeLoginFragment"
-            app:destination="@id/completeLoginFragment" />
     </fragment>
     <fragment
         android:id="@+id/home"
@@ -41,7 +38,11 @@
         android:id="@+id/cart"
         android:name="com.hema.e_commerce.ui.cart.Cart"
         android:label="cart_fragment"
-        tools:layout="@layout/cart_fragment" />
+        tools:layout="@layout/cart_fragment" >
+        <action
+            android:id="@+id/action_cart_to_checkout"
+            app:destination="@id/checkout" />
+    </fragment>
     <fragment
         android:id="@+id/category"
         android:name="com.hema.e_commerce.ui.category.categoryui.maincategoryui.CategoryFragment"
@@ -80,6 +81,7 @@
         <action
             android:id="@+id/action_Settings_to_orderFragment"
             app:destination="@id/orderFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/typeListProductFragment2"
@@ -155,11 +157,7 @@
     </fragment>
     android:name="com.hema.e_commerce.ui.product.product.ProductFragment"
     android:label="ProductFragment" />
-    <fragment
-        android:id="@+id/completeLoginFragment"
-        android:name="com.hema.e_commerce.ui.settings.auth.password.SignInPasswordFragment"
-        android:label="CompleteLoginFragment"
-        tools:layout="@layout/signin_password_fragment" />
+
     <fragment
         android:id="@+id/splashFragment"
         android:name="com.hema.e_commerce.ui.splash.SplashFragment"
@@ -194,14 +192,16 @@
         android:id="@+id/checkout"
         android:name="com.hema.e_commerce.ui.settings.checkout.Checkout"
         android:label="fragment_checkout"
-        tools:layout="@layout/fragment_checkout" />
+        tools:layout="@layout/fragment_checkout" >
+        <argument
+            android:name="totalPrice"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/addAddressFragment"
         android:name="com.hema.e_commerce.ui.settings.address.AddAddressFragment"
         android:label="fragment_add_address"
         tools:layout="@layout/fragment_add_address">
-
-
         <argument
             android:name="isDefault"
             android:defaultValue="false"

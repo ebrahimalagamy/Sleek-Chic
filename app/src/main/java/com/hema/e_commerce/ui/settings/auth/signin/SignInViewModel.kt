@@ -1,4 +1,4 @@
-package com.hema.e_commerce
+package com.hema.e_commerce.ui.settings.auth.signin
 
 import android.app.Application
 import android.os.Build
@@ -7,7 +7,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
-import com.hema.e_commerce.model.dataclass.customer.CustomerModel
+import com.hema.e_commerce.model.dataclass.customer.CustomersModel
 import com.hema.e_commerce.model.remote.RetrofitInstance.Companion.api
 import com.hema.e_commerce.model.repository.AuthRepo
 import com.hema.e_commerce.util.Either
@@ -16,17 +16,16 @@ import com.hema.e_commerce.util.SharedPreferencesProvider
 import kotlinx.coroutines.launch
 
 
-class MainViewModel(application: Application, private val AuthRepo: AuthRepo) :
+class SignInViewModel(application: Application, val AuthRepo: AuthRepo) :
     AndroidViewModel(application) {
 
-    val updateUser: MutableLiveData<Boolean?> = MutableLiveData()
+    val mldSignIn: MutableLiveData<Boolean?> = MutableLiveData()
 
     @RequiresApi(Build.VERSION_CODES.M)
-    fun update(id: Long, customer: CustomerModel) {
+    fun getData(email: String,pass:String) {
         viewModelScope.launch {
 
-            when (val response: Either<CustomerModel, LoginErrors> =
-                AuthRepo.update(id, customer)) {
+            when (val response: Either<CustomersModel, LoginErrors> = AuthRepo.signIn(email,pass)) {
                 is Either.Error -> when (response.errorCode) {
                     LoginErrors.NoInternetConnection -> {
                         Toast.makeText(
@@ -43,6 +42,13 @@ class MainViewModel(application: Application, private val AuthRepo: AuthRepo) :
                             Toast.LENGTH_SHORT
                         ).show()
                     }
+                    LoginErrors.IncorrectEmailOrPassword->{
+                        Toast.makeText(
+                            getApplication(),
+                            "IncorrectEmailOrPassword" + response.message,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                     LoginErrors.CustomerNotFound -> {
                         Toast.makeText(
                             getApplication(),
@@ -53,22 +59,21 @@ class MainViewModel(application: Application, private val AuthRepo: AuthRepo) :
                 }
                 is Either.Success -> {
                     Log.d("singin", "" + response.data)
-                    updateUser.postValue(true)
+                    mldSignIn.postValue(true)
                 }
             }
         }
     }
 
-
     class Factory(private val application: Application, val AuthRepo: AuthRepo) :
         ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return MainViewModel(application, AuthRepo) as T
+            return SignInViewModel(application, AuthRepo) as T
         }
     }
 
     companion object {
-        fun create(context: Fragment): MainViewModel {
+        fun create(context: Fragment): SignInViewModel {
             return ViewModelProvider(
                 context,
                 Factory(
@@ -80,7 +85,7 @@ class MainViewModel(application: Application, private val AuthRepo: AuthRepo) :
                         context.context?.applicationContext as Application
                     )
                 )
-            )[MainViewModel::class.java]
+            )[SignInViewModel::class.java]
         }
     }
 }

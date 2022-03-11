@@ -9,12 +9,9 @@ import android.location.Geocoder
 import android.util.Log
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
-import androidx.fragment.app.Fragment
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
-import com.hema.e_commerce.MainViewModel
-import com.hema.e_commerce.ui.settings.auth.login.LoginViewModel
 import com.hema.e_commerce.util.Constant.LOCATION_REQUEST_CODE
 
 @SuppressLint("StaticFieldLeak")
@@ -63,11 +60,13 @@ object LocationProvider {
                         val currentLocation =
                             geoCoder.getFromLocation(it.latitude, it.longitude, 1)
                         Log.d("first", currentLocation[0].getAddressLine(0))
+                        Log.d("first", currentLocation[0].postalCode)
                         sharedPref.setLocation(
                             it.latitude.toString(),
                             it.longitude.toString(),
                             currentLocation[0].getAddressLine(0),
                         )
+
 //                        sharedPref.update {
 //                            it.copy(customer = it.customer.lastName)
 //                        }
