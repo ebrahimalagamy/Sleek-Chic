@@ -12,8 +12,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/frag_list_product"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:context=".ui.typelistofproduct.TypeListProductsFragment">
+        android:layout_height="match_parent"
+        tools:context=".ui.typelistofproduct.TypeListProductsFragment"
+        >
 
         <Toolbar
             android:layout_width="match_parent"
@@ -56,9 +57,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/mytoolbar"
             tools:itemCount="10" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textSize="@dimen/_15sdp"
+            android:id="@+id/tv_empty"
+            android:gravity="center"
+            />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

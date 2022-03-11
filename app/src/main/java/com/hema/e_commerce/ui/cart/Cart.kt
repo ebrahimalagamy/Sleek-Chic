@@ -1,5 +1,6 @@
 package com.hema.e_commerce.ui.cart
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -48,8 +49,37 @@ class Cart : Fragment(){
                 cartFragmentBinding.notLoged.visibility=View.GONE
 
                 cartAdapter.differ.submitList(product)
-                cartFragmentBinding.textTotalprice.text=totalCalc(product).toString()
 
+
+                //
+
+               // cartFragmentBinding.textTotalprice.text=totalCalc(product).toString()
+
+
+                val sharedPreferences: SharedPreferences =requireContext().getSharedPreferences("currency", 0)
+                var value = sharedPreferences.getString("currency","EGP")
+                when(value){
+                    "EGP"->  cartFragmentBinding.textTotalprice.text=totalCalc(product).toString()+" "+getString(R.string.eg)
+                    "USA"-> {
+                        var usCurrancy=   ((totalCalc(product).toString()).toDouble() / (15.71))
+                        val number:Double=String.format("%.2f",usCurrancy).toDouble()
+                        cartFragmentBinding.textTotalprice.text= number.toString() + " " + getString(R.string.us)
+
+                    }
+                    "EUR"->      {
+                        var ureCurrancy=   ((totalCalc(product).toString()).toDouble() / (17.10))
+                        val number:Double=String.format("%.2f",ureCurrancy).toDouble()
+                        cartFragmentBinding.textTotalprice.text=number.toString()+" "+getString(R.string.eur)
+                    }
+                    else->  cartFragmentBinding.textTotalprice.text=totalCalc(product).toString()+" "+getString(R.string.eg)
+
+                }
+
+
+
+
+
+//
             }else{
                 cartFragmentBinding.notLoged.visibility=View.VISIBLE
                 cartFragmentBinding.group.visibility=View.GONE
