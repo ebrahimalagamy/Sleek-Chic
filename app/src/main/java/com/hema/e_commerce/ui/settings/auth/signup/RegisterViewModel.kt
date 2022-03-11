@@ -14,7 +14,7 @@ import com.hema.e_commerce.util.RepoErrors
 import com.hema.e_commerce.util.SharedPreferencesProvider
 import kotlinx.coroutines.launch
 
-class RegisterViewModel(application: Application, private val authenticationRepo: AuthRepo) :
+class RegisterViewModel(application: Application, private val authRepo: AuthRepo) :
     AndroidViewModel(application) {
 
     val signupSuccess: MutableLiveData<Boolean?> = MutableLiveData()
@@ -22,7 +22,7 @@ class RegisterViewModel(application: Application, private val authenticationRepo
     @RequiresApi(Build.VERSION_CODES.M)
     fun postData(customer: CustomerModel) {
         viewModelScope.launch {
-            when (val response: Either<CustomerModel, RepoErrors> = authenticationRepo.signUp(customer)) {
+            when (val response: Either<CustomerModel, RepoErrors> = authRepo.signUp(customer)) {
                 is Either.Error -> when (response.errorCode) {
                     RepoErrors.NoInternetConnection -> {
                         Toast.makeText(
@@ -44,16 +44,12 @@ class RegisterViewModel(application: Application, private val authenticationRepo
             }
         }
     }
-
-//    fun update()
-
-
     class Factory(
         private val application: Application,
-        val authenticationRepo: AuthRepo
+        val authRepo: AuthRepo
     ) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return RegisterViewModel(application, authenticationRepo) as T
+            return RegisterViewModel(application, authRepo) as T
         }
     }
 
@@ -65,7 +61,6 @@ class RegisterViewModel(application: Application, private val authenticationRepo
                     context.context?.applicationContext as Application,
                     AuthRepo(
                         RetrofitInstance.api,
-//                        SettingsPreferences(context.context?.applicationContext as Application),
                         SharedPreferencesProvider(context.context?.applicationContext as Application),
 
                         context.context?.applicationContext as Application

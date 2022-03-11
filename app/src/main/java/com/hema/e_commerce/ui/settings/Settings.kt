@@ -88,9 +88,7 @@ class Settings : Fragment() {
         binding.btnAddress.setOnClickListener {
             findNavController().navigate(R.id.action_settings_to_address)
         }
-        binding.Checkout.setOnClickListener {
-            findNavController().navigate(R.id.action_Settings_to_checkout)
-        }
+
 //        binding.myAccountConstraint.visibility = View.GONE
     }
 

@@ -5,10 +5,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hema.e_commerce.R
 import com.hema.e_commerce.adapter.cart.CartAdapter
@@ -49,7 +52,23 @@ class Cart : Fragment(){
                 cartFragmentBinding.notLoged.visibility=View.GONE
 
                 cartAdapter.differ.submitList(product)
+                cartFragmentBinding.textTotalprice.text=totalCalc(product).toString()
+                cartFragmentBinding.tvSubTotal.text=totalCalc(product).toString()
 
+                cartFragmentBinding.btCopoun.setOnClickListener {
+                    val copoun = cartFragmentBinding.edtexCopoun.text.toString()
+                    if (copoun == "hema5"){
+                        val totalPricee =  cartFragmentBinding.textTotalprice.text.toString()
+                        val discount = totalPricee.toDouble() - 20
+                        cartFragmentBinding.textTotalprice.text = discount.toString()
+                        cartFragmentBinding.tvDiscount.text = "-20"
+
+                    }
+                    else if(copoun != "hema5"){
+                        cartFragmentBinding.tvSubTotal.text=totalCalc(product).toString()
+                        cartFragmentBinding.tvDiscount.text = "0"
+                    }
+                }
 
                 //
 
@@ -87,8 +106,22 @@ class Cart : Fragment(){
             }
         })
 
+        bindButton()
     }
 
+    private fun bindButton() {
+        cartFragmentBinding.btCheckout.setOnClickListener {
+            val totalPrice =cartFragmentBinding.textTotalprice.text.toString()
+            if (totalPrice.isNotEmpty()){
+                val action = CartDirections.actionCartToCheckout(totalPrice)
+                Navigation.findNavController(requireView()).navigate(action)
+            }else{
+//                Toast.makeText()
+            }
+//            findNavController().navigate(R.id.action_cart_to_checkout)
+
+        }
+    }
 
 
     private fun totalCalc(items:List<CartProductData>):Double{
