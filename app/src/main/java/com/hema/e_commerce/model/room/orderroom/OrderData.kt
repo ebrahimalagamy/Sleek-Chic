@@ -3,26 +3,32 @@ package com.hema.e_commerce.model.room.orderroom
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-@Entity(tableName = "OrderTable")
+@Entity
 data class OrderData(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name="id")
-
     val id:Long,
-    @ColumnInfo(name="title")
 
-    val title: String,
-    @ColumnInfo(name="price")
+    @ColumnInfo(name="orderNumber")
+    val orderNumber:Long,
 
-    val price: String,
-    @ColumnInfo(name="image")
+    @ColumnInfo(name="totalPrice")
+    val totalPrice: String,
 
-    val image: String,
-/*
-    @ColumnInfo(name="item_number")
+    @ColumnInfo(name="CustomerName")
+    val customerName: String,
 
-    val item_number: String
-*/
+    @ColumnInfo(name="Address")
+    val address: String,
+
+    @ColumnInfo(name="Phone")
+    val phone: String,
+
+    @ColumnInfo(name="PayMethod")
+    val payMethod: String,
+
+    @ColumnInfo(name="state")
+    val state: String
 
 
         )

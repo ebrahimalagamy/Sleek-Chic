@@ -5,7 +5,6 @@ import androidx.room.*
 
 @Dao
 interface LocalDataDao {
-    // query of  cart table
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveAllCartList(cartProduct: CartProductData)
