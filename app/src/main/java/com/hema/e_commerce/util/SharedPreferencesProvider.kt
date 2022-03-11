@@ -78,7 +78,7 @@ class SharedPreferencesProvider(context: Context) {
             return location
         }
 
-    fun setUserInfo(//userAddress: String?,
+  /*  fun setUserInfo(//userAddress: String?,
         phone: String?, name: String?
     ) {
 //        editor.putString(USER_ADDRESS, userAddress)
@@ -95,7 +95,7 @@ class SharedPreferencesProvider(context: Context) {
             info[0] = phone
             info[1] = name
             return info
-        }
+        }*/
 
     fun setFirstTimeLaunch(isFirstTime: Boolean) {
         editor.putBoolean(IS_FIRST_TIME_LAUNCH, isFirstTime)
@@ -111,7 +111,7 @@ class SharedPreferencesProvider(context: Context) {
     }
 
     val isSignIn: Boolean
-        get() = pref.getBoolean(IS_SIGN_IN, true)
+        get() = pref.getBoolean(IS_SIGN_IN, false)
 
 
     private fun settingsToJson(settings: CustomerInfo): String {

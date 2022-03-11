@@ -20,7 +20,7 @@ class Settings : Fragment() {
     private lateinit var binding: SettingsFragmentBinding
 
     var selectedItemIndex = 0
-    private var arrayItems = arrayOf("EGP","USA","EUR")
+    private var arrayItems = arrayOf("EGP", "USA", "EUR")
     var selectedItem = arrayItems[selectedItemIndex]
 
     override fun onCreateView(
@@ -37,24 +37,41 @@ class Settings : Fragment() {
 
         bindNav()
         bindUi()
+        bindSignIn()
 
 
     }
 
+    private fun bindSignIn() {
+        if (sharedPref.isSignIn){
+            binding.tvMyAccount.visibility = View.VISIBLE
+            binding.myLinear.visibility = View.VISIBLE
+            binding.btnSignOut.visibility = View.VISIBLE
+        }
+        else{
+            binding.tvMyAccount.visibility = View.GONE
+            binding.myLinear.visibility = View.GONE
+            binding.btnSignOut.visibility = View.GONE
+        }
+
+    }
+
     private fun bindUi() {
-        binding.tvWelcomeUser.text = sharedPref.getUserInfo().customer?.email ?: "Email"
-        binding.tvUserName.text = sharedPref.getUserInfo().customer?.firstName ?: "User name"
+        binding.tvWelcomeUser.text =
+            sharedPref.getUserInfo().customer?.email ?: "Register now to enjoy shopping !"
+        binding.tvUserName.text = sharedPref.getUserInfo().customer?.firstName ?: ""
 
         binding.btnCurrency.setOnClickListener {
 
-            val sharedPreferences: SharedPreferences =requireContext().getSharedPreferences("currency", 0)
-             selectedItemIndex = sharedPreferences.getInt("currencyindex",0)
+            val sharedPreferences: SharedPreferences =
+                requireContext().getSharedPreferences("currency", 0)
+            selectedItemIndex = sharedPreferences.getInt("currencyindex", 0)
 
             MaterialAlertDialogBuilder(requireActivity())
                 .setTitle("Currency")
-                .setSingleChoiceItems(arrayItems,selectedItemIndex){ _,which ->
-                    selectedItemIndex=which
-                    selectedItem =arrayItems[which]
+                .setSingleChoiceItems(arrayItems, selectedItemIndex) { _, which ->
+                    selectedItemIndex = which
+                    selectedItem = arrayItems[which]
                     val editor: SharedPreferences.Editor = sharedPreferences.edit()
                     editor.putString("currency", selectedItem)
                     editor.putInt("currencyindex", selectedItemIndex)
@@ -63,10 +80,11 @@ class Settings : Fragment() {
 
 
                 }
-                .setPositiveButton("Ok"){ _,_ ->
-                    Toast.makeText(requireActivity(),"$selectedItem Selected",Toast.LENGTH_SHORT).show()
+                .setPositiveButton("Ok") { _, _ ->
+                    Toast.makeText(requireActivity(), "$selectedItem Selected", Toast.LENGTH_SHORT)
+                        .show()
                 }
-                .setNegativeButton("Cancel"){ _,_ ->
+                .setNegativeButton("Cancel") { _, _ ->
                     // for cancel
                 }.show()
         }
@@ -88,9 +106,9 @@ class Settings : Fragment() {
         binding.btnAddress.setOnClickListener {
             findNavController().navigate(R.id.action_settings_to_address)
         }
-        binding.Checkout.setOnClickListener {
-            findNavController().navigate(R.id.action_Settings_to_checkout)
-        }
+//        binding.Checkout.setOnClickListener {
+//            findNavController().navigate(R.id.action_Settings_to_checkout)
+//        }
         binding.btnOrder.setOnClickListener {
             findNavController().navigate(R.id.action_Settings_to_orderFragment)
         }
