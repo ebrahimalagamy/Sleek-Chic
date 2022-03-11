@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.hema.e_commerce.R
 import com.hema.e_commerce.databinding.FragmentOrderCancelledBinding
 import com.hema.e_commerce.model.repository.Repository
@@ -15,7 +17,7 @@ import com.hema.e_commerce.model.room.RoomData
 class CancelledOrderFragment:Fragment() {
     private lateinit var binding:FragmentOrderCancelledBinding
     private lateinit var viewModel: OrderFragmentViewModel
-    private lateinit var adapter: OrderAdapter
+    private lateinit var adapter: CancelledOrderAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,5 +33,18 @@ class CancelledOrderFragment:Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupRecyclerView()
+        viewModel.getActiveStateOrder("CANCELLED").observe(viewLifecycleOwner, Observer {order->
+            adapter.differ.submitList(order)
+        })
+    }
+
+    private fun setupRecyclerView(){
+        adapter = CancelledOrderAdapter(viewModel)
+        binding.orderRec.apply {
+            adapter=adapter
+            layoutManager= LinearLayoutManager(context)
+
+        }
     }
 }

@@ -29,7 +29,7 @@ data class OrderData(
 
     @ColumnInfo(name = "state")
     val state: String
-        ){
+        )
 
-}
+
 

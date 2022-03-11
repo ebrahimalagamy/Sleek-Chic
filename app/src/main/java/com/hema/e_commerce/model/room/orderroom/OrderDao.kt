@@ -20,6 +20,9 @@ interface OrderDao {
     @Query("SELECT * FROM OrderData")
     fun getAllOrders(): LiveData<List<OrderData>>
 
+    @Query("SELECT * FROM OrderData Where State= :state")
+    fun getOrdersFromState(state: String): LiveData<List<OrderData>>
+
     @Delete
     suspend  fun deleteOrder(orderData: OrderData)
 
