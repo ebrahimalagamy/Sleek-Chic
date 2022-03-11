@@ -142,23 +142,26 @@ class SearchFragment : Fragment() {
                 position: Int,
                 id: Long
             ) {
-                searchProducts.clear()
-                if (parent!!.getItemAtPosition(position).equals("price From 0 to 100")){
-                    priceFilter("0","100")
-                }else if (parent!!.getItemAtPosition(position).equals("price to 150")){
-                    priceFilter("0","150")
+                when {
+                    parent!!.getItemAtPosition(position).equals("price 0 to 150") -> {
+                        priceFilter("0","150")
 
-                }else if(parent!!.getItemAtPosition(position).equals("price to 200")){
-                    priceFilter("0","200")
-                }else if(parent!!.getItemAtPosition(position).equals("price to 500")){
-                    priceFilter("0","500")
+                    }
+                    parent!!.getItemAtPosition(position).equals("price 0 to 200") -> {
+                        priceFilter("0","200")
+                    }
+                    parent!!.getItemAtPosition(position).equals("price 0 to 500") -> {
+                        priceFilter("0","500")
 
-                }else if(parent!!.getItemAtPosition(position).equals("price to 1000")){
-                    priceFilter("0","1000")
+                    }
+                    parent!!.getItemAtPosition(position).equals("price 0 to 1000") -> {
+                        priceFilter("0","1000")
 
-                }else if(parent!!.getItemAtPosition(position).equals("price bigger than 1000")){
-                    priceFilter("0","5000")
+                    }
+                    parent!!.getItemAtPosition(position).equals("price bigger than 1000") -> {
+                        priceFilter("0","5000")
 
+                    }
                 }
 
             }
@@ -169,6 +172,7 @@ class SearchFragment : Fragment() {
 
         }
     }
+
     fun priceFilter(price1:String,price2: String){
         searchProducts.clear()
         products.forEach {

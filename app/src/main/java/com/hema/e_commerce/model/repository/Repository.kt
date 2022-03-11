@@ -14,6 +14,7 @@ import com.hema.e_commerce.model.dataclass.singleproduct.ProductCollectionRespon
 import com.hema.e_commerce.model.room.cartroom.CartProductData
 import com.hema.e_commerce.model.room.RoomData
 import com.hema.e_commerce.model.room.favoriteRoom.FavoriteProduct
+import com.hema.e_commerce.model.room.orderroom.OrderData
 import com.hema.e_commerce.ui.category.subcollectionsmodel.SubCollections
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -63,13 +64,13 @@ class Repository(val db: RoomData) {
         }
     }
 
-//sub collections
+    //sub collections
     var subCollectionProductsLiveData = MutableLiveData<ArrayList<SubCollections>>()
     fun getSubCollections(position: Int) {
         subCollectionProductsLiveData.value = ShowSubCollections().showSub(position)
     }
 
-//Single product
+    //Single product
     val singleProductsLiveData = MutableLiveData<ProductCollectionResponse>()
     fun getSingleProduct(productId: Long) {
         GlobalScope.launch(Dispatchers.IO) {
@@ -88,10 +89,10 @@ class Repository(val db: RoomData) {
         }
     }
 
-//////////////////////////////////////////
+    //////////////////////////////////////////
 //Mohamed
 //Live data
-val brandsLiveData = MutableLiveData<BrandsResponce>()
+    val brandsLiveData = MutableLiveData<BrandsResponce>()
     val onSaleProductsList = MutableLiveData<ProductsResponse>()
     val onHomeProductsList = MutableLiveData<ProductsResponse>()
     val allProduct = MutableLiveData<ProductsResponse>()
@@ -99,24 +100,27 @@ val brandsLiveData = MutableLiveData<BrandsResponce>()
     //Remote function
     private suspend fun getBrands() = RetrofitInstance.api.getBrands()
 
-    private suspend fun getProducts()=RetrofitInstance.api.getProducts()
+    private suspend fun getProducts() = RetrofitInstance.api.getProducts()
 
-    private suspend  fun getOnSaleProductsList()=RetrofitInstance.api.getOnSaleProductsList()
+    private suspend fun getOnSaleProductsList() = RetrofitInstance.api.getOnSaleProductsList()
 
-    private suspend  fun getOnHomeProductsList()=RetrofitInstance.api.getOnHomeProductsList()
+    private suspend fun getOnHomeProductsList() = RetrofitInstance.api.getOnHomeProductsList()
+
     //room
-    private suspend fun fetchFav(favoriteProduct: FavoriteProduct)=db.getFavoriteData().insert(favoriteProduct)
+    private suspend fun fetchFav(favoriteProduct: FavoriteProduct) =
+        db.getFavoriteData().insert(favoriteProduct)
 
-   private suspend fun deleteFav(favoriteProduct: FavoriteProduct)=db.getFavoriteData().delete(favoriteProduct)
+    private suspend fun deleteFav(favoriteProduct: FavoriteProduct) =
+        db.getFavoriteData().delete(favoriteProduct)
 
-    private suspend fun deleteAll()=db.getFavoriteData().deleteAll()
+    private suspend fun deleteAll() = db.getFavoriteData().deleteAll()
 
-    private suspend fun deleteById(id:Long)=db.getFavoriteData().deleteById(id)
+    private suspend fun deleteById(id: Long) = db.getFavoriteData().deleteById(id)
 
 
-    fun getAllFav()=db.getFavoriteData().getAllFav()
+    fun getAllFav() = db.getFavoriteData().getAllFav()
 
-    fun getOneItem(id:Long)=db.getFavoriteData().getOneItem(id)
+    fun getOneItem(id: Long) = db.getFavoriteData().getOneItem(id)
 
 
     //Methods use in viewModel
@@ -129,11 +133,13 @@ val brandsLiveData = MutableLiveData<BrandsResponce>()
                         brandsLiveData.value = it
                     }
                 } else {
-                    Log.i("checkkkk", "getBrands: error " + response.errorBody()) }
+                    Log.i("checkkkk", "getBrands: error " + response.errorBody())
+                }
             }
         }
     }
-    fun getOnSaleProducts(){
+
+    fun getOnSaleProducts() {
         GlobalScope.launch(Dispatchers.IO) {
             val response = getOnSaleProductsList()
             withContext(Dispatchers.Main) {
@@ -142,12 +148,14 @@ val brandsLiveData = MutableLiveData<BrandsResponce>()
                         onSaleProductsList.value = it
                     }
                 } else {
-                    Log.i("checkkkk", "getBrands: error " + response.errorBody()) }
+                    Log.i("checkkkk", "getBrands: error " + response.errorBody())
+                }
             }
 
         }
     }
-    fun getOnHomeProducts(){
+
+    fun getOnHomeProducts() {
         GlobalScope.launch(Dispatchers.IO) {
             val response = getOnHomeProductsList()
             withContext(Dispatchers.Main) {
@@ -157,13 +165,14 @@ val brandsLiveData = MutableLiveData<BrandsResponce>()
 
                     }
                 } else {
-                    Log.i("checkkkk", "getBrands: error " + response.errorBody()) }
+                    Log.i("checkkkk", "getBrands: error " + response.errorBody())
+                }
             }
 
         }
-
     }
-    fun getallProduct(){
+
+    fun getallProduct() {
         GlobalScope.launch(Dispatchers.IO) {
             val response = getProducts()
             withContext(Dispatchers.Main) {
@@ -172,143 +181,106 @@ val brandsLiveData = MutableLiveData<BrandsResponce>()
                         allProduct.value = it
                     }
                 } else {
-                    Log.i("checkkkk", "getBrands: error " + response.errorBody()) }
+                    Log.i("checkkkk", "getBrands: error " + response.errorBody())
+                }
             }
 
         }
 
     }
 
-    fun insert(favoriteProduct:FavoriteProduct){
+    fun insert(favoriteProduct: FavoriteProduct) {
         GlobalScope.launch(Dispatchers.IO) {
             fetchFav(favoriteProduct)
         }
     }
 
-    fun deleteOnItemFromFavByID(id: Long){
+    fun deleteOnItemFromFavByID(id: Long) {
         GlobalScope.launch(Dispatchers.IO) {
             deleteById(id)
         }
     }
-   fun deleteOnItemFromFav(favoriteProduct:FavoriteProduct){
-       GlobalScope.launch(Dispatchers.IO) {
-           deleteFav(favoriteProduct)
-       }
-   }
 
-    fun deleteAllFromFav(){
+    fun deleteOnItemFromFav(favoriteProduct: FavoriteProduct) {
+        GlobalScope.launch(Dispatchers.IO) {
+            deleteFav(favoriteProduct)
+        }
+    }
+
+    fun deleteAllFromFav() {
         GlobalScope.launch(Dispatchers.IO) {
             deleteAll()
         }
     }
 
+
     //////////////////////////////////////////////////////////////////////////////////////////////////////
-    val oneOrder= MutableLiveData<Order>()
-    fun getcreatAnOrder(){
-
-        GlobalScope.launch(Dispatchers.IO) {
-
-            val response=RetrofitInstance.api.creatAnOrder()
-            withContext(Dispatchers.Main){
-                if (response.isSuccessful){
-                    response.body()?.let {
-                        oneOrder.value= it
-                    }
-                }else{
-
-
-                }
-
-            }
-        }
-
-
-    }
-    val listOfOrder= MutableLiveData<GetOrderResponce>()
-
-    fun getListOfOrderOpen(){
-        GlobalScope.launch(Dispatchers.IO) {
-
-            val response=RetrofitInstance.api.getListOfOrderOpen()
-            withContext(Dispatchers.Main){
-                if (response.isSuccessful){
-                    response.body()?.let {
-                        listOfOrder.value= it
-                    }
-                }else{
-
-
-                }
-
-            }
-        }
-
-
-    }
-    val getOneOrder= MutableLiveData<Order>()
-
-    fun getAnOrder(orderId:Long){
-
-        GlobalScope.launch(Dispatchers.IO) {
-
-            val response=RetrofitInstance.api.getAnOrder(orderId)
-            withContext(Dispatchers.Main){
-                if (response.isSuccessful){
-                    response.body()?.let {
-                        getOneOrder.value= it
-                    }
-                }else{
-
-
-
-                }
-
-            }
-        }
-
-    }
-
-
-
-    ///////////////////
 
     //Local database
-  suspend  fun saveCartList(cartlist: CartProductData){
+    suspend fun saveCartList(cartlist: CartProductData) {
         db.getLocalDataObject().saveAllCartList(cartlist)
     }
 
-    suspend  fun updateCount(cartlist: CartProductData){
+    suspend fun updateCount(cartlist: CartProductData) {
         db.getLocalDataObject().getCountUpdate(cartlist)
     }
+
     fun getAllCartProduct(): LiveData<List<CartProductData>> {
         return db.getLocalDataObject().getAllCartList()
 
     }
 
-     suspend fun deleteOneItemOnCart(cartlist: CartProductData){
-        db.getLocalDataObject().deleteOnCartItem(cartlist )
+    suspend fun deleteOneItemOnCart(cartlist: CartProductData) {
+        db.getLocalDataObject().deleteOnCartItem(cartlist)
     }
 
-
-//Method to handle data
-    fun insert(cartlist: CartProductData){
+    //Method to handle data
+    fun insert(cartlist: CartProductData) {
         GlobalScope.launch(Dispatchers.IO) {
             saveCartList(cartlist)
         }
     }
 
-    fun updateCountChange(cartlist: CartProductData){
+    fun updateCountChange(cartlist: CartProductData) {
         GlobalScope.launch(Dispatchers.IO) {
-         updateCount(cartlist)
+            updateCount(cartlist)
         }
     }
 
-
-
-    fun deleteOneCartItem(cartlist: CartProductData){
+    fun deleteOneCartItem(cartlist: CartProductData) {
         GlobalScope.launch(Dispatchers.IO) {
             deleteOneItemOnCart(cartlist)
         }
+    }
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////
+//order
+    suspend fun addOrder(orderData: OrderData) {
+        db.getOrder().addOrder(orderData)
+    }
+
+    fun getCanceledOrder(state:String) {
+        db.getOrder().getCanceledOrder(state)
+    }
+
+    suspend fun updateOrder(id: Int, state: String) {
+        db.getOrder().updateOrder(id, state)
+    }
+
+    suspend fun updateState(orderData: OrderData) {
+        db.getOrder().updateState(orderData)
+    }
+
+    fun getAllOrders():LiveData<List<OrderData>> {
+       return db.getOrder().getAllOrders()
+    }
+
+    suspend fun deleteOrder(orderData: OrderData) {
+        db.getOrder().deleteOrder(orderData)
+    }
+
+    suspend fun deleteAllOrders() {
+        db.getOrder().deleteAllOrders()
     }
 
 }
