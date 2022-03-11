@@ -1,6 +1,5 @@
 package com.hema.e_commerce.ui.order
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,12 +8,11 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.hema.e_commerce.R
-import com.hema.e_commerce.databinding.ItemFavoriteBinding
 import com.hema.e_commerce.databinding.ItemOrderBinding
 import com.hema.e_commerce.model.room.orderroom.OrderData
-import com.hema.e_commerce.model.viewmodels.WishListViewModel
 
-class CancelledOrderAdapter (val context: Context, var viewModel: WishListViewModel) : RecyclerView.Adapter<CancelledOrderAdapter.ViewHolder>() {
+class CancelledOrderAdapter (var viewModel: OrderFragmentViewModel) : RecyclerView.Adapter<CancelledOrderAdapter.ViewHolder>() {
+
     inner class ViewHolder( val binding: ItemOrderBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CancelledOrderAdapter.ViewHolder {

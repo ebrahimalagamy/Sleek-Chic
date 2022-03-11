@@ -293,6 +293,10 @@ class Repository(val db: RoomData) {
             db.getOrder().deleteAllOrders()
         }
     }
+    fun getOrdersFromState(state: String):LiveData<List<OrderData>> {
+     return   db.getOrder().getOrdersFromState(state)
+    }
+
 
 
 

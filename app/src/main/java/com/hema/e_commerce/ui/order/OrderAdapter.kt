@@ -1,6 +1,5 @@
 package com.hema.e_commerce.ui.order
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -11,7 +10,7 @@ import com.hema.e_commerce.R
 import com.hema.e_commerce.databinding.ItemOrderBinding
 import com.hema.e_commerce.model.room.orderroom.OrderData
 
-class OrderAdapter (val context: Context, var viewModel: OrderFragmentViewModel) : RecyclerView.Adapter<OrderAdapter.ViewHolder>() {
+class OrderAdapter (var viewModel: OrderFragmentViewModel) : RecyclerView.Adapter<OrderAdapter.ViewHolder>() {
 
     inner class ViewHolder( val binding: ItemOrderBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -36,6 +35,9 @@ class OrderAdapter (val context: Context, var viewModel: OrderFragmentViewModel)
 
         holder.binding.tvPayment.text=differ.currentList[position].payMethod
         holder.binding.tvPrice.text=differ.currentList[position].totalPrice
+        holder.binding.btnCancelOrder.setOnClickListener {
+
+        }
 
     }
 
