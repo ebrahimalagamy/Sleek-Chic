@@ -22,6 +22,7 @@ import com.hema.e_commerce.model.room.RoomData
 import com.hema.e_commerce.model.viewModelFactory.CatagoryViewModelFactory
 import com.hema.e_commerce.model.viewmodels.CategoryViewModel
 import com.hema.e_commerce.ui.category.categoryui.containerui.FragmentContainer
+import com.hema.e_commerce.ui.progresspar.ProgressBarSetting
 
 class CategoryFragment : Fragment() {
     lateinit var productAdapter: CategoriesProductAdapter
@@ -44,6 +45,7 @@ class CategoryFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        ProgressBarSetting().setProgress(requireActivity())
         navController= Navigation.findNavController(requireView())
         val repository= Repository(RoomData(requireContext()))
         val catagoryViewModelProviderFactory =CatagoryViewModelFactory(requireActivity().application,repository)

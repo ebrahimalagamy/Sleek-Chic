@@ -1,6 +1,7 @@
 package com.hema.e_commerce.ui.home
 
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -23,6 +24,8 @@ import com.hema.e_commerce.model.repository.Repository
 import com.hema.e_commerce.model.room.RoomData
 import com.hema.e_commerce.model.viewModelFactory.HomeViewModelFactory
 import com.hema.e_commerce.model.viewmodels.HomeViewModel
+import com.hema.e_commerce.ui.progresspar.ProgressBarSetting
+import com.hema.e_commerce.ui.progresspar.ProgressHandler
 
 
 class Home : Fragment() {
@@ -44,6 +47,7 @@ class Home : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        ProgressBarSetting().setProgress(requireActivity())
         val repository= Repository(RoomData(requireContext()))
         val homeViewModelProviderFactory = HomeViewModelFactory(requireActivity().application,repository)
         viewModel = ViewModelProvider(this,homeViewModelProviderFactory)[HomeViewModel::class.java]
@@ -56,6 +60,7 @@ class Home : Fragment() {
 
         onClickSearch()
     }
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
     //product and brand logic

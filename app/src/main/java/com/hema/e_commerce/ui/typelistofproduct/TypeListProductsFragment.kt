@@ -1,6 +1,7 @@
 package com.hema.e_commerce.ui.typelistofproduct
 
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.*
 import android.widget.AdapterView
@@ -17,11 +18,14 @@ import com.hema.e_commerce.model.repository.Repository
 import com.hema.e_commerce.model.room.RoomData
 import com.hema.e_commerce.model.viewModelFactory.ListOfProductViewModelFactory
 import com.hema.e_commerce.model.viewmodels.ListOfProductsViewModel
+import com.hema.e_commerce.ui.progresspar.ProgressBarSetting
+import com.hema.e_commerce.ui.progresspar.ProgressHandler
 import com.hema.e_commerce.util.Constant
 import com.hema.e_commerce.util.Constant.BRAND_KEY
 import com.hema.e_commerce.util.Constant.FLAG
 import com.hema.e_commerce.util.Constant.SUB_COLLECTION_ID
 import com.hema.e_commerce.util.Constant.SUB_COLLECTION_NAME
+import okhttp3.internal.wait
 
 
 class TypeListProductsFragment : Fragment() {
@@ -47,12 +51,15 @@ class TypeListProductsFragment : Fragment() {
         viewModel = ViewModelProvider(this, listOfProductsViewModelProviderFactory)[ListOfProductsViewModel::class.java]
 
 
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-       val flag = arguments?.get(FLAG)
+
+        ProgressBarSetting().setProgress(requireActivity())
+        val flag = arguments?.get(FLAG)
         Log.d("flaaaag","string $flag")
         if (flag==0){
             catagoryList()
@@ -65,6 +72,8 @@ class TypeListProductsFragment : Fragment() {
     }
     ////////////////////////////////////////////////////////////
 //Aya
+
+
 fun catagoryList(){
     subCollectionsName = arguments?.getString(SUB_COLLECTION_NAME).toString()
     collectionsId= arguments?.getLong(SUB_COLLECTION_ID)!!
