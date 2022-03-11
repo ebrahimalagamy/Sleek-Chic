@@ -181,6 +181,7 @@
                         tools:ignore="MissingConstraints" />
 
                     <Button
+                        android:id="@+id/btnOrder"
                         style="@style/Widget.AppCompat.Button.Borderless.Colored"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

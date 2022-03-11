@@ -10,6 +10,8 @@
         <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/categories_products_items.xml" value="0.20416666666666666" />
         <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/category_fragment.xml" value="0.1" />
         <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/first_screen.xml" value="0.1" />
+        <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/fragment_order.xml" value="0.20416666666666666" />
+        <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/fragment_orderCancelled.xml" value="0.20416666666666666" />
         <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/fragment_product.xml" value="0.25" />
         <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/fragment_search.xml" value="0.2" />
         <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/fragment_type_list_product.xml" value="0.30701754385964913" />
@@ -17,8 +19,10 @@
         <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/home_fragment.xml" value="0.33" />
         <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/item_cart.xml" value="0.20416666666666666" />
         <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/item_favorite.xml" value="0.4717208182912154" />
+        <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/item_order.xml" value="0.33" />
         <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/row_brands.xml" value="0.20416666666666666" />
         <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/row_product.xml" value="0.33" />
+        <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/settings_fragment.xml" value="0.1" />
         <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/single_product_fragment.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/CompuTouch/Documents/GitHub/E-Commerce/app/src/main/res/drawable/button_background.xml" value="0.116" />
         <entry key="..\:/Users/CompuTouch/Documents/GitHub/E-Commerce/app/src/main/res/drawable/heart.xml" value="0.116" />

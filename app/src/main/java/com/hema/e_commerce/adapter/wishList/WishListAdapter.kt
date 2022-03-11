@@ -26,12 +26,8 @@ class WishListAdapter(val context:Context,var viewModel:WishListViewModel) : Rec
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(
-            DataBindingUtil.inflate(
-                LayoutInflater.from(parent.context),
-                R.layout.item_favorite,
-                parent,
-                false
+        return ViewHolder(DataBindingUtil.inflate(LayoutInflater.from(parent.context),
+            R.layout.item_favorite, parent, false
             )
         )
 

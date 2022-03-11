@@ -84,6 +84,7 @@
     <string name="alertDeleteMessage">Do You Want To Delete This Product From Favorite</string>
     <string name="yes">yes</string>
     <string name="no">no</string>
+    <string name="cancelled_orders">Cancelled Orders</string>
     <!-- filter -->
     <string-array name="filterArr">
         <item>Filter</item>

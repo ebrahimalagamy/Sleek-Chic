@@ -10,8 +10,10 @@ data class FavoriteProduct(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name="id")
     val id: Long,
+
     @ColumnInfo(name="image")
     val image: String,
+
     @ColumnInfo(name="title")
     val title: String,
     @ColumnInfo(name="price")

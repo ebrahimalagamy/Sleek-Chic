@@ -5,10 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 @Entity
 data class OrderData(
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name="id")
-    val id:Long,
-
+    @PrimaryKey
     @ColumnInfo(name="orderNumber")
     val orderNumber:Long,
 
@@ -29,6 +26,6 @@ data class OrderData(
 
     @ColumnInfo(name="state")
     val state: String
+        ){
 
-
-        )
+}

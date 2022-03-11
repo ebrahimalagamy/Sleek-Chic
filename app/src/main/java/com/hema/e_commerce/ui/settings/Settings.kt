@@ -91,6 +91,9 @@ class Settings : Fragment() {
         binding.Checkout.setOnClickListener {
             findNavController().navigate(R.id.action_Settings_to_checkout)
         }
+        binding.btnOrder.setOnClickListener {
+            findNavController().navigate(R.id.action_Settings_to_orderFragment)
+        }
 //        binding.myAccountConstraint.visibility = View.GONE
     }
 
