@@ -60,7 +60,6 @@ object LocationProvider {
                         val currentLocation =
                             geoCoder.getFromLocation(it.latitude, it.longitude, 1)
                         Log.d("first", currentLocation[0].getAddressLine(0))
-                        Log.d("first", currentLocation[0].postalCode)
                         sharedPref.setLocation(
                             it.latitude.toString(),
                             it.longitude.toString(),

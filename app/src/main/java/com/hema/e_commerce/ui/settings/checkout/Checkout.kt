@@ -70,23 +70,32 @@ class Checkout : Fragment() {
             val rbSelectedId = binding.rgGroup.checkedRadioButtonId
             val btn = requireView().findViewById<RadioButton>(rbSelectedId)
             paymentMethod = btn.text.toString()
-            Toast.makeText(requireActivity(), btn.text, Toast.LENGTH_SHORT).show()
-        }
 
-        if (paymentMethod == "Pay With Cash") {
+            when (paymentMethod) {
+                "Pay With Cash" -> {
+                    CoroutineScope(Dispatchers.IO).launch {
+                        viewModel.addOrder(
+                            OrderData(
+                                orderId,
+                                totalPrice,
+                                customerName,
+                                customerAddress,
+                                customerPhone,
+                                totalPrice,
+                                "ACTIVE"
+                            )
+                        )
+                    }
 
-            CoroutineScope(Dispatchers.IO).launch {
-                viewModel.addOrder(
-                    OrderData(
-                        orderId,
-                        totalPrice,
-                        customerName,
-                        customerAddress,
-                        customerPhone,
-                        totalPrice,
-                        "Active"
-                    )
-                )
+
+                }
+                "Pay With Paypal" -> {
+                    Toast.makeText(requireActivity(),"Not Active Else",Toast.LENGTH_LONG).show()
+                }
+                "Pay With Card" -> {
+                    Toast.makeText(requireActivity(),"Not Active Else",Toast.LENGTH_LONG).show()
+                }
+
             }
 
         }
