@@ -21,6 +21,7 @@
         <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/row_product.xml" value="0.33" />
         <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/single_product_fragment.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/CompuTouch/Documents/GitHub/E-Commerce/app/src/main/res/drawable-v24/ic_loading.xml" value="0.118" />
+        <entry key="..\:/Users/CompuTouch/Documents/GitHub/E-Commerce/app/src/main/res/drawable/border_box.xml" value="0.1" />
         <entry key="..\:/Users/CompuTouch/Documents/GitHub/E-Commerce/app/src/main/res/drawable/button_background.xml" value="0.116" />
         <entry key="..\:/Users/CompuTouch/Documents/GitHub/E-Commerce/app/src/main/res/drawable/heart.xml" value="0.116" />
         <entry key="..\:/Users/CompuTouch/Documents/GitHub/E-Commerce/app/src/main/res/drawable/ic_delete_forever_24.xml" value="0.116" />
@@ -29,8 +30,11 @@
         <entry key="..\:/Users/CompuTouch/Documents/GitHub/E-Commerce/app/src/main/res/layout/categories_products_items.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/CompuTouch/Documents/GitHub/E-Commerce/app/src/main/res/layout/category_fragment.xml" value="0.17222222222222222" />
         <entry key="..\:/Users/CompuTouch/Documents/GitHub/E-Commerce/app/src/main/res/layout/container_item.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/CompuTouch/Documents/GitHub/E-Commerce/app/src/main/res/layout/first_screen.xml" value="0.1398148148148148" />
+        <entry key="..\:/Users/CompuTouch/Documents/GitHub/E-Commerce/app/src/main/res/layout/fragment_splash.xml" value="0.1398148148148148" />
         <entry key="..\:/Users/CompuTouch/Documents/GitHub/E-Commerce/app/src/main/res/layout/fragment_wishlist.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/CompuTouch/Documents/GitHub/E-Commerce/app/src/main/res/layout/item_cart.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/CompuTouch/Documents/GitHub/E-Commerce/app/src/main/res/layout/item_wishlist.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Ebrah/AndroidStudioProjects/ECommerce/app/src/main/res/drawable-v24/facebook_icon.xml" value="0.1655" />
         <entry key="..\:/Users/Ebrah/AndroidStudioProjects/ECommerce/app/src/main/res/drawable-v24/google_icon.xml" value="0.1655" />
         <entry key="..\:/Users/Ebrah/AndroidStudioProjects/ECommerce/app/src/main/res/drawable-v24/login_button.xml" value="0.1865" />
