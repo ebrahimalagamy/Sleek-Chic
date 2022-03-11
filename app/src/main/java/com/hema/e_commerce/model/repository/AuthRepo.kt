@@ -4,14 +4,11 @@ import android.app.Application
 import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
-import com.hema.e_commerce.model.dataclass.customer.AddressModel
-import com.hema.e_commerce.model.dataclass.customer.Customer
 import com.hema.e_commerce.model.dataclass.customer.CustomerModel
 import com.hema.e_commerce.model.dataclass.customer.CustomersModel
 import com.hema.e_commerce.model.remote.RetrofitInstance.Companion.api
 import com.hema.e_commerce.model.remote.ShopifyApi
 import com.hema.e_commerce.util.*
-import retrofit2.Response
 
 class AuthRepo(
     val ShopifyServices: ShopifyApi,
@@ -27,9 +24,7 @@ class AuthRepo(
                 val res = api.register(customer)
                 if (res.isSuccessful) {
                     sharedPref.update {
-                        it.copy(
-                            customer = res.body()?.customer
-                        )
+                        it.copy(customer = res.body()?.customer)
                     }
 
                     Log.d("body", res.body()?.customer.toString())
@@ -101,7 +96,6 @@ class AuthRepo(
             Either.Error(LoginErrors.ServerError, t.message)
         }
     }
-
 
 
     private fun getCustomerFromSettings() = sharedPref.getUserInfo().customer
