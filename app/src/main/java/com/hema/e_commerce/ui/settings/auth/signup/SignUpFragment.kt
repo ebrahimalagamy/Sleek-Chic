@@ -26,6 +26,7 @@ class SignUpFragment : Fragment() {
     private val viewModel by lazy {
         RegisterViewModel.create(this)
     }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -39,6 +40,12 @@ class SignUpFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         bindUi()
+        bindNav()
+
+    }
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    private fun bindNav() {
         binding.btnSignUp.setOnClickListener {
             if (validateForm()) {
 
@@ -53,17 +60,10 @@ class SignUpFragment : Fragment() {
                 )
                 viewModel.postData(customer)
                 viewModel.signupSuccess.observe(viewLifecycleOwner) {
-                    if (it!!) {
-                        Toast.makeText(
-                            requireContext(),
-                            "Registered successfully",
-                            Toast.LENGTH_LONG
-                        ).show()
-                    } else Toast.makeText(
-                        requireContext(),
-                        "Unsuccessfully Register",
-                        Toast.LENGTH_LONG
-                    ).show()
+                    if (it == true) {
+                        Toast.makeText(requireContext(), "Successfully", Toast.LENGTH_LONG).show()
+                        findNavController().navigate(R.id.signInFragment)
+                    } else Toast.makeText(requireContext(), "Try again", Toast.LENGTH_LONG).show()
                 }
             }
         }

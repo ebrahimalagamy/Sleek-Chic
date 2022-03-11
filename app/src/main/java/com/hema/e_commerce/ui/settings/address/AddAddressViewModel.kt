@@ -12,24 +12,7 @@ import com.hema.e_commerce.model.repository.AuthRepo
 import com.hema.e_commerce.util.SharedPreferencesProvider
 
 
-class AddAddressViewModel(application: Application, val productRepo: AuthRepo) : AndroidViewModel(application) {
-
-    var addressSource = Address()
-    val addressLiveData = MutableLiveData(addressSource)
-
-    var isDefault = false
-
-    var isValid = false
-
-    var setErrors = false
-
-    fun setErrors(){
-        setErrors = true
-        addressLiveData.value = addressSource
-    }
-
-    @RequiresApi(Build.VERSION_CODES.M)
-    suspend fun addAddress() = productRepo.addAddress(AddressModel(addressSource),isDefault)
+class AddAddressViewModel(application: Application, val authRepo: AuthRepo) : AndroidViewModel(application) {
 
 
     class Factory(private val application: Application,val productRepo: AuthRepo) : ViewModelProvider.Factory {
