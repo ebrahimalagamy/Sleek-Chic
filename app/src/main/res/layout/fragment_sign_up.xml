@@ -93,6 +93,26 @@
                     android:inputType="textEmailAddress" />
 
             </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:hint="Phone"
+                app:boxStrokeColor="@color/yellow"
+                app:endIconMode="clear_text"
+                app:hintTextColor="@color/yellow"
+                app:startIconDrawable="@drawable/ic_phone">
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:inputType="number"
+                    android:maxLength="11"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
 
 
             <com.google.android.material.textfield.TextInputLayout

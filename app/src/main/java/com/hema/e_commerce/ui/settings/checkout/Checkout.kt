@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.hema.e_commerce.R
 import com.hema.e_commerce.databinding.FragmentCheckoutBinding
 import com.hema.e_commerce.model.repository.Repository
@@ -54,8 +55,8 @@ class Checkout : Fragment() {
 
     private fun bindArgs() {
         val totalPrice = args.totalPrice
-        binding.tvTotalPrice.text = "EGP $totalPrice"
-        binding.tvSubtotal.text = "EGP $totalPrice"
+        binding.tvTotalPrice.text = totalPrice
+        binding.tvSubtotal.text = totalPrice
     }
 
     private suspend fun bindUI() {
@@ -73,27 +74,39 @@ class Checkout : Fragment() {
 
             when (paymentMethod) {
                 "Pay With Cash" -> {
-                    CoroutineScope(Dispatchers.IO).launch {
-                        viewModel.addOrder(
-                            OrderData(
-                                orderId,
-                                totalPrice,
-                                customerName,
-                                customerAddress,
-                                customerPhone,
-                                totalPrice,
-                                "ACTIVE"
-                            )
-                        )
-                    }
+                    MaterialAlertDialogBuilder(requireActivity())
+                        .setTitle("Currency")
+                        .setMessage("Do you Want Confirm Your Order")
+                        .setPositiveButton("Ok") { _, _ ->
+                            Toast.makeText(requireActivity(), "Confirmed", Toast.LENGTH_SHORT)
+                                .show()
+                            CoroutineScope(Dispatchers.IO).launch {
+                                viewModel.addOrder(
+                                    OrderData(
+                                        orderId,
+                                        totalPrice,
+                                        customerName,
+                                        customerAddress,
+                                        customerPhone,
+                                        paymentMethod!!,
+                                        "ACTIVE"
+                                    )
+                                )
+
+                            }
+                        }
+                        .setNegativeButton("Cancel") { _, _ ->
+                            Toast.makeText(requireActivity(), "Order Canceled", Toast.LENGTH_SHORT)
+                                .show()
+                        }.show()
 
 
                 }
                 "Pay With Paypal" -> {
-                    Toast.makeText(requireActivity(),"Not Active Else",Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireActivity(), "Not Active Else", Toast.LENGTH_LONG).show()
                 }
                 "Pay With Card" -> {
-                    Toast.makeText(requireActivity(),"Not Active Else",Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireActivity(), "Not Active Else", Toast.LENGTH_LONG).show()
                 }
 
             }

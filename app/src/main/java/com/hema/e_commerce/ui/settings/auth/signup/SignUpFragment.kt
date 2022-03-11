@@ -22,6 +22,7 @@ class SignUpFragment : Fragment() {
     private lateinit var userEmail: String
     private lateinit var userPassword: String
     private lateinit var userConfirmPassword: String
+    private lateinit var phone: String
 
     private val viewModel by lazy {
         RegisterViewModel.create(this)
@@ -55,7 +56,8 @@ class SignUpFragment : Fragment() {
                         lastName = userPassword,
                         email = userEmail,
                         password = userPassword,
-                        passwordConfirmation = userConfirmPassword
+                        passwordConfirmation = userConfirmPassword,
+                        phone = phone
                     )
                 )
                 viewModel.postData(customer)
@@ -88,6 +90,11 @@ class SignUpFragment : Fragment() {
         if (userPassword.isEmpty()) {
             binding.etPassword.requestFocus()
             binding.etPassword.error = "Required"
+            return false
+        }
+        if (phone.isEmpty()) {
+            binding.etPhone.requestFocus()
+            binding.etPhone.error = "Required"
             return false
         }
         if (userConfirmPassword.isEmpty()) {
