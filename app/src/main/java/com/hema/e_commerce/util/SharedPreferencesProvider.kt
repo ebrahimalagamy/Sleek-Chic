@@ -3,6 +3,7 @@ package com.hema.e_commerce.util
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
+import android.location.Location
 import androidx.core.content.edit
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider.NewInstanceFactory.Companion.instance
@@ -121,7 +122,7 @@ class SharedPreferencesProvider(context: Context) {
     fun getUserStatus(): Boolean {
         return pref!!.getBoolean(USER_STATS, false)
     }
-//////////////
+
     private fun settingsFromJson(settings: String): CustomerInfo {
         val json = Gson()
         return json.fromJson(settings, CustomerInfo::class.java)

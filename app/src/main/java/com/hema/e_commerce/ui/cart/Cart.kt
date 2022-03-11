@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hema.e_commerce.R
+import com.hema.e_commerce.adapter.cart.CartAdapter
 import com.hema.e_commerce.databinding.CartFragmentBinding
 import com.hema.e_commerce.model.repository.Repository
 import com.hema.e_commerce.model.room.cartroom.CartProductData
