@@ -80,10 +80,6 @@ fun catagoryList(){
                     list.add(i)
                 }
             }
-            if(list.size==0){
-
-                binding.tvEmpty.text=getString(R.string.emptylist)
-            }
             adapter = TypeListAdapter(list)
             val layoutManager = GridLayoutManager(requireContext(), 2)
             binding.recListProduct.adapter = adapter

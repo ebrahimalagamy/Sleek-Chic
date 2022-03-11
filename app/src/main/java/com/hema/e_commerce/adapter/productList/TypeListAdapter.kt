@@ -35,10 +35,8 @@ class TypeListAdapter(private val productList: List<Product>) : RecyclerView.Ada
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
         val products = productList[position]
 //        holder.itemBinding.tvListPrice.text = products.variants.get(0).price
-
         Glide.with(holder.itemBinding.imgListProduct.context).load(products.image.src).into(holder.itemBinding.imgListProduct)
         holder.itemBinding.tvListShDesc.text = products.title
 
@@ -47,7 +45,6 @@ class TypeListAdapter(private val productList: List<Product>) : RecyclerView.Ada
             navController.navigate(R.id.action_typeListProductFragment2_to_productFragment,bundle)
 
         }
-
 
 
 

@@ -46,8 +46,6 @@ app:cardCornerRadius="@dimen/_10sdp"
 
 
             />
-
-
 </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,7 +1,5 @@
 package com.hema.e_commerce.adapter.cart
 
-import android.content.SharedPreferences
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -52,51 +50,7 @@ class CartAdapter(val cartViewModel: CartViewModel) : RecyclerView.Adapter<CartA
 
         val cartProduct = differ.currentList[position]
         holder.itemCartBinding.title.text = differ.currentList[position].title
-       // holder.itemCartBinding.price.text = differ.currentList[position].price
-
-
-
-        val sharedPreferences: SharedPreferences = holder.itemCartBinding.minCount.context.getSharedPreferences("currency", 0)
-        var value = sharedPreferences.getString("currency","EGP")
-        Log.i("cur value", "onBindViewHolder: "+value)
-
-
-        when(value){
-            "EGP"-> {
-                holder.itemCartBinding.price.text =
-                    differ.currentList[position].price + " " + holder.itemCartBinding.minCount.context.getString(
-                        R.string.eg)
-                Log.i("currancyyyyyy", "onBindViewHolder: "+ differ.currentList[position].price + " " + holder.itemCartBinding.minCount.context.getString(
-                    R.string.eg))
-
-            }
-            "USA"-> {
-                var usCurrancy=   (( differ.currentList[position].price).toDouble() / (15.71))
-                val number:Double=String.format("%.2f",usCurrancy).toDouble()
-                holder.itemCartBinding.price.text = number.toString() + " " + holder.itemCartBinding.minCount.context.getString(R.string.us)
-                Log.i("currancyyyyyy", "onBindViewHolder: "+         number.toString() + " " + holder.itemCartBinding.minCount.context.getString(R.string.us)
-                )
-
-
-            }
-            "EUR"->      {
-                var ureCurrancy=   ((differ.currentList[position].price).toDouble() / (17.10))
-                val number:Double=String.format("%.2f",ureCurrancy).toDouble()
-                holder.itemCartBinding.price.text=number.toString()+" "+ holder.itemCartBinding.minCount.context.getString(R.string.eur)
-
-                Log.i("currancyyyyyy", "onBindViewHolder: "+number.toString()+" "+ holder.itemCartBinding.minCount.context.getString(R.string.eur)
-                )}
-            else -> {
-                holder.itemCartBinding.price.text =
-                    differ.currentList[position].price + " " + holder.itemCartBinding.minCount.context.getString(
-                        R.string.eg)
-                Log.i("currancyyyyyy", "onBindViewHolder: else "+  differ.currentList[position].price + " " + holder.itemCartBinding.minCount.context.getString(
-                    R.string.eg))
-            }
-        }
-
-
-        //
+        holder.itemCartBinding.price.text = differ.currentList[position].price
         holder.itemCartBinding.copoun.text = "free delevery"
         Glide.with(holder.itemCartBinding.imageView)
             .load(differ.currentList[position].image)
@@ -110,15 +64,7 @@ class CartAdapter(val cartViewModel: CartViewModel) : RecyclerView.Adapter<CartA
             if(num>0){
                 // differ.currentList[position].count-= num
                 differ.currentList[position].inventory_quantity=num
-
-
-
-
-
-
-
-              //  differ.currentList[position].price
-                //
+                differ.currentList[position].price
                 holder.itemCartBinding.count.text=num.toString()
 
                 val cartitem= CartProductData(
