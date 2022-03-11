@@ -80,6 +80,7 @@ class Wishlist : Fragment() {
         binding.favRec.apply {
             adapter=favAdapter
             layoutManager= LinearLayoutManager(context)
+
         }
     }
 

@@ -269,6 +269,7 @@ class Repository(val db: RoomData) {
         GlobalScope.launch(Dispatchers.IO) {
             db.getOrder().updateOrder(id, state)
         }
+
     }
 
     suspend fun updateState(orderData: OrderData) {
