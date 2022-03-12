@@ -13,7 +13,7 @@ import com.hema.e_commerce.R
 import com.hema.e_commerce.databinding.ItemOrderBinding
 import com.hema.e_commerce.model.room.orderroom.OrderData
 
-class CancelledOrderAdapter (val viewModel: OrderFragmentViewModel,val context: Context) : RecyclerView.Adapter<CancelledOrderAdapter.ViewHolder>() {
+class CancelledOrderAdapter (val list: List<OrderData>,val viewModel: OrderFragmentViewModel,val context: Context) : RecyclerView.Adapter<CancelledOrderAdapter.ViewHolder>() {
 lateinit var order:OrderData
     inner class ViewHolder( val binding: ItemOrderBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -25,30 +25,29 @@ lateinit var order:OrderData
     }
 
     override fun getItemCount(): Int {
-        return   differ.currentList.size
+        return   list.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        if (differ.currentList.size>-1) {
              order = OrderData(
-                differ.currentList[position].orderNumber,
-                differ.currentList[position].totalPrice,
-                differ.currentList[position].customerName,
-                differ.currentList[position].address,
-                differ.currentList[position].phone,
-                differ.currentList[position].payMethod,
+                 list[position].orderNumber,
+                 list[position].totalPrice,
+                 list[position].customerName,
+                 list[position].address,
+                 list[position].phone,
+                 list[position].payMethod,
                 "ACTIVE"
             )
-        }
-            holder.binding.tvOrderNumber.text=differ.currentList[position].orderNumber.toString()
-        holder.binding.tvState.text=differ.currentList[position].state
 
-        holder.binding.tvAddress.text=differ.currentList[position].address
-        holder.binding.tvName.text=differ.currentList[position].customerName
-        holder.binding.tvPhone.text=differ.currentList[position].phone
+            holder.binding.tvOrderNumber.text=list[position].orderNumber.toString()
+        holder.binding.tvState.text=list[position].state
 
-        holder.binding.tvPayment.text=differ.currentList[position].payMethod
-        holder.binding.tvPrice.text=differ.currentList[position].totalPrice
+        holder.binding.tvAddress.text=list[position].address
+        holder.binding.tvName.text=list[position].customerName
+        holder.binding.tvPhone.text=list[position].phone
+
+        holder.binding.tvPayment.text=list[position].payMethod
+        holder.binding.tvPrice.text=list[position].totalPrice
         holder.binding.btnCancelOrder.text="Active Order"
 
         holder.binding.btnCancelOrder.setOnClickListener {
@@ -66,16 +65,4 @@ lateinit var order:OrderData
     }
 
 
-    // util to see only change in articles to refresh it only not like we give list and we refresh all list
-    private val differCallBack = object : DiffUtil.ItemCallback<OrderData>(){
-        override fun areItemsTheSame(oldItem: OrderData, newItem: OrderData):Boolean{
-            return oldItem.orderNumber == newItem.orderNumber
-        }
-        override fun areContentsTheSame(oldItem: OrderData, newItem: OrderData): Boolean {
-            return oldItem == newItem
-        }
-    }
-
-    //Async list differ take two list and compare them to change the difference only it run on background
-    val differ= AsyncListDiffer(this,differCallBack)
 }

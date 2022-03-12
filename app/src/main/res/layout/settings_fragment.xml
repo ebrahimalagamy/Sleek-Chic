@@ -144,7 +144,7 @@
                     android:layout_height="wrap_content"
                     android:background="@color/white"
                     android:orientation="vertical"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     tools:ignore="MissingConstraints">
 
                     <Button
@@ -193,6 +193,7 @@
                         android:textAllCaps="false"
                         android:textColor="@color/black"
                         tools:ignore="MissingConstraints" />
+
                     <Button
                         android:id="@+id/Checkout"
                         style="@style/Widget.AppCompat.Button.Borderless.Colored"
