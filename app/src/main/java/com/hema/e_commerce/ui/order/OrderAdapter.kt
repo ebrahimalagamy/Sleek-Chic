@@ -1,7 +1,9 @@
 package com.hema.e_commerce.ui.order
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
@@ -10,14 +12,14 @@ import com.hema.e_commerce.R
 import com.hema.e_commerce.databinding.ItemOrderBinding
 import com.hema.e_commerce.model.room.orderroom.OrderData
 
-class OrderAdapter (var viewModel: OrderFragmentViewModel) : RecyclerView.Adapter<OrderAdapter.ViewHolder>() {
+class OrderAdapter (val viewModel: OrderFragmentViewModel,val context: Context) : RecyclerView.Adapter<OrderAdapter.ViewHolder>() {
+    lateinit var order:OrderData
 
     inner class ViewHolder( val binding: ItemOrderBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrderAdapter.ViewHolder {
         return ViewHolder(DataBindingUtil.inflate(LayoutInflater.from(parent.context),
-            R.layout.item_order, parent, false
-        )
+            R.layout.item_order, parent, false)
         )
     }
 
@@ -26,6 +28,17 @@ class OrderAdapter (var viewModel: OrderFragmentViewModel) : RecyclerView.Adapte
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        if (differ.currentList.size>-1) {
+             order = OrderData(
+                differ.currentList[position].orderNumber,
+                differ.currentList[position].totalPrice,
+                differ.currentList[position].customerName,
+                differ.currentList[position].address,
+                differ.currentList[position].phone,
+                differ.currentList[position].payMethod,
+                "CANCELLED"
+            )
+        }
         holder.binding.tvOrderNumber.text=differ.currentList[position].orderNumber.toString()
         holder.binding.tvState.text=differ.currentList[position].state
 
@@ -36,6 +49,13 @@ class OrderAdapter (var viewModel: OrderFragmentViewModel) : RecyclerView.Adapte
         holder.binding.tvPayment.text=differ.currentList[position].payMethod
         holder.binding.tvPrice.text=differ.currentList[position].totalPrice
         holder.binding.btnCancelOrder.setOnClickListener {
+            val builder = AlertDialog.Builder(context)
+            builder.setMessage(R.string.alertDeleteMessage)
+            builder.setPositiveButton(R.string.yes) { _, _ ->
+                viewModel.updateOrder(order)
+            }
+            builder.setNegativeButton(R.string.no, null)
+            builder.show()
 
         }
 

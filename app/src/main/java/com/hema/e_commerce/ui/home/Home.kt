@@ -83,21 +83,21 @@ class Home : Fragment() {
             binding.brandsRecycler.adapter = brandAdapter
         })
     }
-//    fun observeSaleProduct() {
-//        viewModel.onSaleProducts .observe(viewLifecycleOwner, Observer {
-//            var productList=it.products
-//            productAdapter= ProductsAdapter(arrayListOf())
-//            productAdapter.updateproduct(productList)
-//            binding.bestSellingRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false)
-//            binding.bestSellingRecyclerView.adapter=productAdapter
-//        })
-//    }
+  /*  fun observeSaleProduct() {
+        viewModel.onSaleProducts .observe(viewLifecycleOwner, Observer {
+            var productList=it.products
+            productAdapter= ProductsAdapter(arrayListOf())
+            productAdapter.updateproduct(productList)
+            binding.bestSellingRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false)
+            binding.bestSellingRecyclerView.adapter=productAdapter
+        })
+    }*/
 
 
      private fun initViews() {
          viewModel.getBrand()
       //   viewModel.getOnHomeProducts()
-         viewModel.getOnSaleProducts()
+       //  viewModel.getOnSaleProducts()
     }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 // image slide view

@@ -11,7 +11,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hema.e_commerce.R
-import com.hema.e_commerce.adapter.wishList.WishListAdapter
 import com.hema.e_commerce.databinding.FragmentOrderBinding
 import com.hema.e_commerce.model.repository.Repository
 import com.hema.e_commerce.model.room.RoomData
@@ -19,7 +18,7 @@ import com.hema.e_commerce.model.room.RoomData
 class OrderFragment:Fragment() {
     private lateinit var binding:FragmentOrderBinding
     private lateinit var viewModel: OrderFragmentViewModel
-    private lateinit var adapter: OrderAdapter
+    private lateinit var orderAdapter: OrderAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,11 +35,13 @@ class OrderFragment:Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         click()
-        setupRecyclerView()
 
         viewModel.getActiveStateOrder("ACTIVE").observe(viewLifecycleOwner, Observer {order->
-            adapter.differ.submitList(order)
+            orderAdapter.differ.submitList(order)
         })
+
+        setupRecyclerView()
+
 
     }
 
@@ -49,10 +50,12 @@ class OrderFragment:Fragment() {
             findNavController().navigate(R.id.action_orderFragment_to_cancelledOrderFragment)
         }
     }
+
     private fun setupRecyclerView(){
-        adapter = OrderAdapter(viewModel)
-        binding.orderRec.apply {
-            adapter=adapter
+
+        orderAdapter = OrderAdapter(viewModel,requireContext())
+        binding.orderRecA.apply {
+            adapter=orderAdapter
             layoutManager= LinearLayoutManager(context)
 
         }

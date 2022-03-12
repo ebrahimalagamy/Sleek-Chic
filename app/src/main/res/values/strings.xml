@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">E-Commerce</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="home">Home</string>
     <string name="category">Category</string>
     <string name="cart">Cart</string>
@@ -47,7 +47,7 @@
     <string name="address_information">Address Information</string>
     <string name="profile">Profile</string>
     <string name="register_now_to_enjoy_shopping">Register now to enjoy shopping !</string>
-    <string name="e_commerce">E-Commerce</string>
+    <string name="e_commerce" translatable="false">E-Commerce</string>
     <string name="payment">Payment</string>
     <string name="sign_out">Sign Out</string>
     <string name="orders">Orders</string>
@@ -61,7 +61,7 @@
     <string name="connect">Connect</string>
     <string name="connection_failed">Connection Failed</string>
     <string name="location">Location</string>
-    <string name="gpsOff">Your GPS is turned off, please turn it on if you want to see the weather data for your current location</string>
+    <string name="gpsOff">Your GPS is turned off, please turn it on </string>
     <string name="No">No</string>
     <string name="ok">Ok</string>
     <string name="offline">You\'re offline, please check your internet connection to be able to choose a location</string>
@@ -84,6 +84,7 @@
     <!-- favorite -->
     <string name="caution">Caution</string>
     <string name="alertDeleteMessage">Do You Want To Delete This Product From Favorite</string>
+    <string name="alertActiveMessage">Do You Want To Cancel This Order</string>
     <string name="yes">yes</string>
     <string name="no">no</string>
 

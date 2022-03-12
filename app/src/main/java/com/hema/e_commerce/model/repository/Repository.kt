@@ -252,7 +252,7 @@ class Repository(val db: RoomData) {
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////
 //order
-    suspend fun addOrder(orderData: OrderData) {
+     fun addOrder(orderData: OrderData) {
         GlobalScope.launch(Dispatchers.IO) {
             db.getOrder().addOrder(orderData)
         }
@@ -262,14 +262,21 @@ class Repository(val db: RoomData) {
             db.getOrder().getCanceledOrder(state)
     }
 
-    suspend fun updateOrder(id: Long, state: String) {
+/*     fun updateOrder(id: Long, state: String) {
         GlobalScope.launch(Dispatchers.IO) {
             db.getOrder().updateOrder(id, state)
         }
 
+    }*/
+
+     fun updateOrder(orderData: OrderData) {
+        GlobalScope.launch(Dispatchers.IO) {
+            db.getOrder().updateState(orderData)
+        }
+
     }
 
-    suspend fun updateState(orderData: OrderData) {
+     fun updateState(orderData: OrderData) {
         GlobalScope.launch(Dispatchers.IO) {
             db.getOrder().updateState(orderData)
         }
@@ -279,13 +286,13 @@ class Repository(val db: RoomData) {
        return db.getOrder().getAllOrders()
     }
 
-    suspend fun deleteOrder(orderData: OrderData) {
+     fun deleteOrder(orderData: OrderData) {
         GlobalScope.launch(Dispatchers.IO) {
             db.getOrder().deleteOrder(orderData)
         }
     }
 
-    suspend fun deleteAllOrders() {
+     fun deleteAllOrders() {
         GlobalScope.launch(Dispatchers.IO) {
             db.getOrder().deleteAllOrders()
         }

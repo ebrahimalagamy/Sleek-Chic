@@ -17,7 +17,7 @@ import com.hema.e_commerce.model.room.RoomData
 class CancelledOrderFragment:Fragment() {
     private lateinit var binding:FragmentOrderCancelledBinding
     private lateinit var viewModel: OrderFragmentViewModel
-    private lateinit var adapter: CancelledOrderAdapter
+    private lateinit var cancelAdapter: CancelledOrderAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,14 +35,14 @@ class CancelledOrderFragment:Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
         viewModel.getActiveStateOrder("CANCELLED").observe(viewLifecycleOwner, Observer {order->
-            adapter.differ.submitList(order)
+            cancelAdapter.differ.submitList(order)
         })
     }
 
     private fun setupRecyclerView(){
-        adapter = CancelledOrderAdapter(viewModel)
+        cancelAdapter = CancelledOrderAdapter(viewModel,requireContext())
         binding.orderRec.apply {
-            adapter=adapter
+            adapter=cancelAdapter
             layoutManager= LinearLayoutManager(context)
 
         }
