@@ -3,14 +3,11 @@ package com.hema.e_commerce.util
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
-import android.location.Location
 import androidx.core.content.edit
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModelProvider.NewInstanceFactory.Companion.instance
 import androidx.preference.PreferenceManager
 import com.google.gson.Gson
 import com.hema.e_commerce.model.dataclass.customer.Customer
-import java.util.concurrent.locks.Lock
 
 class SharedPreferencesProvider(context: Context) {
     companion object {
@@ -27,9 +24,6 @@ class SharedPreferencesProvider(context: Context) {
         private const val IS_FIRST_TIME_LAUNCH = "IS_FIRST_TIME_LAUNCH"
         private const val IS_SIGN_IN = "IS_SIGN_IN"
 
-        // user Info
-        private const val PHONE = "PHONE"
-        private const val NAME = "NAME"
         fun getInstance(application: Application):SharedPreferencesProvider{
             return instance ?:synchronized(Lock){
                 instance ?: SharedPreferencesProvider(application).also {
@@ -37,9 +31,6 @@ class SharedPreferencesProvider(context: Context) {
                 }
             }
         }
-
-        private const val USER_STATS="user-state"
-
 
     }
 
@@ -78,25 +69,6 @@ class SharedPreferencesProvider(context: Context) {
             return location
         }
 
-  /*  fun setUserInfo(//userAddress: String?,
-        phone: String?, name: String?
-    ) {
-//        editor.putString(USER_ADDRESS, userAddress)
-        editor.putString(PHONE, phone)
-        editor.putString(NAME, name)
-        editor.commit()
-    }
-
-    val getUserInfo: Array<String?>
-        get() {
-            val info = arrayOfNulls<String>(2)
-            val phone = pref.getString(PHONE, "Phone")
-            val name = pref.getString(NAME, "Username")
-            info[0] = phone
-            info[1] = name
-            return info
-        }*/
-
     fun setFirstTimeLaunch(isFirstTime: Boolean) {
         editor.putBoolean(IS_FIRST_TIME_LAUNCH, isFirstTime)
         editor.commit()
@@ -118,10 +90,6 @@ class SharedPreferencesProvider(context: Context) {
         val json = Gson()
         return json.toJson(settings)
     }
-    ///////////////
-    fun getUserStatus(): Boolean {
-        return pref!!.getBoolean(USER_STATS, false)
-    }
 
     private fun settingsFromJson(settings: String): CustomerInfo {
         val json = Gson()
@@ -131,7 +99,7 @@ class SharedPreferencesProvider(context: Context) {
     fun update(update: (CustomerInfo) -> CustomerInfo) {
         preferences.edit {
             putString(
-                Constant.ALL_DATA_ROUTE,
+                Constant.ALL_DATA,
                 settingsToJson(update(settings.value ?: CustomerInfo.getDefault()))
             )
             apply()
@@ -139,13 +107,10 @@ class SharedPreferencesProvider(context: Context) {
     }
 
     fun getUserInfo(): CustomerInfo {
-        return preferences.getString(Constant.ALL_DATA_ROUTE, null)?.let { settingsFromJson(it) }
+        return preferences.getString(Constant.ALL_DATA, null)?.let { settingsFromJson(it) }
             ?: CustomerInfo.getDefault()
     }
-//    fun getUserAddress(): CustomerAddress {
-//        return preferences.getString(Constant.ALL_DATA_ROUTE, null)?.let { settingsFromJson(it) }
-//            ?: CustomerAddress.getDefault()
-//    }
+
 }
 
 data class CustomerInfo(var customer: Customer?) {
@@ -154,9 +119,3 @@ data class CustomerInfo(var customer: Customer?) {
     }
 
 }
-//
-//data class CustomerAddress(var address: Address?) {
-//    companion object {
-//        fun getDefault(): CustomerAddress = CustomerAddress(null)
-//    }
-//}

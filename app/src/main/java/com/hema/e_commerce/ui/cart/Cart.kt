@@ -25,6 +25,8 @@ class Cart : Fragment() {
     lateinit var cartAdapter: CartAdapter
     lateinit var cartFragmentBinding: CartFragmentBinding
     private lateinit var viewModel: CartViewModel
+    private lateinit var sharedPref: SharedPreferencesProvider
+
 
 
     override fun onCreateView(
@@ -43,17 +45,18 @@ class Cart : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        sharedPref = SharedPreferencesProvider(requireActivity())
+
         setupRecyclerView()
+
 
         viewModel.getCartProducts().observe(viewLifecycleOwner, Observer { product ->
             //check if login or registration
-            if (!SharedPreferencesProvider(requireContext()).getUserStatus()) {
+            if (sharedPref.isSignIn) {
                 cartFragmentBinding.layoutCartRec.visibility = View.VISIBLE
                 cartFragmentBinding.notLoged.visibility = View.GONE
-
                 cartAdapter.differ.submitList(product)
                 //
-
                 val sharedPreferences: SharedPreferences =
                     requireContext().getSharedPreferences("currency", 0)
                 var value = sharedPreferences.getString("currency", "EGP")
@@ -116,7 +119,8 @@ class Cart : Fragment() {
 
             } else {
                 cartFragmentBinding.notLoged.visibility = View.VISIBLE
-                cartFragmentBinding.group.visibility = View.GONE
+                cartFragmentBinding.layoutCartRec.visibility = View.GONE
+                cartFragmentBinding.btCheckout.visibility = View.GONE
 
             }
         })

@@ -1,11 +1,13 @@
 package com.hema.e_commerce.ui.settings
 
 import android.content.SharedPreferences
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -31,6 +33,7 @@ class Settings : Fragment() {
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         sharedPref = SharedPreferencesProvider(requireActivity())
@@ -47,19 +50,27 @@ class Settings : Fragment() {
             binding.tvMyAccount.visibility = View.VISIBLE
             binding.myLinear.visibility = View.VISIBLE
             binding.btnSignOut.visibility = View.VISIBLE
+            binding.constraintLayoutForAuth.visibility = View.GONE
         }
         else{
             binding.tvMyAccount.visibility = View.GONE
             binding.myLinear.visibility = View.GONE
             binding.btnSignOut.visibility = View.GONE
+            binding.constraintLayoutForAuth.visibility = View.VISIBLE
+
         }
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     private fun bindUi() {
+        if (sharedPref.isSignIn){
         binding.tvWelcomeUser.text =
-            sharedPref.getUserInfo().customer?.email ?: "Register now to enjoy shopping !"
+            sharedPref.getUserInfo().customer?.email ?: ""
         binding.tvUserName.text = sharedPref.getUserInfo().customer?.firstName ?: ""
+        }else{
+            binding.tvWelcomeUser.text = "Register now to enjoy shopping !"
+        }
 
         binding.btnCurrency.setOnClickListener {
 
@@ -88,6 +99,10 @@ class Settings : Fragment() {
                     // for cancel
                 }.show()
         }
+        binding.btnSignOut.setOnClickListener {
+            requireActivity().deleteSharedPreferences("myPref")
+            findNavController().navigate(R.id.Settings)
+        }
     }
 
     private fun bindNav() {
@@ -106,14 +121,11 @@ class Settings : Fragment() {
         binding.btnAddress.setOnClickListener {
             findNavController().navigate(R.id.action_settings_to_address)
         }
-//        binding.Checkout.setOnClickListener {
-//            findNavController().navigate(R.id.action_Settings_to_checkout)
-//        }
+
         binding.btnOrder.setOnClickListener {
             findNavController().navigate(R.id.action_Settings_to_orderFragment)
         }
 
-//        binding.myAccountConstraint.visibility = View.GONE
     }
 
 }

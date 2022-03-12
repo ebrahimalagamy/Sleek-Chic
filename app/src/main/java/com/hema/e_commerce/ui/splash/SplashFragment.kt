@@ -19,7 +19,7 @@ class SplashFragment : Fragment() {
     ): View? {
         Handler().postDelayed({
             if (onBoardFinished()){
-                findNavController().navigate(R.id.action_splashFragment_to_home)
+                findNavController().navigate(R.id.home)
             }else{
                 findNavController().navigate(R.id.action_splashFragment_to_viewPagerFragment)
             }
