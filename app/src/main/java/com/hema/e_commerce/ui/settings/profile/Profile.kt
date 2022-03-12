@@ -46,5 +46,4 @@ class Profile : Fragment() {
         binding.tvUsername.text = sharedPref.getUserInfo().customer?.firstName ?: "Username"
 
     }
-
 }

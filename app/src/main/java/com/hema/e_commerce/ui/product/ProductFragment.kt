@@ -18,8 +18,8 @@ import com.hema.e_commerce.R
 import com.hema.e_commerce.adapter.singleProduct.ProductAdapter
 import com.hema.e_commerce.databinding.FragmentProductBinding
 import com.hema.e_commerce.model.repository.Repository
-import com.hema.e_commerce.model.room.cartroom.CartProductData
 import com.hema.e_commerce.model.room.RoomData
+import com.hema.e_commerce.model.room.cartroom.CartProductData
 import com.hema.e_commerce.model.room.favoriteRoom.FavoriteProduct
 import com.hema.e_commerce.model.viewModelFactory.SingleProductViewModelFactory
 import com.hema.e_commerce.model.viewmodels.SingleProductViewModel
@@ -32,20 +32,27 @@ import com.hema.e_commerce.util.SharedPreferencesProvider
 class ProductFragment : Fragment() {
     lateinit var navController: NavController
     private lateinit var viewModel: SingleProductViewModel
-    lateinit var binding:FragmentProductBinding
+    lateinit var binding: FragmentProductBinding
     private lateinit var sharedPref: SharedPreferencesProvider
 
-    var productId: Long? =null
-   lateinit var favProduct: FavoriteProduct
-    var isFavBtnClicked:Boolean=false
+    var productId: Long? = null
+    lateinit var favProduct: FavoriteProduct
+    var isFavBtnClicked: Boolean = false
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?, ): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_product, container, false)
-        val repository= Repository(RoomData(requireContext()))
+        val repository = Repository(RoomData(requireContext()))
         val singleProductsViewModelProviderFactory =
-            SingleProductViewModelFactory(requireActivity().application,repository)
-        viewModel = ViewModelProvider(this, singleProductsViewModelProviderFactory)[SingleProductViewModel::class.java]
+            SingleProductViewModelFactory(requireActivity().application, repository)
+        viewModel = ViewModelProvider(
+            this,
+            singleProductsViewModelProviderFactory
+        )[SingleProductViewModel::class.java]
         return binding.root
     }
 
@@ -55,66 +62,84 @@ class ProductFragment : Fragment() {
         ProgressBarSetting().setProgress(requireActivity())
         sharedPref = SharedPreferencesProvider(requireActivity())
         productId = arguments?.getLong(PRODUCT)
-            initViews(productId!!)
-            observe(savedInstanceState)
-            reviewAction()
-        }
+        initViews(productId!!)
+        observe(savedInstanceState)
+        reviewAction()
+    }
 
     fun observe(savedInstanceState: Bundle?) {
         viewModel.singleProductLiveData.observe(viewLifecycleOwner, Observer {
 
-            var adapter:PagerAdapter= ProductAdapter(requireContext(),it.product.images)
-            var product=it.product
+            var adapter: PagerAdapter = ProductAdapter(requireContext(), it.product.images)
+            var product = it.product
             binding.viewPager.adapter = adapter
             it.product.handle
-            Log.i("n", "observe: "+  it.product.handle)
-            binding.tvDescProduct.text=  it.product.body_html
+            Log.i("n", "observe: " + it.product.handle)
+            binding.tvDescProduct.text = it.product.body_html
 
-            val sharedPreferences: SharedPreferences =requireContext().getSharedPreferences("currency", 0)
-            var value = sharedPreferences.getString("currency","EGP")
-            when(value){
-                "EGP"->  binding.tvPrice.text=it.product.variants.get(0).price+" "+getString(R.string.eg)
-                "USA"-> {
-                    var usCurrancy=   ((it.product.variants.get(0).price).toDouble() / (15.71))
-                    val number:Double=String.format("%.2f",usCurrancy).toDouble()
+            val sharedPreferences: SharedPreferences =
+                requireContext().getSharedPreferences("currency", 0)
+            var value = sharedPreferences.getString("currency", "EGP")
+            when (value) {
+                "EGP" -> binding.tvPrice.text =
+                    it.product.variants.get(0).price + " " + getString(R.string.eg)
+                "USA" -> {
+                    var usCurrancy = ((it.product.variants.get(0).price).toDouble() / (15.71))
+                    val number: Double = String.format("%.2f", usCurrancy).toDouble()
                     binding.tvPrice.text = number.toString() + " " + "$"
 
                 }
-                "EUR"->      {
-                    var ureCurrancy=   ((it.product.variants.get(0).price).toDouble() / (17.10))
-                    val number:Double=String.format("%.2f",ureCurrancy).toDouble()
-                    binding.tvPrice.text=number.toString()+" "+getString(R.string.eur)
+                "EUR" -> {
+                    var ureCurrancy = ((it.product.variants.get(0).price).toDouble() / (17.10))
+                    val number: Double = String.format("%.2f", ureCurrancy).toDouble()
+                    binding.tvPrice.text = number.toString() + " " + getString(R.string.eur)
                 }
-                else->  binding.tvPrice.text=it.product.variants.get(0).price+" "+getString(R.string.eg)
+                else -> binding.tvPrice.text =
+                    it.product.variants.get(0).price + " " + getString(R.string.eg)
 
             }
-            binding.tvTitle.text=it.product.title
+            binding.tvTitle.text = it.product.title
 
             binding.addToCart.setOnClickListener {
                 //befor that we will check if user login or not
 
-                val cartitem= CartProductData(
-                  product.id,product.image.src,product.title,product.variants.get(0).price,product.variants.get(0).inventory_quantity,1
+                val cartitem = CartProductData(
+                    product.id,
+                    product.image.src,
+                    product.title,
+                    product.variants.get(0).price,
+                    product.variants.get(0).inventory_quantity,
+                    1
                 )
-                if (product.variants.get(0).inventory_quantity>0){
-                viewModel.saveCartList(cartitem)
-            }
-                else{
-                    Toast.makeText(requireContext(), "this product not available in  stor now", Toast.LENGTH_SHORT).show()
+                if (product.variants.get(0).inventory_quantity > 0) {
+                    viewModel.saveCartList(cartitem)
+                } else {
+                    Toast.makeText(
+                        requireContext(),
+                        "this product not available in  stor now",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
 
             }
 
             //favorite function
-            favProduct= FavoriteProduct(product.id,product.image.src,product.title,product.variants.get(0).price,product.variants[0].inventory_quantity,1)
-             setFav(savedInstanceState)
+            favProduct = FavoriteProduct(
+                product.id,
+                product.image.src,
+                product.title,
+                product.variants.get(0).price,
+                product.variants[0].inventory_quantity,
+                1
+            )
+            setFav(savedInstanceState)
         })
 
     }
 
-    private fun reviewAction(){
+    private fun reviewAction() {
         navController = Navigation.findNavController(binding.root)
-        binding.tvReviews.setOnClickListener{
+        binding.tvReviews.setOnClickListener {
             navController.navigate(R.id.action_productFragment_to_reviewFragment)
         }
     }
@@ -123,7 +148,7 @@ class ProductFragment : Fragment() {
         viewModel.getSingleProduct(productId)
     }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //favorite Logic Mohamed
     private fun setFav(savedInstanceState: Bundle?) {
         val activity = activity
@@ -136,7 +161,7 @@ class ProductFragment : Fragment() {
             }
 
             binding.favButton.setOnClickListener(View.OnClickListener {
-              /*  if(sharedPref.isSignIn){*/
+                /*  if(sharedPref.isSignIn){*/
                 isFavBtnClicked = if (isFavBtnClicked) {
                     viewModel.deleteByID(productId ?: 0)
                     false
@@ -157,14 +182,16 @@ class ProductFragment : Fragment() {
         super.onSaveInstanceState(outState)
         outState.putBoolean(FAVORITE, isFavBtnClicked)
     }
+
     private fun checkWishListStored(id: Long) {
-        viewModel.getOneItemFromRoom(id).observe(viewLifecycleOwner,Observer {
+        viewModel.getOneItemFromRoom(id).observe(viewLifecycleOwner, Observer {
             if (it != null) {
                 isFavBtnClicked = true
                 setStoredButton(isFavBtnClicked)
             }
         })
     }
+
     private fun setStoredButton(isFavBtnClicked: Boolean) {
         if (isFavBtnClicked) {
             binding.favButton.setImageResource(R.drawable.ic_baseline_favorite_24)
@@ -173,22 +200,10 @@ class ProductFragment : Fragment() {
         }
     }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
     fun setRating() {
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

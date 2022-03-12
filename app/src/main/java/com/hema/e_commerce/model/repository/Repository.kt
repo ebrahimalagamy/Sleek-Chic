@@ -54,7 +54,6 @@ class Repository(val db: RoomData) {
                 if (response.isSuccessful) {
                     response.body()?.let {
                         collectionProductsLiveData.value = it
-
                     }
                 } else {
 
