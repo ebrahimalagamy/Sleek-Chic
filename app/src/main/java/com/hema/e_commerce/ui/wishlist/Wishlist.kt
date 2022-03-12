@@ -45,6 +45,12 @@ class Wishlist : Fragment() {
         setupRecyclerView()
 
         viewModel.getFavProducts().observe(viewLifecycleOwner, Observer {product->
+            if (product.size==0){
+                binding.imageView4.visibility=View.VISIBLE
+            }else{
+                binding.imageView4.visibility=View.GONE
+
+            }
             favAdapter.differ.submitList(product)
             Log.d("product",product.size.toString())
         })
