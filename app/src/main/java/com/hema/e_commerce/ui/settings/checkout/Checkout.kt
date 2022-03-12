@@ -89,7 +89,8 @@ class Checkout : Fragment() {
         binding.btnOrder.setOnClickListener {
             val rbSelectedId = binding.rgGroup.checkedRadioButtonId
             val btn = requireView().findViewById<RadioButton>(rbSelectedId)
-            paymentMethod = btn.text.toString()
+            if (btn !=null){
+            paymentMethod = btn.text.toString()}
 
             when (paymentMethod) {
                 "Pay With Cash" -> {
@@ -133,8 +134,8 @@ class Checkout : Fragment() {
                     intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payment)
                     requireActivity().startActivityForResult(intent, 123)
                 }
-                "Pay With Card" -> {
-                    Toast.makeText(requireActivity(), "Not Active Else", Toast.LENGTH_LONG).show()
+                else -> {
+                    Toast.makeText(requireActivity(), "Select way to pay", Toast.LENGTH_LONG).show()
                 }
 
             }
