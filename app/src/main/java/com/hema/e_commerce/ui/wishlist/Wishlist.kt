@@ -1,6 +1,7 @@
 package com.hema.e_commerce.ui.wishlist
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,17 +27,18 @@ class Wishlist : Fragment() {
     private lateinit var viewModel: WishListViewModel
     private lateinit var favAdapter: WishListAdapter
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_wishlist, container, false)
         val repository= Repository(RoomData(requireContext()))
         val wishListViewModelProviderFactory = WishListViewModelFactory(requireActivity().application,repository)
         viewModel = ViewModelProvider(this,wishListViewModelProviderFactory)[WishListViewModel::class.java]
 
         return binding.root
+
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -44,6 +46,7 @@ class Wishlist : Fragment() {
 
         viewModel.getFavProducts().observe(viewLifecycleOwner, Observer {product->
             favAdapter.differ.submitList(product)
+            Log.d("product",product.size.toString())
         })
 
         //swap to delete
