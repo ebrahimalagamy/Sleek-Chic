@@ -37,10 +37,11 @@ class OrderFragment:Fragment() {
         click()
 
         viewModel.getActiveStateOrder("ACTIVE").observe(viewLifecycleOwner, Observer {order->
-            orderAdapter.differ.submitList(order)
+            orderAdapter = OrderAdapter(order,viewModel,requireContext())
+            setupRecyclerView()
+
         })
 
-        setupRecyclerView()
 
 
     }
@@ -52,8 +53,6 @@ class OrderFragment:Fragment() {
     }
 
     private fun setupRecyclerView(){
-
-        orderAdapter = OrderAdapter(viewModel,requireContext())
         binding.orderRecA.apply {
             adapter=orderAdapter
             layoutManager= LinearLayoutManager(context)

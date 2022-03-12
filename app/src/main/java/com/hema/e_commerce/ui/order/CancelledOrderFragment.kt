@@ -33,14 +33,14 @@ class CancelledOrderFragment:Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupRecyclerView()
         viewModel.getActiveStateOrder("CANCELLED").observe(viewLifecycleOwner, Observer {order->
-            cancelAdapter.differ.submitList(order)
+            cancelAdapter = CancelledOrderAdapter(order,viewModel,requireContext())
+            setupRecyclerView()
+
         })
     }
 
     private fun setupRecyclerView(){
-        cancelAdapter = CancelledOrderAdapter(viewModel,requireContext())
         binding.orderRec.apply {
             adapter=cancelAdapter
             layoutManager= LinearLayoutManager(context)
