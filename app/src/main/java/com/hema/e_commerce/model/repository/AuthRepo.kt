@@ -22,9 +22,9 @@ class AuthRepo(
             return if (Connectivity.isOnline(application.applicationContext)) {
                 val res = api.register(customer)
                 if (res.isSuccessful) {
-                    sharedPref.update {
-                        it.copy(customer = res.body()?.customer)
-                    }
+//                    sharedPref.update {
+//                        it.copy(customer = res.body()?.customer)
+//                    }
 
                     Log.d("body", res.body()?.customer.toString())
 

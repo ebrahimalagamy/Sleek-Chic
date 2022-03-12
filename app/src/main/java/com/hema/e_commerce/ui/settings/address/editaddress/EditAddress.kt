@@ -69,7 +69,9 @@ class EditAddress : Fragment() {
             }
             viewModel.updateUser.observe(viewLifecycleOwner) {
                 if (it!!) {
+
                     Toast.makeText(requireContext(), "updated", Toast.LENGTH_LONG).show()
+                    findNavController().navigate(R.id.Settings)
                 } else Toast.makeText(requireContext(), "update failed", Toast.LENGTH_LONG).show()
             }
 

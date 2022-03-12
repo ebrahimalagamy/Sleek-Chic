@@ -3,15 +3,23 @@ package com.hema.e_commerce.ui.settings
 import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
+
 import android.content.res.Configuration
+
+import android.os.Build
+
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat.recreate
+
+import androidx.annotation.RequiresApi
+
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -27,9 +35,13 @@ class Settings : Fragment() {
     private lateinit var binding: SettingsFragmentBinding
 
     var selectedItemIndex = 0
+
     var selectedLanguageIndex = -1
 
     private var arrayItems = arrayOf("EGP","USA","EUR")
+
+    private var arrayItems = arrayOf("EGP", "USA", "EUR")
+
     var selectedItem = arrayItems[selectedItemIndex]
 
     override fun onCreateView(
@@ -40,33 +52,63 @@ class Settings : Fragment() {
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         sharedPref = SharedPreferencesProvider(requireActivity())
 
         bindNav()
         bindUi()
+        bindSignIn()
 
 
     }
 
+    private fun bindSignIn() {
+        if (sharedPref.isSignIn){
+            binding.tvMyAccount.visibility = View.VISIBLE
+            binding.myLinear.visibility = View.VISIBLE
+            binding.btnSignOut.visibility = View.VISIBLE
+            binding.constraintLayoutForAuth.visibility = View.GONE
+        }
+        else{
+            binding.tvMyAccount.visibility = View.GONE
+            binding.myLinear.visibility = View.GONE
+            binding.btnSignOut.visibility = View.GONE
+            binding.constraintLayoutForAuth.visibility = View.VISIBLE
+
+        }
+
+    }
+
+    @RequiresApi(Build.VERSION_CODES.N)
     private fun bindUi() {
+
         binding.tvWelcomeUser.text = sharedPref.getUserInfo().customer?.email ?: "Email"
         binding.tvUserName.text = sharedPref.getUserInfo().customer?.firstName ?: "User name"
         binding.btnLanguage.setOnClickListener{
             showChangeLang()
+
+        if (sharedPref.isSignIn){
+        binding.tvWelcomeUser.text =
+            sharedPref.getUserInfo().customer?.email ?: ""
+        binding.tvUserName.text = sharedPref.getUserInfo().customer?.firstName ?: ""
+        }else{
+            binding.tvWelcomeUser.text = "Register now to enjoy shopping !"
+
         }
 
         binding.btnCurrency.setOnClickListener {
 
-            val sharedPreferences: SharedPreferences =requireContext().getSharedPreferences("currency", 0)
-             selectedItemIndex = sharedPreferences.getInt("currencyindex",0)
+            val sharedPreferences: SharedPreferences =
+                requireContext().getSharedPreferences("currency", 0)
+            selectedItemIndex = sharedPreferences.getInt("currencyindex", 0)
 
             MaterialAlertDialogBuilder(requireActivity())
                 .setTitle("Currency")
-                .setSingleChoiceItems(arrayItems,selectedItemIndex){ _,which ->
-                    selectedItemIndex=which
-                    selectedItem =arrayItems[which]
+                .setSingleChoiceItems(arrayItems, selectedItemIndex) { _, which ->
+                    selectedItemIndex = which
+                    selectedItem = arrayItems[which]
                     val editor: SharedPreferences.Editor = sharedPreferences.edit()
                     editor.putString("currency", selectedItem)
                     editor.putInt("currencyindex", selectedItemIndex)
@@ -75,12 +117,17 @@ class Settings : Fragment() {
 
 
                 }
-                .setPositiveButton("Ok"){ _,_ ->
-                    Toast.makeText(requireActivity(),"$selectedItem Selected",Toast.LENGTH_SHORT).show()
+                .setPositiveButton("Ok") { _, _ ->
+                    Toast.makeText(requireActivity(), "$selectedItem Selected", Toast.LENGTH_SHORT)
+                        .show()
                 }
-                .setNegativeButton("Cancel"){ _,_ ->
+                .setNegativeButton("Cancel") { _, _ ->
                     // for cancel
                 }.show()
+        }
+        binding.btnSignOut.setOnClickListener {
+            requireActivity().deleteSharedPreferences("myPref")
+            findNavController().navigate(R.id.Settings)
         }
     }
 
@@ -159,14 +206,11 @@ class Settings : Fragment() {
         binding.btnAddress.setOnClickListener {
             findNavController().navigate(R.id.action_settings_to_address)
         }
-        binding.Checkout.setOnClickListener {
-            findNavController().navigate(R.id.action_Settings_to_checkout)
-        }
+
         binding.btnOrder.setOnClickListener {
             findNavController().navigate(R.id.action_Settings_to_orderFragment)
         }
 
-//        binding.myAccountConstraint.visibility = View.GONE
     }
 
 }

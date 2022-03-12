@@ -76,6 +76,7 @@ class SignUpFragment : Fragment() {
         userEmail = binding.etEmail.text.toString()
         userPassword = binding.etPassword.text.toString()
         userConfirmPassword = binding.etConfirmPassword.text.toString()
+        phone = binding.etPhone.text.toString()
         if (userEmail.isEmpty()) {
             binding.etEmail.requestFocus()
             binding.etEmail.error = "Required"
