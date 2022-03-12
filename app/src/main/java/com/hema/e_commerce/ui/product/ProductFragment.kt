@@ -23,6 +23,7 @@ import com.hema.e_commerce.model.room.RoomData
 import com.hema.e_commerce.model.room.favoriteRoom.FavoriteProduct
 import com.hema.e_commerce.model.viewModelFactory.SingleProductViewModelFactory
 import com.hema.e_commerce.model.viewmodels.SingleProductViewModel
+import com.hema.e_commerce.ui.progresspar.ProgressBarSetting
 import com.hema.e_commerce.util.Constant.FAVORITE
 import com.hema.e_commerce.util.Constant.PRODUCT
 import com.hema.e_commerce.util.SharedPreferencesProvider
@@ -51,6 +52,7 @@ class ProductFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        ProgressBarSetting().setProgress(requireActivity())
         sharedPref = SharedPreferencesProvider(requireActivity())
         productId = arguments?.getLong(PRODUCT)
             initViews(productId!!)
@@ -75,7 +77,7 @@ class ProductFragment : Fragment() {
                 "USA"-> {
                     var usCurrancy=   ((it.product.variants.get(0).price).toDouble() / (15.71))
                     val number:Double=String.format("%.2f",usCurrancy).toDouble()
-                    binding.tvPrice.text = number.toString() + " " + getString(R.string.us)
+                    binding.tvPrice.text = number.toString() + " " + "$"
 
                 }
                 "EUR"->      {

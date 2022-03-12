@@ -1,13 +1,25 @@
 package com.hema.e_commerce.ui.settings
 
+import android.app.Activity
+import android.content.Context
 import android.content.SharedPreferences
+
+import android.content.res.Configuration
+
 import android.os.Build
+
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+
+import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat.recreate
+
 import androidx.annotation.RequiresApi
+
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -15,6 +27,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.hema.e_commerce.R
 import com.hema.e_commerce.databinding.SettingsFragmentBinding
 import com.hema.e_commerce.util.SharedPreferencesProvider
+import java.util.*
 
 class Settings : Fragment() {
 
@@ -22,7 +35,13 @@ class Settings : Fragment() {
     private lateinit var binding: SettingsFragmentBinding
 
     var selectedItemIndex = 0
+
+    var selectedLanguageIndex = -1
+
+    private var arrayItems = arrayOf("EGP","USA","EUR")
+
     private var arrayItems = arrayOf("EGP", "USA", "EUR")
+
     var selectedItem = arrayItems[selectedItemIndex]
 
     override fun onCreateView(
@@ -64,12 +83,19 @@ class Settings : Fragment() {
 
     @RequiresApi(Build.VERSION_CODES.N)
     private fun bindUi() {
+
+        binding.tvWelcomeUser.text = sharedPref.getUserInfo().customer?.email ?: "Email"
+        binding.tvUserName.text = sharedPref.getUserInfo().customer?.firstName ?: "User name"
+        binding.btnLanguage.setOnClickListener{
+            showChangeLang()
+
         if (sharedPref.isSignIn){
         binding.tvWelcomeUser.text =
             sharedPref.getUserInfo().customer?.email ?: ""
         binding.tvUserName.text = sharedPref.getUserInfo().customer?.firstName ?: ""
         }else{
             binding.tvWelcomeUser.text = "Register now to enjoy shopping !"
+
         }
 
         binding.btnCurrency.setOnClickListener {
@@ -104,6 +130,65 @@ class Settings : Fragment() {
             findNavController().navigate(R.id.Settings)
         }
     }
+
+//
+    private fun showChangeLang() {
+
+        val listItmes = arrayOf("عربي",  "English")
+    val sharedPreferences: SharedPreferences =requireContext().getSharedPreferences("language", 0)
+
+    selectedLanguageIndex = sharedPreferences.getInt("languageindex",-1)
+    Log.i("setting language", "showChangeLang: "+selectedLanguageIndex)
+
+
+        val mBuilder = AlertDialog.Builder(requireContext())
+        mBuilder.setTitle(getString(R.string.chooselanguage))
+        mBuilder.setSingleChoiceItems(listItmes, selectedLanguageIndex) { dialog, which ->
+            val editor: SharedPreferences.Editor = sharedPreferences.edit()
+            editor.putInt("languageindex", which)
+            editor.apply()
+            editor.commit()
+
+            if (which == 0) {
+                setLocate("ar")
+                requireActivity().recreate()
+
+            } else if (which == 1) {
+                setLocate("en")
+                requireActivity().recreate()
+            }
+
+            dialog.dismiss()
+        }
+        val mDialog = mBuilder.create()
+
+        mDialog.show()
+
+    }
+
+    private fun setLocate(Lang: String) {
+
+        val locale = Locale(Lang)
+
+        Locale.setDefault(locale)
+
+        val config = Configuration()
+
+        config.locale = locale
+        requireContext().resources.updateConfiguration(config, requireContext().resources.displayMetrics)
+
+//        val editor = requireActivity().getSharedPreferences("Settings", Context.MODE_PRIVATE).edit()
+//        editor.putString("My_Lang", Lang)
+//        editor.apply()
+    }
+
+//    fun loadLocate() {
+//        val sharedPreferences = requireActivity().getSharedPreferences("Settings", Activity.MODE_PRIVATE)
+//        val language = sharedPreferences.getString("My_Lang", "")
+//        setLocate(language!!)
+//    }
+
+
 
     private fun bindNav() {
         binding.ivSignIn.setOnClickListener {

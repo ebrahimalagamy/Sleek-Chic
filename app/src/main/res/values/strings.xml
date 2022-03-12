@@ -86,7 +86,20 @@
     <string name="alertDeleteMessage">Do You Want To Delete This Product From Favorite</string>
     <string name="yes">yes</string>
     <string name="no">no</string>
+
+    <string name="chooselanguage">Choose Language</string>
+    <string name="home_page">Home Page</string>
+    <string name="kid">KID</string>
+    <string name="men">MEN</string>
+    <string name="sale">SALE</string>
+    <string name="woman">WOMEN</string>
+    <string name="tshirt">T-SHIRTS</string>
+    <string name="shoes">SHOES</string>
+    <string name="accessories">ACCESSORIES</string>
+    <string name="loading">Loading...!!</string>
+
     <string name="me">Me</string>
+
 
 
     <!-- filter -->
