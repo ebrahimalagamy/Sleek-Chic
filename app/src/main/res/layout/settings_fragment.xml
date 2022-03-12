@@ -26,7 +26,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_marginEnd="10dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -43,6 +44,7 @@
                     android:layout_marginTop="15dp"
                     android:textColor="@color/black"
                     android:textSize="14sp"
+
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
@@ -255,7 +257,7 @@
                             android:layout_height="wrap_content"
                             android:drawableEnd="@drawable/ic_arrow_forward"
                             android:gravity="center_vertical"
-                            android:text="Currency"
+                            android:text="@string/currency"
                             android:textAllCaps="false"
                             android:textColor="@color/black"
                             tools:ignore="MissingConstraints" />

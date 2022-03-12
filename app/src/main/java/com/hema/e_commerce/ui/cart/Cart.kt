@@ -26,7 +26,7 @@ class Cart : Fragment() {
     lateinit var cartFragmentBinding: CartFragmentBinding
     private lateinit var viewModel: CartViewModel
     private lateinit var sharedPref: SharedPreferencesProvider
-
+    lateinit var totalPriceWithoutSimp:String
 
 
     override fun onCreateView(
@@ -49,14 +49,13 @@ class Cart : Fragment() {
 
         setupRecyclerView()
 
-
         viewModel.getCartProducts().observe(viewLifecycleOwner, Observer { product ->
             //check if login or registration
             if (sharedPref.isSignIn) {
                 cartFragmentBinding.layoutCartRec.visibility = View.VISIBLE
                 cartFragmentBinding.notLoged.visibility = View.GONE
                 cartAdapter.differ.submitList(product)
-                //
+
                 val sharedPreferences: SharedPreferences =
                     requireContext().getSharedPreferences("currency", 0)
                 var value = sharedPreferences.getString("currency", "EGP")
@@ -68,17 +67,21 @@ class Cart : Fragment() {
                         cartFragmentBinding.tvSubTotal.text =
                             totalCalc(product).toString() + " " + getString(R.string.eg)
 
+                        totalPriceWithoutSimp = totalCalc(product).toString()
+
                     }
                     "USA" -> {
                         var usCurrancy = ((totalCalc(product).toString()).toDouble() / (15.71))
                         val number: Double = String.format("%.2f", usCurrancy).toDouble()
-                        cartFragmentBinding.textTotalprice.text =
-                            number.toString()+ " " + getString(R.string.us)
+                        cartFragmentBinding.textTotalprice.text = number.toString() + " " + getString(R.string.us)
                         //
                         var usCurrancySub = ((totalCalc(product).toString()).toDouble() / (15.71))
                         val numberSub: Double = String.format("%.2f", usCurrancySub).toDouble()
                         cartFragmentBinding.tvSubTotal.text =
                             numberSub.toString() + " " + getString(R.string.us)
+
+                        totalPriceWithoutSimp = number.toString()
+
 
                     }
                     "EUR" -> {
@@ -92,6 +95,8 @@ class Cart : Fragment() {
                         val numberSub: Double = String.format("%.2f", ureCurrancySub).toDouble()
                         cartFragmentBinding.tvSubTotal.text =
                             numberSub.toString() + " " + getString(R.string.eur)
+                        totalPriceWithoutSimp = number.toString()
+
                     }
                     else -> {
                         cartFragmentBinding.textTotalprice.text =
@@ -99,23 +104,34 @@ class Cart : Fragment() {
                         cartFragmentBinding.tvSubTotal.text =
                             totalCalc(product).toString() + " " + getString(R.string.eg)
 
+                        totalPriceWithoutSimp = totalCalc(product).toString()
+
+
                     }
                 }
 
                 cartFragmentBinding.btCopoun.setOnClickListener {
                     val copoun = cartFragmentBinding.edtexCopoun.text.toString()
                     if (copoun == "hema5") {
-                        val totalPricee = cartFragmentBinding.textTotalprice.text.toString()
-                        val discount = totalPricee.toDouble() - 20
+                        val totalPricee = totalPriceWithoutSimp
+                        val discount = totalPricee.toDouble() * 90 / 100
                         cartFragmentBinding.textTotalprice.text = discount.toString()
-                        cartFragmentBinding.tvDiscount.text = "-20"
+                        cartFragmentBinding.tvDiscount.text = "% 10"
+                        totalPriceWithoutSimp = discount.toString()
 
                     } else if (copoun != "hema5") {
-                        cartFragmentBinding.tvSubTotal.text = totalCalc(product).toString()
+                        cartFragmentBinding.tvSubTotal.text = totalPriceWithoutSimp
                         cartFragmentBinding.tvDiscount.text = "0"
                     }
                 }
+                cartFragmentBinding.btCheckout.setOnClickListener {
+                    val totalPrice = totalPriceWithoutSimp
+                    if (totalPrice.isNotEmpty()) {
+                        val action = CartDirections.actionCartToCheckout(totalPrice)
+                        Navigation.findNavController(requireView()).navigate(action)
+                    }
 
+                }
 
             } else {
                 cartFragmentBinding.notLoged.visibility = View.VISIBLE
@@ -124,24 +140,7 @@ class Cart : Fragment() {
 
             }
         })
-
-        bindButton()
     }
-
-    private fun bindButton() {
-        cartFragmentBinding.btCheckout.setOnClickListener {
-            val totalPrice = cartFragmentBinding.textTotalprice.text.toString()
-            if (totalPrice.isNotEmpty()) {
-                val action = CartDirections.actionCartToCheckout(totalPrice)
-                Navigation.findNavController(requireView()).navigate(action)
-            } else {
-//                Toast.makeText()
-            }
-//            findNavController().navigate(R.id.action_cart_to_checkout)
-
-        }
-    }
-
 
     private fun totalCalc(items: List<CartProductData>): Double {
         var sumPrices: Double = 0.0
@@ -150,7 +149,6 @@ class Cart : Fragment() {
         }
         return sumPrices
     }
-
     private fun setupRecyclerView() {
 
         cartAdapter = CartAdapter(viewModel)
@@ -159,6 +157,5 @@ class Cart : Fragment() {
             layoutManager = LinearLayoutManager(context)
         }
     }
-
 
 }

@@ -26,7 +26,6 @@ import com.paypal.android.sdk.payments.PayPalService
 import com.paypal.android.sdk.payments.PaymentActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.math.BigDecimal
 import kotlin.random.Random
@@ -35,7 +34,6 @@ class Checkout : Fragment() {
     private lateinit var binding: FragmentCheckoutBinding
     private val args: CheckoutArgs by navArgs()
     private lateinit var viewModel: CheckoutViewModel
-
     private lateinit var config: PayPalConfiguration
 
     override fun onCreateView(
@@ -55,16 +53,17 @@ class Checkout : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         bindArgs()
-        GlobalScope.launch(Dispatchers.IO) {
-            bindUI()
-        }
+        bindUI()
+        bindPaypal()
+
+    }
+
+    private fun bindPaypal() {
         config = PayPalConfiguration()
             .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX).clientId(CLIENT_ID)
         var i = Intent(requireActivity(), PayPalService::class.java)
         i.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config)
         requireActivity().startService(i)
-
-
     }
 
     override fun onDestroy() {
@@ -78,7 +77,7 @@ class Checkout : Fragment() {
         binding.tvSubtotal.text = totalPrice
     }
 
-    private suspend fun bindUI() {
+    private fun bindUI() {
         val orderId = Random.nextLong(1000000, 10000000)
         val customerName = binding.tvCustomerName.text.toString()
         val customerAddress = binding.tvCustomerAddress.text.toString()
@@ -89,16 +88,17 @@ class Checkout : Fragment() {
         binding.btnOrder.setOnClickListener {
             val rbSelectedId = binding.rgGroup.checkedRadioButtonId
             val btn = requireView().findViewById<RadioButton>(rbSelectedId)
-            if (btn !=null){
-            paymentMethod = btn.text.toString()}
+            if (btn != null) {
+                paymentMethod = btn.text.toString()
+            }
 
             when (paymentMethod) {
-                "Pay With Cash" -> {
+                getString(R.string.pay_with_cash) -> {
                     MaterialAlertDialogBuilder(requireActivity())
-                        .setTitle("Currency")
-                        .setMessage("Do you Want Confirm Your Order")
-                        .setPositiveButton("Ok") { _, _ ->
-                            Toast.makeText(requireActivity(), "Confirmed", Toast.LENGTH_SHORT)
+                        .setTitle(getString(R.string.currency))
+                        .setMessage(getString(R.string.do_you_want_confirm_your_order))
+                        .setPositiveButton(getString(R.string.ok)) { _, _ ->
+                            Toast.makeText(requireActivity(), getString(R.string.confirmed), Toast.LENGTH_SHORT)
                                 .show()
                             CoroutineScope(Dispatchers.IO).launch {
                                 viewModel.addOrder(
@@ -115,16 +115,17 @@ class Checkout : Fragment() {
 
                             }
                         }
-                        .setNegativeButton("Cancel") { _, _ ->
-                            Toast.makeText(requireActivity(), "Order Canceled", Toast.LENGTH_SHORT)
+                        .setNegativeButton(getString(R.string.cancel)) { _, _ ->
+                            Toast.makeText(requireActivity(), getString(R.string.order_oanceled), Toast.LENGTH_SHORT)
                                 .show()
                         }.show()
 
 
                 }
-                "Pay With Paypal" -> {
+                getString(R.string.pay_with_paypal) -> {
+                    val totalPaypal = totalPrice.toDouble() / 15.7
                     var payment = PayPalPayment(
-                        BigDecimal.valueOf(20.00),
+                        BigDecimal.valueOf(totalPaypal),
                         "USD",
                         "Checkout",
                         PayPalPayment.PAYMENT_INTENT_SALE
@@ -135,7 +136,7 @@ class Checkout : Fragment() {
                     requireActivity().startActivityForResult(intent, 123)
                 }
                 else -> {
-                    Toast.makeText(requireActivity(), "Select way to pay", Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireActivity(), getString(R.string.select_way_to_pay), Toast.LENGTH_LONG).show()
                 }
 
             }
@@ -148,7 +149,7 @@ class Checkout : Fragment() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 123) {
             if (resultCode == Activity.RESULT_OK) {
-                Toast.makeText(requireActivity(), "Operation done ", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireActivity(), getString(R.string.operation_done), Toast.LENGTH_SHORT).show()
             }
         }
     }

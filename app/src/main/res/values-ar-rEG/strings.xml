@@ -57,7 +57,7 @@
     <string name="connection_failed">فشل الاتصال</string>
     <string name="location">الموقع</string>
     <string name="No">لا</string>
-    <string name="ok">اجل</string>
+    <string name="ok">موافق</string>
     <string name="offline">انت غير متصل بالانترنت , من فضلك تحقق من اتصالك لتتمكن من اختيار الموقع</string>
     <string name="us">دولار</string>
     <string name="eur">يورو</string>
@@ -94,4 +94,24 @@
     <string name="read_it_together">فلنقرأها معا</string>
     <string name="checkout">الدفع</string>
     <string name="gpsOff">يرجى تفعيل خدمه تحديد الموثع</string>
+    <string name="currency">العملة</string>
+    <string name="apply">تطبيق</string>
+    <string name="free">مجانا</string>
+    <string name="pay_with_cash">الدفع نقدا</string>
+    <string name="pay_with_paypal">الدفع بواسط  Paypal</string>
+    <string name="order">طلب</string>
+    <string name="shipping_fee">رسوم الشحن</string>
+    <string name="subtotal">المجموع الفرعي</string>
+    <string name="order_summary">الفاتوره</string>
+    <string name="payment_method">طريقة الدفع</string>
+    <string name="signout">تسجيل الخروج</string>
+    <string name="do_you_want_sign_out">هل ترغب في تسجيل الخروج</string>
+    <string name="successfully">عملية ناجحة</string>
+    <string name="cancel">اغلاق</string>
+    <string name="canceled">Canceled</string>
+    <string name="lets_go">انطلق</string>
+    <string name="operation_done">نجحت العملية</string>
+    <string name="select_way_to_pay">اختار طريقة الدفع</string>
+    <string name="order_oanceled">Order Canceled</string>
+
 </resources>

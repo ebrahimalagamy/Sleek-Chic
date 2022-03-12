@@ -47,7 +47,7 @@ class SignInFragment : Fragment() {
                         Toast.makeText(requireContext(), "Successfully Login", Toast.LENGTH_LONG)
                             .show()
                         viewModel.AuthRepo.sharedPref.checkSignIn(true)
-                        findNavController().popBackStack()
+                        findNavController().navigate(R.id.Settings)
                     }
                 }
             }

@@ -100,7 +100,27 @@
     <string name="loading">Loading...!!</string>
 
     <string name="me">Me</string>
-
+    <string name="currency">Currency</string>
+    <string name="apply">Apply</string>
+    <string name="free">Free</string>
+    <string name="pay_with_cash">Pay With Cash</string>
+    <string name="pay_with_paypal">Pay With Paypal</string>
+    <string name="order">Order</string>
+    <string name="shipping_fee">Shipping Fee</string>
+    <string name="subtotal">Subtotal</string>
+    <string name="order_summary">ORDER SUMMARY</string>
+    <string name="payment_method">PAYMENT METHOD</string>
+    <string name="signout">Sign out</string>
+    <string name="do_you_want_sign_out">Do you Want Sign out</string>
+    <string name="successfully">Successfully</string>
+    <string name="cancel">Cancel</string>
+    <string name="canceled">Canceled</string>
+    <string name="lets_go">Let\'s go</string>
+    <string name="operation_done">Operation done</string>
+    <string name="select_way_to_pay">Select way to pay</string>
+    <string name="do_you_want_confirm_your_order">Do you Want Confirm Your Order</string>
+    <string name="confirmed">Confirmed</string>
+    <string name="order_oanceled">Order Canceled</string>
 
 
     <!-- filter -->

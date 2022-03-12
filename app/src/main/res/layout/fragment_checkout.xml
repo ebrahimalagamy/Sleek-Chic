@@ -25,12 +25,13 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:text="Checkout"
+                    android:text="@string/checkout"
                     android:textStyle="bold"
+                    android:layout_marginStart="5dp"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/ivBack"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -115,7 +116,7 @@
                         android:paddingStart="10dp"
                         android:paddingEnd="10dp"
                         android:paddingTop="10dp"
-                        android:text="PAYMENT METHOD"
+                        android:text="@string/payment_method"
                         android:textSize="12sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
@@ -136,7 +137,7 @@
                             android:background="@color/white"
                             android:drawableEnd="@drawable/money"
                             android:padding="10dp"
-                            android:text="Pay With Cash"
+                            android:text="@string/pay_with_cash"
                             android:textSize="18sp"
 
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -165,7 +166,7 @@
                             android:background="@color/white"
                             android:drawableEnd="@drawable/paypall"
                             android:padding="10dp"
-                            android:text="Pay With Paypal"
+                            android:text="@string/pay_with_paypal"
                             android:textSize="18sp"
 
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -191,7 +192,7 @@
                         android:id="@+id/textView11"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="ORDER SUMMARY"
+                        android:text="@string/order_summary"
                         android:textColor="@color/black"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -202,7 +203,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:text="Subtotal"
+                        android:text="@string/subtotal"
                         app:layout_constraintStart_toStartOf="@+id/textView11"
                         app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
@@ -219,7 +220,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
-                        android:text="Shipping Fee"
+                        android:text="@string/shipping_fee"
                         app:layout_constraintStart_toStartOf="@+id/textView12"
                         app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
@@ -227,7 +228,7 @@
                         android:id="@+id/textView15"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="FREE"
+                        android:text="@string/free"
                         android:textColor="@color/yellow"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tvSubtotal" />
@@ -236,17 +237,18 @@
                         android:id="@+id/view"
                         android:layout_width="match_parent"
                         android:layout_height="2dp"
-                        android:layout_marginTop="3dp"
+                        android:layout_marginTop="10dp"
                         android:alpha=".3"
                         android:background="@color/black"
-                        app:layout_constraintTop_toBottomOf="@+id/textView18" />
+                        app:layout_constraintTop_toBottomOf="@+id/textView14"
+                        tools:layout_editor_absoluteX="10dp" />
 
                     <TextView
                         android:id="@+id/textView16"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
-                        android:text="TOTAL "
+                        android:text="@string/total"
                         android:textColor="@color/black"
                         app:layout_constraintStart_toStartOf="@+id/textView14"
                         app:layout_constraintTop_toBottomOf="@+id/view" />
@@ -260,22 +262,7 @@
                         app:layout_constraintEnd_toEndOf="@+id/textView15"
                         app:layout_constraintTop_toBottomOf="@+id/view" />
 
-                    <TextView
-                        android:id="@+id/textView18"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="3dp"
-                        android:text="Discount"
-                        app:layout_constraintStart_toStartOf="@+id/textView14"
-                        app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
-                    <TextView
-                        android:id="@+id/textView19"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="% 0"
-                        app:layout_constraintEnd_toEndOf="@+id/textView15"
-                        app:layout_constraintTop_toBottomOf="@+id/textView15" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <Button
@@ -286,7 +273,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="5dp"
                     android:backgroundTint="#3866DE"
-                    android:text="Order"
+                    android:text="@string/order"
 
                     android:textAllCaps="false"
                     android:textColor="@color/white"

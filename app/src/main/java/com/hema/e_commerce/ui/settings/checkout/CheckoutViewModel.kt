@@ -8,5 +8,5 @@ import com.hema.e_commerce.model.room.orderroom.OrderData
 
 
 class CheckoutViewModel(private val repo: Repository, app: Application) : AndroidViewModel(app) {
-    suspend fun addOrder(orderData: OrderData) = repo.addOrder(orderData)
+     fun addOrder(orderData: OrderData) = repo.addOrder(orderData)
 }

@@ -17,7 +17,11 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.hema.e_commerce.R
 import com.hema.e_commerce.databinding.SettingsFragmentBinding
+import com.hema.e_commerce.model.room.orderroom.OrderData
 import com.hema.e_commerce.util.SharedPreferencesProvider
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.util.*
 
 class Settings : Fragment() {
@@ -46,7 +50,6 @@ class Settings : Fragment() {
         bindUi()
         bindSignIn()
 
-
     }
 
     private fun bindSignIn() {
@@ -68,55 +71,74 @@ class Settings : Fragment() {
     @RequiresApi(Build.VERSION_CODES.N)
     private fun bindUi() {
 
-        binding.tvWelcomeUser.text = sharedPref.getUserInfo().customer?.email ?: "Email"
-        binding.tvUserName.text = sharedPref.getUserInfo().customer?.firstName ?: "User name"
+        binding.tvWelcomeUser.text = sharedPref.getUserInfo().customer?.email ?: getString(R.string.email)
+        binding.tvUserName.text = sharedPref.getUserInfo().customer?.firstName ?: getString(R.string.user_name)
         binding.btnLanguage.setOnClickListener {
             showChangeLang()
-            if (sharedPref.isSignIn) {
-                binding.tvWelcomeUser.text =
-                    sharedPref.getUserInfo().customer?.email ?: ""
-                binding.tvUserName.text = sharedPref.getUserInfo().customer?.firstName ?: ""
-            } else {
-                binding.tvWelcomeUser.text = "Register now to enjoy shopping !"
+        }
+        if (sharedPref.isSignIn) {
+            binding.tvWelcomeUser.text =
+                sharedPref.getUserInfo().customer?.email ?: ""
+            binding.tvUserName.text = sharedPref.getUserInfo().customer?.firstName ?: ""
+        } else {
+            binding.tvWelcomeUser.text = getString(R.string.register_now_to_enjoy_shopping)
+            binding.tvUserName.text = getString(R.string.lets_go)
 
-            }
+        }
 
-            binding.btnCurrency.setOnClickListener {
+        binding.btnCurrency.setOnClickListener {
 
-                val sharedPreferences: SharedPreferences =
-                    requireContext().getSharedPreferences("currency", 0)
-                selectedItemIndex = sharedPreferences.getInt("currencyindex", 0)
+            val sharedPreferences: SharedPreferences =
+                requireContext().getSharedPreferences("currency", 0)
+            selectedItemIndex = sharedPreferences.getInt("currencyindex", 0)
 
-                MaterialAlertDialogBuilder(requireActivity())
-                    .setTitle("Currency")
-                    .setSingleChoiceItems(arrayItems, selectedItemIndex) { _, which ->
-                        selectedItemIndex = which
-                        selectedItem = arrayItems[which]
-                        val editor: SharedPreferences.Editor = sharedPreferences.edit()
-                        editor.putString("currency", selectedItem)
-                        editor.putInt("currencyindex", selectedItemIndex)
-                        editor.apply()
-                        editor.commit()
+            MaterialAlertDialogBuilder(requireActivity())
+                .setTitle(getString(R.string.currency))
+                .setSingleChoiceItems(arrayItems, selectedItemIndex) { _, which ->
+                    selectedItemIndex = which
+                    selectedItem = arrayItems[which]
+                    val editor: SharedPreferences.Editor = sharedPreferences.edit()
+                    editor.putString("currency", selectedItem)
+                    editor.putInt("currencyindex", selectedItemIndex)
+                    editor.apply()
+                    editor.commit()
 
 
-                    }
-                    .setPositiveButton("Ok") { _, _ ->
-                        Toast.makeText(
-                            requireActivity(),
-                            "$selectedItem Selected",
-                            Toast.LENGTH_SHORT
-                        )
-                            .show()
-                    }
-                    .setNegativeButton("Cancel") { _, _ ->
-                        // for cancel
-                    }.show()
-            }
-            binding.btnSignOut.setOnClickListener {
+                }
+                .setPositiveButton(getString(R.string.ok)) { _, _ ->
+                    Toast.makeText(
+                        requireActivity(),
+                        "$selectedItem Selected",
+                        Toast.LENGTH_SHORT
+                    )
+                        .show()
+                }
+                .setNegativeButton(getString(R.string.cancel)) { _, _ ->
+                    // for cancel
+                }.show()
+        }
+        binding.btnSignOut.setOnClickListener {
+            showDialog()
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    private fun showDialog() {
+        MaterialAlertDialogBuilder(requireActivity())
+            .setTitle(getString(R.string.signout))
+            .setMessage(getString(R.string.do_you_want_sign_out))
+            .setPositiveButton(getString(R.string.ok)) { _, _ ->
                 requireActivity().deleteSharedPreferences("myPref")
+
+                Toast.makeText(requireActivity(), getString(R.string.successfully), Toast.LENGTH_SHORT)
+                    .show()
                 findNavController().navigate(R.id.Settings)
             }
-        }
+            .setNegativeButton(getString(R.string.cancel)) { _, _ ->
+                Toast.makeText(requireActivity(), getString(R.string.canceled), Toast.LENGTH_SHORT)
+                    .show()
+            }.show()
+
     }
 
     //
