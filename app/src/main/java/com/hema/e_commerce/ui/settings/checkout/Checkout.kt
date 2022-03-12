@@ -1,5 +1,7 @@
 package com.hema.e_commerce.ui.settings.checkout
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,10 +19,16 @@ import com.hema.e_commerce.model.repository.Repository
 import com.hema.e_commerce.model.room.RoomData
 import com.hema.e_commerce.model.room.orderroom.OrderData
 import com.hema.e_commerce.model.viewmodels.CheckoutViewModelFactory
+import com.hema.e_commerce.util.Constant.CLIENT_ID
+import com.paypal.android.sdk.payments.PayPalConfiguration
+import com.paypal.android.sdk.payments.PayPalPayment
+import com.paypal.android.sdk.payments.PayPalService
+import com.paypal.android.sdk.payments.PaymentActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.math.BigDecimal
 import kotlin.random.Random
 
 class Checkout : Fragment() {
@@ -28,7 +36,7 @@ class Checkout : Fragment() {
     private val args: CheckoutArgs by navArgs()
     private lateinit var viewModel: CheckoutViewModel
 
-//  private lateinit var config: Paypal
+    private lateinit var config: PayPalConfiguration
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,7 +58,18 @@ class Checkout : Fragment() {
         GlobalScope.launch(Dispatchers.IO) {
             bindUI()
         }
+        config = PayPalConfiguration()
+            .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX).clientId(CLIENT_ID)
+        var i = Intent(requireActivity(), PayPalService::class.java)
+        i.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config)
+        requireActivity().startService(i)
 
+
+    }
+
+    override fun onDestroy() {
+        requireActivity().stopService(Intent(requireActivity(), PayPalService::class.java))
+        super.onDestroy()
     }
 
     private fun bindArgs() {
@@ -103,7 +122,16 @@ class Checkout : Fragment() {
 
                 }
                 "Pay With Paypal" -> {
-                    Toast.makeText(requireActivity(), "Not Active Else", Toast.LENGTH_LONG).show()
+                    var payment = PayPalPayment(
+                        BigDecimal.valueOf(20.00),
+                        "USD",
+                        "Checkout",
+                        PayPalPayment.PAYMENT_INTENT_SALE
+                    )
+                    val intent = Intent(requireActivity(), PaymentActivity::class.java)
+                    intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config)
+                    intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payment)
+                    requireActivity().startActivityForResult(intent, 123)
                 }
                 "Pay With Card" -> {
                     Toast.makeText(requireActivity(), "Not Active Else", Toast.LENGTH_LONG).show()
@@ -113,6 +141,15 @@ class Checkout : Fragment() {
 
         }
 
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 123) {
+            if (resultCode == Activity.RESULT_OK) {
+                Toast.makeText(requireActivity(), "Operation done ", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
 
