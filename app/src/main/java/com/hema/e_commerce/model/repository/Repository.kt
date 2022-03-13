@@ -17,10 +17,8 @@ import com.hema.e_commerce.model.room.RoomData
 import com.hema.e_commerce.model.room.favoriteRoom.FavoriteProduct
 import com.hema.e_commerce.model.room.orderroom.OrderData
 import com.hema.e_commerce.ui.category.subcollectionsmodel.SubCollections
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
+import retrofit2.Retrofit
 
 class Repository(val db: RoomData) {
     //Aya
@@ -29,7 +27,7 @@ class Repository(val db: RoomData) {
     val collectionsLiveData = MutableLiveData<CustomCollectionsResponse>()
 
     fun getCollections() {
-        GlobalScope.launch(Dispatchers.IO) {
+        GlobalScope.launch(Dispatchers.IO+coroutineExceptionHandler) {
             val response = RetrofitInstance.api.getAllCollections()
             withContext(Dispatchers.Main) {
                 if (response.isSuccessful) {
@@ -48,7 +46,7 @@ class Repository(val db: RoomData) {
 
     val collectionProductsLiveData = MutableLiveData<ProductsResponse>()
     fun getSubCollectionsProducts(categoryId: Long) {
-        GlobalScope.launch(Dispatchers.IO) {
+        GlobalScope.launch(Dispatchers.IO+coroutineExceptionHandler) {
             val response = RetrofitInstance.api.getCollectionProducts(categoryId)
             withContext(Dispatchers.Main) {
                 if (response.isSuccessful) {
@@ -69,7 +67,7 @@ class Repository(val db: RoomData) {
     //Single product
     val singleProductsLiveData = MutableLiveData<ProductCollectionResponse>()
     fun getSingleProduct(productId: Long) {
-        GlobalScope.launch(Dispatchers.IO) {
+        GlobalScope.launch(Dispatchers.IO+coroutineExceptionHandler) {
             val response = RetrofitInstance.api.getSingleProduct(productId)
             withContext(Dispatchers.Main) {
                 if (response.isSuccessful) {
@@ -87,6 +85,10 @@ class Repository(val db: RoomData) {
 
     //////////////////////////////////////////
 //Mohamed
+
+    val coroutineExceptionHandler = CoroutineExceptionHandler{_, throwable ->
+        throwable.printStackTrace()
+    }
 //Live data
     val brandsLiveData = MutableLiveData<BrandsResponce>()
     val onSaleProductsList = MutableLiveData<ProductsResponse>()
@@ -121,7 +123,7 @@ class Repository(val db: RoomData) {
 
     //Methods use in viewModel
     fun getBrand() {
-        GlobalScope.launch(Dispatchers.IO) {
+        GlobalScope.launch(Dispatchers.IO+coroutineExceptionHandler) {
             val response = getBrands()
             withContext(Dispatchers.Main) {
                 if (response.isSuccessful) {
@@ -129,14 +131,14 @@ class Repository(val db: RoomData) {
                         brandsLiveData.value = it
                     }
                 } else {
-                    Log.i("checkkkk", "getBrands: error " + response.errorBody())
+
                 }
             }
         }
     }
 
     fun getOnSaleProducts() {
-        GlobalScope.launch(Dispatchers.IO) {
+        GlobalScope.launch(Dispatchers.IO+coroutineExceptionHandler) {
             val response = getOnSaleProductsList()
             withContext(Dispatchers.Main) {
                 if (response.isSuccessful) {
@@ -152,7 +154,7 @@ class Repository(val db: RoomData) {
     }
 
     fun getOnHomeProducts() {
-        GlobalScope.launch(Dispatchers.IO) {
+        GlobalScope.launch(Dispatchers.IO+coroutineExceptionHandler) {
             val response = getOnHomeProductsList()
             withContext(Dispatchers.Main) {
                 if (response.isSuccessful) {
@@ -169,7 +171,7 @@ class Repository(val db: RoomData) {
     }
 
     fun getallProduct() {
-        GlobalScope.launch(Dispatchers.IO) {
+        GlobalScope.launch(Dispatchers.IO+coroutineExceptionHandler) {
             val response = getProducts()
             withContext(Dispatchers.Main) {
                 if (response.isSuccessful) {
@@ -257,16 +259,7 @@ class Repository(val db: RoomData) {
         }
     }
 
-    fun getCanceledOrder(state:String) {
-            db.getOrder().getCanceledOrder(state)
-    }
 
-/*     fun updateOrder(id: Long, state: String) {
-        GlobalScope.launch(Dispatchers.IO) {
-            db.getOrder().updateOrder(id, state)
-        }
-
-    }*/
 
      fun updateOrder(orderData: OrderData) {
         GlobalScope.launch(Dispatchers.IO) {

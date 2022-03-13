@@ -8,8 +8,6 @@ interface OrderDao {
     @Insert
     suspend fun addOrder(orderData: OrderData)
 
-    @Query("SELECT * FROM OrderData Where state= :state")
-    fun getCanceledOrder(state: String): LiveData<List<OrderData>>
 
     @Query("UPDATE OrderData SET state = :state WHERE orderNumber = :orderNumber")
     suspend fun updateOrder(orderNumber: Long, state: String)

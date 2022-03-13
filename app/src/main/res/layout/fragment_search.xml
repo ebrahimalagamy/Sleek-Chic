@@ -8,11 +8,10 @@
     </data>
 
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/frag_list_product"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         tools:context=".ui.typelistofproduct.TypeListProductsFragment">
 
         <Toolbar
@@ -30,6 +29,7 @@
                 android:layout_marginEnd="5dp"
                 android:text="@string/e_commerce"
                 android:textStyle="bold" />
+
             <Spinner
                 android:id="@+id/spinner"
                 android:layout_width="30dp"
@@ -37,8 +37,7 @@
                 android:layout_gravity="end"
                 android:layout_marginEnd="10dp"
                 android:background="@drawable/filter"
-                android:entries="@array/sortArr"
-                />
+                android:entries="@array/sortArr" />
 
             <!--<ImageView
                 android:id="@+id/imageView3"
@@ -63,7 +62,7 @@
 
         </Toolbar>
 
-       <!-- <androidx.constraintlayout.widget.ConstraintLayout
+        <!-- <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/filterPrice"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -122,8 +121,11 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rec_list_product"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/mytoolbar"
             tools:itemCount="10" />
     </androidx.constraintlayout.widget.ConstraintLayout>

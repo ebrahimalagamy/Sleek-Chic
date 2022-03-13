@@ -1,4 +1,4 @@
-package com.hema.e_commerce.ui.order
+package com.hema.e_commerce.adapter.order
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,26 +6,25 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
-import androidx.recyclerview.widget.AsyncListDiffer
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.hema.e_commerce.R
 import com.hema.e_commerce.databinding.ItemOrderBinding
 import com.hema.e_commerce.model.room.orderroom.OrderData
+import com.hema.e_commerce.model.viewmodels.OrderFragmentViewModel
 
-class CancelledOrderAdapter (val list: List<OrderData>,val viewModel: OrderFragmentViewModel,val context: Context) : RecyclerView.Adapter<CancelledOrderAdapter.ViewHolder>() {
-lateinit var order:OrderData
+class OrderAdapter (val list: List<OrderData>, val viewModel: OrderFragmentViewModel, val context: Context) : RecyclerView.Adapter<OrderAdapter.ViewHolder>() {
+    lateinit var order:OrderData
+
     inner class ViewHolder( val binding: ItemOrderBinding) : RecyclerView.ViewHolder(binding.root)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CancelledOrderAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(DataBindingUtil.inflate(LayoutInflater.from(parent.context),
-            R.layout.item_order, parent, false
-        )
+            R.layout.item_order, parent, false)
         )
     }
 
     override fun getItemCount(): Int {
-        return   list.size
+     return   list.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -36,33 +35,31 @@ lateinit var order:OrderData
                  list[position].address,
                  list[position].phone,
                  list[position].payMethod,
-                "ACTIVE"
+                "CANCELLED"
             )
-
-            holder.binding.tvOrderNumber.text=list[position].orderNumber.toString()
+        holder.binding.tvOrderNumber.text=list[position].orderNumber.toString()
         holder.binding.tvState.text=list[position].state
 
         holder.binding.tvAddress.text=list[position].address
         holder.binding.tvName.text=list[position].customerName
         holder.binding.tvPhone.text=list[position].phone
+        holder.binding.imageButton2.visibility= View.GONE
 
         holder.binding.tvPayment.text=list[position].payMethod
         holder.binding.tvPrice.text=list[position].totalPrice
-        holder.binding.btnCancelOrder.text="Active Order"
-
         holder.binding.btnCancelOrder.setOnClickListener {
-
-                val builder = AlertDialog.Builder(context)
-                builder.setMessage(R.string.alertActiveMessage)
-                builder.setPositiveButton(R.string.yes) { _, _ ->
-                    viewModel.updateOrder(order)
-                }
-                builder.setNegativeButton(R.string.no, null)
-                builder.show()
-
+            val builder = AlertDialog.Builder(context)
+            builder.setMessage(R.string.alertActiveMessage2)
+            builder.setPositiveButton(R.string.yes) { _, _ ->
+                viewModel.updateOrder(order)
+            }
+            builder.setNegativeButton(R.string.no, null)
+            builder.show()
 
         }
+
     }
+
 
 
 }

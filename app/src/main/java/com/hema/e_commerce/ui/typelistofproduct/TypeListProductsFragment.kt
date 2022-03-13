@@ -99,7 +99,7 @@ fun catagoryList(){
             binding.recListProduct.layoutManager = layoutManager
 
         })
-        filterf()
+      //  filter()
 
     }
 
@@ -130,7 +130,7 @@ fun BrandList(){
             binding.recListProduct.layoutManager = layoutManager
 
         })
-        filterf()
+    //  filter()
 
     }
 
@@ -139,7 +139,7 @@ fun BrandList(){
     }
 
 //////////////////////////////////////////////////////////
-    fun filterf(){
+   /* fun filter(){
     binding.spinner2.onItemSelectedListener=object : AdapterView.OnItemSelectedListener{
         override fun onItemSelected(
             parent: AdapterView<*>?,
@@ -164,6 +164,7 @@ fun BrandList(){
         }
 
     }
-    }
+    }*/
+
 
 }

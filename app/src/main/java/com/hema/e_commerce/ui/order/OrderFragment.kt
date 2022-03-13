@@ -11,9 +11,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hema.e_commerce.R
+import com.hema.e_commerce.adapter.order.OrderAdapter
 import com.hema.e_commerce.databinding.FragmentOrderBinding
 import com.hema.e_commerce.model.repository.Repository
 import com.hema.e_commerce.model.room.RoomData
+import com.hema.e_commerce.model.viewModelFactory.OrderFragmentViewModelFactory
+import com.hema.e_commerce.model.viewmodels.OrderFragmentViewModel
 
 class OrderFragment:Fragment() {
     private lateinit var binding:FragmentOrderBinding
@@ -37,6 +40,12 @@ class OrderFragment:Fragment() {
         click()
 
         viewModel.getActiveStateOrder("ACTIVE").observe(viewLifecycleOwner, Observer {order->
+            if (order.isEmpty()){
+                binding.imageView6.visibility=View.VISIBLE
+            }else{
+                binding.imageView6.visibility=View.GONE
+
+            }
             orderAdapter = OrderAdapter(order,viewModel,requireContext())
             setupRecyclerView()
 

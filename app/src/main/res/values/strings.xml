@@ -84,7 +84,8 @@
     <!-- favorite -->
     <string name="caution">Caution</string>
     <string name="alertDeleteMessage">Do You Want To Delete This Product From Favorite</string>
-    <string name="alertActiveMessage">Do You Want To Cancel This Order</string>
+    <string name="alertActiveMessage2">Do You Want To Cancel This Order</string>
+    <string name="alertActiveMessage">Do You Want To Active This Order</string>
     <string name="yes">yes</string>
     <string name="no">no</string>
 
@@ -122,6 +123,7 @@
     <string name="confirmed">Confirmed</string>
     <string name="order_oanceled">Order Canceled</string>
     <string name="add_address">Add Address</string>
+    <string name="alertdelteMessage">Do you want delete order?</string>
 
 
     <!-- filter -->
@@ -137,8 +139,8 @@
         <item>price 0 to 150</item>
         <item>price 0 to 200</item>
         <item>price 0 to 500</item>
-        <item>price 0 to 1000</item>
-        <item>price bigger than 1000</item>
+        <item>price 0 to 500</item>
+        <item>All prices</item>
     </string-array>
 
 

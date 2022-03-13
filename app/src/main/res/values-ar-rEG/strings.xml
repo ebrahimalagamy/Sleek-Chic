@@ -89,7 +89,7 @@
     <string name="tshirt">تي شيرت</string>
     <string name="loading">تحميل</string>
     <string name="me">انا</string>
-    <string name="alertActiveMessage">هل تريد الغاء هذا الطلب</string>
+    <string name="alertActiveMessage2">هل تريد الغاء هذا الطلب</string>
     <string name="total">الاجمالي</string>
     <string name="read_it_together">فلنقرأها معا</string>
     <string name="checkout">الدفع</string>
@@ -112,6 +112,11 @@
     <string name="lets_go">انطلق</string>
     <string name="operation_done">نجحت العملية</string>
     <string name="select_way_to_pay">اختار طريقة الدفع</string>
-    <string name="order_oanceled">Order Canceled</string>
+    <string name="order_oanceled">الغاء الطلب</string>
+    <string name="do_you_want_confirm_your_order">هل تريد تاكيد الطلب؟</string>
+    <string name="confirmed">تاكيد</string>
+    <string name="add_address">اضف عنوان</string>
+    <string name="alertActiveMessage">هل تريد تفعيل الطلب</string>
+    <string name="alertdelteMessage">هل تريد مسح هذا الطلب ؟</string>
 
 </resources>

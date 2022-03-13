@@ -1,14 +1,13 @@
 package com.hema.e_commerce.ui.home
 
+import android.os.Build
 import android.os.Bundle
-import android.os.Handler
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.navigation.NavController
@@ -18,33 +17,33 @@ import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
 import com.hema.e_commerce.R
 import com.hema.e_commerce.adapter.home.BrandAdapter
-import com.hema.e_commerce.adapter.home.ProductsAdapter
 import com.hema.e_commerce.databinding.HomeFragmentBinding
 import com.hema.e_commerce.model.repository.Repository
 import com.hema.e_commerce.model.room.RoomData
 import com.hema.e_commerce.model.viewModelFactory.HomeViewModelFactory
 import com.hema.e_commerce.model.viewmodels.HomeViewModel
 import com.hema.e_commerce.ui.progresspar.ProgressBarSetting
-import com.hema.e_commerce.ui.progresspar.ProgressHandler
+import com.hema.e_commerce.util.Connectivity.Companion.isOnline
 
 
 class Home : Fragment() {
     private lateinit var binding: HomeFragmentBinding
     private lateinit var viewModel: HomeViewModel
     private lateinit var brandAdapter: BrandAdapter
-    private lateinit var productAdapter: ProductsAdapter
+ //   private lateinit var productAdapter: ProductsAdapter
     private lateinit var navController: NavController
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.home_fragment, container, false)
         return binding.root
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         ProgressBarSetting().setProgress(requireActivity())
@@ -56,7 +55,7 @@ class Home : Fragment() {
         imageSlider()
 
         initViews()
-        obesrvers()
+        observers()
 
         onClickSearch()
     }
@@ -64,24 +63,25 @@ class Home : Fragment() {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
     //product and brand logic
-    fun obesrvers(){
+private fun observers(){
         observeBrand()
        // observeSaleProduct()
     }
 
-    fun observeBrand() {
-        viewModel.brandsLiveData.observe(viewLifecycleOwner, Observer {
-            var brandList = it.smart_collections
+    private fun observeBrand() {
+        viewModel.brandsLiveData.observe(viewLifecycleOwner) {
+            val brandList = it.smart_collections
             brandAdapter = BrandAdapter(arrayListOf())
             brandAdapter.updateBrand(brandList)
             binding.brandsRecycler.layoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
-            binding.brandsRecycler.layoutManager = GridLayoutManager(context, 2, LinearLayoutManager.HORIZONTAL,false)
+            binding.brandsRecycler.layoutManager =
+                GridLayoutManager(context, 2, LinearLayoutManager.HORIZONTAL, false)
 
 
             binding.brandsRecycler.adapter = brandAdapter
-        })
+        }
     }
   /*  fun observeSaleProduct() {
         viewModel.onSaleProducts .observe(viewLifecycleOwner, Observer {
@@ -112,24 +112,21 @@ class Home : Fragment() {
         imageList.add(SlideModel(R.drawable.cubontshirt, ScaleTypes.FIT))
         imageList.add(SlideModel(R.drawable.shoes2, ScaleTypes.FIT))
 
-
         binding.imageSlider.setImageList(imageList, ScaleTypes.FIT)
-
-
-
-
         binding.imageSlider.setImageList(imageList)
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 //search
-    fun onClickSearch(){
-        binding.searchView.setOnSearchClickListener(View.OnClickListener {
-            Log.i("Searchh","yyyyyyyyyyyyyyyyyyyyy")
+    @RequiresApi(Build.VERSION_CODES.M)
+    private fun onClickSearch(){
+        binding.searchView.setOnSearchClickListener {
+            if(isOnline(requireContext())){
             binding.searchView.isIconified = true
             navController.navigate(
                 R.id.action_home_to_searchFragment
             )
-        })
+        }
+        }
     }
 
 
