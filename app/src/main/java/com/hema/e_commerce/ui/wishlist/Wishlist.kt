@@ -36,7 +36,6 @@ class Wishlist : Fragment() {
         val repository= Repository(RoomData(requireContext()))
         val wishListViewModelProviderFactory = WishListViewModelFactory(requireActivity().application,repository)
         viewModel = ViewModelProvider(this,wishListViewModelProviderFactory)[WishListViewModel::class.java]
-
         return binding.root
 
     }

@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <Toolbar
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -18,8 +19,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginEnd="5dp"
-                android:text="@string/e_commerce"
+                android:text="CATEGORY"
+                android:textColor="@color/black"
                 android:textStyle="bold" />
 
             <androidx.appcompat.widget.SearchView
@@ -33,52 +36,56 @@
                 app:queryHint="Search" />
         </Toolbar>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height=".1dp"
+            android:alpha=".2"
+            android:background="@color/black" />
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
 
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/frag_container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="10dp"
-
-            tools:context=".ui.category.categoryui.maincategoryui.CategoryFragment">
-
-
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/frag_container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:weightSum="5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                android:padding="10dp"
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rec_product"
-                    android:layout_width="0dp"
+                tools:context=".ui.category.categoryui.maincategoryui.CategoryFragment">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1.5"
-                    android:background="#EDEDED"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:itemCount="10"
-                    tools:listitem="@layout/categories_products_items" />
+                    android:weightSum="5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rec_product"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.5"
+                        android:background="#EDEDED"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:itemCount="10"
+                        tools:listitem="@layout/categories_products_items" />
 
 
-                <FrameLayout
-                    android:id="@+id/fram_cont"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="3.5"
-                    android:layout_marginStart="@dimen/_10sdp"
+                    <FrameLayout
+                        android:id="@+id/fram_cont"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_weight="3.5"
 
-                    />
-            </LinearLayout>
+                        />
+                </LinearLayout>
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>
 </layout>

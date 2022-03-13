@@ -9,21 +9,20 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        >
+        android:layout_marginBottom="20dp">
 
 
         <TextView
             android:id="@+id/product_type_name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:padding="10dp"
             android:text="product types"
-            android:gravity="center"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginBottom="@dimen/_65sdp"
-            android:layout_marginTop="@dimen/_65sdp"
+
 
             />
     </androidx.constraintlayout.widget.ConstraintLayout>

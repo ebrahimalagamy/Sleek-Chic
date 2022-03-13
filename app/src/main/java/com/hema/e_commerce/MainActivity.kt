@@ -11,7 +11,6 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
@@ -20,7 +19,6 @@ import androidx.navigation.ui.setupWithNavController
 import com.hema.e_commerce.databinding.ActivityMainBinding
 import com.hema.e_commerce.util.Connectivity
 import com.hema.e_commerce.util.LocationProvider
-import com.hema.e_commerce.util.SharedPreferencesProvider
 
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
@@ -62,8 +60,8 @@ class MainActivity : AppCompatActivity() {
             if (destination.id == R.id.signInFragment || destination.id == R.id.signUpFragment
                 || destination.id == R.id.editAddress || destination.id == R.id.mapFragment
                 || destination.id == R.id.editProfile || destination.id == R.id.productFragment
-                || destination.id == R.id.typeListProductFragment2  || destination.id == R.id.searchFragment
-                || destination.id == R.id.splashFragment|| destination.id == R.id.viewPagerFragment
+                || destination.id == R.id.typeListProductFragment2 || destination.id == R.id.searchFragment
+                || destination.id == R.id.splashFragment || destination.id == R.id.viewPagerFragment
                 || destination.id == R.id.checkout
             ) {
                 binding.bottomNavView.visibility = View.GONE
