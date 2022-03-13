@@ -11,7 +11,6 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
@@ -20,7 +19,6 @@ import androidx.navigation.ui.setupWithNavController
 import com.hema.e_commerce.databinding.ActivityMainBinding
 import com.hema.e_commerce.util.Connectivity
 import com.hema.e_commerce.util.LocationProvider
-import com.hema.e_commerce.util.SharedPreferencesProvider
 
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
@@ -67,7 +65,6 @@ class MainActivity : AppCompatActivity() {
                 || destination.id == R.id.checkout|| destination.id == R.id.orderFragment
                 || destination.id == R.id.cancelledOrderFragment|| destination.id == R.id.wishlist
                 || destination.id == R.id.addAddressFragment || destination.id == R.id.address
-
 
 
 

@@ -38,10 +38,31 @@
         <entry key="..\:/Users/CompuTouch/Documents/GitHub/E-Commerce/app/src/main/res/layout/container_item.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/CompuTouch/Documents/GitHub/E-Commerce/app/src/main/res/layout/fragment_wishlist.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/CompuTouch/Documents/GitHub/E-Commerce/app/src/main/res/layout/item_cart.xml" value="0.20416666666666666" />
+
+        <entry key="..\:/Users/Ebrah/AndroidStudioProjects/E-Commerce/app/src/main/res/drawable/circle_view.xml" value="0.165" />
+        <entry key="..\:/Users/Ebrah/AndroidStudioProjects/E-Commerce/app/src/main/res/drawable/ic_favorite_border.xml" value="0.165" />
+        <entry key="..\:/Users/Ebrah/AndroidStudioProjects/E-Commerce/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/Ebrah/AndroidStudioProjects/E-Commerce/app/src/main/res/layout/cart_fragment.xml" value="0.25" />
+        <entry key="..\:/Users/Ebrah/AndroidStudioProjects/E-Commerce/app/src/main/res/layout/categories_products_items.xml" value="0.25" />
+        <entry key="..\:/Users/Ebrah/AndroidStudioProjects/E-Commerce/app/src/main/res/layout/category_fragment.xml" value="0.25" />
+        <entry key="..\:/Users/Ebrah/AndroidStudioProjects/E-Commerce/app/src/main/res/layout/container_item.xml" value="0.25" />
         <entry key="..\:/Users/Ebrah/AndroidStudioProjects/E-Commerce/app/src/main/res/layout/first_screen.xml" value="0.25" />
+        <entry key="..\:/Users/Ebrah/AndroidStudioProjects/E-Commerce/app/src/main/res/layout/fragment_add_address.xml" value="0.25" />
+        <entry key="..\:/Users/Ebrah/AndroidStudioProjects/E-Commerce/app/src/main/res/layout/fragment_address.xml" value="0.25" />
         <entry key="..\:/Users/Ebrah/AndroidStudioProjects/E-Commerce/app/src/main/res/layout/fragment_checkout.xml" value="0.264" />
         <entry key="..\:/Users/Ebrah/AndroidStudioProjects/E-Commerce/app/src/main/res/layout/fragment_splash.xml" value="0.25" />
+
+        <entry key="..\:/Users/Ebrah/AndroidStudioProjects/E-Commerce/app/src/main/res/layout/fragment_edit_address.xml" value="0.25" />
+        <entry key="..\:/Users/Ebrah/AndroidStudioProjects/E-Commerce/app/src/main/res/layout/fragment_product.xml" value="0.264" />
+        <entry key="..\:/Users/Ebrah/AndroidStudioProjects/E-Commerce/app/src/main/res/layout/fragment_profile.xml" value="0.25" />
+        <entry key="..\:/Users/Ebrah/AndroidStudioProjects/E-Commerce/app/src/main/res/layout/fragment_sign_in.xml" value="0.24615384615384617" />
+        <entry key="..\:/Users/Ebrah/AndroidStudioProjects/E-Commerce/app/src/main/res/layout/fragment_sign_up.xml" value="0.24256410256410257" />
+        <entry key="..\:/Users/Ebrah/AndroidStudioProjects/E-Commerce/app/src/main/res/layout/fragment_splash.xml" value="0.25" />
+        <entry key="..\:/Users/Ebrah/AndroidStudioProjects/E-Commerce/app/src/main/res/layout/fragment_type_list_product.xml" value="0.25" />
+        <entry key="..\:/Users/Ebrah/AndroidStudioProjects/E-Commerce/app/src/main/res/layout/item_adresses.xml" value="0.25" />
+        <entry key="..\:/Users/Ebrah/AndroidStudioProjects/E-Commerce/app/src/main/res/layout/item_order.xml" value="0.25" />
+        <entry key="..\:/Users/Ebrah/AndroidStudioProjects/E-Commerce/app/src/main/res/layout/item_product_list.xml" value="0.25" />
+        <entry key="..\:/Users/Ebrah/AndroidStudioProjects/E-Commerce/app/src/main/res/layout/loading_progress.xml" value="0.25" />
         <entry key="..\:/Users/Ebrah/AndroidStudioProjects/E-Commerce/app/src/main/res/layout/second_screen.xml" value="0.264" />
         <entry key="..\:/Users/Ebrah/AndroidStudioProjects/E-Commerce/app/src/main/res/layout/settings_fragment.xml" value="0.25" />
         <entry key="..\:/Users/Ebrah/AndroidStudioProjects/E-Commerce/app/src/main/res/layout/third_screen.xml" value="0.25" />

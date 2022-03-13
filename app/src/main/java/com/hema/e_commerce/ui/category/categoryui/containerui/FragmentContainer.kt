@@ -29,7 +29,7 @@ class FragmentContainer : Fragment() {
     lateinit var binding: FragmentContainerBinding
     lateinit var adapter: ContainerAdapter
     private lateinit var viewModel: SubCollectionViewModel
-    lateinit var collectionName:String
+    lateinit var collectionName: String
     var fragMan: FragmentManager? = fragmentManager
 
     override fun onCreateView(
@@ -38,19 +38,20 @@ class FragmentContainer : Fragment() {
     ): View? {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_container, container, false)
-        val repository= Repository(RoomData(requireContext()))
+        val repository = Repository(RoomData(requireContext()))
         val subCollectionViewModelProviderFactory =
-            SubCollectionViewModelFactory(requireActivity().application,repository)
-        viewModel = ViewModelProvider(this, subCollectionViewModelProviderFactory)[SubCollectionViewModel::class.java]
+            SubCollectionViewModelFactory(requireActivity().application, repository)
+        viewModel = ViewModelProvider(
+            this,
+            subCollectionViewModelProviderFactory
+        )[SubCollectionViewModel::class.java]
 
 
-
-
-        var bundle:Bundle?= arguments
-       if(bundle!=null){
-            if(bundle.getString("title")!=null) {
+        var bundle: Bundle? = arguments
+        if (bundle != null) {
+            if (bundle.getString("title") != null) {
                 bundle.getString("title")
-                collectionName=bundle.getString("title").toString()
+                collectionName = bundle.getString("title").toString()
             }
 
         }
@@ -63,15 +64,15 @@ class FragmentContainer : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.subcollectionName.text=collectionName
-        var collectionPosition: Int=
-            when(collectionName){
+        binding.subcollectionName.text = collectionName
+        var collectionPosition: Int =
+            when (collectionName) {
 
-                getString(R.string.home_page)->  0
-                getString(R.string.kid)-> 1
-                getString(R.string.men)->2
-                getString(R.string.sale)-> 3
-                getString(R.string.woman)-> 4
+                getString(R.string.home_page) -> 0
+                getString(R.string.kid) -> 1
+                getString(R.string.men) -> 2
+                getString(R.string.sale) -> 3
+                getString(R.string.woman) -> 4
                 else -> 0
             }
 
@@ -86,24 +87,24 @@ class FragmentContainer : Fragment() {
             var ProductList = it
 
             Log.i("ggggg", "onActivityCreated: " + ProductList.size)
-            var collectionId: Long=
-                when(collectionName){
+            var collectionId: Long =
+                when (collectionName) {
 
-                    getString(R.string.home_page)-> HOME_PAGE_ID
-                    getString(R.string.kid)-> KIDS_ID
-                    getString(R.string.men)-> MEN_ID
-                    getString(R.string.sale)-> SALE_ID
-                    getString(R.string.woman)-> WOMAN_ID
+                    getString(R.string.home_page) -> HOME_PAGE_ID
+                    getString(R.string.kid) -> KIDS_ID
+                    getString(R.string.men) -> MEN_ID
+                    getString(R.string.sale) -> SALE_ID
+                    getString(R.string.woman) -> WOMAN_ID
                     else -> HOME_PAGE_ID
                 }
-            adapter = ContainerAdapter(collectionId,fragMan, ProductList, requireContext())
+            adapter = ContainerAdapter(collectionId, fragMan, ProductList, requireContext())
             val layoutManager = GridLayoutManager(requireContext(), 2)
             binding.recContainerItem.adapter = adapter
             binding.recContainerItem.layoutManager = layoutManager
         })
     }
 
-    private fun initViews(position:Int) {
+    private fun initViews(position: Int) {
         viewModel.getProducts(position)
     }
 
