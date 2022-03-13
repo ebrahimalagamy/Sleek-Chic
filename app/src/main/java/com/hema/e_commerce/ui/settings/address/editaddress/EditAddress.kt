@@ -78,7 +78,7 @@ class EditAddress : Fragment() {
         viewModel.updateUser.observe(viewLifecycleOwner) {
             if (it!!) {
                 Toast.makeText(requireContext(), "updated", Toast.LENGTH_LONG).show()
-                findNavController().popBackStack()
+                findNavController().navigate(R.id.Address)
                 viewModel.updateUser.postValue(false)
             } else Toast.makeText(requireContext(), "update failed", Toast.LENGTH_LONG).show()
         }
