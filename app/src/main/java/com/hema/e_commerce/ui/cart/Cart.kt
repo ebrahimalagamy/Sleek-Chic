@@ -49,7 +49,15 @@ class Cart : Fragment() {
 
         setupRecyclerView()
 
-        viewModel.getCartProducts().observe(viewLifecycleOwner, Observer { product ->
+        viewModel.getCartProducts().observe(viewLifecycleOwner) { product ->
+            if (product.isEmpty()) {
+                cartFragmentBinding.imageView5.visibility = View.VISIBLE
+                cartFragmentBinding.cslayout.visibility = View.GONE
+
+            } else {
+                cartFragmentBinding.imageView5.visibility = View.GONE
+                cartFragmentBinding.cslayout.visibility = View.VISIBLE
+            }
             //check if login or registration
             if (sharedPref.isSignIn) {
                 cartFragmentBinding.layoutCartRec.visibility = View.VISIBLE
@@ -58,8 +66,7 @@ class Cart : Fragment() {
 
                 val sharedPreferences: SharedPreferences =
                     requireContext().getSharedPreferences("currency", 0)
-                var value = sharedPreferences.getString("currency", "EGP")
-                when (value) {
+                when (sharedPreferences.getString("currency", "EGP")) {
                     "EGP" -> {
                         cartFragmentBinding.textTotalprice.text =
                             totalCalc(product).toString() + " " + getString(R.string.eg)
@@ -71,11 +78,12 @@ class Cart : Fragment() {
 
                     }
                     "USA" -> {
-                        var usCurrancy = ((totalCalc(product).toString()).toDouble() / (15.71))
+                        val usCurrancy = ((totalCalc(product).toString()).toDouble() / (15.71))
                         val number: Double = String.format("%.2f", usCurrancy).toDouble()
-                        cartFragmentBinding.textTotalprice.text = number.toString() + " " + getString(R.string.us)
+                        cartFragmentBinding.textTotalprice.text =
+                            number.toString() + " " + getString(R.string.us)
                         //
-                        var usCurrancySub = ((totalCalc(product).toString()).toDouble() / (15.71))
+                        val usCurrancySub = ((totalCalc(product).toString()).toDouble() / (15.71))
                         val numberSub: Double = String.format("%.2f", usCurrancySub).toDouble()
                         cartFragmentBinding.tvSubTotal.text =
                             numberSub.toString() + " " + getString(R.string.us)
@@ -85,13 +93,13 @@ class Cart : Fragment() {
 
                     }
                     "EUR" -> {
-                        var ureCurrancy = ((totalCalc(product).toString()).toDouble() / (17.10))
+                        val ureCurrancy = ((totalCalc(product).toString()).toDouble() / (17.10))
                         val number: Double = String.format("%.2f", ureCurrancy).toDouble()
                         cartFragmentBinding.textTotalprice.text =
                             number.toString() + " " + getString(R.string.eur)
                         //
 
-                        var ureCurrancySub = ((totalCalc(product).toString()).toDouble() / (17.10))
+                        val ureCurrancySub = ((totalCalc(product).toString()).toDouble() / (17.10))
                         val numberSub: Double = String.format("%.2f", ureCurrancySub).toDouble()
                         cartFragmentBinding.tvSubTotal.text =
                             numberSub.toString() + " " + getString(R.string.eur)
@@ -139,11 +147,11 @@ class Cart : Fragment() {
                 cartFragmentBinding.btCheckout.visibility = View.GONE
 
             }
-        })
+        }
     }
 
     private fun totalCalc(items: List<CartProductData>): Double {
-        var sumPrices: Double = 0.0
+        var sumPrices = 0.0
         for (item in items) {
             sumPrices += item.price.toDouble() * item.count
         }

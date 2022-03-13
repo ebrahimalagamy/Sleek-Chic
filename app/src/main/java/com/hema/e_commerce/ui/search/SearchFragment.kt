@@ -154,11 +154,11 @@ class SearchFragment : Fragment() {
                         priceFilter("0","500")
 
                     }
-                    parent!!.getItemAtPosition(position).equals("price 0 to 1000") -> {
+                   /* parent!!.getItemAtPosition(position).equals("price 0 to 1000") -> {
                         priceFilter("0","1000")
 
-                    }
-                    parent!!.getItemAtPosition(position).equals("price bigger than 1000") -> {
+                    }*/
+                    parent!!.getItemAtPosition(position).equals("All prices") -> {
                         priceFilter("0","5000")
 
                     }

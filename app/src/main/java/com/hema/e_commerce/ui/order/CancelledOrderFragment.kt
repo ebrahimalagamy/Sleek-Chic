@@ -10,9 +10,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hema.e_commerce.R
+import com.hema.e_commerce.adapter.order.CancelledOrderAdapter
 import com.hema.e_commerce.databinding.FragmentOrderCancelledBinding
 import com.hema.e_commerce.model.repository.Repository
 import com.hema.e_commerce.model.room.RoomData
+import com.hema.e_commerce.model.viewModelFactory.OrderFragmentViewModelFactory
+import com.hema.e_commerce.model.viewmodels.OrderFragmentViewModel
 
 class CancelledOrderFragment:Fragment() {
     private lateinit var binding:FragmentOrderCancelledBinding

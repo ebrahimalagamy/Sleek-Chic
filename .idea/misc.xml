@@ -6,10 +6,12 @@
         <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/drawable-v24/ic_favorite_Red.xml" value="0.1455" />
         <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/drawable/ic_baseline_favorite_24.xml" value="0.1455" />
         <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/drawable/ic_favorite_border.xml" value="0.1455" />
-        <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/cart_fragment.xml" value="0.20416666666666666" />
+        <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/cart_fragment.xml" value="0.1" />
         <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/categories_products_items.xml" value="0.20416666666666666" />
         <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/category_fragment.xml" value="0.1" />
         <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/first_screen.xml" value="0.1" />
+        <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/fragment_address.xml" value="0.20416666666666666" />
+        <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/fragment_order.xml" value="0.18" />
         <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/fragment_product.xml" value="0.25" />
         <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/fragment_search.xml" value="0.2" />
         <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/fragment_type_list_product.xml" value="0.30701754385964913" />
@@ -17,8 +19,14 @@
         <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/home_fragment.xml" value="0.33" />
         <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/item_cart.xml" value="0.20416666666666666" />
         <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/item_favorite.xml" value="0.4717208182912154" />
+        <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/item_order.xml" value="0.33" />
+        <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/item_product_list.xml" value="0.33" />
+        <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/item_wishlist.xml" value="0.25" />
+        <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/loading_progress.xml" value="0.20416666666666666" />
         <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/row_brands.xml" value="0.20416666666666666" />
         <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/row_product.xml" value="0.33" />
+        <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/settings_fragment.xml" value="0.18" />
+        <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/signin_password_fragment.xml" value="0.1" />
         <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/single_product_fragment.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/CompuTouch/Documents/GitHub/E-Commerce/app/src/main/res/drawable/button_background.xml" value="0.116" />
         <entry key="..\:/Users/CompuTouch/Documents/GitHub/E-Commerce/app/src/main/res/drawable/heart.xml" value="0.116" />
@@ -30,18 +38,10 @@
         <entry key="..\:/Users/CompuTouch/Documents/GitHub/E-Commerce/app/src/main/res/layout/container_item.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/CompuTouch/Documents/GitHub/E-Commerce/app/src/main/res/layout/fragment_wishlist.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/CompuTouch/Documents/GitHub/E-Commerce/app/src/main/res/layout/item_cart.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/Ebrah/AndroidStudioProjects/E-Commerce/app/src/main/res/drawable/circle_view.xml" value="0.165" />
-        <entry key="..\:/Users/Ebrah/AndroidStudioProjects/E-Commerce/app/src/main/res/drawable/ic_favorite_border.xml" value="0.165" />
         <entry key="..\:/Users/Ebrah/AndroidStudioProjects/E-Commerce/app/src/main/res/layout/cart_fragment.xml" value="0.25" />
         <entry key="..\:/Users/Ebrah/AndroidStudioProjects/E-Commerce/app/src/main/res/layout/first_screen.xml" value="0.25" />
         <entry key="..\:/Users/Ebrah/AndroidStudioProjects/E-Commerce/app/src/main/res/layout/fragment_checkout.xml" value="0.264" />
-        <entry key="..\:/Users/Ebrah/AndroidStudioProjects/E-Commerce/app/src/main/res/layout/fragment_product.xml" value="0.264" />
-        <entry key="..\:/Users/Ebrah/AndroidStudioProjects/E-Commerce/app/src/main/res/layout/fragment_sign_in.xml" value="0.24615384615384617" />
-        <entry key="..\:/Users/Ebrah/AndroidStudioProjects/E-Commerce/app/src/main/res/layout/fragment_sign_up.xml" value="0.24256410256410257" />
         <entry key="..\:/Users/Ebrah/AndroidStudioProjects/E-Commerce/app/src/main/res/layout/fragment_splash.xml" value="0.25" />
-        <entry key="..\:/Users/Ebrah/AndroidStudioProjects/E-Commerce/app/src/main/res/layout/fragment_type_list_product.xml" value="0.25" />
-        <entry key="..\:/Users/Ebrah/AndroidStudioProjects/E-Commerce/app/src/main/res/layout/item_product_list.xml" value="0.25" />
-        <entry key="..\:/Users/Ebrah/AndroidStudioProjects/E-Commerce/app/src/main/res/layout/loading_progress.xml" value="0.25" />
         <entry key="..\:/Users/Ebrah/AndroidStudioProjects/E-Commerce/app/src/main/res/layout/second_screen.xml" value="0.264" />
         <entry key="..\:/Users/Ebrah/AndroidStudioProjects/E-Commerce/app/src/main/res/layout/settings_fragment.xml" value="0.25" />
         <entry key="..\:/Users/Ebrah/AndroidStudioProjects/E-Commerce/app/src/main/res/layout/third_screen.xml" value="0.25" />
