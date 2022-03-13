@@ -7,8 +7,8 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
+import com.hema.e_commerce.model.dataclass.customer.AddressModel
 import com.hema.e_commerce.model.dataclass.customer.CustomerModel
-import com.hema.e_commerce.model.dataclass.customer.CustomersModel
 import com.hema.e_commerce.model.remote.RetrofitInstance.Companion.api
 import com.hema.e_commerce.model.repository.AuthRepo
 import com.hema.e_commerce.util.Either
@@ -21,12 +21,47 @@ class EditAddressViewModel(application: Application,  val AuthRepo: AuthRepo) :
     AndroidViewModel(application) {
 
     val updateUser: MutableLiveData<Boolean?> = MutableLiveData()
+    @RequiresApi(Build.VERSION_CODES.M)
+    fun updateAddress(address:AddressModel){
+        viewModelScope.launch {
+            when (val response: Either<AddressModel, LoginErrors> =
+                AuthRepo.updateAddress(address)) {
+                is Either.Error -> when (response.errorCode) {
+                    LoginErrors.NoInternetConnection -> {
+                        Toast.makeText(
+                            getApplication(),
+                            "NoInternet Connection" + response.message,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                    LoginErrors.ServerError -> {
 
+                        Toast.makeText(
+                            getApplication(),
+                            "Server Error" + response.message,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                    LoginErrors.CustomerNotFound -> {
+                        Toast.makeText(
+                            getApplication(),
+                            "Customer Not Found" + response.message,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+                is Either.Success -> {
+                    Log.d("singin", "" + response.data)
+                    updateUser.postValue(true)
+                }
+            }
+        }
+    }
     @RequiresApi(Build.VERSION_CODES.M)
     fun update(id: Long, customer: CustomerModel) {
         viewModelScope.launch {
 
-            when (val response: Either<CustomerModel, LoginErrors> = AuthRepo.update(id, customer)) {
+            when (val response: Either<CustomerModel, LoginErrors> = AuthRepo.updateCustomer(id, customer)) {
                 is Either.Error -> when (response.errorCode) {
                     LoginErrors.NoInternetConnection -> {
                         Toast.makeText(

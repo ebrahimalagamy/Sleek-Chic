@@ -11,12 +11,15 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.MarkerOptions
 import com.hema.e_commerce.util.Connectivity
 import com.hema.e_commerce.R
 import com.hema.e_commerce.databinding.FragmentMapBinding
+import com.hema.e_commerce.model.dataclass.customer.AddressesItem
+import com.hema.e_commerce.ui.settings.address.editaddress.EditAddressArgs
 import com.hema.e_commerce.util.SharedPreferencesProvider
 
 
@@ -28,6 +31,8 @@ class MapFragment : Fragment() {
     private lateinit var address: String
     private lateinit var binding: FragmentMapBinding
     private lateinit var sharedPref: SharedPreferencesProvider
+    val args: MapFragmentArgs by navArgs()
+    lateinit var adressItem: AddressesItem
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,7 +47,7 @@ class MapFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         sharedPref = SharedPreferencesProvider(requireActivity())
-
+        adressItem = args.address
         binding.btnLocation.setOnClickListener {
             if (markerLat == 0.0 && markerLong == 0.0) {
                 return@setOnClickListener
@@ -56,7 +61,11 @@ class MapFragment : Fragment() {
                 address
 
             )
-            findNavController().navigate(R.id.editAddress)
+            var newAddress = adressItem
+            newAddress.address1 = address
+            val action = MapFragmentDirections.actionMapFragmentToEditAddress(newAddress)
+
+            findNavController().navigate(action)
 
         }
 

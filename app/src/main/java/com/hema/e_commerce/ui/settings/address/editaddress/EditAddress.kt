@@ -3,7 +3,6 @@ package com.hema.e_commerce.ui.settings.address.editaddress
 import android.os.Build
 import android.os.Bundle
 import android.text.Editable
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,14 +11,19 @@ import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.hema.e_commerce.R
 import com.hema.e_commerce.databinding.FragmentEditAddressBinding
-import com.hema.e_commerce.model.dataclass.customer.Customer
-import com.hema.e_commerce.model.dataclass.customer.CustomerModel
+import com.hema.e_commerce.model.dataclass.customer.Address
+import com.hema.e_commerce.model.dataclass.customer.AddressModel
+import com.hema.e_commerce.model.dataclass.customer.AddressesItem
+import com.hema.e_commerce.util.SharedPreferencesProvider
 
 class EditAddress : Fragment() {
     private lateinit var binding: FragmentEditAddressBinding
-//    private lateinit var sharedPref: SharedPreferencesProvider
+    private val args: EditAddressArgs by navArgs()
+    lateinit var addressItem: AddressesItem
+    lateinit var sharedPref: SharedPreferencesProvider
 
     val viewModel by lazy {
         EditAddressViewModel.create(this)
@@ -37,6 +41,8 @@ class EditAddress : Fragment() {
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        sharedPref = SharedPreferencesProvider(requireContext())
+        addressItem = args.adress
         bindUI()
         bindNav()
 
@@ -48,47 +54,43 @@ class EditAddress : Fragment() {
             findNavController().navigate(R.id.address)
         }
         binding.ibOpenMap.setOnClickListener {
-            findNavController().navigate(R.id.action_editAddress_to_mapFragment)
+            val action = EditAddressDirections.actionEditAddressToMapFragment(addressItem)
+            findNavController().navigate(action)
         }
+
         binding.btnSaveAddressInfo.setOnClickListener {
-            var address = binding.tvAddress.text.toString()
+            var address = addressItem.address1
             var phone = binding.etPhoneNumber.text.toString()
             var name = binding.etName.text.toString()
+            var split = name.split(" ")
             var id: Long? = viewModel.AuthRepo.sharedPref.getUserInfo().customer?.customerId
-
-            val customer = CustomerModel(
-                Customer(
-                    firstName = name,
-                    email = viewModel.AuthRepo.sharedPref.getUserInfo().customer?.email,
-                    phone = phone
-//                    addresses = address
+            val addressModel = AddressModel(
+                Address(
+                    id = addressItem.id,
+                    address = address,
+                    phone = phone,
+                    firstName = split[0],
+                    lastName = split[1]
                 )
             )
-            if (id != null) {
-                viewModel.update(id, customer)
-            }
-            viewModel.updateUser.observe(viewLifecycleOwner) {
-                if (it!!) {
-
-                    Toast.makeText(requireContext(), "updated", Toast.LENGTH_LONG).show()
-                    findNavController().navigate(R.id.Settings)
-                } else Toast.makeText(requireContext(), "update failed", Toast.LENGTH_LONG).show()
-            }
-
-//            findNavController().navigate(R.id.address)
+            viewModel.updateAddress(addressModel)
+        }
+        viewModel.updateUser.observe(viewLifecycleOwner) {
+            if (it!!) {
+                Toast.makeText(requireContext(), "updated", Toast.LENGTH_LONG).show()
+                findNavController().popBackStack()
+                viewModel.updateUser.postValue(false)
+            } else Toast.makeText(requireContext(), "update failed", Toast.LENGTH_LONG).show()
         }
     }
 
+
     private fun bindUI() {
 
-        binding.etPhoneNumber.text = Editable.Factory.getInstance().newEditable(
-            viewModel.AuthRepo.sharedPref.getUserInfo().customer?.phone ?: "Phone"
-        )
-//        binding.tvAddress.text =
-//            (viewModel.AuthRepo.sharedPref.getUserInfo().customer?.addresses ?: "empty") as CharSequence?
-
+        binding.etPhoneNumber.text = Editable.Factory.getInstance().newEditable(addressItem.phone)
+        binding.tvAddress.text = addressItem.address1
         binding.etName.text = Editable.Factory.getInstance()
-            .newEditable(viewModel.AuthRepo.sharedPref.getUserInfo().customer?.firstName ?: "Username")
+            .newEditable(addressItem.firstName + " " + addressItem.lastName)
 
     }
 

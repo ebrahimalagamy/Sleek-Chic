@@ -4,6 +4,8 @@ import android.app.Application
 import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
+import com.hema.e_commerce.model.dataclass.customer.AddressArray
+import com.hema.e_commerce.model.dataclass.customer.AddressModel
 import com.hema.e_commerce.model.dataclass.customer.CustomerModel
 import com.hema.e_commerce.model.dataclass.customer.CustomersModel
 import com.hema.e_commerce.model.remote.RetrofitInstance.Companion.api
@@ -38,7 +40,6 @@ class AuthRepo(
             Either.Error(RepoErrors.ServerError, t.message)
         }
     }
-
     @RequiresApi(Build.VERSION_CODES.M)
     suspend fun signIn(email: String, pass: String): Either<CustomersModel, LoginErrors> {
         return try {
@@ -71,9 +72,8 @@ class AuthRepo(
             Either.Error(LoginErrors.ServerError, t.message)
         }
     }
-
     @RequiresApi(Build.VERSION_CODES.M)
-    suspend fun update(id: Long, customer: CustomerModel): Either<CustomerModel, LoginErrors> {
+    suspend fun updateCustomer(id: Long, customer: CustomerModel): Either<CustomerModel, LoginErrors> {
         return try {
             return if (Connectivity.isOnline(application.applicationContext)) {
                 val res = api.update(id, customer)
@@ -94,6 +94,78 @@ class AuthRepo(
         } catch (t: Throwable) {
             Either.Error(LoginErrors.ServerError, t.message)
         }
+    }
+    @RequiresApi(Build.VERSION_CODES.M)
+
+    suspend fun updateAddress(address: AddressModel): Either<AddressModel, LoginErrors> {
+        return try {
+            return if (Connectivity.isOnline(application.applicationContext)) {
+                val res = api.updateAddress(getCustomerFromSettings()?.customerId!!, address.address.id!!,address)
+                if (res.isSuccessful) {
+
+                    Log.d("body", res.body()?.address.toString())
+
+                    Either.Success(res.body()!!)
+                } else
+                    Either.Error(LoginErrors.ServerError, res.message())
+            } else
+                Either.Error(LoginErrors.NoInternetConnection, "NoInternetConnection")
+
+        } catch (t: Throwable) {
+            Either.Error(LoginErrors.ServerError, t.message)
+        }
+    }
+    @RequiresApi(Build.VERSION_CODES.M)
+    suspend fun addAddress(address: AddressModel): Either<AddressModel, LoginErrors> {
+        return try {
+            return if (Connectivity.isOnline(application.applicationContext)) {
+                val res = api.addAddress(getCustomerFromSettings()?.customerId!!, address)
+                if (res.isSuccessful)
+                {
+                    Either.Success(res.body()!!)
+                }else
+                    Either.Error(LoginErrors.ServerError, res.message())
+            }else
+                Either.Error(LoginErrors.NoInternetConnection, "NoInternetConnection")
+        } catch (t: Throwable) {
+            Either.Error(LoginErrors.ServerError, t.message)
+        }
+
+    }
+    @RequiresApi(Build.VERSION_CODES.M)
+    suspend fun removeAddress(id:Long): Either<AddressModel, LoginErrors>{
+        return try {
+            return if (Connectivity.isOnline(application.applicationContext)) {
+                val res = api.deleteAddress(getCustomerFromSettings()?.customerId!!,id)
+                Log.d("address id",res.toString())
+                if (res.isSuccessful)
+                {
+                    Either.Success(res.body()!!)
+                }else
+                    Either.Error(LoginErrors.ServerError, res.message())
+            }else
+                Either.Error(LoginErrors.NoInternetConnection, "NoInternetConnection")
+        } catch (t: Throwable) {
+            Either.Error(LoginErrors.ServerError, t.message)
+        }
+
+    }
+    @RequiresApi(Build.VERSION_CODES.M)
+    suspend fun getAddress(): Either<AddressArray, LoginErrors> {
+        return try {
+            return if (Connectivity.isOnline(application.applicationContext)) {
+                val res = api.getAddress(getCustomerFromSettings()?.customerId!!)
+                if (res.isSuccessful)
+                {
+                    Either.Success(res.body()!!)
+                }else
+                    Either.Error(LoginErrors.ServerError, res.message())
+            }else
+                Either.Error(LoginErrors.NoInternetConnection, "NoInternetConnection")
+        } catch (t: Throwable) {
+            Either.Error(LoginErrors.ServerError, t.message)
+        }
+
     }
 
     private fun getCustomerFromSettings() = sharedPref.getUserInfo().customer

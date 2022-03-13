@@ -8,7 +8,6 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
 import com.hema.e_commerce.model.dataclass.customer.CustomerModel
-import com.hema.e_commerce.model.dataclass.customer.CustomersModel
 import com.hema.e_commerce.model.remote.RetrofitInstance.Companion.api
 import com.hema.e_commerce.model.repository.AuthRepo
 import com.hema.e_commerce.util.Either
@@ -26,7 +25,7 @@ class EditProfileViewModel(application: Application, val AuthRepo: AuthRepo) :
     fun update(id: Long, customer: CustomerModel) {
         viewModelScope.launch {
 
-            when (val response: Either<CustomerModel, LoginErrors> = AuthRepo.update(id, customer)) {
+            when (val response: Either<CustomerModel, LoginErrors> = AuthRepo.updateCustomer(id, customer)) {
                 is Either.Error -> when (response.errorCode) {
                     LoginErrors.NoInternetConnection -> {
                         Toast.makeText(

@@ -86,12 +86,12 @@ class SharedPreferencesProvider(context: Context) {
         get() = pref.getBoolean(IS_SIGN_IN, false)
 
 
-    private fun settingsToJson(settings: CustomerInfo): String {
+    private fun toJson(settings: CustomerInfo): String {
         val json = Gson()
         return json.toJson(settings)
     }
 
-    private fun settingsFromJson(settings: String): CustomerInfo {
+    private fun fromJson(settings: String): CustomerInfo {
         val json = Gson()
         return json.fromJson(settings, CustomerInfo::class.java)
     }
@@ -100,14 +100,14 @@ class SharedPreferencesProvider(context: Context) {
         preferences.edit {
             putString(
                 Constant.ALL_DATA,
-                settingsToJson(update(settings.value ?: CustomerInfo.getDefault()))
+                toJson(update(settings.value ?: CustomerInfo.getDefault()))
             )
             apply()
         }
     }
 
     fun getUserInfo(): CustomerInfo {
-        return preferences.getString(Constant.ALL_DATA, null)?.let { settingsFromJson(it) }
+        return preferences.getString(Constant.ALL_DATA, null)?.let { fromJson(it) }
             ?: CustomerInfo.getDefault()
     }
 

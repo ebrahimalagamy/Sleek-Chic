@@ -121,12 +121,22 @@
         <action
             android:id="@+id/action_editAddress_to_mapFragment"
             app:destination="@id/mapFragment" />
+        <argument
+            android:name="adress"
+            app:argType="com.hema.e_commerce.model.dataclass.customer.AddressesItem" />
     </fragment>
     <fragment
         android:id="@+id/mapFragment"
         android:name="com.hema.e_commerce.ui.settings.map.MapFragment"
         android:label="MapFragment"
-        tools:layout="@layout/fragment_map" />
+        tools:layout="@layout/fragment_map" >
+        <argument
+            android:name="address"
+            app:argType="com.hema.e_commerce.model.dataclass.customer.AddressesItem" />
+        <action
+            android:id="@+id/action_mapFragment_to_editAddress"
+            app:destination="@id/editAddress" />
+    </fragment>
     <fragment
         android:id="@+id/profile"
         android:name="com.hema.e_commerce.ui.settings.profile.Profile"
@@ -199,7 +209,7 @@
     </fragment>
     <fragment
         android:id="@+id/addAddressFragment"
-        android:name="com.hema.e_commerce.ui.settings.address.AddAddressFragment"
+        android:name="com.hema.e_commerce.ui.settings.address.addaddress.AddAddressFragment"
         android:label="fragment_add_address"
         tools:layout="@layout/fragment_add_address">
         <argument

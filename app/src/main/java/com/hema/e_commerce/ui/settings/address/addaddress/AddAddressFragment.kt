@@ -1,22 +1,14 @@
-package com.hema.e_commerce.ui.settings.address
+package com.hema.e_commerce.ui.settings.address.addaddress
 
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.hema.e_commerce.databinding.FragmentAddAddressBinding
-import com.hema.e_commerce.util.Either
-import com.hema.e_commerce.util.RepoErrors
-
-import kotlinx.coroutines.launch
 
 class AddAddressFragment : Fragment() {
 
@@ -34,13 +26,31 @@ class AddAddressFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        binding.vm = viewModel
         return binding.root
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.ivBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
+        binding.btnSave.setOnClickListener {
+            viewModel.addAddress()
+            viewModel.addressAdded.observe(requireActivity()) {
+                if (it) {
+                    viewModel.addressAdded.postValue(false)
+                    findNavController().popBackStack()
 
+                }
+            }
+        }
+
+//        binding.ibOpenMap.setOnClickListener {
+//            val action = EditAddressDirections.actionEditAddressToMapFragment(addressItem)
+//            findNavController().navigate(action)
+//        }
 
     }
 

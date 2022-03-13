@@ -121,6 +121,7 @@
     <string name="do_you_want_confirm_your_order">Do you Want Confirm Your Order</string>
     <string name="confirmed">Confirmed</string>
     <string name="order_oanceled">Order Canceled</string>
+    <string name="add_address">Add Address</string>
 
 
     <!-- filter -->

@@ -1,7 +1,10 @@
 package com.hema.e_commerce.model.remote
 
 import com.hema.e_commerce.model.dataclass.allProducts.ProductsResponse
-import com.hema.e_commerce.model.dataclass.customer.*
+import com.hema.e_commerce.model.dataclass.customer.AddressArray
+import com.hema.e_commerce.model.dataclass.customer.AddressModel
+import com.hema.e_commerce.model.dataclass.customer.CustomerModel
+import com.hema.e_commerce.model.dataclass.customer.CustomersModel
 import com.hema.e_commerce.model.dataclass.getOrder.GetOrderResponce
 import com.hema.e_commerce.model.dataclass.getOrder.Order
 import com.hema.e_commerce.model.dataclass.listofcustomcollections.CustomCollectionsResponse
@@ -49,23 +52,34 @@ interface ShopifyApi {
             Response<CustomerModel>
 
     @POST("customers/{customer_id}/addresses.json")
-    suspend fun addAddress(id: Long, @Body address: AddressModel):
+    suspend fun addAddress(@Path("customer_id") id: Long, @Body address: AddressModel):
             Response<AddressModel>
 
-//    @PUT("customers/{customer_id}/addresses/{address_id}.json")
-//    suspend fun updateAddress(@Path("customer_id") customerId:Long,
-//                              @Path("address_id") addressId:Long,
-//                              @Body address:AddressModel):
-//            Response<CustomerAddressModel>
+    @PUT("customers/{customer_id}/addresses/{address_id}.json")
+    suspend fun updateAddress(
+        @Path("customer_id") customerId: Long,
+        @Path("address_id") addressId: Long,
+        @Body address: AddressModel
+    ):
+            Response<AddressModel>
+
+    @DELETE("customers/{customer_id}/addresses/{address_id}.json")
+    suspend fun deleteAddress(
+        @Path("customer_id") customerId: Long,
+        @Path("address_id") addressId: Long
+    ):
+            Response<AddressModel>
+
+    @GET("customers/{customer_id}/addresses.json")
+    suspend fun getAddress(@Path("customer_id") customerId: Long):
+            Response<AddressArray>
 
     @PUT("customers/{customer_id}/addresses/{address_id}/default.json")
-    suspend fun setDefault(@Path("customer_id") customerId:Long,
-                           @Path("address_id") addressId:Long):
+    suspend fun setDefault(
+        @Path("customer_id") customerId: Long,
+        @Path("address_id") addressId: Long
+    ):
             Response<AddressModel>
-
-    @GET("customers/{customer_id}.json")
-    suspend fun getAddress(@Path("customer_id") customerId:Long):
-            Response<CustomerModel>
 
 
     //creat an order in api web
