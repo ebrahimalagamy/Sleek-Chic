@@ -11,6 +11,10 @@ interface LocalDataDao {
 
     @Query("SELECT * FROM ProductCart")
     fun getAllCartList(): LiveData<List<CartProductData>>
+
+    @Query("SELECT count FROM ProductCart Where id= :id")
+    fun getCartproduct(id:Long):Int
+
     @Update
     suspend fun getCountUpdate(cartProduct: CartProductData)
 

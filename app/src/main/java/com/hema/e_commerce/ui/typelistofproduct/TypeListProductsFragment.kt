@@ -19,13 +19,10 @@ import com.hema.e_commerce.model.room.RoomData
 import com.hema.e_commerce.model.viewModelFactory.ListOfProductViewModelFactory
 import com.hema.e_commerce.model.viewmodels.ListOfProductsViewModel
 import com.hema.e_commerce.ui.progresspar.ProgressBarSetting
-import com.hema.e_commerce.ui.progresspar.ProgressHandler
-import com.hema.e_commerce.util.Constant
 import com.hema.e_commerce.util.Constant.BRAND_KEY
 import com.hema.e_commerce.util.Constant.FLAG
 import com.hema.e_commerce.util.Constant.SUB_COLLECTION_ID
 import com.hema.e_commerce.util.Constant.SUB_COLLECTION_NAME
-import okhttp3.internal.wait
 
 
 class TypeListProductsFragment : Fragment() {
@@ -93,7 +90,7 @@ fun catagoryList(){
 
                 binding.tvEmpty.text=getString(R.string.emptylist)
             }
-            adapter = TypeListAdapter(list)
+            adapter = TypeListAdapter(list,viewModel)
             val layoutManager = GridLayoutManager(requireContext(), 2)
             binding.recListProduct.adapter = adapter
             binding.recListProduct.layoutManager = layoutManager
@@ -124,7 +121,7 @@ fun BrandList(){
                     list.add(i)
                 }
             }
-            adapter = TypeListAdapter(list)
+            adapter = TypeListAdapter(list,viewModel)
             val layoutManager = GridLayoutManager(requireContext(), 2)
             binding.recListProduct.adapter = adapter
             binding.recListProduct.layoutManager = layoutManager

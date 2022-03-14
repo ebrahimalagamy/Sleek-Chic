@@ -3,11 +3,8 @@ package com.hema.e_commerce.model.repository
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.hema.e_commerce.MainActivity
 import com.hema.e_commerce.model.dataclass.allProducts.ProductItem
 import com.hema.e_commerce.model.dataclass.allProducts.ProductsResponse
-import com.hema.e_commerce.model.dataclass.getOrder.GetOrderResponce
-import com.hema.e_commerce.model.dataclass.getOrder.Order
 import com.hema.e_commerce.model.remote.RetrofitInstance
 import com.hema.e_commerce.model.dataclass.listofcustomcollections.CustomCollectionsResponse
 import com.hema.e_commerce.model.dataclass.smartCollection.BrandsResponce
@@ -16,9 +13,7 @@ import com.hema.e_commerce.model.room.cartroom.CartProductData
 import com.hema.e_commerce.model.room.RoomData
 import com.hema.e_commerce.model.room.favoriteRoom.FavoriteProduct
 import com.hema.e_commerce.model.room.orderroom.OrderData
-import com.hema.e_commerce.ui.category.subcollectionsmodel.SubCollections
 import kotlinx.coroutines.*
-import retrofit2.Retrofit
 
 class Repository(val db: RoomData) {
     //Aya

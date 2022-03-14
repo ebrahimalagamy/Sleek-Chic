@@ -161,7 +161,7 @@ class ProductFragment : Fragment() {
             }
 
             binding.favButton.setOnClickListener(View.OnClickListener {
-                /*  if(sharedPref.isSignIn){*/
+                  if(sharedPref.isSignIn){
                 isFavBtnClicked = if (isFavBtnClicked) {
                     viewModel.deleteByID(productId ?: 0)
                     false
@@ -170,10 +170,10 @@ class ProductFragment : Fragment() {
                     true
                 }
                 setStoredButton(isFavBtnClicked)
-                /*} else{
+                } else{
                     Toast.makeText(requireContext(), "Please SignIn To Enjoy our Service", Toast.LENGTH_SHORT).show()
                      navController.navigate(R.id.Settings)
-                }*/
+                }
             })
         }
     }
@@ -202,6 +202,9 @@ class ProductFragment : Fragment() {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     fun setRating() {
+        binding.ratingBar.setOnClickListener {
+
+        }
 
     }
 

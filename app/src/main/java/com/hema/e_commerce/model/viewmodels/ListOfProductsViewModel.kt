@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.hema.e_commerce.model.dataclass.allProducts.ProductsResponse
 import com.hema.e_commerce.model.repository.Repository
+import com.hema.e_commerce.model.room.favoriteRoom.FavoriteProduct
 
 class ListOfProductsViewModel(private val repo: Repository,app: Application) : AndroidViewModel(app) {
 
@@ -23,6 +24,8 @@ class ListOfProductsViewModel(private val repo: Repository,app: Application) : A
         repo.getallProduct()
         allProduct=repo.allProduct
     }
+    fun insertFav(favoriteProduct: FavoriteProduct)=repo.insert(favoriteProduct)
+    fun deleteByID(id: Long)=repo.deleteOnItemFromFavByID(id)
 
 
 }

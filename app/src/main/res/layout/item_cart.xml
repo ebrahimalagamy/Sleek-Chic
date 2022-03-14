@@ -119,13 +119,13 @@
                 android:background="#F8F6F6"
                 android:backgroundTint="#FAF4F4"
 
-                app:layout_constraintBottom_toBottomOf="@+id/count"
+                app:layout_constraintBottom_toBottomOf="@+id/tvcount"
                 app:layout_constraintStart_toStartOf="@+id/imageView"
-                app:layout_constraintTop_toTopOf="@+id/count"
+                app:layout_constraintTop_toTopOf="@+id/tvcount"
                 app:srcCompat="@drawable/ic_add" />
 
             <TextView
-                android:id="@+id/count"
+                android:id="@+id/tvcount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-light"
@@ -142,9 +142,9 @@
                 android:layout_height="32dp"
                 android:background="#FBFBFB"
                 android:backgroundTint="#FDFAFA"
-                app:layout_constraintBottom_toBottomOf="@+id/count"
-                app:layout_constraintStart_toEndOf="@+id/count"
-                app:layout_constraintTop_toTopOf="@+id/count"
+                app:layout_constraintBottom_toBottomOf="@+id/tvcount"
+                app:layout_constraintStart_toEndOf="@+id/tvcount"
+                app:layout_constraintTop_toTopOf="@+id/tvcount"
                 app:srcCompat="@drawable/ic_min" />
 
             <View
@@ -152,7 +152,7 @@
                 android:layout_height=".5dp"
                 android:alpha=".2"
                 android:background="@color/black"
-                app:layout_constraintTop_toBottomOf="@+id/count"
+                app:layout_constraintTop_toBottomOf="@+id/tvcount"
                 tools:layout_editor_absoluteX="10dp" />
 
 
