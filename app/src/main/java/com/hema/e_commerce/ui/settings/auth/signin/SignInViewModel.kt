@@ -27,7 +27,7 @@ class SignInViewModel(application: Application, val AuthRepo: AuthRepo) :
 
             when (val response: Either<CustomersModel, LoginErrors> = AuthRepo.signIn(email,pass)) {
                 is Either.Error -> when (response.errorCode) {
-                    LoginErrors.NoInternetConnection -> {
+                    LoginErrors.ConnectionFiled -> {
                         Toast.makeText(
                             getApplication(),
                             "NoInternetConnection" + response.message,
@@ -42,14 +42,14 @@ class SignInViewModel(application: Application, val AuthRepo: AuthRepo) :
                             Toast.LENGTH_SHORT
                         ).show()
                     }
-                    LoginErrors.IncorrectEmailOrPassword->{
+                    LoginErrors.IncorrectPassword->{
                         Toast.makeText(
                             getApplication(),
                             "IncorrectEmailOrPassword" + response.message,
                             Toast.LENGTH_SHORT
                         ).show()
                     }
-                    LoginErrors.CustomerNotFound -> {
+                    LoginErrors.UserNotFound -> {
                         Toast.makeText(
                             getApplication(),
                             "CustomerNotFound" + response.message,

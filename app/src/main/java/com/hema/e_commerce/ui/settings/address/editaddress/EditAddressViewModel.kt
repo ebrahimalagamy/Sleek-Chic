@@ -27,7 +27,7 @@ class EditAddressViewModel(application: Application,  val AuthRepo: AuthRepo) :
             when (val response: Either<AddressModel, LoginErrors> =
                 AuthRepo.updateAddress(address)) {
                 is Either.Error -> when (response.errorCode) {
-                    LoginErrors.NoInternetConnection -> {
+                    LoginErrors.ConnectionFiled -> {
                         Toast.makeText(
                             getApplication(),
                             "NoInternet Connection" + response.message,
@@ -42,7 +42,7 @@ class EditAddressViewModel(application: Application,  val AuthRepo: AuthRepo) :
                             Toast.LENGTH_SHORT
                         ).show()
                     }
-                    LoginErrors.CustomerNotFound -> {
+                    LoginErrors.UserNotFound -> {
                         Toast.makeText(
                             getApplication(),
                             "Customer Not Found" + response.message,
@@ -63,7 +63,7 @@ class EditAddressViewModel(application: Application,  val AuthRepo: AuthRepo) :
 
             when (val response: Either<CustomerModel, LoginErrors> = AuthRepo.updateCustomer(id, customer)) {
                 is Either.Error -> when (response.errorCode) {
-                    LoginErrors.NoInternetConnection -> {
+                    LoginErrors.ConnectionFiled -> {
                         Toast.makeText(
                             getApplication(),
                             "NoInternet Connection" + response.message,
@@ -78,7 +78,7 @@ class EditAddressViewModel(application: Application,  val AuthRepo: AuthRepo) :
                             Toast.LENGTH_SHORT
                         ).show()
                     }
-                    LoginErrors.CustomerNotFound -> {
+                    LoginErrors.UserNotFound -> {
                         Toast.makeText(
                             getApplication(),
                             "Customer Not Found" + response.message,

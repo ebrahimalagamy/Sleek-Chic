@@ -5,10 +5,10 @@ import com.hema.e_commerce.model.dataclass.customer.AddressArray
 import com.hema.e_commerce.model.dataclass.customer.AddressModel
 import com.hema.e_commerce.model.dataclass.customer.CustomerModel
 import com.hema.e_commerce.model.dataclass.customer.CustomersModel
-import com.hema.e_commerce.model.dataclass.getOrder.GetOrderResponce
-import com.hema.e_commerce.model.dataclass.getOrder.Order
 import com.hema.e_commerce.model.dataclass.listofcustomcollections.CustomCollectionsResponse
-import com.hema.e_commerce.model.dataclass.setOrder.OrderResponse
+import com.hema.e_commerce.model.dataclass.order.OneOrderResponse
+import com.hema.e_commerce.model.dataclass.order.Order
+import com.hema.e_commerce.model.dataclass.order.Orders
 import com.hema.e_commerce.model.dataclass.singleproduct.ProductCollectionResponse
 import com.hema.e_commerce.model.dataclass.smartCollection.BrandsResponce
 import retrofit2.Response
@@ -79,19 +79,11 @@ interface ShopifyApi {
     suspend fun setDefault(
         @Path("customer_id") customerId: Long,
         @Path("address_id") addressId: Long
-    ):
-            Response<AddressModel>
-
+    ): Response<AddressModel>
 
     //creat an order in api web
-    @POST("Orders.json")
-    suspend fun createOrder(@Body orderResponse: OrderResponse): Response<OrderResponse>
-
-    @POST("orders/{order_id}/cancel.json")
-    suspend fun canceledOneOrder(@Path("order_id") id: Long): Response<Order>
-    //retrive list of order
-    @GET("orders.json?status=any")
-    suspend fun getListOfOrderOpen(): Response<GetOrderResponce>
+    @POST("orders.json")
+    suspend fun createOrder(@Body order: Orders): Response<OneOrderResponse>
 
     @GET("orders/{order_id}.json")
     suspend fun getAnOrder(@Path("order_id") id: Long): Response<Order>

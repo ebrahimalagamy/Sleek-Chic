@@ -33,7 +33,7 @@ class AddressesViewModel(application: Application, val AuthRepo: AuthRepo) :
             when (val response: Either<AddressModel, LoginErrors> = AuthRepo.removeAddress(id)
             ){
                 is Either.Error -> when (response.errorCode) {
-                    LoginErrors.NoInternetConnection -> {
+                    LoginErrors.ConnectionFiled -> {
                         withContext(Dispatchers.Main) {
 
                             Toast.makeText(
@@ -81,7 +81,7 @@ class AddressesViewModel(application: Application, val AuthRepo: AuthRepo) :
             when (val response: Either<AddressArray, LoginErrors> = AuthRepo.getAddress()
             ){
                 is Either.Error -> when (response.errorCode) {
-                    LoginErrors.NoInternetConnection -> {
+                    LoginErrors.ConnectionFiled -> {
                         withContext(Dispatchers.Main) {
 
                             Toast.makeText(

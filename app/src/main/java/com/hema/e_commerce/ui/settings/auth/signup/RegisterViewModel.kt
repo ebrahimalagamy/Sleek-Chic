@@ -24,7 +24,7 @@ class RegisterViewModel(application: Application, private val authRepo: AuthRepo
         viewModelScope.launch {
             when (val response: Either<CustomerModel, RepoErrors> = authRepo.signUp(customer)) {
                 is Either.Error -> when (response.errorCode) {
-                    RepoErrors.NoInternetConnection -> {
+                    RepoErrors.ConnectionFiled -> {
                         Toast.makeText(
                             getApplication(),
                             "NoInternetConnection" + response.message,

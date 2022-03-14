@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,17 +19,16 @@ import androidx.navigation.fragment.navArgs
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.hema.e_commerce.R
 import com.hema.e_commerce.databinding.FragmentCheckoutBinding
-import com.hema.e_commerce.model.dataclass.customer.Customer
-import com.hema.e_commerce.model.dataclass.customer.CustomerModel
-import com.hema.e_commerce.model.dataclass.setOrder.Order
-import com.hema.e_commerce.model.dataclass.setOrder.OrderResponse
-import com.hema.e_commerce.model.dataclass.setOrder.OrderTest
+import com.hema.e_commerce.model.dataclass.order.CustomerOrder
+import com.hema.e_commerce.model.dataclass.order.LineItem
+import com.hema.e_commerce.model.dataclass.order.Order
+import com.hema.e_commerce.model.dataclass.order.Orders
 import com.hema.e_commerce.model.repository.Repository
 import com.hema.e_commerce.model.room.RoomData
 import com.hema.e_commerce.model.room.orderroom.OrderData
 import com.hema.e_commerce.model.viewmodels.CheckoutViewModelFactory
-import com.hema.e_commerce.ui.settings.auth.signup.RegisterViewModel
 import com.hema.e_commerce.util.Constant.CLIENT_ID
+import com.hema.e_commerce.util.SharedPreferencesProvider
 import com.paypal.android.sdk.payments.PayPalConfiguration
 import com.paypal.android.sdk.payments.PayPalPayment
 import com.paypal.android.sdk.payments.PayPalService
@@ -44,6 +44,7 @@ class Checkout : Fragment() {
     private val args: CheckoutArgs by navArgs()
     private lateinit var viewModel: CheckoutViewModel
     private lateinit var config: PayPalConfiguration
+    private lateinit var sharedPref: SharedPreferencesProvider
 
     private val vm by lazy {
         CheckOuttViewModel.create(this)
@@ -65,6 +66,7 @@ class Checkout : Fragment() {
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        sharedPref = SharedPreferencesProvider(requireActivity())
 
         bindArgs()
         bindUI()
@@ -99,6 +101,13 @@ class Checkout : Fragment() {
         val customerPhone = binding.tvCustomerPhone.text.toString()
         var paymentMethod: String? = null
         val totalPrice = binding.tvTotalPrice.text.toString()
+        var customerOrder = CustomerOrder(sharedPref.getUserInfo().customer?.customerId)
+
+        var lineItem: MutableList<LineItem> = arrayListOf()
+
+        lineItem.add(LineItem(1, 7604694319335))
+
+
 
         binding.btnOrder.setOnClickListener {
             val rbSelectedId = binding.rgGroup.checkedRadioButtonId
@@ -113,7 +122,11 @@ class Checkout : Fragment() {
                         .setTitle(getString(R.string.currency))
                         .setMessage(getString(R.string.do_you_want_confirm_your_order))
                         .setPositiveButton(getString(R.string.ok)) { _, _ ->
-                            Toast.makeText(requireActivity(), getString(R.string.confirmed), Toast.LENGTH_SHORT)
+                            Toast.makeText(
+                                requireActivity(),
+                                getString(R.string.confirmed),
+                                Toast.LENGTH_SHORT
+                            )
                                 .show()
                             CoroutineScope(Dispatchers.IO).launch {
                                 viewModel.addOrder(
@@ -131,7 +144,11 @@ class Checkout : Fragment() {
                             }
                         }
                         .setNegativeButton(getString(R.string.cancel)) { _, _ ->
-                            Toast.makeText(requireActivity(), getString(R.string.order_oanceled), Toast.LENGTH_SHORT)
+                            Toast.makeText(
+                                requireActivity(),
+                                getString(R.string.order_oanceled),
+                                Toast.LENGTH_SHORT
+                            )
                                 .show()
                         }.show()
 
@@ -151,7 +168,11 @@ class Checkout : Fragment() {
                     requireActivity().startActivityForResult(intent, 123)
                 }
                 else -> {
-                    Toast.makeText(requireActivity(), getString(R.string.select_way_to_pay), Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        requireActivity(),
+                        getString(R.string.select_way_to_pay),
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
 
             }
@@ -159,17 +180,18 @@ class Checkout : Fragment() {
         }
 
         binding.btnOrderRepo.setOnClickListener {
-            val orderResponse = OrderResponse(
-                OrderTest(
-                    id = orderId.toInt(),
-                    phone = customerPhone,
-                    name = customerName,
-                    shipping_address =customerAddress,
-                    total_price = totalPrice,
-                    contact_email = "hemaaaa@gmail.com"
+            val order = Orders(
+                Order(
+                    customer = customerOrder,
+                    financialStatus = "pending",
+                    lineItems = lineItem,
+                    note = paymentMethod,
+                    discountCodes = null
                 )
             )
-            vm.postOrder(orderResponse)
+            Log.d("orderrr", "" + customerOrder)
+
+            vm.postOrder(order)
             vm.orderSuccess.observe(viewLifecycleOwner) {
                 if (it == true) {
                     Toast.makeText(requireContext(), "Successfully", Toast.LENGTH_LONG).show()
@@ -190,7 +212,11 @@ class Checkout : Fragment() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 123) {
             if (resultCode == Activity.RESULT_OK) {
-                Toast.makeText(requireActivity(), getString(R.string.operation_done), Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireActivity(),
+                    getString(R.string.operation_done),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }

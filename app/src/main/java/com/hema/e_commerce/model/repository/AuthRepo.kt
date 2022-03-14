@@ -8,15 +8,14 @@ import com.hema.e_commerce.model.dataclass.customer.AddressArray
 import com.hema.e_commerce.model.dataclass.customer.AddressModel
 import com.hema.e_commerce.model.dataclass.customer.CustomerModel
 import com.hema.e_commerce.model.dataclass.customer.CustomersModel
-import com.hema.e_commerce.model.dataclass.setOrder.Order
-import com.hema.e_commerce.model.dataclass.setOrder.OrderResponse
+import com.hema.e_commerce.model.dataclass.order.OneOrderResponse
+import com.hema.e_commerce.model.dataclass.order.Orders
 import com.hema.e_commerce.model.remote.RetrofitInstance.Companion.api
 import com.hema.e_commerce.model.remote.ShopifyApi
-import com.hema.e_commerce.model.room.orderroom.OrderData
 import com.hema.e_commerce.util.*
 
 class AuthRepo(
-    val ShopifyServices: ShopifyApi,
+    val shopifyApi: ShopifyApi,
     var sharedPref: SharedPreferencesProvider,
     val application: Application
 ) {
@@ -27,22 +26,18 @@ class AuthRepo(
             return if (Connectivity.isOnline(application.applicationContext)) {
                 val res = api.register(customer)
                 if (res.isSuccessful) {
-//                    sharedPref.update {
-//                        it.copy(customer = res.body()?.customer)
-//                    }
-
                     Log.d("body", res.body()?.customer.toString())
-
                     Either.Success(res.body()!!)
                 } else
                     Either.Error(RepoErrors.ServerError, res.message())
             } else
-                Either.Error(RepoErrors.NoInternetConnection, "NoInternetConnection")
+                Either.Error(RepoErrors.ConnectionFiled, "Connection Filed")
 
         } catch (t: Throwable) {
             Either.Error(RepoErrors.ServerError, t.message)
         }
     }
+
     @RequiresApi(Build.VERSION_CODES.M)
     suspend fun signIn(email: String, pass: String): Either<CustomersModel, LoginErrors> {
         return try {
@@ -52,7 +47,7 @@ class AuthRepo(
 
                     val customer = res.body()?.customer?.first {
                         it?.email.equals(email)
-                    } ?: return Either.Error(LoginErrors.CustomerNotFound, "CustomerNotFound")
+                    } ?: return Either.Error(LoginErrors.UserNotFound, "User Not Found")
                     if (customer.lastName.equals(pass)) {
                         sharedPref.update {
                             it.copy(
@@ -60,21 +55,21 @@ class AuthRepo(
                             )
                         }
                     } else return Either.Error(
-                        LoginErrors.IncorrectEmailOrPassword,
-                        "Please enter correct email or password"
+                        LoginErrors.IncorrectPassword,
+                        "Please Insert Correct email or password"
                     )
-
 
                     return Either.Success(res.body()!!)
                 } else
                     return Either.Error(LoginErrors.ServerError, res.message())
             } else
-                return Either.Error(LoginErrors.NoInternetConnection, "NoInternetConnection")
+                return Either.Error(LoginErrors.ConnectionFiled, "Connection Filed")
 
         } catch (t: Throwable) {
             Either.Error(LoginErrors.ServerError, t.message)
         }
     }
+
     @RequiresApi(Build.VERSION_CODES.M)
     suspend fun updateCustomer(id: Long, customer: CustomerModel): Either<CustomerModel, LoginErrors> {
         return try {
@@ -92,18 +87,22 @@ class AuthRepo(
                 } else
                     Either.Error(LoginErrors.ServerError, res.message())
             } else
-                Either.Error(LoginErrors.NoInternetConnection, "NoInternetConnection")
+                Either.Error(LoginErrors.ConnectionFiled, "Connection Filed")
 
         } catch (t: Throwable) {
             Either.Error(LoginErrors.ServerError, t.message)
         }
     }
-    @RequiresApi(Build.VERSION_CODES.M)
 
+    @RequiresApi(Build.VERSION_CODES.M)
     suspend fun updateAddress(address: AddressModel): Either<AddressModel, LoginErrors> {
         return try {
             return if (Connectivity.isOnline(application.applicationContext)) {
-                val res = api.updateAddress(getCustomerFromSettings()?.customerId!!, address.address.id!!,address)
+                val res = api.updateAddress(
+                    sharedPref.getUserInfo().customer?.customerId!!,
+                    address.address.id!!,
+                    address
+                )
                 if (res.isSuccessful) {
 
                     Log.d("body", res.body()?.address.toString())
@@ -112,85 +111,78 @@ class AuthRepo(
                 } else
                     Either.Error(LoginErrors.ServerError, res.message())
             } else
-                Either.Error(LoginErrors.NoInternetConnection, "NoInternetConnection")
+                Either.Error(LoginErrors.ConnectionFiled, "Connection Filed")
 
         } catch (t: Throwable) {
             Either.Error(LoginErrors.ServerError, t.message)
         }
     }
+
     @RequiresApi(Build.VERSION_CODES.M)
     suspend fun addAddress(address: AddressModel): Either<AddressModel, RepoErrors> {
         return try {
             return if (Connectivity.isOnline(application.applicationContext)) {
-                val customerId = getCustomerFromSettings()?.customerId
+                val customerId = sharedPref.getUserInfo().customer?.customerId
                 val res = api.addAddress(customerId!!, address)
-                if (res.isSuccessful)
-                {
+                if (res.isSuccessful) {
                     Either.Success(res.body()!!)
-                }else
+                } else
                     Either.Error(RepoErrors.ServerError, res.message())
-            }else
-                Either.Error(RepoErrors.NoInternetConnection, "NoInternetConnection")
+            } else
+                Either.Error(RepoErrors.ConnectionFiled, "Connection Filed")
         } catch (t: Throwable) {
             Either.Error(RepoErrors.ServerError, t.message)
         }
 
     }
+
     @RequiresApi(Build.VERSION_CODES.M)
-    suspend fun removeAddress(id:Long): Either<AddressModel, LoginErrors>{
+    suspend fun removeAddress(id: Long): Either<AddressModel, LoginErrors> {
         return try {
             return if (Connectivity.isOnline(application.applicationContext)) {
-                val res = api.deleteAddress(getCustomerFromSettings()?.customerId!!,id)
-                Log.d("address id",res.toString())
-                if (res.isSuccessful)
-                {
+                val res = api.deleteAddress(sharedPref.getUserInfo().customer?.customerId!!, id)
+                Log.d("address id", res.toString())
+                if (res.isSuccessful) {
                     Either.Success(res.body()!!)
-                }else
+                } else
                     Either.Error(LoginErrors.ServerError, res.message())
-            }else
-                Either.Error(LoginErrors.NoInternetConnection, "NoInternetConnection")
+            } else
+                Either.Error(LoginErrors.ConnectionFiled, "Connection Filed")
         } catch (t: Throwable) {
             Either.Error(LoginErrors.ServerError, t.message)
         }
 
     }
+
     @RequiresApi(Build.VERSION_CODES.M)
     suspend fun getAddress(): Either<AddressArray, LoginErrors> {
         return try {
             return if (Connectivity.isOnline(application.applicationContext)) {
-                val res = api.getAddress(getCustomerFromSettings()?.customerId!!)
-                if (res.isSuccessful)
-                {
+                val res = api.getAddress(sharedPref.getUserInfo().customer?.customerId!!)
+                if (res.isSuccessful) {
                     Either.Success(res.body()!!)
-                }else
+                } else
                     Either.Error(LoginErrors.ServerError, res.message())
-            }else
-                Either.Error(LoginErrors.NoInternetConnection, "NoInternetConnection")
+            } else
+                Either.Error(LoginErrors.ConnectionFiled, "Connection Filed")
         } catch (t: Throwable) {
             Either.Error(LoginErrors.ServerError, t.message)
         }
 
     }
 
-    private fun getCustomerFromSettings() = sharedPref.getUserInfo().customer
-
     @RequiresApi(Build.VERSION_CODES.M)
-    suspend fun createOrder(orderResponse: OrderResponse): Either<OrderResponse, RepoErrors> {
+    suspend fun createOrder(order: Orders): Either<OneOrderResponse, RepoErrors> {
         return try {
             return if (Connectivity.isOnline(application.applicationContext)) {
-                val res = api.createOrder(orderResponse)
+                val res = api.createOrder(order)
                 if (res.isSuccessful) {
-//                    sharedPref.update {
-//                        it.copy(customer = res.body()?.customer)
-//                    }
-
                     Log.d("body", res.body()?.order.toString())
-
                     Either.Success(res.body()!!)
                 } else
                     Either.Error(RepoErrors.ServerError, res.message())
             } else
-                Either.Error(RepoErrors.NoInternetConnection, "NoInternetConnection")
+                Either.Error(RepoErrors.ConnectionFiled, "Connection Field")
 
         } catch (t: Throwable) {
             Either.Error(RepoErrors.ServerError, t.message)

@@ -6,8 +6,8 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
-import com.hema.e_commerce.model.dataclass.customer.CustomerModel
-import com.hema.e_commerce.model.dataclass.setOrder.OrderResponse
+import com.hema.e_commerce.model.dataclass.order.OneOrderResponse
+import com.hema.e_commerce.model.dataclass.order.Orders
 import com.hema.e_commerce.model.remote.RetrofitInstance
 import com.hema.e_commerce.model.repository.AuthRepo
 import com.hema.e_commerce.util.Either
@@ -21,11 +21,12 @@ class CheckOuttViewModel(application: Application, private val authRepo: AuthRep
     val orderSuccess: MutableLiveData<Boolean?> = MutableLiveData()
 
     @RequiresApi(Build.VERSION_CODES.M)
-    fun postOrder(orderResponse: OrderResponse) {
+    fun postOrder(order: Orders) {
         viewModelScope.launch {
-            when (val response: Either<OrderResponse, RepoErrors> = authRepo.createOrder(orderResponse)) {
+            when (val response: Either<OneOrderResponse, RepoErrors> =
+                authRepo.createOrder(order)) {
                 is Either.Error -> when (response.errorCode) {
-                    RepoErrors.NoInternetConnection -> {
+                    RepoErrors.ConnectionFiled -> {
                         Toast.makeText(
                             getApplication(),
                             "NoInternetConnection" + response.message,
@@ -45,7 +46,6 @@ class CheckOuttViewModel(application: Application, private val authRepo: AuthRep
             }
         }
     }
-
 
 
     class Factory(

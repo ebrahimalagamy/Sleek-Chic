@@ -2,22 +2,17 @@ package com.hema.e_commerce.ui.settings.address.addaddress
 
 import android.app.Application
 import android.os.Build
-import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
-import com.hema.e_commerce.model.dataclass.customer.Address
 import com.hema.e_commerce.model.dataclass.customer.AddressModel
-import com.hema.e_commerce.model.dataclass.customer.CustomerModel
 import com.hema.e_commerce.model.remote.RetrofitInstance
 import com.hema.e_commerce.model.repository.AuthRepo
 import com.hema.e_commerce.util.Either
-import com.hema.e_commerce.util.LoginErrors
 import com.hema.e_commerce.util.RepoErrors
 import com.hema.e_commerce.util.SharedPreferencesProvider
 import kotlinx.coroutines.launch
-import kotlin.random.Random
 
 
 class AddAddressViewModel(application: Application, val authRepo: AuthRepo) :
@@ -30,7 +25,7 @@ class AddAddressViewModel(application: Application, val authRepo: AuthRepo) :
         viewModelScope.launch {
             when (val response: Either<AddressModel, RepoErrors> = authRepo.addAddress(address)) {
                 is Either.Error -> when (response.errorCode) {
-                    RepoErrors.NoInternetConnection -> {
+                    RepoErrors.ConnectionFiled -> {
                         Toast.makeText(
                             getApplication(),
                             "NoInternetConnection" + response.message,
