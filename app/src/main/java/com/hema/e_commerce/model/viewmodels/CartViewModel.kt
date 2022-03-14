@@ -2,18 +2,44 @@ package com.hema.e_commerce.model.viewmodels
 
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import com.hema.e_commerce.model.repository.Repository
 import com.hema.e_commerce.model.room.cartroom.CartProductData
 import com.hema.e_commerce.model.room.favoriteRoom.FavoriteProduct
+import kotlinx.coroutines.launch
 
 
 class CartViewModel(private val repo: Repository,app: Application) : AndroidViewModel(app) {
+    private val count = MutableLiveData<Int>()
+    private val ChangeQuntityListener = MutableLiveData<Boolean>()
+    private val order = MutableLiveData<Long>()
+    private val favOrder = MutableLiveData<CartProductData>()
+
+
+    fun onCountChange(item:Int){
+        count.postValue(item)
+    }
+
+
+
+
+    fun onChangeQuntity() {
+        ChangeQuntityListener.postValue(true)
+    }
+    fun onDelClick(id: Long) {
+        order.postValue(id)
+    }
+
+    fun onFavClick(item: CartProductData) {
+        favOrder.postValue(item)
+    }
+
+
 
     fun getCartProducts()= repo.getAllCartProduct()
+  //  fun getCartProductCount(id:Long)= repo.getCartproduct(id)
+
+
 
     fun deleteOneItemCart(cartItem: CartProductData)=repo.deleteOneCartItem(cartItem)
 

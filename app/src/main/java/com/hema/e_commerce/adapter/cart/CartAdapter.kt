@@ -1,9 +1,11 @@
 package com.hema.e_commerce.adapter.cart
 
+import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -16,23 +18,12 @@ import com.hema.e_commerce.model.room.cartroom.CartProductData
 import com.hema.e_commerce.model.room.favoriteRoom.FavoriteProduct
 import com.hema.e_commerce.model.viewmodels.CartViewModel
 
-class CartAdapter(val cartViewModel: CartViewModel) : RecyclerView.Adapter<CartAdapter.ViewHolder>() {
-    private val count= MutableLiveData<Int>()
-    private val ChangeQuntityListener = MutableLiveData<Boolean>()
-    private val order = MutableLiveData<Long>()
-    private val favOrder = MutableLiveData<CartProductData>()
+class CartAdapter(private val cartViewModel: CartViewModel,private val context: Context) : RecyclerView.Adapter<CartAdapter.ViewHolder>() {
+
 
     inner class ViewHolder(itemCartBinding: ItemCartBinding) :
-        RecyclerView.ViewHolder(itemCartBinding.getRoot()) {
-        var itemCartBinding: ItemCartBinding
-
-        init {
-            this.itemCartBinding = itemCartBinding
-        }
-
-
-
-
+        RecyclerView.ViewHolder(itemCartBinding.root) {
+        var itemCartBinding: ItemCartBinding = itemCartBinding
     }
 
 
@@ -52,51 +43,65 @@ class CartAdapter(val cartViewModel: CartViewModel) : RecyclerView.Adapter<CartA
 
         val cartProduct = differ.currentList[position]
         holder.itemCartBinding.title.text = differ.currentList[position].title
-       // holder.itemCartBinding.price.text = differ.currentList[position].price
+        // holder.itemCartBinding.price.text = differ.currentList[position].price
 
-
-
-        val sharedPreferences: SharedPreferences = holder.itemCartBinding.minCount.context.getSharedPreferences("currency", 0)
-        var value = sharedPreferences.getString("currency","EGP")
-        Log.i("cur value", "onBindViewHolder: "+value)
-
-
-        when(value){
-            "EGP"-> {
+        val sharedPreferences: SharedPreferences =
+            holder.itemCartBinding.minCount.context.getSharedPreferences("currency", 0)
+        var value = sharedPreferences.getString("currency", "EGP")
+        when (value) {
+            "EGP" -> {
                 holder.itemCartBinding.price.text =
                     differ.currentList[position].price + " " + holder.itemCartBinding.minCount.context.getString(
-                        R.string.eg)
-                Log.i("currancyyyyyy", "onBindViewHolder: "+ differ.currentList[position].price + " " + holder.itemCartBinding.minCount.context.getString(
-                    R.string.eg))
+                        R.string.eg
+                    )
+                Log.i(
+                    "currancyyyyyy",
+                    "onBindViewHolder: " + differ.currentList[position].price + " " + holder.itemCartBinding.minCount.context.getString(
+                        R.string.eg
+                    )
+                )
 
             }
-            "USA"-> {
-                var usCurrancy=   (( differ.currentList[position].price).toDouble() / (15.71))
-                val number:Double=String.format("%.2f",usCurrancy).toDouble()
-                holder.itemCartBinding.price.text = number.toString() + " " + holder.itemCartBinding.minCount.context.getString(R.string.us)
-                Log.i("currancyyyyyy", "onBindViewHolder: "+         number.toString() + " " + holder.itemCartBinding.minCount.context.getString(R.string.us)
+            "USA" -> {
+                var usCurrancy = ((differ.currentList[position].price).toDouble() / (15.71))
+                val number: Double = String.format("%.2f", usCurrancy).toDouble()
+                holder.itemCartBinding.price.text =
+                    number.toString() + " " + holder.itemCartBinding.minCount.context.getString(R.string.us)
+                Log.i(
+                    "currancyyyyyy",
+                    "onBindViewHolder: " + number.toString() + " " + holder.itemCartBinding.minCount.context.getString(
+                        R.string.us
+                    )
                 )
 
 
             }
-            "EUR"->      {
-                var ureCurrancy=   ((differ.currentList[position].price).toDouble() / (17.10))
-                val number:Double=String.format("%.2f",ureCurrancy).toDouble()
-                holder.itemCartBinding.price.text=number.toString()+" "+ holder.itemCartBinding.minCount.context.getString(R.string.eur)
+            "EUR" -> {
+                var ureCurrancy = ((differ.currentList[position].price).toDouble() / (17.10))
+                val number: Double = String.format("%.2f", ureCurrancy).toDouble()
+                holder.itemCartBinding.price.text =
+                    number.toString() + " " + holder.itemCartBinding.minCount.context.getString(R.string.eur)
 
-                Log.i("currancyyyyyy", "onBindViewHolder: "+number.toString()+" "+ holder.itemCartBinding.minCount.context.getString(R.string.eur)
-                )}
+                Log.i(
+                    "currancyyyyyy",
+                    "onBindViewHolder: " + number.toString() + " " + holder.itemCartBinding.minCount.context.getString(
+                        R.string.eur
+                    )
+                )
+            }
             else -> {
                 holder.itemCartBinding.price.text =
                     differ.currentList[position].price + " " + holder.itemCartBinding.minCount.context.getString(
-                        R.string.eg)
-                Log.i("currancyyyyyy", "onBindViewHolder: else "+  differ.currentList[position].price + " " + holder.itemCartBinding.minCount.context.getString(
-                    R.string.eg))
+                        R.string.eg
+                    )
+                Log.i(
+                    "currancyyyyyy",
+                    "onBindViewHolder: else " + differ.currentList[position].price + " " + holder.itemCartBinding.minCount.context.getString(
+                        R.string.eg
+                    )
+                )
             }
         }
-
-
-        //
         holder.itemCartBinding.copoun.text = "free delevery"
         Glide.with(holder.itemCartBinding.imageView)
             .load(differ.currentList[position].image)
@@ -105,70 +110,53 @@ class CartAdapter(val cartViewModel: CartViewModel) : RecyclerView.Adapter<CartA
             .into(holder.itemCartBinding.imageView)
 
 
+        holder.itemCartBinding.tvcount.text = differ.currentList[position].count.toString()
         holder.itemCartBinding.minCount.setOnClickListener {
-            var num =((holder.itemCartBinding.count.text.toString().toInt())-1)
-            if(num>0){
-                // differ.currentList[position].count-= num
-                differ.currentList[position].inventory_quantity=num
-
-
-
-
-
-
-
-              //  differ.currentList[position].price
-                //
-                holder.itemCartBinding.count.text=num.toString()
-
-                val cartitem= CartProductData(
+            if (holder.itemCartBinding.tvcount.text.toString().toInt() >1) {
+                var counter = holder.itemCartBinding.tvcount.text.toString().toInt()
+                counter -= 1
+                val cartitem = CartProductData(
                     differ.currentList[position].id,
-                    differ.currentList[position].image,differ.currentList[position].title
-                    ,differ.currentList[position].price
-                    ,differ.currentList[position].inventory_quantity,num
-                )
+                    differ.currentList[position].image,
+                    differ.currentList[position].title,
+                    differ.currentList[position].price,
+                    differ.currentList[position].inventory_quantity,
+                    counter)
                 cartViewModel.updateItemCount(cartitem)
-
-                onChangeQuntity()
-                onCountChange(num)
+                cartViewModel.onChangeQuntity()
+                cartViewModel.onCountChange(counter)
             }
-
-            else{
-                onDelClick( differ.currentList[position].id)
-            }
-
         }
-
         holder.itemCartBinding.increCount.setOnClickListener {
-            var num =((holder.itemCartBinding.count.text.toString().toInt())+1)
-            differ.currentList[position].inventory_quantity=num
-            differ.currentList[position].price
-            holder.itemCartBinding.count.text=num.toString()
-            val cartitem= CartProductData(
-                differ.currentList[position].id,
-                differ.currentList[position].image,differ.currentList[position].title
-                ,differ.currentList[position].price
-                ,differ.currentList[position].inventory_quantity,num
-            )
-            cartViewModel.updateItemCount(cartitem)
-
-            onChangeQuntity()
-            onCountChange(num)
-
-
+                if (holder.itemCartBinding.tvcount.text.toString().toInt() < differ.currentList[position].inventory_quantity) {
+                var counter = holder.itemCartBinding.tvcount.text.toString().toInt()
+                counter += 1
+                    val cartitem = CartProductData(
+                        differ.currentList[position].id,
+                        differ.currentList[position].image,
+                        differ.currentList[position].title,
+                        differ.currentList[position].price,
+                        differ.currentList[position].inventory_quantity,
+                        counter)
+                    cartViewModel.updateItemCount(cartitem)
+                    cartViewModel.onChangeQuntity()
+                    cartViewModel. onCountChange(counter)
+            }else{
+                Toast.makeText(context, "No More Pieces In Inventory", Toast.LENGTH_SHORT).show() }
         }
 
 
         holder.itemCartBinding.favBt.setOnClickListener {
-            val fav=FavoriteProduct(
-                differ.currentList[position].id,differ.currentList[position].image,differ.currentList[position].title
-                ,differ.currentList[position].price,differ.currentList[position].inventory_quantity, 1)
+            val fav = FavoriteProduct(
+                differ.currentList[position].id,
+                differ.currentList[position].image,
+                differ.currentList[position].title,
+                differ.currentList[position].price,
+                differ.currentList[position].inventory_quantity,
+                1
+            )
             cartViewModel.insertFav(fav)
-
-
-
         }
-
 
 
         holder.itemCartBinding.cancel.setOnClickListener {
@@ -182,23 +170,7 @@ class CartAdapter(val cartViewModel: CartViewModel) : RecyclerView.Adapter<CartA
     }
 
 
-    fun onCountChange(item:Int){
-        count.postValue(item)
-    }
 
-
-
-
-    fun onChangeQuntity() {
-        ChangeQuntityListener.postValue(true)
-    }
-    fun onDelClick(id: Long) {
-        order.postValue(id)
-    }
-
-    fun onFavClick(item: CartProductData) {
-        favOrder.postValue(item)
-    }
     // util to see only change in articles to refresh it only not like we give list and we refresh all list
     private val differCallBack = object : DiffUtil.ItemCallback<CartProductData>(){
         override fun areItemsTheSame(oldItem: CartProductData,newItem:CartProductData):Boolean{

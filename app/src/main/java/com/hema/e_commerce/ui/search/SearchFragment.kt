@@ -180,6 +180,7 @@ class SearchFragment : Fragment() {
                 searchProducts.add(it)
             }
         }
+        //search()
         brandList()
     }
 

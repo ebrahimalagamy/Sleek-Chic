@@ -159,7 +159,7 @@ class Cart : Fragment() {
     }
     private fun setupRecyclerView() {
 
-        cartAdapter = CartAdapter(viewModel)
+        cartAdapter = CartAdapter(viewModel,requireContext())
         cartFragmentBinding.cartRec.apply {
             adapter = cartAdapter
             layoutManager = LinearLayoutManager(context)

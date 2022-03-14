@@ -5,7 +5,10 @@ import android.content.SharedPreferences
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -15,17 +18,20 @@ import com.hema.e_commerce.databinding.ItemFavoriteBinding
 import com.hema.e_commerce.model.room.cartroom.CartProductData
 import com.hema.e_commerce.model.room.favoriteRoom.FavoriteProduct
 import com.hema.e_commerce.model.viewmodels.WishListViewModel
+import com.hema.e_commerce.util.Constant
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class WishListAdapter(val context:Context,var viewModel:WishListViewModel) : RecyclerView.Adapter<WishListAdapter.ViewHolder>() {
+    private lateinit var navController: NavController
 
     inner class ViewHolder( val binding: ItemFavoriteBinding) : RecyclerView.ViewHolder(binding.root)
 
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        navController= Navigation.findNavController(parent)
         return ViewHolder(DataBindingUtil.inflate(LayoutInflater.from(parent.context),
             R.layout.item_favorite, parent, false
             )
@@ -61,21 +67,12 @@ class WishListAdapter(val context:Context,var viewModel:WishListViewModel) : Rec
                 .load(differ.currentList[position].image).into(holder.binding.imgFavProduct)
         }
 
-     /*
-       //Error
-       holder.binding.imageButton2.setOnClickListener(View.OnClickListener {
-            val builder = AlertDialog.Builder(context)
-            builder.setMessage(R.string.alertDeleteMessage)
+        holder.itemView.setOnClickListener{
+            val bundle = bundleOf(Constant.PRODUCT to  differ.currentList[position].id)
 
-            builder.setPositiveButton(R.string.yes) { _, _ ->
-               // this.differ.currentList.remove(differ.currentList[position])
-                this.viewModel.delete(differ.currentList[position])
-                this.notifyDataSetChanged()
-            }
-            builder.setNegativeButton(R.string.no, null)
-            builder.show()
+            navController.navigate(R.id.productFragment,bundle)
 
-        })*/
+        }
 
         holder.binding.btnAddToCart.setOnClickListener(View.OnClickListener {
         val cart=CartProductData(
