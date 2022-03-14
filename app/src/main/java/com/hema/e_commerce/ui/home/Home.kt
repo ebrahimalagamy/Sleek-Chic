@@ -5,18 +5,23 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
 import com.hema.e_commerce.R
 import com.hema.e_commerce.adapter.home.BrandAdapter
+import com.hema.e_commerce.adapter.home.CartNotificationAdapter
+import com.hema.e_commerce.adapter.home.WishListNotificationAdapter
 import com.hema.e_commerce.databinding.HomeFragmentBinding
 import com.hema.e_commerce.model.repository.Repository
 import com.hema.e_commerce.model.room.RoomData
@@ -30,7 +35,8 @@ class Home : Fragment() {
     private lateinit var binding: HomeFragmentBinding
     private lateinit var viewModel: HomeViewModel
     private lateinit var brandAdapter: BrandAdapter
- //   private lateinit var productAdapter: ProductsAdapter
+
+    //   private lateinit var productAdapter: ProductsAdapter
     private lateinit var navController: NavController
 
 
@@ -47,25 +53,26 @@ class Home : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         ProgressBarSetting().setProgress(requireActivity())
-        val repository= Repository(RoomData(requireContext()))
-        val homeViewModelProviderFactory = HomeViewModelFactory(requireActivity().application,repository)
-        viewModel = ViewModelProvider(this,homeViewModelProviderFactory)[HomeViewModel::class.java]
-        navController= Navigation.findNavController(requireView())
+        val repository = Repository(RoomData(requireContext()))
+        val homeViewModelProviderFactory =
+            HomeViewModelFactory(requireActivity().application, repository)
+        viewModel = ViewModelProvider(this, homeViewModelProviderFactory)[HomeViewModel::class.java]
+        navController = Navigation.findNavController(requireView())
 
         imageSlider()
-
         initViews()
         observers()
-
         onClickSearch()
+        iconBadges()
+
     }
 
 
-////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////
     //product and brand logic
-private fun observers(){
+    private fun observers() {
         observeBrand()
-       // observeSaleProduct()
+        // observeSaleProduct()
     }
 
     private fun observeBrand() {
@@ -83,23 +90,24 @@ private fun observers(){
             binding.brandsRecycler.adapter = brandAdapter
         }
     }
-  /*  fun observeSaleProduct() {
-        viewModel.onSaleProducts .observe(viewLifecycleOwner, Observer {
-            var productList=it.products
-            productAdapter= ProductsAdapter(arrayListOf())
-            productAdapter.updateproduct(productList)
-            binding.bestSellingRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false)
-            binding.bestSellingRecyclerView.adapter=productAdapter
-        })
-    }*/
+    /*  fun observeSaleProduct() {
+          viewModel.onSaleProducts .observe(viewLifecycleOwner, Observer {
+              var productList=it.products
+              productAdapter= ProductsAdapter(arrayListOf())
+              productAdapter.updateproduct(productList)
+              binding.bestSellingRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false)
+              binding.bestSellingRecyclerView.adapter=productAdapter
+          })
+      }*/
 
 
-     private fun initViews() {
-         viewModel.getBrand()
-      //   viewModel.getOnHomeProducts()
-       //  viewModel.getOnSaleProducts()
+    private fun initViews() {
+        viewModel.getBrand()
+        //   viewModel.getOnHomeProducts()
+        //  viewModel.getOnSaleProducts()
     }
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 // image slide view
     private fun imageSlider() {
         //function for image slider
@@ -115,20 +123,42 @@ private fun observers(){
         binding.imageSlider.setImageList(imageList, ScaleTypes.FIT)
         binding.imageSlider.setImageList(imageList)
     }
+
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 //search
     @RequiresApi(Build.VERSION_CODES.M)
-    private fun onClickSearch(){
+    private fun onClickSearch() {
         binding.searchView.setOnSearchClickListener {
-            if(isOnline(requireContext())){
             binding.searchView.isIconified = true
-            navController.navigate(
-                R.id.action_home_to_searchFragment
-            )
-        }
+            if (isOnline(requireContext())) {
+                navController.navigate(
+                    R.id.action_home_to_searchFragment
+                )
+            } else {
+
+                Toast.makeText(requireContext(), R.string.check_internet, Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
+    fun iconBadges() {
+        val wishListIcon = WishListNotificationAdapter(binding.favourite)
+
+        if (isOnline(requireContext())) {
+            viewModel.getFavProducts().observe(viewLifecycleOwner, Observer {
+                wishListIcon.updateView(it.size)
+            })
+
+
+            wishListIcon.Button.setOnClickListener {
+                findNavController().navigate(R.id.wishlist)
+            }
+
+        } else {
+            Toast.makeText(requireContext(), R.string.check_internet, Toast.LENGTH_SHORT).show()
+        }
+    }
 
 
 }
