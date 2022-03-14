@@ -8,8 +8,11 @@ import com.hema.e_commerce.model.dataclass.customer.AddressArray
 import com.hema.e_commerce.model.dataclass.customer.AddressModel
 import com.hema.e_commerce.model.dataclass.customer.CustomerModel
 import com.hema.e_commerce.model.dataclass.customer.CustomersModel
+import com.hema.e_commerce.model.dataclass.setOrder.Order
+import com.hema.e_commerce.model.dataclass.setOrder.OrderResponse
 import com.hema.e_commerce.model.remote.RetrofitInstance.Companion.api
 import com.hema.e_commerce.model.remote.ShopifyApi
+import com.hema.e_commerce.model.room.orderroom.OrderData
 import com.hema.e_commerce.util.*
 
 class AuthRepo(
@@ -116,19 +119,20 @@ class AuthRepo(
         }
     }
     @RequiresApi(Build.VERSION_CODES.M)
-    suspend fun addAddress(address: AddressModel): Either<AddressModel, LoginErrors> {
+    suspend fun addAddress(address: AddressModel): Either<AddressModel, RepoErrors> {
         return try {
             return if (Connectivity.isOnline(application.applicationContext)) {
-                val res = api.addAddress(getCustomerFromSettings()?.customerId!!, address)
+                val customerId = getCustomerFromSettings()?.customerId
+                val res = api.addAddress(customerId!!, address)
                 if (res.isSuccessful)
                 {
                     Either.Success(res.body()!!)
                 }else
-                    Either.Error(LoginErrors.ServerError, res.message())
+                    Either.Error(RepoErrors.ServerError, res.message())
             }else
-                Either.Error(LoginErrors.NoInternetConnection, "NoInternetConnection")
+                Either.Error(RepoErrors.NoInternetConnection, "NoInternetConnection")
         } catch (t: Throwable) {
-            Either.Error(LoginErrors.ServerError, t.message)
+            Either.Error(RepoErrors.ServerError, t.message)
         }
 
     }
@@ -169,5 +173,28 @@ class AuthRepo(
     }
 
     private fun getCustomerFromSettings() = sharedPref.getUserInfo().customer
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    suspend fun createOrder(orderResponse: OrderResponse): Either<OrderResponse, RepoErrors> {
+        return try {
+            return if (Connectivity.isOnline(application.applicationContext)) {
+                val res = api.createOrder(orderResponse)
+                if (res.isSuccessful) {
+//                    sharedPref.update {
+//                        it.copy(customer = res.body()?.customer)
+//                    }
+
+                    Log.d("body", res.body()?.order.toString())
+
+                    Either.Success(res.body()!!)
+                } else
+                    Either.Error(RepoErrors.ServerError, res.message())
+            } else
+                Either.Error(RepoErrors.NoInternetConnection, "NoInternetConnection")
+
+        } catch (t: Throwable) {
+            Either.Error(RepoErrors.ServerError, t.message)
+        }
+    }
 
 }

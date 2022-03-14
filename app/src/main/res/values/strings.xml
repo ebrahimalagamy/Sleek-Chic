@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">E-Commerce</string>
+    <string name="app_name">Sleek Chic</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
-    <string name="home">Home</string>
+    <string name="home">Shop</string>
     <string name="category">Category</string>
     <string name="cart">Cart</string>
     <string name="featured_brands">Brands</string>
@@ -18,7 +18,7 @@
     <string name="sign_in">Sign In</string>
     <string name="don_t_have_account">Don\'t have account?</string>
     <string name="sign_up">Sign up</string>
-    <string name="forget_password">Forget password</string>
+    <string name="forget_password">Forget password ?</string>
     <string name="create_new_account">Create new account</string>
     <string name="lets_do_it_now">Lets do it now</string>
     <string name="username">Username</string>
@@ -78,7 +78,7 @@
     <string name="email_">EMAIL</string>
     <string name="security_information">SECURITY INFORMATION</string>
     <string name="change_password">change password</string>
-      <string name="cancelled_orders">Cancelled Orders</string>
+    <string name="cancelled_orders">Cancelled Orders</string>
     <string name="emptylist">Products Not Available Now</string>
 
     <!-- favorite -->
@@ -142,7 +142,6 @@
         <item>price 0 to 500</item>
         <item>All prices</item>
     </string-array>
-
 
 
 </resources>

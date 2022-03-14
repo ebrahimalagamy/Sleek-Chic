@@ -38,8 +38,8 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height=".1dp"
-            android:alpha=".2"
+            android:layout_height="1dp"
+            android:alpha=".1"
             android:background="@color/black" />
 
         <androidx.core.widget.NestedScrollView

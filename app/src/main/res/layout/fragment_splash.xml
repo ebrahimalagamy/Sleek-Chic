@@ -11,18 +11,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.splash.SplashFragment"
-        android:background="@color/yellow"
         >
 
         <ImageView
+            android:id="@+id/imageView7"
             android:layout_width="250dp"
             android:layout_height="250dp"
-            android:src="@drawable/onlinenshopping"
+            android:src="@drawable/splash2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

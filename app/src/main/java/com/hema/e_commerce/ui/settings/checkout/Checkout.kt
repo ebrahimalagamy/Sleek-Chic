@@ -2,23 +2,32 @@ package com.hema.e_commerce.ui.settings.checkout
 
 import android.app.Activity
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.hema.e_commerce.R
 import com.hema.e_commerce.databinding.FragmentCheckoutBinding
+import com.hema.e_commerce.model.dataclass.customer.Customer
+import com.hema.e_commerce.model.dataclass.customer.CustomerModel
+import com.hema.e_commerce.model.dataclass.setOrder.Order
+import com.hema.e_commerce.model.dataclass.setOrder.OrderResponse
+import com.hema.e_commerce.model.dataclass.setOrder.OrderTest
 import com.hema.e_commerce.model.repository.Repository
 import com.hema.e_commerce.model.room.RoomData
 import com.hema.e_commerce.model.room.orderroom.OrderData
 import com.hema.e_commerce.model.viewmodels.CheckoutViewModelFactory
+import com.hema.e_commerce.ui.settings.auth.signup.RegisterViewModel
 import com.hema.e_commerce.util.Constant.CLIENT_ID
 import com.paypal.android.sdk.payments.PayPalConfiguration
 import com.paypal.android.sdk.payments.PayPalPayment
@@ -36,6 +45,10 @@ class Checkout : Fragment() {
     private lateinit var viewModel: CheckoutViewModel
     private lateinit var config: PayPalConfiguration
 
+    private val vm by lazy {
+        CheckOuttViewModel.create(this)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -49,6 +62,7 @@ class Checkout : Fragment() {
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -77,6 +91,7 @@ class Checkout : Fragment() {
         binding.tvSubtotal.text = totalPrice
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     private fun bindUI() {
         val orderId = Random.nextLong(1000000, 10000000)
         val customerName = binding.tvCustomerName.text.toString()
@@ -141,6 +156,32 @@ class Checkout : Fragment() {
 
             }
 
+        }
+
+        binding.btnOrderRepo.setOnClickListener {
+            val orderResponse = OrderResponse(
+                OrderTest(
+                    id = orderId.toInt(),
+                    phone = customerPhone,
+                    name = customerName,
+                    shipping_address =customerAddress,
+                    total_price = totalPrice,
+                    contact_email = "hemaaaa@gmail.com"
+                )
+            )
+            vm.postOrder(orderResponse)
+            vm.orderSuccess.observe(viewLifecycleOwner) {
+                if (it == true) {
+                    Toast.makeText(requireContext(), "Successfully", Toast.LENGTH_LONG).show()
+//                    findNavController().navigate(R.id.signInFragment)
+                } else Toast.makeText(requireContext(), "Try again", Toast.LENGTH_LONG).show()
+            }
+        }
+
+
+
+        binding.tvChangeAddress.setOnClickListener {
+            findNavController().navigate(R.id.action_checkout_to_selectAddress)
         }
 
     }

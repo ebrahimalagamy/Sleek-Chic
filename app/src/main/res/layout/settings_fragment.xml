@@ -26,33 +26,35 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginEnd="10dp">
+                android:layout_marginEnd="10dp"
+                android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_marginTop="15dp"
-                    android:text="@string/e_commerce"
+                    android:src="@drawable/appicon2"
+
                     android:textStyle="bold" />
-
-
-                <TextView
-                    android:id="@+id/tvWelcomeUser"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:textColor="@color/black"
-                    android:textSize="14sp"
-
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
                 <TextView
                     android:id="@+id/tvUserName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                     />
+                    android:layout_marginTop="15dp"
+                    android:text="ebrahim"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tvWelcomeUser"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="ebrahim@gmail.com"
+
+
+                    />
+
 
                 <androidx.constraintlayout.widget.ConstraintLayout
 
@@ -116,6 +118,12 @@
 
         </Toolbar>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height=".1dp"
+            android:alpha=".2"
+            android:background="@color/black" />
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -134,11 +142,10 @@
                     android:layout_marginStart="5dp"
                     android:layout_marginEnd="5dp"
                     android:padding="10dp"
-                    android:visibility="gone"
                     android:text="@string/my_account"
                     android:textSize="12sp"
                     android:textStyle="bold"
-                    />
+                    android:visibility="gone" />
 
                 <LinearLayout
                     android:id="@+id/myLinear"
@@ -146,7 +153,7 @@
                     android:layout_height="wrap_content"
                     android:background="@color/white"
                     android:orientation="vertical"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     tools:ignore="MissingConstraints">
 
                     <Button
@@ -159,6 +166,12 @@
                         android:text="@string/wishlist"
                         android:textAllCaps="false"
                         android:textColor="@color/black" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height=".1dp"
+                        android:alpha=".1"
+                        android:background="@color/black" />
+
 
                     <Button
                         android:id="@+id/btnAddress"
@@ -171,6 +184,11 @@
                         android:textAllCaps="false"
                         android:textColor="@color/black"
                         tools:ignore="MissingConstraints" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height=".1dp"
+                        android:alpha=".1"
+                        android:background="@color/black" />
 
                     <Button
                         android:id="@+id/btnEditProfile"
@@ -183,6 +201,11 @@
                         android:textAllCaps="false"
                         android:textColor="@color/black"
                         tools:ignore="MissingConstraints" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height=".1dp"
+                        android:alpha=".1"
+                        android:background="@color/black" />
 
                     <Button
                         android:id="@+id/btnOrder"
@@ -195,6 +218,11 @@
                         android:textAllCaps="false"
                         android:textColor="@color/black"
                         tools:ignore="MissingConstraints" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height=".1dp"
+                        android:alpha=".1"
+                        android:background="@color/black" />
 
                     <Button
                         android:id="@+id/Checkout"
@@ -250,6 +278,13 @@
                             android:textColor="@color/black"
 
                             tools:ignore="MissingConstraints" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height=".1dp"
+                            android:alpha=".1"
+                            android:background="@color/black" />
+
                         <Button
                             android:id="@+id/btnCurrency"
                             style="@style/Widget.AppCompat.Button.Borderless.Colored"

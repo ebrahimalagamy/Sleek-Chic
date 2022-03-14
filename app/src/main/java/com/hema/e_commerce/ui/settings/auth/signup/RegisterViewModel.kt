@@ -44,6 +44,9 @@ class RegisterViewModel(application: Application, private val authRepo: AuthRepo
             }
         }
     }
+
+
+
     class Factory(
         private val application: Application,
         val authRepo: AuthRepo

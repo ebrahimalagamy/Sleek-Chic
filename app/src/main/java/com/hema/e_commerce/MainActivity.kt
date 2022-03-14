@@ -64,9 +64,7 @@ class MainActivity : AppCompatActivity() {
                 || destination.id == R.id.splashFragment|| destination.id == R.id.viewPagerFragment
                 || destination.id == R.id.checkout|| destination.id == R.id.orderFragment
                 || destination.id == R.id.cancelledOrderFragment|| destination.id == R.id.wishlist
-                || destination.id == R.id.addAddressFragment || destination.id == R.id.address
-
-
+                || destination.id == R.id.addAddressFragment  || destination.id == R.id.selectAddress
 
             ) {
                 binding.bottomNavView.visibility = View.GONE

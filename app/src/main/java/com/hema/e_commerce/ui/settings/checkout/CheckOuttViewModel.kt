@@ -1,0 +1,77 @@
+package com.hema.e_commerce.ui.settings.checkout
+
+import android.app.Application
+import android.os.Build
+import android.widget.Toast
+import androidx.annotation.RequiresApi
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.*
+import com.hema.e_commerce.model.dataclass.customer.CustomerModel
+import com.hema.e_commerce.model.dataclass.setOrder.OrderResponse
+import com.hema.e_commerce.model.remote.RetrofitInstance
+import com.hema.e_commerce.model.repository.AuthRepo
+import com.hema.e_commerce.util.Either
+import com.hema.e_commerce.util.RepoErrors
+import com.hema.e_commerce.util.SharedPreferencesProvider
+import kotlinx.coroutines.launch
+
+class CheckOuttViewModel(application: Application, private val authRepo: AuthRepo) :
+    AndroidViewModel(application) {
+
+    val orderSuccess: MutableLiveData<Boolean?> = MutableLiveData()
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    fun postOrder(orderResponse: OrderResponse) {
+        viewModelScope.launch {
+            when (val response: Either<OrderResponse, RepoErrors> = authRepo.createOrder(orderResponse)) {
+                is Either.Error -> when (response.errorCode) {
+                    RepoErrors.NoInternetConnection -> {
+                        Toast.makeText(
+                            getApplication(),
+                            "NoInternetConnection" + response.message,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                    RepoErrors.ServerError -> {
+
+                        Toast.makeText(
+                            getApplication(),
+                            "ServerError" + response.message,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+                is Either.Success -> orderSuccess.postValue(true)
+            }
+        }
+    }
+
+
+
+    class Factory(
+        private val application: Application,
+        val authRepo: AuthRepo
+    ) : ViewModelProvider.Factory {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            return CheckOuttViewModel(application, authRepo) as T
+        }
+    }
+
+    companion object {
+        fun create(context: Fragment): CheckOuttViewModel {
+            return ViewModelProvider(
+                context,
+                Factory(
+                    context.context?.applicationContext as Application,
+                    AuthRepo(
+                        RetrofitInstance.api,
+                        SharedPreferencesProvider(context.context?.applicationContext as Application),
+
+                        context.context?.applicationContext as Application
+                    )
+                )
+            )[CheckOuttViewModel::class.java]
+        }
+    }
+
+}

@@ -1,5 +1,6 @@
 package com.hema.e_commerce.ui.settings.address
 
+import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -59,11 +60,13 @@ class Address : Fragment() {
                 target: RecyclerView.ViewHolder
             ) = false
 
+            @SuppressLint("NotifyDataSetChanged")
             @RequiresApi(Build.VERSION_CODES.M)
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, swipeDir: Int) {
                 val position = viewHolder.adapterPosition
                 val id = adapter.removeItem(position)
                 viewModel.delete(id)
+                adapter.notifyDataSetChanged()
                 Toast.makeText(requireActivity(), "Location deleted", Toast.LENGTH_SHORT).show()
             }
         }
@@ -75,6 +78,9 @@ class Address : Fragment() {
     private fun bindUi() {
         binding.btnAddAddress.setOnClickListener {
             findNavController().navigate(R.id.action_address_to_addAddressFragment)
+        }
+        binding.ivBack.setOnClickListener {
+            findNavController().popBackStack()
         }
 
 

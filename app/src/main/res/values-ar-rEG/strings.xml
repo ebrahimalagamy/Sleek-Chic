@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">E-Commerce</string>
-    <string name="home">الصفحه الرئيسيه</string>
+    <string name="app_name">Sleek Chic</string>
+    <string name="home">المتجر</string>
     <string name="category">الفئات</string>
     <string name="cart">عربه التسوق</string>
     <string name="featured_brands">الماركات</string>
@@ -15,7 +15,7 @@
     <string name="sign_in">تسجيل الدخول</string>
     <string name="don_t_have_account">لا تمتلك حساب</string>
     <string name="sign_up">"تسجيل حساب "</string>
-    <string name="forget_password">نسيت الرقم السري</string>
+    <string name="forget_password">هل نسيت الرقم السري ؟</string>
     <string name="create_new_account">انشاء حستب جديد</string>
     <string name="lets_do_it_now">فلنفعلها الان</string>
     <string name="username">اسم المستخدم</string>

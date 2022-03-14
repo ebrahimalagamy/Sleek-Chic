@@ -51,7 +51,7 @@ class EditAddress : Fragment() {
     @RequiresApi(Build.VERSION_CODES.M)
     private fun bindNav() {
         binding.tvCancel.setOnClickListener {
-            findNavController().navigate(R.id.address)
+            findNavController().popBackStack()
         }
         binding.ibOpenMap.setOnClickListener {
             val action = EditAddressDirections.actionEditAddressToMapFragment(addressItem)
@@ -78,7 +78,7 @@ class EditAddress : Fragment() {
         viewModel.updateUser.observe(viewLifecycleOwner) {
             if (it!!) {
                 Toast.makeText(requireContext(), "updated", Toast.LENGTH_LONG).show()
-                findNavController().navigate(R.id.Address)
+                findNavController().popBackStack()
                 viewModel.updateUser.postValue(false)
             } else Toast.makeText(requireContext(), "update failed", Toast.LENGTH_LONG).show()
         }
