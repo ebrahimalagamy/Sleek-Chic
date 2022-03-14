@@ -1,10 +1,13 @@
 package com.hema.e_commerce.ui.category.categoryui.maincategoryui
 
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -23,6 +26,7 @@ import com.hema.e_commerce.model.viewModelFactory.CatagoryViewModelFactory
 import com.hema.e_commerce.model.viewmodels.CategoryViewModel
 import com.hema.e_commerce.ui.category.categoryui.containerui.FragmentContainer
 import com.hema.e_commerce.ui.progresspar.ProgressBarSetting
+import com.hema.e_commerce.util.Connectivity
 
 class CategoryFragment : Fragment() {
     lateinit var productAdapter: CategoriesProductAdapter
@@ -43,6 +47,7 @@ class CategoryFragment : Fragment() {
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         ProgressBarSetting().setProgress(requireActivity())
@@ -82,17 +87,20 @@ class CategoryFragment : Fragment() {
     private fun initViews() {
         viewModel.getCollections()
     }
+
     //search
-    fun onClickSearch(){
-        binding.searchView.setOnSearchClickListener(View.OnClickListener {
-            binding.searchView.isIconified = true
-            navController.navigate(
-                R.id.action_category_to_searchFragment
-            )
-        })
+    @RequiresApi(Build.VERSION_CODES.M)
+    private fun onClickSearch(){
+        binding.searchView.setOnSearchClickListener {
+            if(Connectivity.isOnline(requireContext())){
+                binding.searchView.isIconified = true
+                navController.navigate(
+                    R.id.action_category_to_searchFragment
+                )
+            }else{
+                Toast.makeText(requireContext(), R.string.check_internet, Toast.LENGTH_SHORT).show()
+            }
+        }
     }
-
-
-
 
 }

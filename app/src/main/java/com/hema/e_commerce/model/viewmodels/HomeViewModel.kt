@@ -8,25 +8,30 @@ import com.hema.e_commerce.model.dataclass.allProducts.ProductsResponse
 import com.hema.e_commerce.model.dataclass.smartCollection.BrandsResponce
 import com.hema.e_commerce.model.repository.Repository
 
-class HomeViewModel(private val repository: Repository,app:Application) : AndroidViewModel(app) {
+class HomeViewModel(private val repository: Repository, app: Application) : AndroidViewModel(app) {
     var brandsLiveData = MutableLiveData<BrandsResponce>()
     var onSaleProducts = MutableLiveData<ProductsResponse>()
     var onHomeProducts = MutableLiveData<ProductsResponse>()
 
-    fun getBrand(){
+    fun getBrand() {
         repository.getBrand()
         brandsLiveData = repository.brandsLiveData
 
     }
-    fun getOnSaleProducts(){
-     repository.getOnSaleProducts()
-        onSaleProducts=repository.onSaleProductsList
+
+    fun getOnSaleProducts() {
+        repository.getOnSaleProducts()
+        onSaleProducts = repository.onSaleProductsList
     }
-    fun getOnHomeProducts(){
+
+    fun getOnHomeProducts() {
         repository.getOnHomeProducts()
-        onHomeProducts=repository.onHomeProductsList
+        onHomeProducts = repository.onHomeProductsList
 
     }
+
+    fun getFavProducts() = repository.getAllFav()
+    fun getCartProducts() = repository.getAllCartProduct()
 
 
 }

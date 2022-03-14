@@ -11,12 +11,18 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.badge.BadgeDrawable
 import com.hema.e_commerce.databinding.ActivityMainBinding
+import com.hema.e_commerce.model.repository.Repository
+import com.hema.e_commerce.model.room.RoomData
+import com.hema.e_commerce.model.viewModelFactory.MainActivityViewModelFactory
 import com.hema.e_commerce.util.Connectivity
 import com.hema.e_commerce.util.LocationProvider
 
@@ -27,14 +33,21 @@ class MainActivity : AppCompatActivity() {
     private lateinit var locationManager: LocationManager
     private val locationProvider = LocationProvider
     private val connectivity = Connectivity
+    private lateinit var viewModel: MainActivityViewModel
+
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val repository = Repository(RoomData(applicationContext))
+        val mainViewModelProviderFactory = MainActivityViewModelFactory(application, repository)
+        viewModel =
+            ViewModelProvider(this, mainViewModelProviderFactory)[MainActivityViewModel::class.java]
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         bindLocation()
         bindNav()
+        cartIconBadge()
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -59,12 +72,11 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             if (destination.id == R.id.signInFragment || destination.id == R.id.signUpFragment
                 || destination.id == R.id.editAddress || destination.id == R.id.mapFragment
-                || destination.id == R.id.editProfile || destination.id == R.id.productFragment
-                || destination.id == R.id.typeListProductFragment2  || destination.id == R.id.searchFragment
-                || destination.id == R.id.splashFragment|| destination.id == R.id.viewPagerFragment
-                || destination.id == R.id.checkout|| destination.id == R.id.orderFragment
-                || destination.id == R.id.cancelledOrderFragment|| destination.id == R.id.wishlist
-                || destination.id == R.id.addAddressFragment  || destination.id == R.id.selectAddress
+                || destination.id == R.id.editProfile || destination.id == R.id.searchFragment
+                || destination.id == R.id.splashFragment || destination.id == R.id.viewPagerFragment
+                || destination.id == R.id.checkout || destination.id == R.id.orderFragment
+                || destination.id == R.id.cancelledOrderFragment || destination.id == R.id.wishlist
+                || destination.id == R.id.addAddressFragment || destination.id == R.id.selectAddress
 
             ) {
                 binding.bottomNavView.visibility = View.GONE
@@ -117,6 +129,19 @@ class MainActivity : AppCompatActivity() {
             permissions = permissions,
             grantResults = grantResults
         )
+    }
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    fun cartIconBadge() {
+        var cartBadge: BadgeDrawable = binding.bottomNavView.getOrCreateBadge(R.id.cart)
+        cartBadge.badgeTextColor = getColor(R.color.myRed)
+        cartBadge.maxCharacterCount = 5000
+        cartBadge.badgeTextColor = getColor(R.color.white)
+        viewModel.getCartProducts().observe(this, Observer {
+            cartBadge.number = it.size
+            cartBadge.isVisible = it.isNotEmpty()
+
+        })
     }
 
 
