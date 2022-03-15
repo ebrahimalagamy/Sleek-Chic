@@ -22,6 +22,8 @@ class SingleProductViewModel(private val repo: Repository,app: Application) : An
     fun insertFav(favoriteProduct: FavoriteProduct)=repo.insert(favoriteProduct)
     fun deleteByID(id: Long)=repo.deleteOnItemFromFavByID(id)
     fun getOneItemFromRoom(id: Long,customerId:Long) = repo.getOneItem(id,customerId)
+    fun getFavProducts(customerId:Long) = repo.getAllFav(customerId)
+
 
 
 

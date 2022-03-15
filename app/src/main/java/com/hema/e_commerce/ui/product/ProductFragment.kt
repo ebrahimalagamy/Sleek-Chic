@@ -1,12 +1,14 @@
 package com.hema.e_commerce.ui.product
 
 import android.content.SharedPreferences
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -17,6 +19,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.viewpager.widget.PagerAdapter
 import com.google.android.material.snackbar.Snackbar
 import com.hema.e_commerce.R
+import com.hema.e_commerce.adapter.home.WishListNotificationAdapter
 import com.hema.e_commerce.adapter.singleProduct.ProductAdapter
 import com.hema.e_commerce.databinding.FragmentProductBinding
 import com.hema.e_commerce.model.repository.Repository
@@ -37,9 +40,9 @@ class ProductFragment : Fragment() {
     lateinit var binding: FragmentProductBinding
     private lateinit var sharedPref: SharedPreferencesProvider
 
-    var productId: Long? = null
-    lateinit var favProduct: FavoriteProduct
-    var isFavBtnClicked: Boolean = false
+    private var productId: Long? = null
+    private lateinit var favProduct: FavoriteProduct
+    private var isFavBtnClicked: Boolean = false
 
 
     override fun onCreateView(
@@ -59,6 +62,7 @@ class ProductFragment : Fragment() {
     }
 
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         ProgressBarSetting().setProgress(requireActivity())
@@ -67,24 +71,17 @@ class ProductFragment : Fragment() {
         initViews(productId!!)
         observe(savedInstanceState)
         reviewAction()
+        iconBadges()
+        back()
 
-        if (sharedPref.isSignIn) {
 
-        }else {
-            Snackbar.make(view,R.string.sign_in_message, Snackbar.LENGTH_LONG).apply {
-                setAction("Sign In"){
-                    navController.navigate(R.id.Settings)
-                }
-                show()
-            }
-        }
     }
 
     fun observe(savedInstanceState: Bundle?) {
-        viewModel.singleProductLiveData.observe(viewLifecycleOwner, Observer {
+        viewModel.singleProductLiveData.observe(viewLifecycleOwner) {
 
-            var adapter: PagerAdapter = ProductAdapter(requireContext(), it.product.images)
-            var product = it.product
+            val adapter: PagerAdapter = ProductAdapter(requireContext(), it.product.images)
+            val product = it.product
             binding.viewPager.adapter = adapter
             it.product.handle
             Log.i("n", "observe: " + it.product.handle)
@@ -92,23 +89,22 @@ class ProductFragment : Fragment() {
 
             val sharedPreferences: SharedPreferences =
                 requireContext().getSharedPreferences("currency", 0)
-            var value = sharedPreferences.getString("currency", "EGP")
-            when (value) {
+            when (sharedPreferences.getString("currency", "EGP")) {
                 "EGP" -> binding.tvPrice.text =
-                    it.product.variants.get(0).price + " " + getString(R.string.eg)
+                    it.product.variants[0].price + " " + getString(R.string.eg)
                 "USA" -> {
-                    var usCurrancy = ((it.product.variants.get(0).price).toDouble() / (15.71))
+                    val usCurrancy = ((it.product.variants[0].price).toDouble() / (15.71))
                     val number: Double = String.format("%.2f", usCurrancy).toDouble()
-                    binding.tvPrice.text = number.toString() + " " + "$"
+                    binding.tvPrice.text = "$number $"
 
                 }
                 "EUR" -> {
-                    var ureCurrancy = ((it.product.variants.get(0).price).toDouble() / (17.10))
+                    val ureCurrancy = ((it.product.variants[0].price).toDouble() / (17.10))
                     val number: Double = String.format("%.2f", ureCurrancy).toDouble()
                     binding.tvPrice.text = number.toString() + " " + getString(R.string.eur)
                 }
                 else -> binding.tvPrice.text =
-                    it.product.variants.get(0).price + " " + getString(R.string.eg)
+                    it.product.variants[0].price + " " + getString(R.string.eg)
 
             }
             binding.tvTitle.text = it.product.title
@@ -116,17 +112,16 @@ class ProductFragment : Fragment() {
             binding.addToCart.setOnClickListener {
                 //befor that we will check if user login or not
                 if (sharedPref.isSignIn) {
-
                     val cartitem = CartProductData(
                         product.id,
                         sharedPref.getUserInfo().customer?.customerId,
                         product.image.src,
                         product.title,
-                        product.variants.get(0).price,
-                        product.variants.get(0).inventory_quantity,
+                        product.variants[0].price,
+                        product.variants[0].inventory_quantity,
                         1
                     )
-                    if (product.variants.get(0).inventory_quantity > 0) {
+                    if (product.variants[0].inventory_quantity > 0) {
                         viewModel.saveCartList(cartitem)
                     } else {
                         Toast.makeText(
@@ -136,15 +131,15 @@ class ProductFragment : Fragment() {
                         ).show()
                     }
 
-                }else {
-                    Snackbar.make(requireView(),R.string.sign_in_message, Snackbar.LENGTH_LONG).apply {
-                        setAction("Sign In"){
-                            navController.navigate(R.id.Settings)
+                } else {
+                    Snackbar.make(requireView(), R.string.sign_in_message, Snackbar.LENGTH_LONG)
+                        .apply {
+                            setAction("Sign In") {
+                                navController.navigate(R.id.Settings)
+                            }
+                            show()
                         }
-                        show()
-                    }
                 }
-
 
 
             }
@@ -155,13 +150,13 @@ class ProductFragment : Fragment() {
                 sharedPref.getUserInfo().customer?.customerId,
                 product.image.src,
                 product.title,
-                product.variants.get(0).price,
+                product.variants[0].price,
                 product.variants[0].inventory_quantity,
                 1
             )
             setFav(savedInstanceState)
 
-        })
+        }
 
     }
 
@@ -188,7 +183,7 @@ class ProductFragment : Fragment() {
                 checkWishListStored(productId ?: 0)
             }
 
-            binding.favButton.setOnClickListener(View.OnClickListener {
+            binding.favButton.setOnClickListener {
                 if (sharedPref.isSignIn) {
 
                     isFavBtnClicked = if (isFavBtnClicked) {
@@ -200,14 +195,15 @@ class ProductFragment : Fragment() {
                     }
                     setStoredButton(isFavBtnClicked)
                 } else {
-                        Snackbar.make(requireView(),R.string.sign_in_message, Snackbar.LENGTH_LONG).apply {
-                            setAction("Sign In"){
+                    Snackbar.make(requireView(), R.string.sign_in_message, Snackbar.LENGTH_LONG)
+                        .apply {
+                            setAction("Sign In") {
                                 navController.navigate(R.id.Settings)
                             }
                             show()
                         }
-                    }
-            })
+                }
+            }
         }
     }
 
@@ -218,12 +214,12 @@ class ProductFragment : Fragment() {
 
     private fun checkWishListStored(id: Long) {
         viewModel.getOneItemFromRoom(id, sharedPref.getUserInfo().customer?.customerId!!)
-            .observe(viewLifecycleOwner, Observer {
+            .observe(viewLifecycleOwner) {
                 if (it != null) {
                     isFavBtnClicked = true
                     setStoredButton(isFavBtnClicked)
                 }
-            })
+            }
     }
 
     private fun setStoredButton(isFavBtnClicked: Boolean) {
@@ -240,6 +236,38 @@ class ProductFragment : Fragment() {
 
         }
 
+    }
+    fun back(){
+        binding.ivBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    fun iconBadges() {
+        val wishListIcon = WishListNotificationAdapter(binding.favourite)
+        if (sharedPref.isSignIn) {
+            viewModel.getFavProducts(sharedPref.getUserInfo().customer?.customerId!!)
+                .observe(viewLifecycleOwner) {
+                    wishListIcon.updateView(it.size)
+                }
+        } else {
+            wishListIcon.hideNumber()
+        }
+
+        wishListIcon.Button.setOnClickListener {
+            if (sharedPref.isSignIn) {
+                findNavController().navigate(R.id.wishlist)
+            } else {
+                Snackbar.make(requireView(), R.string.sign_in_message, Snackbar.LENGTH_LONG)
+                    .apply {
+                        setAction("Sign In") {
+                            navController.navigate(R.id.Settings)
+                        }
+                        show()
+                    }
+            }
+        }
     }
 
 
