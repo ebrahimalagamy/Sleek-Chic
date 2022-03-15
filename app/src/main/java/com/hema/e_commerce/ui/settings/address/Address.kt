@@ -3,6 +3,7 @@ package com.hema.e_commerce.ui.settings.address
 import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,6 +25,7 @@ import com.hema.e_commerce.util.SharedPreferencesProvider
 class Address : Fragment() {
     private lateinit var binding: FragmentAddressBinding
     private lateinit var sharedPref: SharedPreferencesProvider
+     lateinit var adapter: AddressAdapter
     private val viewModel by lazy {
         AddressesViewModel.create(this)
     }
@@ -31,20 +34,30 @@ class Address : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Log.d("Address","onCreateView")
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            viewModel.getAdressesList()
+        }
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_address, container, false)
         binding.vm = viewModel
         return binding.root
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val adapter = AddressAdapter(viewModel.list.addresses!!, view.context)
-        sharedPref = SharedPreferencesProvider(requireActivity())
-        binding.recycler.layoutManager = LinearLayoutManager(view.context)
-        binding.recycler.setHasFixedSize(true)
-        binding.recycler.adapter = adapter
-        removeItemRecycler(binding.recycler, adapter)
-        bindUi()
+        Log.d("Address","onViewCreated")
+
+        viewModel.list.observe(requireActivity(), Observer {
+            adapter = AddressAdapter(it.addresses!!, view.context)
+            //sharedPref = SharedPreferencesProvider(requireActivity())
+            binding.recycler.layoutManager = LinearLayoutManager(view.context)
+            binding.recycler.setHasFixedSize(true)
+            binding.recycler.adapter = adapter
+            removeItemRecycler(binding.recycler, adapter)
+            bindUi()
+        })
+
 
     }
 
@@ -84,6 +97,20 @@ class Address : Fragment() {
         }
 
 
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        Log.d("Address","onPause")
+
+    }
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    override fun onResume() {
+        super.onResume()
+
+        Log.d("Address","resume")
     }
 }
 

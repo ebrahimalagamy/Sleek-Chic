@@ -109,6 +109,16 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <View
+
+                    android:id="@+id/view5"
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:background="#f1f4fc"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageSlider" />
+
                 <TextView
                     android:id="@+id/tv_Coupon"
                     android:layout_width="wrap_content"

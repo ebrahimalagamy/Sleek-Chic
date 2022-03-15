@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,10 +18,8 @@ import androidx.navigation.fragment.navArgs
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.hema.e_commerce.R
 import com.hema.e_commerce.databinding.FragmentCheckoutBinding
-import com.hema.e_commerce.model.dataclass.order.CustomerOrder
-import com.hema.e_commerce.model.dataclass.order.LineItem
-import com.hema.e_commerce.model.dataclass.order.Order
-import com.hema.e_commerce.model.dataclass.order.Orders
+import com.hema.e_commerce.model.dataclass.test.LineItem
+import com.hema.e_commerce.model.dataclass.test.Order
 import com.hema.e_commerce.model.repository.Repository
 import com.hema.e_commerce.model.room.RoomData
 import com.hema.e_commerce.model.room.orderroom.OrderData
@@ -96,17 +93,20 @@ class Checkout : Fragment() {
     @RequiresApi(Build.VERSION_CODES.M)
     private fun bindUI() {
         val orderId = Random.nextLong(1000000, 10000000)
-        val customerName = binding.tvCustomerName.text.toString()
-        val customerAddress = binding.tvCustomerAddress.text.toString()
-        val customerPhone = binding.tvCustomerPhone.text.toString()
+        val address = sharedPref.getAddress()
+        val customerName = address?.firstName.toString()
+        val customerAddress = address?.address1
+        val customerPhone = address?.phone
+        binding.tvCustomerAddress.text = customerAddress
+        binding.tvCustomerName.text = customerName
+        binding.tvCustomerPhone.text = customerPhone
         var paymentMethod: String? = null
         val totalPrice = binding.tvTotalPrice.text.toString()
-        var customerOrder = CustomerOrder(sharedPref.getUserInfo().customer?.customerId)
 
         var lineItem: MutableList<LineItem> = arrayListOf()
+        val id = 7604694319335
 
-        lineItem.add(LineItem(1, 7604694319335))
-
+        lineItem.add(LineItem(1, id.toInt()))
 
 
         binding.btnOrder.setOnClickListener {
@@ -134,8 +134,8 @@ class Checkout : Fragment() {
                                         orderId,
                                         totalPrice,
                                         customerName,
-                                        customerAddress,
-                                        customerPhone,
+                                        customerAddress!!,
+                                        customerPhone!!,
                                         paymentMethod!!,
                                         "ACTIVE"
                                     )
@@ -180,16 +180,19 @@ class Checkout : Fragment() {
         }
 
         binding.btnOrderRepo.setOnClickListener {
-            val order = Orders(
+            val order =
                 Order(
-                    customer = customerOrder,
-                    financialStatus = "pending",
-                    lineItems = lineItem,
-                    note = paymentMethod,
-                    discountCodes = null
+//                    billing_address = null,
+//                    discount_codes =null ,
+                    email = sharedPref.getUserInfo().customer?.email.toString(),
+                    financial_status = "cash",
+                    line_items = lineItem,
+                    phone = sharedPref.getUserInfo().customer?.phone.toString()
+//                    shipping_address = ,
+//                    transactions =
+
+
                 )
-            )
-            Log.d("orderrr", "" + customerOrder)
 
             vm.postOrder(order)
             vm.orderSuccess.observe(viewLifecycleOwner) {
@@ -200,7 +203,7 @@ class Checkout : Fragment() {
             }
         }
 
-
+        binding.ivBack.setOnClickListener { findNavController().popBackStack() }
 
         binding.tvChangeAddress.setOnClickListener {
             findNavController().navigate(R.id.action_checkout_to_selectAddress)

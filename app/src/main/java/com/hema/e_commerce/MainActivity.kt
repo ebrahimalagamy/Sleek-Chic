@@ -25,6 +25,7 @@ import com.hema.e_commerce.model.room.RoomData
 import com.hema.e_commerce.model.viewModelFactory.MainActivityViewModelFactory
 import com.hema.e_commerce.util.Connectivity
 import com.hema.e_commerce.util.LocationProvider
+import com.hema.e_commerce.util.Network
 
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
@@ -39,6 +40,25 @@ class MainActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val networkConnection = Network(applicationContext)
+        networkConnection.observe(this) { isConnect ->
+            if (isConnect) {
+                binding.fragmentContainerView.visibility = View.VISIBLE
+                binding.bottomNavView.visibility = View.VISIBLE
+                binding.ivWifi.visibility = View.GONE
+                binding.tvInternetConnection.visibility = View.GONE
+
+            } else {
+                binding.fragmentContainerView.visibility = View.GONE
+                binding.bottomNavView.visibility = View.GONE
+                binding.ivWifi.visibility = View.VISIBLE
+                binding.tvInternetConnection.visibility = View.VISIBLE
+                Toast.makeText(this, "Connection Field", Toast.LENGTH_SHORT).show()
+
+            }
+        }
+
+
         val repository = Repository(RoomData(applicationContext))
         val mainViewModelProviderFactory = MainActivityViewModelFactory(application, repository)
         viewModel =
@@ -48,6 +68,7 @@ class MainActivity : AppCompatActivity() {
         bindLocation()
         bindNav()
         cartIconBadge()
+
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -75,7 +96,7 @@ class MainActivity : AppCompatActivity() {
                 || destination.id == R.id.editProfile || destination.id == R.id.searchFragment
                 || destination.id == R.id.splashFragment || destination.id == R.id.viewPagerFragment
                 || destination.id == R.id.checkout || destination.id == R.id.orderFragment
-                || destination.id == R.id.cancelledOrderFragment || destination.id == R.id.wishlist
+                || destination.id == R.id.cancelledOrderFragment
                 || destination.id == R.id.addAddressFragment || destination.id == R.id.selectAddress
 
             ) {

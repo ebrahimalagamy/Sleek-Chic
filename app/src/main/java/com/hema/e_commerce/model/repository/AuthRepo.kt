@@ -8,8 +8,8 @@ import com.hema.e_commerce.model.dataclass.customer.AddressArray
 import com.hema.e_commerce.model.dataclass.customer.AddressModel
 import com.hema.e_commerce.model.dataclass.customer.CustomerModel
 import com.hema.e_commerce.model.dataclass.customer.CustomersModel
-import com.hema.e_commerce.model.dataclass.order.OneOrderResponse
-import com.hema.e_commerce.model.dataclass.order.Orders
+import com.hema.e_commerce.model.dataclass.test.Order
+import com.hema.e_commerce.model.dataclass.test.OrderResponce
 import com.hema.e_commerce.model.remote.RetrofitInstance.Companion.api
 import com.hema.e_commerce.model.remote.ShopifyApi
 import com.hema.e_commerce.util.*
@@ -71,7 +71,10 @@ class AuthRepo(
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
-    suspend fun updateCustomer(id: Long, customer: CustomerModel): Either<CustomerModel, LoginErrors> {
+    suspend fun updateCustomer(
+        id: Long,
+        customer: CustomerModel
+    ): Either<CustomerModel, LoginErrors> {
         return try {
             return if (Connectivity.isOnline(application.applicationContext)) {
                 val res = api.update(id, customer)
@@ -172,7 +175,7 @@ class AuthRepo(
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
-    suspend fun createOrder(order: Orders): Either<OneOrderResponse, RepoErrors> {
+    suspend fun createOrder(order: Order): Either<OrderResponce, RepoErrors> {
         return try {
             return if (Connectivity.isOnline(application.applicationContext)) {
                 val res = api.createOrder(order)

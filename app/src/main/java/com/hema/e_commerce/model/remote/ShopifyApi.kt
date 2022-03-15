@@ -6,11 +6,10 @@ import com.hema.e_commerce.model.dataclass.customer.AddressModel
 import com.hema.e_commerce.model.dataclass.customer.CustomerModel
 import com.hema.e_commerce.model.dataclass.customer.CustomersModel
 import com.hema.e_commerce.model.dataclass.listofcustomcollections.CustomCollectionsResponse
-import com.hema.e_commerce.model.dataclass.order.OneOrderResponse
-import com.hema.e_commerce.model.dataclass.order.Order
-import com.hema.e_commerce.model.dataclass.order.Orders
 import com.hema.e_commerce.model.dataclass.singleproduct.ProductCollectionResponse
 import com.hema.e_commerce.model.dataclass.smartCollection.BrandsResponce
+import com.hema.e_commerce.model.dataclass.test.Order
+import com.hema.e_commerce.model.dataclass.test.OrderResponce
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -83,10 +82,10 @@ interface ShopifyApi {
 
     //creat an order in api web
     @POST("orders.json")
-    suspend fun createOrder(@Body order: Orders): Response<OneOrderResponse>
+    suspend fun createOrder(@Body order: Order): Response<OrderResponce>
 
-    @GET("orders/{order_id}.json")
-    suspend fun getAnOrder(@Path("order_id") id: Long): Response<Order>
+//    @GET("orders/{order_id}.json")
+//    suspend fun getAnOrder(@Path("order_id") id: Long): Response<Order>
 
     @DELETE("orders/{order_id}.json")
     suspend fun deleteAnOrder(@Path("order_id") id: Long): Response<String>

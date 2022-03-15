@@ -21,17 +21,19 @@ import kotlinx.coroutines.withContext
 
 class SelectAddressesViewModel(application: Application, val AuthRepo: AuthRepo) :
     AndroidViewModel(application) {
-     lateinit var list:AddressArray
+    lateinit var list: AddressArray
+
     init {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             getAdressesList()
-          }
+        }
     }
+
     @RequiresApi(Build.VERSION_CODES.M)
-    fun delete(id:Long){
-        val job =  viewModelScope.launch(Dispatchers.IO) {
+    fun delete(id: Long) {
+        val job = viewModelScope.launch(Dispatchers.IO) {
             when (val response: Either<AddressModel, LoginErrors> = AuthRepo.removeAddress(id)
-            ){
+            ) {
                 is Either.Error -> when (response.errorCode) {
                     LoginErrors.ConnectionFiled -> {
                         withContext(Dispatchers.Main) {
@@ -44,7 +46,7 @@ class SelectAddressesViewModel(application: Application, val AuthRepo: AuthRepo)
                         }
                     }
                     LoginErrors.ServerError -> {
-                        withContext(Dispatchers.Main){
+                        withContext(Dispatchers.Main) {
                             Toast.makeText(
                                 getApplication(),
                                 "Server Error" + response.message,
@@ -65,7 +67,7 @@ class SelectAddressesViewModel(application: Application, val AuthRepo: AuthRepo)
                     }
                 }
                 is Either.Success -> {
-                    Log.d("ADDRESSES","address deleted")
+                    Log.d("ADDRESSES", "address deleted")
 
 
                 }
@@ -75,11 +77,12 @@ class SelectAddressesViewModel(application: Application, val AuthRepo: AuthRepo)
         }
 
     }
+
     @RequiresApi(Build.VERSION_CODES.M)
-    fun getAdressesList(){
-       val job =  viewModelScope.launch(Dispatchers.IO) {
+    fun getAdressesList() {
+        val job = viewModelScope.launch(Dispatchers.IO) {
             when (val response: Either<AddressArray, LoginErrors> = AuthRepo.getAddress()
-            ){
+            ) {
                 is Either.Error -> when (response.errorCode) {
                     LoginErrors.ConnectionFiled -> {
                         withContext(Dispatchers.Main) {
@@ -92,7 +95,7 @@ class SelectAddressesViewModel(application: Application, val AuthRepo: AuthRepo)
                         }
                     }
                     LoginErrors.ServerError -> {
-                        withContext(Dispatchers.Main){
+                        withContext(Dispatchers.Main) {
                             Toast.makeText(
                                 getApplication(),
                                 "Server Error" + response.message,
@@ -113,7 +116,7 @@ class SelectAddressesViewModel(application: Application, val AuthRepo: AuthRepo)
                     }
                 }
                 is Either.Success -> {
-                    Log.d("ADDRESSES","list of addresses have been received")
+                    Log.d("ADDRESSES", "list of addresses have been received")
                     list = response.data
 
                 }
@@ -148,4 +151,4 @@ class SelectAddressesViewModel(application: Application, val AuthRepo: AuthRepo)
             )[SelectAddressesViewModel::class.java]
         }
     }
-    }
+}

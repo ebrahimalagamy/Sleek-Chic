@@ -51,7 +51,7 @@
     <string name="payment">Payment</string>
     <string name="sign_out">Sign Out</string>
     <string name="orders">Orders</string>
-    <string name="reviews">Reviews</string>
+    <string name="reviews">Reviews ></string>
     <string name="add_to_cart">Add To Cart</string>
     <string name="description">Description</string>
     <string name="eg">EG</string>
@@ -124,6 +124,8 @@
     <string name="order_oanceled">Order Canceled</string>
     <string name="add_address">Add Address</string>
     <string name="alertdelteMessage">Do you want delete order?</string>
+    <string name="product_details">Product Details</string>
+    <string name="shopping_bag">Shopping Bag</string>
 
 
     <!-- filter -->

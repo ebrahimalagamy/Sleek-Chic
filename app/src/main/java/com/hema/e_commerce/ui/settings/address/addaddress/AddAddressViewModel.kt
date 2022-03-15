@@ -47,33 +47,6 @@ class AddAddressViewModel(application: Application, val authRepo: AuthRepo) :
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //    var addressLine = MutableLiveData<String>()
 //    var city = MutableLiveData<String>()
 //    val firstName = MutableLiveData<String>()

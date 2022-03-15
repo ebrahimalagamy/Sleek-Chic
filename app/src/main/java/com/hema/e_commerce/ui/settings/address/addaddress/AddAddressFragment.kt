@@ -96,6 +96,7 @@ class AddAddressFragment : Fragment() {
                 viewModel.postData(address)
                 viewModel.add.observe(viewLifecycleOwner) {
                     if (it == true) {
+                        viewModel.add.postValue(false)
                         Toast.makeText(requireContext(), "Successfully", Toast.LENGTH_LONG).show()
                         findNavController().popBackStack()
                     } else Toast.makeText(requireContext(), "Try again", Toast.LENGTH_LONG).show()

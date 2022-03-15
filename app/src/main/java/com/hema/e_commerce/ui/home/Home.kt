@@ -156,7 +156,7 @@ class Home : Fragment() {
             }
 
         } else {
-            Toast.makeText(requireContext(), R.string.check_internet, Toast.LENGTH_SHORT).show()
+//            Toast.makeText(requireContext(), R.string.check_internet, Toast.LENGTH_SHORT).show()
         }
     }
 

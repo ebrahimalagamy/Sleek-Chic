@@ -6,8 +6,8 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
-import com.hema.e_commerce.model.dataclass.order.OneOrderResponse
-import com.hema.e_commerce.model.dataclass.order.Orders
+import com.hema.e_commerce.model.dataclass.test.Order
+import com.hema.e_commerce.model.dataclass.test.OrderResponce
 import com.hema.e_commerce.model.remote.RetrofitInstance
 import com.hema.e_commerce.model.repository.AuthRepo
 import com.hema.e_commerce.util.Either
@@ -21,9 +21,9 @@ class CheckOuttViewModel(application: Application, private val authRepo: AuthRep
     val orderSuccess: MutableLiveData<Boolean?> = MutableLiveData()
 
     @RequiresApi(Build.VERSION_CODES.M)
-    fun postOrder(order: Orders) {
+    fun postOrder(order: Order) {
         viewModelScope.launch {
-            when (val response: Either<OneOrderResponse, RepoErrors> =
+            when (val response: Either<OrderResponce, RepoErrors> =
                 authRepo.createOrder(order)) {
                 is Either.Error -> when (response.errorCode) {
                     RepoErrors.ConnectionFiled -> {
@@ -66,7 +66,6 @@ class CheckOuttViewModel(application: Application, private val authRepo: AuthRep
                     AuthRepo(
                         RetrofitInstance.api,
                         SharedPreferencesProvider(context.context?.applicationContext as Application),
-
                         context.context?.applicationContext as Application
                     )
                 )

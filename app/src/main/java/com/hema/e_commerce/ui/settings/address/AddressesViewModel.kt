@@ -21,11 +21,10 @@ import kotlinx.coroutines.withContext
 
 class AddressesViewModel(application: Application, val AuthRepo: AuthRepo) :
     AndroidViewModel(application) {
-     lateinit var list:AddressArray
+      var list:MutableLiveData<AddressArray> = MutableLiveData()
+    val pref:SharedPreferencesProvider= SharedPreferencesProvider(application.applicationContext)
     init {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            getAdressesList()
-          }
+
     }
     @RequiresApi(Build.VERSION_CODES.M)
     fun delete(id:Long){
@@ -114,7 +113,9 @@ class AddressesViewModel(application: Application, val AuthRepo: AuthRepo) :
                 }
                 is Either.Success -> {
                     Log.d("ADDRESSES","list of addresses have been received")
-                    list = response.data
+                    list.postValue(response.data!!)
+                    if (pref.getAddress() == null)
+                        pref.saveAddress(response.data.addresses?.get(0)!!)
 
                 }
 

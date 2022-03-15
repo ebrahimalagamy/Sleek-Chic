@@ -16,8 +16,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hema.e_commerce.R
 import com.hema.e_commerce.adapter.address.AddressAdapter
+import com.hema.e_commerce.adapter.address.RecyclerOnItemTouchLestiner
+import com.hema.e_commerce.adapter.address.SelectedAdapter
 import com.hema.e_commerce.databinding.FragmentSelectAddressBinding
-import com.hema.e_commerce.ui.settings.address.AddressesViewModel
 import com.hema.e_commerce.util.SharedPreferencesProvider
 
 class SelectAddress : Fragment() {
@@ -32,7 +33,8 @@ class SelectAddress : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_select_address, container, false)
+        binding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_select_address, container, false)
         binding.vm = viewModel
 
         return binding.root
@@ -41,15 +43,31 @@ class SelectAddress : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val adapter = AddressAdapter(viewModel.list.addresses!!, view.context)
+
+        val adapter = SelectedAdapter(viewModel.list.addresses!!, view.context)
         sharedPref = SharedPreferencesProvider(requireActivity())
         binding.recycler.layoutManager = LinearLayoutManager(view.context)
+
+        binding.recycler.addOnItemTouchListener(
+            RecyclerOnItemTouchLestiner(context, binding.recycler, object :
+                RecyclerOnItemTouchLestiner.OnItemClickListener {
+                override fun onItemClick(view: View?, position: Int) {
+                    sharedPref.saveAddress(viewModel.list.addresses!![position]!!)
+                    findNavController().popBackStack()
+                }
+
+                override fun onLongItemClick(view: View?, position: Int) {
+                    // do whatever
+                }
+            })
+        )
         binding.recycler.setHasFixedSize(true)
         binding.recycler.adapter = adapter
 //        removeItemRecycler(binding.recycler, adapter)
         bindUi()
 
     }
+
     fun removeItemRecycler(rv: RecyclerView, adapter: AddressAdapter) {
         val simpleItemTouchCallback: ItemTouchHelper.SimpleCallback = object :
             ItemTouchHelper.SimpleCallback(

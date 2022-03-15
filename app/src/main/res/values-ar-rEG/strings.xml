@@ -118,5 +118,6 @@
     <string name="add_address">اضف عنوان</string>
     <string name="alertActiveMessage">هل تريد تفعيل الطلب</string>
     <string name="alertdelteMessage">هل تريد مسح هذا الطلب ؟</string>
+    <string name="product_details">Product Details</string>
 
 </resources>

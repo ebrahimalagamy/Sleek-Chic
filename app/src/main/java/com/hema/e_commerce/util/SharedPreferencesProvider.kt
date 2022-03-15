@@ -7,6 +7,7 @@ import androidx.core.content.edit
 import androidx.lifecycle.MutableLiveData
 import androidx.preference.PreferenceManager
 import com.google.gson.Gson
+import com.hema.e_commerce.model.dataclass.customer.AddressesItem
 import com.hema.e_commerce.model.dataclass.customer.Customer
 
 class SharedPreferencesProvider(context: Context) {
@@ -23,7 +24,7 @@ class SharedPreferencesProvider(context: Context) {
         private const val ADDRESS = "ADDRESS"
         private const val IS_FIRST_TIME_LAUNCH = "IS_FIRST_TIME_LAUNCH"
         private const val IS_SIGN_IN = "IS_SIGN_IN"
-
+        private const val SAVED_ADDRESS_ORDER = "ORDERED_ADRESS"
         fun getInstance(application: Application):SharedPreferencesProvider{
             return instance ?:synchronized(Lock){
                 instance ?: SharedPreferencesProvider(application).also {
@@ -38,7 +39,21 @@ class SharedPreferencesProvider(context: Context) {
         pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
         editor = pref.edit()
     }
-
+    fun saveAddress(address:AddressesItem)
+    {
+        val gson = Gson()
+        val json = gson.toJson(address)
+        editor.putString(SAVED_ADDRESS_ORDER, json)
+        editor.commit()
+    }
+    fun getAddress(): AddressesItem? {
+        val gson = Gson()
+        val json: String? = pref.getString(SAVED_ADDRESS_ORDER, null)
+        if (json != null){
+        val obj: AddressesItem? = gson.fromJson(json, AddressesItem::class.java)
+        return obj}
+        return null
+    }
     private val preferences: SharedPreferences by lazy {
         PreferenceManager.getDefaultSharedPreferences(context.applicationContext)
     }

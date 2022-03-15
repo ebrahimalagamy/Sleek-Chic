@@ -23,100 +23,103 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="15dp"
-                    android:src="@drawable/appicon2"
-
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/tvUserName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:text="ebrahim"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/tvWelcomeUser"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="ebrahim@gmail.com"
-
-
-                    />
-
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-
-                    android:id="@+id/constraintLayoutForAuth"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="10dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/toolbar">
-
-                    <ImageButton
-                        android:id="@+id/ivSignUp"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:background="@null"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/new_user"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/ivSignIn"
-                        tools:ignore="MissingConstraints" />
-
-                    <ImageButton
-                        android:id="@+id/ivSignIn"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:background="@null"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/user"
-                        app:layout_constraintEnd_toStartOf="@+id/ivSignUp"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent"
-                        tools:ignore="MissingConstraints" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Sign in"
-                        android:textSize="12sp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="@+id/ivSignIn"
-                        app:layout_constraintStart_toStartOf="@+id/ivSignIn"
-                        app:layout_constraintTop_toBottomOf="@+id/ivSignIn" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Sign up"
-                        android:textSize="12sp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="@+id/ivSignUp"
-                        app:layout_constraintStart_toStartOf="@+id/ivSignUp"
-                        app:layout_constraintTop_toBottomOf="@+id/ivSignUp" />
-
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </LinearLayout>
+                android:layout_gravity="center"
+                android:text="Me"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
 
 
         </Toolbar>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:alpha=".1"
+            android:background="@color/black" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/tvUserName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ebrahim"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tvWelcomeUser"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ebrahim@gmail.com"
+                />
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+
+                android:id="@+id/constraintLayoutForAuth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:layout_marginTop="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+                <ImageButton
+                    android:id="@+id/ivSignUp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@null"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/new_user"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/ivSignIn"
+                    tools:ignore="MissingConstraints" />
+
+                <ImageButton
+                    android:id="@+id/ivSignIn"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@null"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/user"
+                    app:layout_constraintEnd_toStartOf="@+id/ivSignUp"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:ignore="MissingConstraints" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sign_in"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/ivSignIn"
+                    app:layout_constraintStart_toStartOf="@+id/ivSignIn"
+                    app:layout_constraintTop_toBottomOf="@+id/ivSignIn" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sign_up"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/ivSignUp"
+                    app:layout_constraintStart_toStartOf="@+id/ivSignUp"
+                    app:layout_constraintTop_toBottomOf="@+id/ivSignUp" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
 
         <View
             android:layout_width="match_parent"
@@ -166,6 +169,7 @@
                         android:text="@string/wishlist"
                         android:textAllCaps="false"
                         android:textColor="@color/black" />
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height=".1dp"
@@ -184,6 +188,7 @@
                         android:textAllCaps="false"
                         android:textColor="@color/black"
                         tools:ignore="MissingConstraints" />
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height=".1dp"
@@ -201,6 +206,7 @@
                         android:textAllCaps="false"
                         android:textColor="@color/black"
                         tools:ignore="MissingConstraints" />
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height=".1dp"
@@ -218,6 +224,7 @@
                         android:textAllCaps="false"
                         android:textColor="@color/black"
                         tools:ignore="MissingConstraints" />
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height=".1dp"
