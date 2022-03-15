@@ -7,7 +7,7 @@ import com.hema.e_commerce.model.room.orderroom.OrderData
 
 class OrderFragmentViewModel(private val repo: Repository, app: Application) : AndroidViewModel(app) {
 
-    fun getActiveStateOrder(state:String)=repo.getOrdersFromState(state)
+    fun getActiveStateOrder(state:String,customerId:Long)=repo.getOrdersFromState(state,customerId)
     fun deleteOrder(orderData: OrderData)=repo.deleteOrder(orderData)
 
 

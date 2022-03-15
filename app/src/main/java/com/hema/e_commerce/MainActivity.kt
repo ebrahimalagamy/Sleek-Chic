@@ -23,9 +23,11 @@ import com.hema.e_commerce.databinding.ActivityMainBinding
 import com.hema.e_commerce.model.repository.Repository
 import com.hema.e_commerce.model.room.RoomData
 import com.hema.e_commerce.model.viewModelFactory.MainActivityViewModelFactory
+import com.hema.e_commerce.model.viewmodels.MainActivityViewModel
 import com.hema.e_commerce.util.Connectivity
 import com.hema.e_commerce.util.LocationProvider
 import com.hema.e_commerce.util.Network
+import com.hema.e_commerce.util.SharedPreferencesProvider
 
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
@@ -35,11 +37,13 @@ class MainActivity : AppCompatActivity() {
     private val locationProvider = LocationProvider
     private val connectivity = Connectivity
     private lateinit var viewModel: MainActivityViewModel
+    private lateinit var sharedPref: SharedPreferencesProvider
 
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        sharedPref = SharedPreferencesProvider(this)
         val networkConnection = Network(applicationContext)
         networkConnection.observe(this) { isConnect ->
             if (isConnect) {
@@ -67,7 +71,10 @@ class MainActivity : AppCompatActivity() {
 
         bindLocation()
         bindNav()
-        cartIconBadge()
+
+        if (sharedPref.isSignIn) {
+            cartIconBadge()
+        }
 
     }
 
@@ -158,12 +165,14 @@ class MainActivity : AppCompatActivity() {
         cartBadge.badgeTextColor = getColor(R.color.myRed)
         cartBadge.maxCharacterCount = 5000
         cartBadge.badgeTextColor = getColor(R.color.white)
-        viewModel.getCartProducts().observe(this, Observer {
-            cartBadge.number = it.size
-            cartBadge.isVisible = it.isNotEmpty()
 
-        })
-    }
+            viewModel.getCartProducts(sharedPref.getUserInfo().customer?.customerId!!)
+                .observe(this, Observer {
+                    cartBadge.number = it.size
+                    cartBadge.isVisible = it.isNotEmpty()
+
+                })
+        }
 
 
 }

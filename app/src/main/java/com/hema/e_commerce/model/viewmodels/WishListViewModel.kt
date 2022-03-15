@@ -13,7 +13,7 @@ import com.hema.e_commerce.model.room.favoriteRoom.FavoriteProduct
 
 class WishListViewModel(private val repo: Repository, app: Application) : AndroidViewModel(app) {
 
-    fun getFavProducts()=repo.getAllFav()
+    fun getFavProducts(customerId:Long)=repo.getAllFav(customerId)
     fun saveCartList(cartlist: CartProductData)=repo.insert(cartlist)
     fun insertFav(favoriteProduct: FavoriteProduct)=repo.insert(favoriteProduct)
     fun delete(favorite: FavoriteProduct)=repo.deleteOnItemFromFav(favorite)

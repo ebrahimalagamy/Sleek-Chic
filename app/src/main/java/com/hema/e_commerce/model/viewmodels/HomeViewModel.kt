@@ -16,22 +16,24 @@ class HomeViewModel(private val repository: Repository, app: Application) : Andr
     fun getBrand() {
         repository.getBrand()
         brandsLiveData = repository.brandsLiveData
-
     }
 
-    fun getOnSaleProducts() {
-        repository.getOnSaleProducts()
-        onSaleProducts = repository.onSaleProductsList
-    }
+    fun getFavProducts(customerId:Long) = repository.getAllFav(customerId)
+    fun getCartProducts(customerId:Long)= repository.getAllCartProduct(customerId)
 
-    fun getOnHomeProducts() {
-        repository.getOnHomeProducts()
-        onHomeProducts = repository.onHomeProductsList
 
-    }
+    /* fun getOnSaleProducts() {
+         repository.getOnSaleProducts()
+         onSaleProducts = repository.onSaleProductsList
+     }
 
-    fun getFavProducts() = repository.getAllFav()
-    fun getCartProducts() = repository.getAllCartProduct()
+     fun getOnHomeProducts() {
+         repository.getOnHomeProducts()
+         onHomeProducts = repository.onHomeProductsList
+
+     }*/
+
+  //  fun getCartProducts() = repository.getAllCartProduct()
 
 
 }

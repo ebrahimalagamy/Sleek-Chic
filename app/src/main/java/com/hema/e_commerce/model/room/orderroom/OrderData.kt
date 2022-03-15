@@ -11,6 +11,9 @@ data class OrderData(
     @ColumnInfo(name = "orderNumber")
     val orderNumber: Long,
 
+    @ColumnInfo(name="customer_id")
+    val customer_id: Long?,
+
     @ColumnInfo(name = "totalPrice")
     val totalPrice: String,
 

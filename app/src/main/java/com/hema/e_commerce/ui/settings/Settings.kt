@@ -15,9 +15,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.hema.e_commerce.MainActivity
 import com.hema.e_commerce.R
 import com.hema.e_commerce.databinding.SettingsFragmentBinding
 import com.hema.e_commerce.model.room.orderroom.OrderData
+import com.hema.e_commerce.util.Constant
 import com.hema.e_commerce.util.SharedPreferencesProvider
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -49,6 +51,13 @@ class Settings : Fragment() {
         bindNav()
         bindUi()
         bindSignIn()
+        //to active cart icon When sign in todo
+        val SignIn = arguments?.get(Constant.SIGN_IN)
+        if (SignIn != null) {
+            if (sharedPref.isSignIn) {
+                (activity as MainActivity?)?.cartIconBadge()
+            }
+        }
 
     }
 

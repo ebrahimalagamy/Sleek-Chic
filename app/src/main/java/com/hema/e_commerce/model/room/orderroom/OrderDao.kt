@@ -9,21 +9,21 @@ interface OrderDao {
     suspend fun addOrder(orderData: OrderData)
 
 
-    @Query("UPDATE OrderData SET state = :state WHERE orderNumber = :orderNumber")
-    suspend fun updateOrder(orderNumber: Long, state: String)
+/*    @Query("UPDATE OrderData SET state = :state WHERE orderNumber = :orderNumber")
+    suspend fun updateOrder(orderNumber: Long, state: String)*/
 
     @Update
     suspend fun updateState(orderData: OrderData)
 
-    @Query("SELECT * FROM OrderData")
-    fun getAllOrders(): LiveData<List<OrderData>>
+  /*  @Query("SELECT * FROM OrderData")
+    fun getAllOrders(): LiveData<List<OrderData>>*/
 
-    @Query("SELECT * FROM OrderData Where State= :state")
-    fun getOrdersFromState(state: String): LiveData<List<OrderData>>
+    @Query("SELECT * FROM OrderData Where State= :state and customer_id= :customerId")
+    fun getOrdersFromState(state: String,customerId:Long): LiveData<List<OrderData>>
 
     @Delete
     suspend fun deleteOrder(orderData: OrderData)
 
-    @Query("DELETE FROM OrderData")
-    suspend fun deleteAllOrders()
+   /* @Query("DELETE FROM OrderData")
+    suspend fun deleteAllOrders()*/
 }

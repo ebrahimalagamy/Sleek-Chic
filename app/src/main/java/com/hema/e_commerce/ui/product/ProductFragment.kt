@@ -13,7 +13,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager.widget.PagerAdapter
+import com.google.android.material.snackbar.Snackbar
 import com.hema.e_commerce.R
 import com.hema.e_commerce.adapter.singleProduct.ProductAdapter
 import com.hema.e_commerce.databinding.FragmentProductBinding
@@ -65,6 +67,17 @@ class ProductFragment : Fragment() {
         initViews(productId!!)
         observe(savedInstanceState)
         reviewAction()
+
+        if (sharedPref.isSignIn) {
+
+        }else {
+            Snackbar.make(view,R.string.sign_in_message, Snackbar.LENGTH_LONG).apply {
+                setAction("Sign In"){
+                    navController.navigate(R.id.Settings)
+                }
+                show()
+            }
+        }
     }
 
     fun observe(savedInstanceState: Bundle?) {
@@ -102,30 +115,44 @@ class ProductFragment : Fragment() {
 
             binding.addToCart.setOnClickListener {
                 //befor that we will check if user login or not
+                if (sharedPref.isSignIn) {
 
-                val cartitem = CartProductData(
-                    product.id,
-                    product.image.src,
-                    product.title,
-                    product.variants.get(0).price,
-                    product.variants.get(0).inventory_quantity,
-                    1
-                )
-                if (product.variants.get(0).inventory_quantity > 0) {
-                    viewModel.saveCartList(cartitem)
-                } else {
-                    Toast.makeText(
-                        requireContext(),
-                        "this product not available in  stor now",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    val cartitem = CartProductData(
+                        product.id,
+                        sharedPref.getUserInfo().customer?.customerId,
+                        product.image.src,
+                        product.title,
+                        product.variants.get(0).price,
+                        product.variants.get(0).inventory_quantity,
+                        1
+                    )
+                    if (product.variants.get(0).inventory_quantity > 0) {
+                        viewModel.saveCartList(cartitem)
+                    } else {
+                        Toast.makeText(
+                            requireContext(),
+                            "this product not available in  stor now",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+
+                }else {
+                    Snackbar.make(requireView(),R.string.sign_in_message, Snackbar.LENGTH_LONG).apply {
+                        setAction("Sign In"){
+                            navController.navigate(R.id.Settings)
+                        }
+                        show()
+                    }
                 }
+
+
 
             }
 
             //favorite function
             favProduct = FavoriteProduct(
                 product.id,
+                sharedPref.getUserInfo().customer?.customerId,
                 product.image.src,
                 product.title,
                 product.variants.get(0).price,
@@ -133,6 +160,7 @@ class ProductFragment : Fragment() {
                 1
             )
             setFav(savedInstanceState)
+
         })
 
     }
@@ -161,19 +189,24 @@ class ProductFragment : Fragment() {
             }
 
             binding.favButton.setOnClickListener(View.OnClickListener {
-                  if(sharedPref.isSignIn){
-                isFavBtnClicked = if (isFavBtnClicked) {
-                    viewModel.deleteByID(productId ?: 0)
-                    false
+                if (sharedPref.isSignIn) {
+
+                    isFavBtnClicked = if (isFavBtnClicked) {
+                        viewModel.deleteByID(productId ?: 0)
+                        false
+                    } else {
+                        viewModel.insertFav(favProduct)
+                        true
+                    }
+                    setStoredButton(isFavBtnClicked)
                 } else {
-                    viewModel.insertFav(favProduct)
-                    true
-                }
-                setStoredButton(isFavBtnClicked)
-                } else{
-                    Toast.makeText(requireContext(), "Please SignIn To Enjoy our Service", Toast.LENGTH_SHORT).show()
-                     navController.navigate(R.id.Settings)
-                }
+                        Snackbar.make(requireView(),R.string.sign_in_message, Snackbar.LENGTH_LONG).apply {
+                            setAction("Sign In"){
+                                navController.navigate(R.id.Settings)
+                            }
+                            show()
+                        }
+                    }
             })
         }
     }
@@ -184,12 +217,13 @@ class ProductFragment : Fragment() {
     }
 
     private fun checkWishListStored(id: Long) {
-        viewModel.getOneItemFromRoom(id).observe(viewLifecycleOwner, Observer {
-            if (it != null) {
-                isFavBtnClicked = true
-                setStoredButton(isFavBtnClicked)
-            }
-        })
+        viewModel.getOneItemFromRoom(id, sharedPref.getUserInfo().customer?.customerId!!)
+            .observe(viewLifecycleOwner, Observer {
+                if (it != null) {
+                    isFavBtnClicked = true
+                    setStoredButton(isFavBtnClicked)
+                }
+            })
     }
 
     private fun setStoredButton(isFavBtnClicked: Boolean) {

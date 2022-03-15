@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -17,9 +16,10 @@ import com.hema.e_commerce.databinding.ItemCartBinding
 import com.hema.e_commerce.model.room.cartroom.CartProductData
 import com.hema.e_commerce.model.room.favoriteRoom.FavoriteProduct
 import com.hema.e_commerce.model.viewmodels.CartViewModel
+import com.hema.e_commerce.util.SharedPreferencesProvider
 
 class CartAdapter(private val cartViewModel: CartViewModel,private val context: Context) : RecyclerView.Adapter<CartAdapter.ViewHolder>() {
-
+    private lateinit var sharedPref: SharedPreferencesProvider
 
     inner class ViewHolder(itemCartBinding: ItemCartBinding) :
         RecyclerView.ViewHolder(itemCartBinding.root) {
@@ -28,6 +28,7 @@ class CartAdapter(private val cartViewModel: CartViewModel,private val context: 
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        sharedPref = SharedPreferencesProvider(context)
         return ViewHolder(
             DataBindingUtil.inflate(
                 LayoutInflater.from(parent.context),
@@ -117,6 +118,7 @@ class CartAdapter(private val cartViewModel: CartViewModel,private val context: 
                 counter -= 1
                 val cartitem = CartProductData(
                     differ.currentList[position].id,
+                    sharedPref.getUserInfo().customer?.customerId,
                     differ.currentList[position].image,
                     differ.currentList[position].title,
                     differ.currentList[position].price,
@@ -133,6 +135,7 @@ class CartAdapter(private val cartViewModel: CartViewModel,private val context: 
                 counter += 1
                     val cartitem = CartProductData(
                         differ.currentList[position].id,
+                        sharedPref.getUserInfo().customer?.customerId,
                         differ.currentList[position].image,
                         differ.currentList[position].title,
                         differ.currentList[position].price,
@@ -149,6 +152,7 @@ class CartAdapter(private val cartViewModel: CartViewModel,private val context: 
         holder.itemCartBinding.favBt.setOnClickListener {
             val fav = FavoriteProduct(
                 differ.currentList[position].id,
+                sharedPref.getUserInfo().customer?.customerId,
                 differ.currentList[position].image,
                 differ.currentList[position].title,
                 differ.currentList[position].price,
