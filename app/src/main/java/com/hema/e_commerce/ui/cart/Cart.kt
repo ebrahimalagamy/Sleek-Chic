@@ -49,7 +49,7 @@ class Cart : Fragment() {
 
         setupRecyclerView()
 
-        viewModel.getCartProducts().observe(viewLifecycleOwner) { product ->
+        viewModel.getCartProducts(sharedPref.getUserInfo().customer?.customerId?:0).observe(viewLifecycleOwner) { product ->
             if (product.isEmpty()) {
                 cartFragmentBinding.imageView5.visibility = View.VISIBLE
                 cartFragmentBinding.cslayout.visibility = View.GONE

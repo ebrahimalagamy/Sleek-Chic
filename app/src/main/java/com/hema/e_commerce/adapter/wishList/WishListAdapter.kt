@@ -19,12 +19,15 @@ import com.hema.e_commerce.model.room.cartroom.CartProductData
 import com.hema.e_commerce.model.room.favoriteRoom.FavoriteProduct
 import com.hema.e_commerce.model.viewmodels.WishListViewModel
 import com.hema.e_commerce.util.Constant
+import com.hema.e_commerce.util.SharedPreferencesProvider
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class WishListAdapter(val context:Context,var viewModel:WishListViewModel) : RecyclerView.Adapter<WishListAdapter.ViewHolder>() {
     private lateinit var navController: NavController
+    private lateinit var sharedPref: SharedPreferencesProvider
+
 
     inner class ViewHolder( val binding: ItemFavoriteBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -32,6 +35,7 @@ class WishListAdapter(val context:Context,var viewModel:WishListViewModel) : Rec
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         navController= Navigation.findNavController(parent)
+        sharedPref = SharedPreferencesProvider(context)
         return ViewHolder(DataBindingUtil.inflate(LayoutInflater.from(parent.context),
             R.layout.item_favorite, parent, false
             )
@@ -76,10 +80,14 @@ class WishListAdapter(val context:Context,var viewModel:WishListViewModel) : Rec
 
         holder.binding.btnAddToCart.setOnClickListener(View.OnClickListener {
         val cart=CartProductData(
-                differ.currentList[position].id,differ.currentList[position].image,differ.currentList[position].title
-        ,differ.currentList[position].price,differ.currentList[position].inventory_quantity, 1)
+            differ.currentList[position].id,
+            sharedPref.getUserInfo().customer?.customerId,
+            differ.currentList[position].image,
+            differ.currentList[position].title,
+            differ.currentList[position].price,
+            differ.currentList[position].inventory_quantity,
+            1)
         viewModel.saveCartList(cart)
-            //todo delete from fav after add to cart
 
 
         })

@@ -11,15 +11,15 @@ interface FavoriteDao {
     @Delete
     suspend fun delete(favoriteProduct: FavoriteProduct)
 
-    @Query("DELETE FROM FavoriteProduct")
+   /* @Query("DELETE FROM FavoriteProduct")
     suspend fun deleteAll()
-
+*/
     @Query("DELETE FROM FavoriteProduct Where id= :id")
     suspend fun deleteById(id:Long)
 
-    @Query ("SELECT * FROM FavoriteProduct")
-    fun getAllFav():LiveData<List<FavoriteProduct>>
+    @Query ("SELECT * FROM FavoriteProduct Where customer_id= :customerId")
+    fun getAllFav(customerId:Long):LiveData<List<FavoriteProduct>>
 
-    @Query ("SELECT * FROM FavoriteProduct Where id= :id")
-    fun getOneItem(id:Long):LiveData<FavoriteProduct>
+    @Query ("SELECT * FROM FavoriteProduct Where id= :id and customer_id= :customerId")
+    fun getOneItem(id:Long,customerId:Long):LiveData<FavoriteProduct>
 }

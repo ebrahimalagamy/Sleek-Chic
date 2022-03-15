@@ -23,7 +23,7 @@ import com.hema.e_commerce.model.dataclass.test.Order
 import com.hema.e_commerce.model.repository.Repository
 import com.hema.e_commerce.model.room.RoomData
 import com.hema.e_commerce.model.room.orderroom.OrderData
-import com.hema.e_commerce.model.viewmodels.CheckoutViewModelFactory
+import com.hema.e_commerce.model.viewModelFactory.CheckoutViewModelFactory
 import com.hema.e_commerce.util.Constant.CLIENT_ID
 import com.hema.e_commerce.util.SharedPreferencesProvider
 import com.paypal.android.sdk.payments.PayPalConfiguration
@@ -132,6 +132,7 @@ class Checkout : Fragment() {
                                 viewModel.addOrder(
                                     OrderData(
                                         orderId,
+                                        sharedPref.getUserInfo().customer?.customerId,
                                         totalPrice,
                                         customerName,
                                         customerAddress!!,

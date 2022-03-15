@@ -16,6 +16,7 @@
     <string name="welcome_back">Welcome Back</string>
     <string name="read_it_together">Read it together</string>
     <string name="sign_in">Sign In</string>
+    <string name="sign_in_message">Please Sign In To Enjoy Our Service</string>
     <string name="don_t_have_account">Don\'t have account?</string>
     <string name="sign_up">Sign up</string>
     <string name="forget_password">Forget password ?</string>

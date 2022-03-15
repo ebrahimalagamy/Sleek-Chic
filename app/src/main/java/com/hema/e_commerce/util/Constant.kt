@@ -23,5 +23,6 @@ object Constant {
     const val FLAG = "Flag"
     const val PRODUCT = "Product"
     const val FAVORITE = "FAVORITE"
+    const val SIGN_IN = "SIGN_IN"
 
 }

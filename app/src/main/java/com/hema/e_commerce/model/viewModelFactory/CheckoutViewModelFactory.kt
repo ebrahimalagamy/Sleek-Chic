@@ -1,10 +1,9 @@
-package com.hema.e_commerce.model.viewmodels
+package com.hema.e_commerce.model.viewModelFactory
 
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.hema.e_commerce.model.repository.Repository
-import com.hema.e_commerce.model.viewmodels.WishListViewModel
 import com.hema.e_commerce.ui.settings.checkout.CheckoutViewModel
 
 class CheckoutViewModelFactory(

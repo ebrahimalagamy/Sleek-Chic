@@ -16,17 +16,20 @@ import com.hema.e_commerce.model.repository.Repository
 import com.hema.e_commerce.model.room.RoomData
 import com.hema.e_commerce.model.viewModelFactory.OrderFragmentViewModelFactory
 import com.hema.e_commerce.model.viewmodels.OrderFragmentViewModel
+import com.hema.e_commerce.util.SharedPreferencesProvider
 
 class CancelledOrderFragment:Fragment() {
     private lateinit var binding:FragmentOrderCancelledBinding
     private lateinit var viewModel: OrderFragmentViewModel
     private lateinit var cancelAdapter: CancelledOrderAdapter
+    private lateinit var sharedPref: SharedPreferencesProvider
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        sharedPref = SharedPreferencesProvider(requireActivity())
         binding=DataBindingUtil.inflate(inflater,R.layout.fragment_order_cancelled,container,false)
         val repository= Repository(RoomData(requireContext()))
         val orderViewModelProviderFactory = OrderFragmentViewModelFactory(requireActivity().application,repository)
@@ -36,7 +39,7 @@ class CancelledOrderFragment:Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getActiveStateOrder("CANCELLED").observe(viewLifecycleOwner, Observer {order->
+        viewModel.getActiveStateOrder("CANCELLED",sharedPref.getUserInfo().customer?.customerId?:0).observe(viewLifecycleOwner, Observer {order->
             cancelAdapter = CancelledOrderAdapter(order,viewModel,requireContext())
             setupRecyclerView()
 

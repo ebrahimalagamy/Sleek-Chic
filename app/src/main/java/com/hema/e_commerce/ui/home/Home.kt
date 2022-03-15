@@ -11,16 +11,16 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
+import com.hema.e_commerce.MainActivity
 import com.hema.e_commerce.R
 import com.hema.e_commerce.adapter.home.BrandAdapter
-import com.hema.e_commerce.adapter.home.CartNotificationAdapter
 import com.hema.e_commerce.adapter.home.WishListNotificationAdapter
 import com.hema.e_commerce.databinding.HomeFragmentBinding
 import com.hema.e_commerce.model.repository.Repository
@@ -29,12 +29,16 @@ import com.hema.e_commerce.model.viewModelFactory.HomeViewModelFactory
 import com.hema.e_commerce.model.viewmodels.HomeViewModel
 import com.hema.e_commerce.ui.progresspar.ProgressBarSetting
 import com.hema.e_commerce.util.Connectivity.Companion.isOnline
+import com.hema.e_commerce.util.Constant
+import com.hema.e_commerce.util.Constant.SIGN_IN
+import com.hema.e_commerce.util.SharedPreferencesProvider
 
 
 class Home : Fragment() {
     private lateinit var binding: HomeFragmentBinding
     private lateinit var viewModel: HomeViewModel
     private lateinit var brandAdapter: BrandAdapter
+    private lateinit var sharedPref: SharedPreferencesProvider
 
     //   private lateinit var productAdapter: ProductsAdapter
     private lateinit var navController: NavController
@@ -44,6 +48,7 @@ class Home : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
+        sharedPref = SharedPreferencesProvider(requireActivity())
         binding = DataBindingUtil.inflate(inflater, R.layout.home_fragment, container, false)
         return binding.root
 
@@ -64,6 +69,7 @@ class Home : Fragment() {
         observers()
         onClickSearch()
         iconBadges()
+
 
     }
 
@@ -146,17 +152,20 @@ class Home : Fragment() {
         val wishListIcon = WishListNotificationAdapter(binding.favourite)
 
         if (isOnline(requireContext())) {
-            viewModel.getFavProducts().observe(viewLifecycleOwner, Observer {
-                wishListIcon.updateView(it.size)
-            })
+            if (sharedPref.isSignIn) {
+                viewModel.getFavProducts(sharedPref.getUserInfo().customer?.customerId!!)
+                    .observe(viewLifecycleOwner, Observer {
+                        wishListIcon.updateView(it.size)
+                    })
 
 
-            wishListIcon.Button.setOnClickListener {
-                findNavController().navigate(R.id.wishlist)
+                wishListIcon.Button.setOnClickListener {
+                    findNavController().navigate(R.id.wishlist)
+                }
             }
 
         } else {
-//            Toast.makeText(requireContext(), R.string.check_internet, Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), R.string.check_internet, Toast.LENGTH_SHORT).show()
         }
     }
 

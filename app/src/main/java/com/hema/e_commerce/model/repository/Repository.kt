@@ -3,7 +3,6 @@ package com.hema.e_commerce.model.repository
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.hema.e_commerce.model.dataclass.allProducts.ProductItem
 import com.hema.e_commerce.model.dataclass.allProducts.ProductsResponse
 import com.hema.e_commerce.model.remote.RetrofitInstance
 import com.hema.e_commerce.model.dataclass.listofcustomcollections.CustomCollectionsResponse
@@ -15,9 +14,9 @@ import com.hema.e_commerce.model.room.favoriteRoom.FavoriteProduct
 import com.hema.e_commerce.model.room.orderroom.OrderData
 import kotlinx.coroutines.*
 
-class Repository(val db: RoomData) {
+class Repository(private val db: RoomData) {
     //Aya
-    val productDetails = MutableLiveData<ProductItem>()
+    //val productDetails = MutableLiveData<ProductItem>()
 
     val collectionsLiveData = MutableLiveData<CustomCollectionsResponse>()
 
@@ -81,13 +80,13 @@ class Repository(val db: RoomData) {
     //////////////////////////////////////////
 //Mohamed
 
-    val coroutineExceptionHandler = CoroutineExceptionHandler{_, throwable ->
+    private val coroutineExceptionHandler = CoroutineExceptionHandler{ _, throwable ->
         throwable.printStackTrace()
     }
 //Live data
     val brandsLiveData = MutableLiveData<BrandsResponce>()
-    val onSaleProductsList = MutableLiveData<ProductsResponse>()
-    val onHomeProductsList = MutableLiveData<ProductsResponse>()
+    //val onSaleProductsList = MutableLiveData<ProductsResponse>()
+    //val onHomeProductsList = MutableLiveData<ProductsResponse>()
     val allProduct = MutableLiveData<ProductsResponse>()
 
     //Remote function
@@ -106,14 +105,14 @@ class Repository(val db: RoomData) {
     private suspend fun deleteFav(favoriteProduct: FavoriteProduct) =
         db.getFavoriteData().delete(favoriteProduct)
 
-    private suspend fun deleteAll() = db.getFavoriteData().deleteAll()
+   // private suspend fun deleteAll() = db.getFavoriteData().deleteAll()
 
     private suspend fun deleteById(id: Long) = db.getFavoriteData().deleteById(id)
 
 
-    fun getAllFav() = db.getFavoriteData().getAllFav()
+    fun getAllFav(customerId:Long) = db.getFavoriteData().getAllFav(customerId)
 
-    fun getOneItem(id: Long) = db.getFavoriteData().getOneItem(id)
+    fun getOneItem(id: Long,customerId:Long) = db.getFavoriteData().getOneItem(id,customerId)
 
 
     //Methods use in viewModel
@@ -132,7 +131,7 @@ class Repository(val db: RoomData) {
         }
     }
 
-    fun getOnSaleProducts() {
+   /* fun getOnSaleProducts() {
         GlobalScope.launch(Dispatchers.IO+coroutineExceptionHandler) {
             val response = getOnSaleProductsList()
             withContext(Dispatchers.Main) {
@@ -141,14 +140,13 @@ class Repository(val db: RoomData) {
                         onSaleProductsList.value = it
                     }
                 } else {
-                    Log.i("checkkkk", "getBrands: error " + response.errorBody())
                 }
             }
 
         }
-    }
+    }*/
 
-    fun getOnHomeProducts() {
+  /*  fun getOnHomeProducts() {
         GlobalScope.launch(Dispatchers.IO+coroutineExceptionHandler) {
             val response = getOnHomeProductsList()
             withContext(Dispatchers.Main) {
@@ -158,14 +156,13 @@ class Repository(val db: RoomData) {
 
                     }
                 } else {
-                    Log.i("checkkkk", "getBrands: error " + response.errorBody())
                 }
             }
 
         }
-    }
+    }*/
 
-    fun getallProduct() {
+    fun getAllProduct() {
         GlobalScope.launch(Dispatchers.IO+coroutineExceptionHandler) {
             val response = getProducts()
             withContext(Dispatchers.Main) {
@@ -174,7 +171,6 @@ class Repository(val db: RoomData) {
                         allProduct.value = it
                     }
                 } else {
-                    Log.i("checkkkk", "getBrands: error " + response.errorBody())
                 }
             }
 
@@ -200,49 +196,49 @@ class Repository(val db: RoomData) {
         }
     }
 
-    fun deleteAllFromFav() {
+ /*   fun deleteAllFromFav() {
         GlobalScope.launch(Dispatchers.IO) {
             deleteAll()
         }
-    }
+    }*/
 
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //Local database
-    suspend fun saveCartList(cartlist: CartProductData) {
-        db.getLocalDataObject().saveAllCartList(cartlist)
+    private suspend fun saveCartList(cartList: CartProductData) {
+        db.getLocalDataObject().saveAllCartList(cartList)
     }
 
-    suspend fun updateCount(cartlist: CartProductData) {
-        db.getLocalDataObject().getCountUpdate(cartlist)
+    private suspend fun updateCount(cartList: CartProductData) {
+        db.getLocalDataObject().getCountUpdate(cartList)
     }
 
-    fun getAllCartProduct(): LiveData<List<CartProductData>> {
-        return db.getLocalDataObject().getAllCartList()
+    fun getAllCartProduct(customerId:Long): LiveData<List<CartProductData>> {
+        return db.getLocalDataObject().getAllCartList(customerId)
 
     }
 
-    suspend fun deleteOneItemOnCart(cartlist: CartProductData) {
-        db.getLocalDataObject().deleteOnCartItem(cartlist)
+    private suspend fun deleteOneItemOnCart(cartList: CartProductData) {
+        db.getLocalDataObject().deleteOnCartItem(cartList)
     }
 
     //Method to handle data
-    fun insert(cartlist: CartProductData) {
+    fun insert(cartList: CartProductData) {
         GlobalScope.launch(Dispatchers.IO) {
-            saveCartList(cartlist)
+            saveCartList(cartList)
         }
     }
 
-    fun updateCountChange(cartlist: CartProductData) {
+    fun updateCountChange(cartList: CartProductData) {
         GlobalScope.launch(Dispatchers.IO) {
-            updateCount(cartlist)
+            updateCount(cartList)
         }
     }
 
-    fun deleteOneCartItem(cartlist: CartProductData) {
+    fun deleteOneCartItem(cartList: CartProductData) {
         GlobalScope.launch(Dispatchers.IO) {
-            deleteOneItemOnCart(cartlist)
+            deleteOneItemOnCart(cartList)
         }
     }
 
@@ -263,15 +259,15 @@ class Repository(val db: RoomData) {
 
     }
 
-     fun updateState(orderData: OrderData) {
+   /* fun updateState(orderData: OrderData) {
         GlobalScope.launch(Dispatchers.IO) {
             db.getOrder().updateState(orderData)
         }
-    }
+    }*/
 
-    fun getAllOrders():LiveData<List<OrderData>> {
+   /* fun getAllOrders():LiveData<List<OrderData>> {
        return db.getOrder().getAllOrders()
-    }
+    }*/
 
      fun deleteOrder(orderData: OrderData) {
         GlobalScope.launch(Dispatchers.IO) {
@@ -279,13 +275,14 @@ class Repository(val db: RoomData) {
         }
     }
 
-     fun deleteAllOrders() {
+   /*  fun deleteAllOrders() {
         GlobalScope.launch(Dispatchers.IO) {
             db.getOrder().deleteAllOrders()
         }
-    }
-    fun getOrdersFromState(state: String):LiveData<List<OrderData>> {
-     return   db.getOrder().getOrdersFromState(state)
+    }*/
+
+    fun getOrdersFromState(state: String,customerId:Long):LiveData<List<OrderData>> {
+     return   db.getOrder().getOrdersFromState(state,customerId)
     }
 
 

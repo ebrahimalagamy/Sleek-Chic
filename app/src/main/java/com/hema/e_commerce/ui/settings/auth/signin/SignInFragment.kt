@@ -14,6 +14,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.hema.e_commerce.R
 import com.hema.e_commerce.databinding.FragmentSignInBinding
+import com.hema.e_commerce.util.Constant
+import com.hema.e_commerce.util.Constant.SIGN_IN
 
 
 class SignInFragment : Fragment() {
@@ -47,7 +49,11 @@ class SignInFragment : Fragment() {
                         Toast.makeText(requireContext(), "Successfully Login", Toast.LENGTH_LONG)
                             .show()
                         viewModel.AuthRepo.sharedPref.checkSignIn(true)
-                        findNavController().navigate(R.id.Settings)
+                        //todo
+                        val brandBundle=Bundle().apply {
+                            putBoolean(SIGN_IN,true)
+                        }
+                        findNavController().navigate(R.id.Settings,brandBundle)
                     }
                 }
             }

@@ -17,17 +17,20 @@ import com.hema.e_commerce.model.repository.Repository
 import com.hema.e_commerce.model.room.RoomData
 import com.hema.e_commerce.model.viewModelFactory.OrderFragmentViewModelFactory
 import com.hema.e_commerce.model.viewmodels.OrderFragmentViewModel
+import com.hema.e_commerce.util.SharedPreferencesProvider
 
 class OrderFragment:Fragment() {
     private lateinit var binding:FragmentOrderBinding
     private lateinit var viewModel: OrderFragmentViewModel
     private lateinit var orderAdapter: OrderAdapter
+    private lateinit var sharedPref: SharedPreferencesProvider
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        sharedPref = SharedPreferencesProvider(requireActivity())
         binding=DataBindingUtil.inflate(inflater,R.layout.fragment_order,container,false)
         val repository= Repository(RoomData(requireContext()))
         val orderViewModelProviderFactory = OrderFragmentViewModelFactory(requireActivity().application,repository)
@@ -39,7 +42,7 @@ class OrderFragment:Fragment() {
         super.onViewCreated(view, savedInstanceState)
         click()
 
-        viewModel.getActiveStateOrder("ACTIVE").observe(viewLifecycleOwner, Observer {order->
+        viewModel.getActiveStateOrder("ACTIVE",sharedPref.getUserInfo().customer?.customerId?:0).observe(viewLifecycleOwner, Observer {order->
             if (order.isEmpty()){
                 binding.imageView6.visibility=View.VISIBLE
             }else{

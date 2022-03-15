@@ -20,18 +20,20 @@ import com.hema.e_commerce.model.repository.Repository
 import com.hema.e_commerce.model.room.RoomData
 import com.hema.e_commerce.model.viewModelFactory.WishListViewModelFactory
 import com.hema.e_commerce.model.viewmodels.WishListViewModel
+import com.hema.e_commerce.util.SharedPreferencesProvider
 
 
 class Wishlist : Fragment() {
     private lateinit var binding: FragmentWishlistBinding
     private lateinit var viewModel: WishListViewModel
     private lateinit var favAdapter: WishListAdapter
+    private lateinit var sharedPref: SharedPreferencesProvider
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
+        sharedPref = SharedPreferencesProvider(requireActivity())
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_wishlist, container, false)
         val repository= Repository(RoomData(requireContext()))
         val wishListViewModelProviderFactory = WishListViewModelFactory(requireActivity().application,repository)
@@ -43,7 +45,7 @@ class Wishlist : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
 
-        viewModel.getFavProducts().observe(viewLifecycleOwner, Observer {product->
+        viewModel.getFavProducts(sharedPref.getUserInfo().customer?.customerId?:0).observe(viewLifecycleOwner, Observer {product->
             if (product.isEmpty()){
                 binding.imageView4.visibility=View.VISIBLE
             }else{

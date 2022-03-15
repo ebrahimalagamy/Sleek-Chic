@@ -15,9 +15,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.hema.e_commerce.MainActivity
 import com.hema.e_commerce.R
 import com.hema.e_commerce.databinding.SettingsFragmentBinding
 import com.hema.e_commerce.model.room.orderroom.OrderData
+import com.hema.e_commerce.util.Constant
 import com.hema.e_commerce.util.SharedPreferencesProvider
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -49,6 +51,14 @@ class Settings : Fragment() {
         bindNav()
         bindUi()
         bindSignIn()
+
+        //to active cart icon When sign in todo
+        val signIn = arguments?.get(Constant.SIGN_IN)
+        if (signIn == true) {
+            if (sharedPref.isSignIn) {
+                (activity as MainActivity?)?.cartIconBadge()
+            }
+        }
 
     }
 
@@ -129,7 +139,10 @@ class Settings : Fragment() {
             .setMessage(getString(R.string.do_you_want_sign_out))
             .setPositiveButton(getString(R.string.ok)) { _, _ ->
                 requireActivity().deleteSharedPreferences("myPref")
-
+                //todo
+                if (sharedPref.isSignIn) {
+                    (activity as MainActivity?)?.  clearCartIconBadge()
+                }
                 Toast.makeText(requireActivity(), getString(R.string.successfully), Toast.LENGTH_SHORT)
                     .show()
                 findNavController().navigate(R.id.Settings)

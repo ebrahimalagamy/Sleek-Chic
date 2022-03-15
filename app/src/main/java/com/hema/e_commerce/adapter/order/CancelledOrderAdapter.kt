@@ -10,12 +10,16 @@ import com.hema.e_commerce.R
 import com.hema.e_commerce.databinding.ItemOrderBinding
 import com.hema.e_commerce.model.room.orderroom.OrderData
 import com.hema.e_commerce.model.viewmodels.OrderFragmentViewModel
+import com.hema.e_commerce.util.SharedPreferencesProvider
 
 class CancelledOrderAdapter (val list: List<OrderData>, val viewModel: OrderFragmentViewModel, val context: Context) : RecyclerView.Adapter<CancelledOrderAdapter.ViewHolder>() {
-lateinit var order:OrderData
+    lateinit var order:OrderData
+    private lateinit var sharedPref: SharedPreferencesProvider
+
     inner class ViewHolder( val binding: ItemOrderBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        sharedPref = SharedPreferencesProvider(context)
         return ViewHolder(DataBindingUtil.inflate(LayoutInflater.from(parent.context),
             R.layout.item_order, parent, false
         )
@@ -29,6 +33,7 @@ lateinit var order:OrderData
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
              order = OrderData(
                  list[position].orderNumber,
+                 sharedPref.getUserInfo().customer?.customerId,
                  list[position].totalPrice,
                  list[position].customerName,
                  list[position].address,

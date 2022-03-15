@@ -21,7 +21,7 @@ class SingleProductViewModel(private val repo: Repository,app: Application) : An
     fun saveCartList(cartlist: CartProductData)=repo.insert(cartlist)
     fun insertFav(favoriteProduct: FavoriteProduct)=repo.insert(favoriteProduct)
     fun deleteByID(id: Long)=repo.deleteOnItemFromFavByID(id)
-    fun getOneItemFromRoom(id: Long) = repo.getOneItem(id)
+    fun getOneItemFromRoom(id: Long,customerId:Long) = repo.getOneItem(id,customerId)
 
 
 

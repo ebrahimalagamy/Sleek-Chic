@@ -9,11 +9,11 @@ interface LocalDataDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveAllCartList(cartProduct: CartProductData)
 
-    @Query("SELECT * FROM ProductCart")
-    fun getAllCartList(): LiveData<List<CartProductData>>
+    @Query("SELECT * FROM ProductCart Where customer_id= :customerId")
+    fun getAllCartList(customerId:Long): LiveData<List<CartProductData>>
 
-    @Query("SELECT count FROM ProductCart Where id= :id")
-    fun getCartproduct(id:Long):Int
+    /*@Query("SELECT count FROM ProductCart Where id= :id")
+    fun getCartproduct(id:Long):Int*/
 
     @Update
     suspend fun getCountUpdate(cartProduct: CartProductData)
