@@ -52,8 +52,8 @@ class Settings : Fragment() {
         bindUi()
         bindSignIn()
         //to active cart icon When sign in todo
-        val SignIn = arguments?.get(Constant.SIGN_IN)
-        if (SignIn != null) {
+        val signIn = arguments?.get(Constant.SIGN_IN)
+        if (signIn == true) {
             if (sharedPref.isSignIn) {
                 (activity as MainActivity?)?.cartIconBadge()
             }

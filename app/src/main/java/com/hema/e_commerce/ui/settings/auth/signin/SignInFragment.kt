@@ -49,8 +49,9 @@ class SignInFragment : Fragment() {
                         Toast.makeText(requireContext(), "Successfully Login", Toast.LENGTH_LONG)
                             .show()
                         viewModel.AuthRepo.sharedPref.checkSignIn(true)
+                        //todo
                         val brandBundle=Bundle().apply {
-                            putString(SIGN_IN,SIGN_IN)
+                            putBoolean(SIGN_IN,true)
                         }
                         findNavController().navigate(R.id.Settings,brandBundle)
                     }
