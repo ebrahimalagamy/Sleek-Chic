@@ -158,10 +158,10 @@ class MainActivity : AppCompatActivity() {
             grantResults = grantResults
         )
     }
-
+    lateinit  var cartBadge: BadgeDrawable
     @RequiresApi(Build.VERSION_CODES.M)
     fun cartIconBadge() {
-        var cartBadge: BadgeDrawable = binding.bottomNavView.getOrCreateBadge(R.id.cart)
+         cartBadge = binding.bottomNavView.getOrCreateBadge(R.id.cart)
         cartBadge.badgeTextColor = getColor(R.color.myRed)
         cartBadge.maxCharacterCount = 5000
         cartBadge.badgeTextColor = getColor(R.color.white)
@@ -173,6 +173,13 @@ class MainActivity : AppCompatActivity() {
 
                 })
         }
+
+    fun clearCartIconBadge(){
+        cartBadge = binding.bottomNavView.getOrCreateBadge(R.id.cart)
+        cartBadge.isVisible=false
+
+    }
+
 
 
 }

@@ -51,6 +51,7 @@ class Settings : Fragment() {
         bindNav()
         bindUi()
         bindSignIn()
+
         //to active cart icon When sign in todo
         val signIn = arguments?.get(Constant.SIGN_IN)
         if (signIn == true) {
@@ -138,7 +139,10 @@ class Settings : Fragment() {
             .setMessage(getString(R.string.do_you_want_sign_out))
             .setPositiveButton(getString(R.string.ok)) { _, _ ->
                 requireActivity().deleteSharedPreferences("myPref")
-
+                //todo
+                if (sharedPref.isSignIn) {
+                    (activity as MainActivity?)?.  clearCartIconBadge()
+                }
                 Toast.makeText(requireActivity(), getString(R.string.successfully), Toast.LENGTH_SHORT)
                     .show()
                 findNavController().navigate(R.id.Settings)
