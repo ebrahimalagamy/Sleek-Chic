@@ -14,9 +14,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.hema.e_commerce.R
+import com.hema.e_commerce.adapter.cart.CartAdapter
 import com.hema.e_commerce.databinding.ItemFavoriteBinding
 import com.hema.e_commerce.model.room.cartroom.CartProductData
 import com.hema.e_commerce.model.room.favoriteRoom.FavoriteProduct
+import com.hema.e_commerce.model.viewmodels.CurrancyViewModel
 import com.hema.e_commerce.model.viewmodels.WishListViewModel
 import com.hema.e_commerce.util.Constant
 import com.hema.e_commerce.util.SharedPreferencesProvider
@@ -24,9 +26,11 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class WishListAdapter(val context:Context,var viewModel:WishListViewModel) : RecyclerView.Adapter<WishListAdapter.ViewHolder>() {
+class WishListAdapter(private val currencyViewModel: CurrancyViewModel, val context:Context, var viewModel:WishListViewModel) : RecyclerView.Adapter<WishListAdapter.ViewHolder>() {
     private lateinit var navController: NavController
     private lateinit var sharedPref: SharedPreferencesProvider
+    var currancy=context.getString(R.string.eg)
+
 
 
     inner class ViewHolder( val binding: ItemFavoriteBinding) : RecyclerView.ViewHolder(binding.root)
@@ -50,17 +54,30 @@ class WishListAdapter(val context:Context,var viewModel:WishListViewModel) : Rec
         var value = sharedPreferences.getString("currency","EGP")
         when(value){
             "USA"-> {
-                var usCurrancy=   ((differ.currentList[position].price).toDouble() / (15.71))
-                val number:Double=String.format("%.2f",usCurrancy).toDouble()
-                holder.binding.tvPrice.text = number.toString()+" "+"$"
+
+
+                currancy=context.getString(R.string.us)
+
+                //val number: Double = String.format("%.2f", usCurrancy).toDouble()
+                initViews("USD",(differ.currentList[position].price).toDouble() )
+
+                currancyObserve(holder)
 
             }
             "EUR"->      {
-                var ureCurrancy=   ((differ.currentList[position].price).toDouble() / (17.10))
-                val number:Double=String.format("%.2f",ureCurrancy).toDouble()
-                holder.binding.tvPrice.text=number.toString()+" "+"EUR"
+                currancy=context.getString(R.string.eur)
+
+                initViews("EUR",(differ.currentList[position].price).toDouble() )
+
+                currancyObserve(holder)
             }
-            else->  holder.binding.tvPrice.text = differ.currentList[position].price+" "+"EGP"
+            else-> {  // holder.binding.tvPrice.text = differ.currentList[position].price+" "+"EGP"
+                currancy=context.getString(R.string.eg)
+
+                initViews("EGP",(differ.currentList[position].price).toDouble() )
+                currancyObserve(holder)
+
+             }
 
         }
 
@@ -113,5 +130,16 @@ class WishListAdapter(val context:Context,var viewModel:WishListViewModel) : Rec
     //Async list differ take two list and compare them to change the difference only it run on background
     val differ= AsyncListDiffer(this,differCallBack)
 
+    private fun initViews( to: String,amount:Double) {
+        currencyViewModel.changeCurrancy(to, amount)
+    }
 
-}
+    fun currancyObserve(holder:ViewHolder){
+        currencyViewModel.currancyLiveData.observeForever{
+
+            val number: Double = String.format("%.2f", it.result).toDouble()
+            holder.binding.tvPrice.text =number.toString()+currancy
+
+
+        }
+}}

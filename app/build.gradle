@@ -50,6 +50,7 @@ dependencies {
     //image slider
     implementation 'com.github.denzcoskun:ImageSlideshow:0.1.0'
     implementation 'com.paypal.sdk:paypal-android-sdk:2.16.0'
+
     // Room
     def roomVersion = "2.4.1"
     implementation("androidx.room:room-runtime:$roomVersion")

@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.hema.e_commerce.model.dataclass.allProducts.ProductsResponse
+import com.hema.e_commerce.model.dataclass.currancy.CurrancyResponse
 import com.hema.e_commerce.model.remote.RetrofitInstance
 import com.hema.e_commerce.model.dataclass.listofcustomcollections.CustomCollectionsResponse
 import com.hema.e_commerce.model.dataclass.smartCollection.BrandsResponce
@@ -76,6 +77,35 @@ class Repository(private val db: RoomData) {
 
         }
     }
+
+
+
+    // currancy
+
+//    val currancyLiveData = MutableLiveData<CurrancyResponse>()
+//    fun getCurrancy(to:String,amount:Double) {
+//
+//
+//        GlobalScope.launch(Dispatchers.IO+coroutineExceptionHandler) {
+//            val response = RetrofitInstance.api
+//                .changeCurrancy(to,amount)
+//            withContext(Dispatchers.Main) {
+//                if (response.isSuccessful) {
+//                    response.body()?.let {
+//                        Log.d("currancy", "onResponse: ${it}")
+//                        Log.i("currancy", "getCurrancy: " + response.body().toString())
+//                        currancyLiveData.value = it
+//                    }
+//                } else {
+//                    Log.i("currancy", "getCurrancy: error " + response.errorBody())
+//
+//
+//                }
+//            }
+//
+//        }
+//    }
+
 
     //////////////////////////////////////////
 //Mohamed
@@ -289,4 +319,9 @@ class Repository(private val db: RoomData) {
 
 
 
+//
+
+
+
+    //
 }

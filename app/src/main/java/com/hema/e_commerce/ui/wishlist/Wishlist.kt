@@ -16,9 +16,13 @@ import com.google.android.material.snackbar.Snackbar
 import com.hema.e_commerce.R
 import com.hema.e_commerce.adapter.wishList.WishListAdapter
 import com.hema.e_commerce.databinding.FragmentWishlistBinding
+import com.hema.e_commerce.model.remote.currancynetwork.CurrancyRepository
 import com.hema.e_commerce.model.repository.Repository
 import com.hema.e_commerce.model.room.RoomData
+import com.hema.e_commerce.model.viewModelFactory.CurrancyViewModelFactory
 import com.hema.e_commerce.model.viewModelFactory.WishListViewModelFactory
+import com.hema.e_commerce.model.viewmodels.CartViewModel
+import com.hema.e_commerce.model.viewmodels.CurrancyViewModel
 import com.hema.e_commerce.model.viewmodels.WishListViewModel
 import com.hema.e_commerce.util.SharedPreferencesProvider
 
@@ -28,6 +32,8 @@ class Wishlist : Fragment() {
     private lateinit var viewModel: WishListViewModel
     private lateinit var favAdapter: WishListAdapter
     private lateinit var sharedPref: SharedPreferencesProvider
+    lateinit var currancyviewModel: CurrancyViewModel
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,6 +44,9 @@ class Wishlist : Fragment() {
         val repository= Repository(RoomData(requireContext()))
         val wishListViewModelProviderFactory = WishListViewModelFactory(requireActivity().application,repository)
         viewModel = ViewModelProvider(this,wishListViewModelProviderFactory)[WishListViewModel::class.java]
+        val currancyViewModelFactory =
+            CurrancyViewModelFactory(requireActivity().application, CurrancyRepository())
+        currancyviewModel = ViewModelProvider(this, currancyViewModelFactory)[CurrancyViewModel::class.java]
         return binding.root
 
     }
@@ -86,7 +95,7 @@ class Wishlist : Fragment() {
 
 
     private fun setupRecyclerView(){
-        favAdapter = WishListAdapter(requireContext(),viewModel)
+        favAdapter = WishListAdapter(currancyviewModel,requireContext(),viewModel)
         binding.favRec.apply {
             adapter=favAdapter
             layoutManager= LinearLayoutManager(context)
