@@ -13,7 +13,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
 import androidx.viewpager.widget.PagerAdapter
 import com.google.android.material.snackbar.Snackbar
 import com.hema.e_commerce.R
@@ -68,16 +67,6 @@ class ProductFragment : Fragment() {
         observe(savedInstanceState)
         reviewAction()
 
-        if (sharedPref.isSignIn) {
-
-        }else {
-            Snackbar.make(view,R.string.sign_in_message, Snackbar.LENGTH_LONG).apply {
-                setAction("Sign In"){
-                    navController.navigate(R.id.Settings)
-                }
-                show()
-            }
-        }
     }
 
     fun observe(savedInstanceState: Bundle?) {
@@ -136,15 +125,15 @@ class ProductFragment : Fragment() {
                         ).show()
                     }
 
-                }else {
-                    Snackbar.make(requireView(),R.string.sign_in_message, Snackbar.LENGTH_LONG).apply {
-                        setAction("Sign In"){
-                            navController.navigate(R.id.Settings)
+                } else {
+                    Snackbar.make(requireView(), R.string.sign_in_message, Snackbar.LENGTH_LONG)
+                        .apply {
+                            setAction("Sign In") {
+                                navController.navigate(R.id.Settings)
+                            }
+                            show()
                         }
-                        show()
-                    }
                 }
-
 
 
             }
@@ -200,13 +189,14 @@ class ProductFragment : Fragment() {
                     }
                     setStoredButton(isFavBtnClicked)
                 } else {
-                        Snackbar.make(requireView(),R.string.sign_in_message, Snackbar.LENGTH_LONG).apply {
-                            setAction("Sign In"){
+                    Snackbar.make(requireView(), R.string.sign_in_message, Snackbar.LENGTH_LONG)
+                        .apply {
+                            setAction("Sign In") {
                                 navController.navigate(R.id.Settings)
                             }
                             show()
                         }
-                    }
+                }
             })
         }
     }

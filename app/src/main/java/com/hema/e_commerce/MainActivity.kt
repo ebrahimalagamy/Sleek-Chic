@@ -48,13 +48,13 @@ class MainActivity : AppCompatActivity() {
         networkConnection.observe(this) { isConnect ->
             if (isConnect) {
                 binding.fragmentContainerView.visibility = View.VISIBLE
-                binding.bottomNavView.visibility = View.VISIBLE
+//                binding.bottomNavView.visibility = View.VISIBLE
                 binding.ivWifi.visibility = View.GONE
                 binding.tvInternetConnection.visibility = View.GONE
 
             } else {
                 binding.fragmentContainerView.visibility = View.GONE
-                binding.bottomNavView.visibility = View.GONE
+//                binding.bottomNavView.visibility = View.GONE
                 binding.ivWifi.visibility = View.VISIBLE
                 binding.tvInternetConnection.visibility = View.VISIBLE
                 Toast.makeText(this, "Connection Field", Toast.LENGTH_SHORT).show()

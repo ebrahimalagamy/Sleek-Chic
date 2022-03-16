@@ -225,23 +225,23 @@
                         android:textColor="@color/black"
                         tools:ignore="MissingConstraints" />
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height=".1dp"
-                        android:alpha=".1"
-                        android:background="@color/black" />
+<!--                    <View-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height=".1dp"-->
+<!--                        android:alpha=".1"-->
+<!--                        android:background="@color/black" />-->
 
-                    <Button
-                        android:id="@+id/Checkout"
-                        style="@style/Widget.AppCompat.Button.Borderless.Colored"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:drawableEnd="@drawable/ic_arrow_forward"
-                        android:gravity="center_vertical"
-                        android:text="@string/payment"
-                        android:textAllCaps="false"
-                        android:textColor="@color/black"
-                        tools:ignore="MissingConstraints" />
+<!--                    <Button-->
+<!--                        android:id="@+id/Checkout"-->
+<!--                        style="@style/Widget.AppCompat.Button.Borderless.Colored"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:drawableEnd="@drawable/ic_arrow_forward"-->
+<!--                        android:gravity="center_vertical"-->
+<!--                        android:text="@string/payment"-->
+<!--                        android:textAllCaps="false"-->
+<!--                        android:textColor="@color/black"-->
+<!--                        tools:ignore="MissingConstraints" />-->
 
                 </LinearLayout>
 
