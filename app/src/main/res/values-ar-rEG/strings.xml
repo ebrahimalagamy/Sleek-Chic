@@ -120,5 +120,6 @@
     <string name="alertdelteMessage">هل تريد مسح هذا الطلب ؟</string>
     <string name="product_details">Product Details</string>
     <string name="sign_in_message">يرجى تسجيل الدخول للاستمتاع بكافه الخدمات المتوفره</string>
+    <string name="select">Select</string>
 
 </resources>

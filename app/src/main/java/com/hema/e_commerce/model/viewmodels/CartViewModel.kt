@@ -37,7 +37,9 @@ class CartViewModel(private val repo: Repository,app: Application) : AndroidView
 
 
     fun getCartProducts(customerId:Long)= repo.getAllCartProduct(customerId)
-  //  fun getCartProductCount(id:Long)= repo.getCartproduct(id)
+    fun getFavProducts(customerId:Long) = repo.getAllFav(customerId)
+
+    //  fun getCartProductCount(id:Long)= repo.getCartproduct(id)
 
 
 

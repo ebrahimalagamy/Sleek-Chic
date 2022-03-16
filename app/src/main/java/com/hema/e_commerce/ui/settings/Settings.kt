@@ -129,6 +129,7 @@ class Settings : Fragment() {
         }
         binding.btnSignOut.setOnClickListener {
             showDialog()
+
         }
     }
 

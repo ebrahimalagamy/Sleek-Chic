@@ -17,7 +17,6 @@ class SharedPreferencesProvider(context: Context) {
         private lateinit var pref: SharedPreferences
         private lateinit var editor: SharedPreferences.Editor
         private const val PREF_NAME = "myPref"
-
         // Shared preferences for lat,lon and address
         private const val LAT_SHARED_PREF = "LAT_SHA.0,RED_PREF"
         private const val LONG_SHARED_PREF = "LONG_SHARED_PREF"
@@ -25,6 +24,7 @@ class SharedPreferencesProvider(context: Context) {
         private const val IS_FIRST_TIME_LAUNCH = "IS_FIRST_TIME_LAUNCH"
         private const val IS_SIGN_IN = "IS_SIGN_IN"
         private const val SAVED_ADDRESS_ORDER = "ORDERED_ADRESS"
+
         fun getInstance(application: Application):SharedPreferencesProvider{
             return instance ?:synchronized(Lock){
                 instance ?: SharedPreferencesProvider(application).also {

@@ -1,18 +1,23 @@
 package com.hema.e_commerce.ui.cart
 
 import android.content.SharedPreferences
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.hema.e_commerce.R
 import com.hema.e_commerce.adapter.cart.CartAdapter
+import com.hema.e_commerce.adapter.home.WishListNotificationAdapter
 import com.hema.e_commerce.databinding.CartFragmentBinding
 import com.hema.e_commerce.model.remote.currancynetwork.CurrancyRepository
 import com.hema.e_commerce.model.repository.Repository
@@ -25,14 +30,13 @@ import com.hema.e_commerce.model.viewmodels.CurrancyViewModel
 import com.hema.e_commerce.util.SharedPreferencesProvider
 
 class Cart : Fragment() {
-    lateinit var cartAdapter: CartAdapter
-    lateinit var cartFragmentBinding: CartFragmentBinding
+    private lateinit var cartAdapter: CartAdapter
+    private lateinit var cartFragmentBinding: CartFragmentBinding
     private lateinit var viewModel: CartViewModel
     private lateinit var sharedPref: SharedPreferencesProvider
     lateinit var totalPriceWithoutSimp:String
     lateinit var currancyviewModel: CurrancyViewModel
    lateinit var currancy:String
-
 
 
 
@@ -53,12 +57,14 @@ class Cart : Fragment() {
         return cartFragmentBinding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         currancy=getString(R.string.eg)
         sharedPref = SharedPreferencesProvider(requireActivity())
 
         setupRecyclerView()
+        iconBadges()
 
         viewModel.getCartProducts(sharedPref.getUserInfo().customer?.customerId?:0).observe(viewLifecycleOwner) { product ->
             if (product.isEmpty()) {
@@ -226,5 +232,31 @@ class Cart : Fragment() {
 
 
 
+    @RequiresApi(Build.VERSION_CODES.M)
+    fun iconBadges() {
+        val wishListIcon = WishListNotificationAdapter(cartFragmentBinding.favourite)
+        if (sharedPref.isSignIn) {
+            viewModel.getFavProducts(sharedPref.getUserInfo().customer?.customerId!!)
+                .observe(viewLifecycleOwner) {
+                    wishListIcon.updateView(it.size)
+                }
+        } else {
+            wishListIcon.hideNumber()
+        }
+
+        wishListIcon.Button.setOnClickListener {
+            if (sharedPref.isSignIn) {
+                findNavController().navigate(R.id.wishlist)
+            } else {
+                Snackbar.make(requireView(), R.string.sign_in_message, Snackbar.LENGTH_LONG)
+                    .apply {
+                        setAction("Sign In") {
+                            findNavController().navigate(R.id.Settings)
+                        }
+                        show()
+                    }
+            }
+        }
+    }
 
 }

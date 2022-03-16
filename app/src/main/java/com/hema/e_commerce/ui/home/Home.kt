@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
+import com.google.android.material.snackbar.Snackbar
 import com.hema.e_commerce.MainActivity
 import com.hema.e_commerce.R
 import com.hema.e_commerce.adapter.home.BrandAdapter
@@ -106,7 +107,6 @@ class Home : Fragment() {
           })
       }*/
 
-
     private fun initViews() {
         viewModel.getBrand()
         //   viewModel.getOnHomeProducts()
@@ -147,25 +147,31 @@ class Home : Fragment() {
         }
     }
 
+
     @RequiresApi(Build.VERSION_CODES.M)
     fun iconBadges() {
         val wishListIcon = WishListNotificationAdapter(binding.favourite)
-
-        if (isOnline(requireContext())) {
-            if (sharedPref.isSignIn) {
-                viewModel.getFavProducts(sharedPref.getUserInfo().customer?.customerId!!)
-                    .observe(viewLifecycleOwner, Observer {
-                        wishListIcon.updateView(it.size)
-                    })
-
-
-                wishListIcon.Button.setOnClickListener {
-                    findNavController().navigate(R.id.wishlist)
-                }
-            }
-
+        if (sharedPref.isSignIn) {
+            viewModel.getFavProducts(sharedPref.getUserInfo().customer?.customerId!!)
+                .observe(viewLifecycleOwner, Observer {
+                    wishListIcon.updateView(it.size)
+                })
         } else {
-            Toast.makeText(requireContext(), R.string.check_internet, Toast.LENGTH_SHORT).show()
+            wishListIcon.hideNumber()
+        }
+
+        wishListIcon.Button.setOnClickListener {
+            if (sharedPref.isSignIn) {
+                findNavController().navigate(R.id.wishlist)
+            } else {
+                Snackbar.make(requireView(), R.string.sign_in_message, Snackbar.LENGTH_LONG)
+                    .apply {
+                        setAction("Sign In") {
+                            navController.navigate(R.id.Settings)
+                        }
+                        show()
+                    }
+            }
         }
     }
 

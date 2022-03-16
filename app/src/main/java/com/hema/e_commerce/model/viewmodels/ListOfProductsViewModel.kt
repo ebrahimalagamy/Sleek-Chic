@@ -22,9 +22,12 @@ class ListOfProductsViewModel(private val repo: Repository,app: Application) : A
         repo.getAllProduct()
         allProduct=repo.allProduct
     }
+    fun getFavProducts(customerId:Long) = repo.getAllFav(customerId)
+
 
 /*    fun insertFav(favoriteProduct: FavoriteProduct)=repo.insert(favoriteProduct)
     fun deleteByID(id: Long)=repo.deleteOnItemFromFavByID(id)*/
+
 
 
 }

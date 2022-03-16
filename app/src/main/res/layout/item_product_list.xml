@@ -7,20 +7,15 @@
     </data>
 
     <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="3dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginBottom="7dp"
-
-        android:backgroundTint="#EDEDED"
+        android:layout_margin="5dp"
         app:cardCornerRadius="@dimen/_10sdp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent">
 
             <ImageView
@@ -28,8 +23,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="134dp"
                 android:layout_gravity="center"
-                android:scaleType="fitXY"
                 android:backgroundTint="#F1EEEE"
+                android:scaleType="fitXY"
                 android:src="@drawable/shoeskids"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -39,7 +34,6 @@
                 android:id="@+id/constraintLayout6"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:background="#FFEB3B"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -49,13 +43,12 @@
                     android:id="@+id/tv_list_sh_desc"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-
-
                     android:layout_marginStart="2dp"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginEnd="3dp"
                     android:layout_marginBottom="2dp"
                     android:text="black bag white red "
+                    android:textColor="@color/black"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/imageButton"
                     app:layout_constraintHorizontal_bias="0.057"

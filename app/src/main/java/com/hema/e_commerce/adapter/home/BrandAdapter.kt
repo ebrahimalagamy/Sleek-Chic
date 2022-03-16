@@ -59,5 +59,4 @@ class BrandAdapter(val brandList:ArrayList<SmartCollection>) : RecyclerView.Adap
 
 
 
-
 }

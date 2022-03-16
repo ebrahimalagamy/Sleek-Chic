@@ -13,8 +13,11 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.hema.e_commerce.R
 import com.hema.e_commerce.databinding.FragmentSignUpBinding
+import com.hema.e_commerce.model.dataclass.customer.Address
 import com.hema.e_commerce.model.dataclass.customer.Customer
 import com.hema.e_commerce.model.dataclass.customer.CustomerModel
+import com.hema.e_commerce.util.SharedPreferencesProvider
+import kotlin.random.Random
 
 class SignUpFragment : Fragment() {
     private lateinit var binding: FragmentSignUpBinding
@@ -22,6 +25,8 @@ class SignUpFragment : Fragment() {
     private lateinit var userEmail: String
     private lateinit var userPassword: String
     private lateinit var userConfirmPassword: String
+    lateinit var sharedPref: SharedPreferencesProvider
+
 //    private lateinit var phone: String
 
     private val viewModel by lazy {
@@ -40,6 +45,8 @@ class SignUpFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        sharedPref = SharedPreferencesProvider(requireContext())
+
         bindUi()
         bindNav()
 
@@ -47,6 +54,12 @@ class SignUpFragment : Fragment() {
 
     @RequiresApi(Build.VERSION_CODES.M)
     private fun bindNav() {
+        val id = Random.nextLong(1, 1000000)
+        val address = sharedPref.getLocation[2]
+        val lastName = ""
+        val defult :Boolean =false
+//        var lineItem: MutableList<Address> = arrayListOf()
+//        lineItem.add(Address(id,address,"","firstName","lastName","",defult,""))
         binding.btnSignUp.setOnClickListener {
             if (validateForm()) {
 
@@ -56,7 +69,8 @@ class SignUpFragment : Fragment() {
                         lastName = userPassword,
                         email = userEmail,
                         password = userPassword,
-                        passwordConfirmation = userConfirmPassword
+                        passwordConfirmation = userConfirmPassword,
+//                        addresses =lineItem
 //                        phone = phone
                     )
                 )
@@ -64,6 +78,7 @@ class SignUpFragment : Fragment() {
                 viewModel.signupSuccess.observe(viewLifecycleOwner) {
                     if (it == true) {
                         Toast.makeText(requireContext(), "Successfully", Toast.LENGTH_LONG).show()
+
                         findNavController().navigate(R.id.signInFragment)
                     } else Toast.makeText(requireContext(), "Try again", Toast.LENGTH_LONG).show()
                 }

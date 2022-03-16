@@ -85,7 +85,7 @@ class AddAddressFragment : Fragment() {
                     Address(
                         id = Random.nextLong(1, 1000000),
                         address = addressLine,
-                        city = city,
+//                        city = city,
                         firstName = firstName,
                         lastName = lastName,
                         zip = "000",
@@ -107,7 +107,7 @@ class AddAddressFragment : Fragment() {
 
     private fun validateForm(): Boolean {
         addressLine = binding.etAddressLine.text.toString()
-        city = binding.etCity.text.toString()
+//        city = binding.etCity.text.toString()
         firstName = binding.etFirstName.text.toString()
         lastName = binding.etLastName.text.toString()
         phone = binding.etPhone.text.toString()

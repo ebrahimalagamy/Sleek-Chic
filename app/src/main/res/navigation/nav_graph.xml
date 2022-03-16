@@ -175,7 +175,8 @@
     <fragment
         android:id="@+id/splashFragment"
         android:name="com.hema.e_commerce.ui.splash.SplashFragment"
-        android:label="SplashFragment">
+        android:label="SplashFragment"
+        tools:layout="@layout/fragment_splash">
         <action
             android:id="@+id/action_splashFragment_to_viewPagerFragment"
             app:destination="@id/viewPagerFragment"
@@ -190,7 +191,8 @@
     <fragment
         android:id="@+id/viewPagerFragment"
         android:name="com.hema.e_commerce.ui.splash.onBoard.ViewPagerFragment"
-        android:label="ViewPagerFragment">
+        android:label="ViewPagerFragment"
+        tools:layout="@layout/fragment_view_pager">
         <action
             android:id="@+id/action_viewPagerFragment_to_home"
             app:destination="@id/home"
@@ -251,6 +253,7 @@
     <fragment
         android:id="@+id/selectAddress"
         android:name="com.hema.e_commerce.ui.settings.address.selectaddress.SelectAddress"
-        android:label="SelectAddress" />
+        android:label="SelectAddress"
+        tools:layout="@layout/fragment_select_address"/>
 
 </navigation>
