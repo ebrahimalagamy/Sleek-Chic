@@ -41,13 +41,12 @@ class ProductFragment : Fragment() {
     lateinit var navController: NavController
     private lateinit var viewModel: SingleProductViewModel
     lateinit var currancyviewModel: CurrancyViewModel
-     lateinit var currancy:String
+    lateinit var currancy: String
     lateinit var binding: FragmentProductBinding
     private lateinit var sharedPref: SharedPreferencesProvider
     var productId: Long? = null
     lateinit var favProduct: FavoriteProduct
     var isFavBtnClicked: Boolean = false
-
 
 
     override fun onCreateView(
@@ -81,7 +80,7 @@ class ProductFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        currancy=getString(R.string.eg)
+        currancy = getString(R.string.eg)
         ProgressBarSetting().setProgress(requireActivity())
         sharedPref = SharedPreferencesProvider(requireActivity())
         productId = arguments?.getLong(PRODUCT)
@@ -109,31 +108,32 @@ class ProductFragment : Fragment() {
             var value = sharedPreferences.getString("currency", "EGP")
             when (value) {
                 "EGP" -> { //binding.tvPrice.text =
-                    currancy=getString(R.string.eg)
+                    currancy = getString(R.string.eg)
 
-                    initViews("EGP",(it.product.variants.get(0).price).toDouble() )
-                            currancyObserve()
+                    initViews("EGP", (it.product.variants.get(0).price).toDouble())
+                    currancyObserve()
                 }
                 "USA" -> {
-                    currancy=getString(R.string.us)
+                    currancy = getString(R.string.us)
 
                     //val number: Double = String.format("%.2f", usCurrancy).toDouble()
-                    initViews("USD",(it.product.variants.get(0).price).toDouble() )
+                    initViews("USD", (it.product.variants.get(0).price).toDouble())
 
                     currancyObserve()
 
                 }
                 "EUR" -> {
-                    currancy=getString(R.string.eur)
+                    currancy = getString(R.string.eur)
 
-                    initViews("EUR",(it.product.variants.get(0).price).toDouble() )
+                    initViews("EUR", (it.product.variants.get(0).price).toDouble())
 
                     currancyObserve()
-                   // binding.tvPrice.text = number.toString() + " " + getString(R.string.eur)
+                    // binding.tvPrice.text = number.toString() + " " + getString(R.string.eur)
                 }
-                else ->{
-                    initViews("EGP",(it.product.variants.get(0).price).toDouble() )
-                    currancyObserve()}
+                else -> {
+                    initViews("EGP", (it.product.variants.get(0).price).toDouble())
+                    currancyObserve()
+                }
 
             }
             binding.tvTitle.text = it.product.title
@@ -169,7 +169,6 @@ class ProductFragment : Fragment() {
                             show()
                         }
                 }
-
 
 
             }
@@ -268,20 +267,53 @@ class ProductFragment : Fragment() {
 
     }
 
-    private fun initViews( to: String,amount:Double) {
+    private fun initViews(to: String, amount: Double) {
         currancyviewModel.changeCurrancy(to, amount)
     }
 
-    fun currancyObserve(){
-        currancyviewModel.currancyLiveData.observeForever{
-val number: Double = String.format("%.2f", it.result).toDouble()
-           binding.tvPrice.text=number.toString()+currancy
-
-
+    fun currancyObserve() {
+        currancyviewModel.currancyLiveData.observeForever {
+            val number: Double = String.format("%.2f", it.result).toDouble()
+            binding.tvPrice.text = number.toString() + currancy
 
 
         }
 
+        fun back() {
+            binding.ivBack.setOnClickListener {
+                findNavController().popBackStack()
+            }
+        }
+
+        @RequiresApi(Build.VERSION_CODES.M)
+        fun iconBadges() {
+            val wishListIcon = WishListNotificationAdapter(binding.favourite)
+            if (sharedPref.isSignIn) {
+                viewModel.getFavProducts(sharedPref.getUserInfo().customer?.customerId!!)
+                    .observe(viewLifecycleOwner) {
+                        wishListIcon.updateView(it.size)
+                    }
+            } else {
+                wishListIcon.hideNumber()
+            }
+
+            wishListIcon.Button.setOnClickListener {
+                if (sharedPref.isSignIn) {
+                    findNavController().navigate(R.id.wishlist)
+                } else {
+                    Snackbar.make(requireView(), R.string.sign_in_message, Snackbar.LENGTH_LONG)
+                        .apply {
+                            setAction("Sign In") {
+                                navController.navigate(R.id.Settings)
+                            }
+                            show()
+                        }
+                }
+            }
+        }
+
+
+    }
     fun back(){
         binding.ivBack.setOnClickListener {
             findNavController().popBackStack()
@@ -314,6 +346,4 @@ val number: Double = String.format("%.2f", it.result).toDouble()
             }
         }
     }
-
-
-}}
+}
