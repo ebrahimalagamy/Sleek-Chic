@@ -142,6 +142,7 @@ class ProductFragment : Fragment() {
                 }
 
 
+
             }
 
             //favorite function
@@ -214,12 +215,12 @@ class ProductFragment : Fragment() {
 
     private fun checkWishListStored(id: Long) {
         viewModel.getOneItemFromRoom(id, sharedPref.getUserInfo().customer?.customerId!!)
-            .observe(viewLifecycleOwner) {
+            .observe(viewLifecycleOwner, Observer {
                 if (it != null) {
                     isFavBtnClicked = true
                     setStoredButton(isFavBtnClicked)
                 }
-            }
+            })
     }
 
     private fun setStoredButton(isFavBtnClicked: Boolean) {

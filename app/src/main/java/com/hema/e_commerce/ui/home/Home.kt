@@ -175,6 +175,5 @@ class Home : Fragment() {
         }
     }
 
+
 }
-
-
