@@ -2,7 +2,6 @@ package com.hema.e_commerce.util
 
 object Constant {
     const val BASE_URL = "https://jets-ismailia.myshopify.com/admin/api/2022-01/"
-
     //location request
     const val LOCATION_REQUEST_CODE = 0
 
