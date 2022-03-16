@@ -1,16 +1,19 @@
 package com.hema.e_commerce.ui.typelistofproduct
 
+import android.os.Build
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
 import android.view.*
-import android.widget.AdapterView
+import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.hema.e_commerce.R
+import com.hema.e_commerce.adapter.home.WishListNotificationAdapter
 import com.hema.e_commerce.adapter.productList.TypeListAdapter
 import com.hema.e_commerce.databinding.FragmentTypeListProductBinding
 import com.hema.e_commerce.model.dataclass.allProducts.Product
@@ -23,6 +26,7 @@ import com.hema.e_commerce.util.Constant.BRAND_KEY
 import com.hema.e_commerce.util.Constant.FLAG
 import com.hema.e_commerce.util.Constant.SUB_COLLECTION_ID
 import com.hema.e_commerce.util.Constant.SUB_COLLECTION_NAME
+import com.hema.e_commerce.util.SharedPreferencesProvider
 
 
 class TypeListProductsFragment : Fragment() {
@@ -32,6 +36,8 @@ class TypeListProductsFragment : Fragment() {
      var collectionsId:Long =398033617127
     lateinit var subCollectionsName:String
     lateinit var brandName:String
+    private lateinit var sharedPref: SharedPreferencesProvider
+
 
     lateinit  var productList:List<Product>
     lateinit   var list: MutableList<Product>
@@ -52,8 +58,11 @@ class TypeListProductsFragment : Fragment() {
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        sharedPref = SharedPreferencesProvider(requireActivity())
+
 
         ProgressBarSetting().setProgress(requireActivity())
         val flag = arguments?.get(FLAG)
@@ -64,6 +73,9 @@ class TypeListProductsFragment : Fragment() {
         }else if(flag == 1){
             BrandList()
         }
+        iconBadges()
+        back()
+
 
 
     }
@@ -135,6 +147,39 @@ fun BrandList(){
         viewModel.getProducts()
     }
 
+
+    @RequiresApi(Build.VERSION_CODES.M)
+    fun iconBadges() {
+        val wishListIcon = WishListNotificationAdapter(binding.favourite)
+        if (sharedPref.isSignIn) {
+            viewModel.getFavProducts(sharedPref.getUserInfo().customer?.customerId!!)
+                .observe(viewLifecycleOwner) {
+                    wishListIcon.updateView(it.size)
+                }
+        } else {
+            wishListIcon.hideNumber()
+        }
+
+        wishListIcon.Button.setOnClickListener {
+            if (sharedPref.isSignIn) {
+                findNavController().navigate(R.id.wishlist)
+            } else {
+                Snackbar.make(requireView(), R.string.sign_in_message, Snackbar.LENGTH_LONG)
+                    .apply {
+                        setAction("Sign In") {
+                            findNavController().navigate(R.id.Settings)
+                        }
+                        show()
+                    }
+            }
+        }
+    }
+    fun back(){
+        binding.ivBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
+    }
+
 //////////////////////////////////////////////////////////
    /* fun filter(){
     binding.spinner2.onItemSelectedListener=object : AdapterView.OnItemSelectedListener{
@@ -162,6 +207,5 @@ fun BrandList(){
 
     }
     }*/
-
 
 }

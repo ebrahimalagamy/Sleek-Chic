@@ -59,6 +59,10 @@ class TypeListAdapter(private val productList: List<Product>,private val viewMod
             navController.navigate(R.id.productFragment,bundle)
 
         }
+        holder.itemBinding.imageButton.setOnClickListener {
+
+
+        }
 
      /*   holder.itemBinding.imageButton.setOnClickListener {
             isFavBtnClicked = if (isFavBtnClicked) {
@@ -79,6 +83,8 @@ class TypeListAdapter(private val productList: List<Product>,private val viewMod
     override fun getItemCount(): Int {
         return productList.size
     }
+
+
 
 
 /*

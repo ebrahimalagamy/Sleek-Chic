@@ -238,6 +238,7 @@ class ProductFragment : Fragment() {
         }
 
     }
+
     fun back(){
         binding.ivBack.setOnClickListener {
             findNavController().popBackStack()
