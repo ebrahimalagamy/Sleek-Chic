@@ -99,9 +99,9 @@ class SelectAddress : Fragment() {
 //        binding.btnAddAddress.setOnClickListener {
 //            findNavController().navigate(R.id.action_address_to_addAddressFragment)
 //        }
-//        binding.ivBack.setOnClickListener {
-//            findNavController().popBackStack()
-//        }
+        binding.ivBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
 
 
     }

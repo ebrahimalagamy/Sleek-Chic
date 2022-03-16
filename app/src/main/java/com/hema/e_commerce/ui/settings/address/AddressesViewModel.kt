@@ -21,16 +21,14 @@ import kotlinx.coroutines.withContext
 
 class AddressesViewModel(application: Application, val AuthRepo: AuthRepo) :
     AndroidViewModel(application) {
-      var list:MutableLiveData<AddressArray> = MutableLiveData()
-    val pref:SharedPreferencesProvider= SharedPreferencesProvider(application.applicationContext)
-    init {
+    var list: MutableLiveData<AddressArray> = MutableLiveData()
+    val pref: SharedPreferencesProvider = SharedPreferencesProvider(application.applicationContext)
 
-    }
     @RequiresApi(Build.VERSION_CODES.M)
-    fun delete(id:Long){
-        val job =  viewModelScope.launch(Dispatchers.IO) {
+    fun delete(id: Long) {
+        val job = viewModelScope.launch(Dispatchers.IO) {
             when (val response: Either<AddressModel, LoginErrors> = AuthRepo.removeAddress(id)
-            ){
+            ) {
                 is Either.Error -> when (response.errorCode) {
                     LoginErrors.ConnectionFiled -> {
                         withContext(Dispatchers.Main) {
@@ -43,7 +41,7 @@ class AddressesViewModel(application: Application, val AuthRepo: AuthRepo) :
                         }
                     }
                     LoginErrors.ServerError -> {
-                        withContext(Dispatchers.Main){
+                        withContext(Dispatchers.Main) {
                             Toast.makeText(
                                 getApplication(),
                                 "Server Error" + response.message,
@@ -64,7 +62,7 @@ class AddressesViewModel(application: Application, val AuthRepo: AuthRepo) :
                     }
                 }
                 is Either.Success -> {
-                    Log.d("ADDRESSES","address deleted")
+                    Log.d("ADDRESSES", "address deleted")
 
 
                 }
@@ -74,11 +72,12 @@ class AddressesViewModel(application: Application, val AuthRepo: AuthRepo) :
         }
 
     }
+
     @RequiresApi(Build.VERSION_CODES.M)
-    fun getAdressesList(){
-       val job =  viewModelScope.launch(Dispatchers.IO) {
+    fun getAdressesList() {
+        val job = viewModelScope.launch(Dispatchers.IO) {
             when (val response: Either<AddressArray, LoginErrors> = AuthRepo.getAddress()
-            ){
+            ) {
                 is Either.Error -> when (response.errorCode) {
                     LoginErrors.ConnectionFiled -> {
                         withContext(Dispatchers.Main) {
@@ -91,7 +90,7 @@ class AddressesViewModel(application: Application, val AuthRepo: AuthRepo) :
                         }
                     }
                     LoginErrors.ServerError -> {
-                        withContext(Dispatchers.Main){
+                        withContext(Dispatchers.Main) {
                             Toast.makeText(
                                 getApplication(),
                                 "Server Error" + response.message,
@@ -112,10 +111,12 @@ class AddressesViewModel(application: Application, val AuthRepo: AuthRepo) :
                     }
                 }
                 is Either.Success -> {
-                    Log.d("ADDRESSES","list of addresses have been received")
+                    Log.d("ADDRESSES", "list of addresses have been received")
                     list.postValue(response.data!!)
                     if (pref.getAddress() == null)
-                        pref.saveAddress(response.data.addresses?.get(0)!!)
+                        if (response.data.addresses!!.isNotEmpty()) {
+                            pref.saveAddress(response.data.addresses?.get(0)!!)
+                        }
 
                 }
 
@@ -149,4 +150,4 @@ class AddressesViewModel(application: Application, val AuthRepo: AuthRepo) :
             )[AddressesViewModel::class.java]
         }
     }
-    }
+}

@@ -127,6 +127,10 @@
     <string name="alertdelteMessage">Do you want delete order?</string>
     <string name="product_details">Product Details</string>
     <string name="shopping_bag">Shopping Bag</string>
+    <string name="select">Select</string>
+    <string name="address_line">Address Line</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
 
 
     <!-- filter -->
