@@ -2,6 +2,7 @@ package com.hema.e_commerce.adapter.cart
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.provider.Settings.Global.getString
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -16,10 +17,13 @@ import com.hema.e_commerce.databinding.ItemCartBinding
 import com.hema.e_commerce.model.room.cartroom.CartProductData
 import com.hema.e_commerce.model.room.favoriteRoom.FavoriteProduct
 import com.hema.e_commerce.model.viewmodels.CartViewModel
+import com.hema.e_commerce.model.viewmodels.CurrancyViewModel
 import com.hema.e_commerce.util.SharedPreferencesProvider
 
-class CartAdapter(private val cartViewModel: CartViewModel,private val context: Context) : RecyclerView.Adapter<CartAdapter.ViewHolder>() {
+class CartAdapter(private val currencyViewModel: CurrancyViewModel,private val cartViewModel: CartViewModel,private val context: Context) : RecyclerView.Adapter<CartAdapter.ViewHolder>() {
     private lateinit var sharedPref: SharedPreferencesProvider
+    var currancy=context.getString(R.string.eg)
+
 
     inner class ViewHolder(itemCartBinding: ItemCartBinding) :
         RecyclerView.ViewHolder(itemCartBinding.root) {
@@ -51,56 +55,33 @@ class CartAdapter(private val cartViewModel: CartViewModel,private val context: 
         var value = sharedPreferences.getString("currency", "EGP")
         when (value) {
             "EGP" -> {
-                holder.itemCartBinding.price.text =
-                    differ.currentList[position].price + " " + holder.itemCartBinding.minCount.context.getString(
-                        R.string.eg
-                    )
-                Log.i(
-                    "currancyyyyyy",
-                    "onBindViewHolder: " + differ.currentList[position].price + " " + holder.itemCartBinding.minCount.context.getString(
-                        R.string.eg
-                    )
-                )
+                    currancy=context.getString(R.string.eg)
+
+                initViews("EGP",(differ.currentList[position].price).toDouble() )
+                currancyObserve(holder)
 
             }
             "USA" -> {
-                var usCurrancy = ((differ.currentList[position].price).toDouble() / (15.71))
-                val number: Double = String.format("%.2f", usCurrancy).toDouble()
-                holder.itemCartBinding.price.text =
-                    number.toString() + " " + holder.itemCartBinding.minCount.context.getString(R.string.us)
-                Log.i(
-                    "currancyyyyyy",
-                    "onBindViewHolder: " + number.toString() + " " + holder.itemCartBinding.minCount.context.getString(
-                        R.string.us
-                    )
-                )
+                currancy=context.getString(R.string.us)
 
+                //val number: Double = String.format("%.2f", usCurrancy).toDouble()
+                initViews("USD",(differ.currentList[position].price).toDouble() )
+
+                currancyObserve(holder)
 
             }
             "EUR" -> {
-                var ureCurrancy = ((differ.currentList[position].price).toDouble() / (17.10))
-                val number: Double = String.format("%.2f", ureCurrancy).toDouble()
-                holder.itemCartBinding.price.text =
-                    number.toString() + " " + holder.itemCartBinding.minCount.context.getString(R.string.eur)
+                currancy=context.getString(R.string.eur)
 
-                Log.i(
-                    "currancyyyyyy",
-                    "onBindViewHolder: " + number.toString() + " " + holder.itemCartBinding.minCount.context.getString(
-                        R.string.eur
-                    )
-                )
+                initViews("EUR",(differ.currentList[position].price).toDouble() )
+
+                currancyObserve(holder)
             }
             else -> {
-                holder.itemCartBinding.price.text =
-                    differ.currentList[position].price + " " + holder.itemCartBinding.minCount.context.getString(
-                        R.string.eg
-                    )
-                Log.i(
-                    "currancyyyyyy",
-                    "onBindViewHolder: else " + differ.currentList[position].price + " " + holder.itemCartBinding.minCount.context.getString(
-                        R.string.eg
-                    )
-                )
+                currancy=context.getString(R.string.eg)
+
+                initViews("EGP",(differ.currentList[position].price).toDouble() )
+                currancyObserve(holder)
             }
         }
         holder.itemCartBinding.copoun.text = "free delevery"
@@ -175,6 +156,7 @@ class CartAdapter(private val cartViewModel: CartViewModel,private val context: 
 
 
 
+
     // util to see only change in articles to refresh it only not like we give list and we refresh all list
     private val differCallBack = object : DiffUtil.ItemCallback<CartProductData>(){
         override fun areItemsTheSame(oldItem: CartProductData,newItem:CartProductData):Boolean{
@@ -187,6 +169,21 @@ class CartAdapter(private val cartViewModel: CartViewModel,private val context: 
 
     //Async list differ take two list and compare them to change the difference only it run on background
     val differ= AsyncListDiffer(this,differCallBack)
+//currancy
 
 
-}
+    private fun initViews( to: String,amount:Double) {
+        currencyViewModel.changeCurrancy(to, amount)
+    }
+
+    fun currancyObserve(holder: ViewHolder){
+        currencyViewModel.currancyLiveData.observeForever{
+
+
+            val number: Double = String.format("%.2f", it.result).toDouble()
+            holder.itemCartBinding.price.text =number.toString()+currancy
+
+
+        }
+
+    }}

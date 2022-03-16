@@ -10,6 +10,7 @@ import com.hema.e_commerce.model.dataclass.singleproduct.ProductCollectionRespon
 import com.hema.e_commerce.model.dataclass.smartCollection.BrandsResponce
 import com.hema.e_commerce.model.dataclass.test.Order
 import com.hema.e_commerce.model.dataclass.test.OrderResponce
+import com.hema.e_commerce.model.dataclass.currancy.CurrancyResponse
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -89,6 +90,10 @@ interface ShopifyApi {
 
     @DELETE("orders/{order_id}.json")
     suspend fun deleteAnOrder(@Path("order_id") id: Long): Response<String>
+
+
+
+
 
 }
 

@@ -19,11 +19,14 @@ import com.google.android.material.snackbar.Snackbar
 import com.hema.e_commerce.R
 import com.hema.e_commerce.adapter.singleProduct.ProductAdapter
 import com.hema.e_commerce.databinding.FragmentProductBinding
+import com.hema.e_commerce.model.remote.currancynetwork.CurrancyRepository
 import com.hema.e_commerce.model.repository.Repository
 import com.hema.e_commerce.model.room.RoomData
 import com.hema.e_commerce.model.room.cartroom.CartProductData
 import com.hema.e_commerce.model.room.favoriteRoom.FavoriteProduct
+import com.hema.e_commerce.model.viewModelFactory.CurrancyViewModelFactory
 import com.hema.e_commerce.model.viewModelFactory.SingleProductViewModelFactory
+import com.hema.e_commerce.model.viewmodels.CurrancyViewModel
 import com.hema.e_commerce.model.viewmodels.SingleProductViewModel
 import com.hema.e_commerce.ui.progresspar.ProgressBarSetting
 import com.hema.e_commerce.util.Constant.FAVORITE
@@ -34,13 +37,13 @@ import com.hema.e_commerce.util.SharedPreferencesProvider
 class ProductFragment : Fragment() {
     lateinit var navController: NavController
     private lateinit var viewModel: SingleProductViewModel
+    lateinit var currancyviewModel: CurrancyViewModel
+     lateinit var currancy:String
     lateinit var binding: FragmentProductBinding
     private lateinit var sharedPref: SharedPreferencesProvider
-
     var productId: Long? = null
     lateinit var favProduct: FavoriteProduct
     var isFavBtnClicked: Boolean = false
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,18 +52,30 @@ class ProductFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_product, container, false)
         val repository = Repository(RoomData(requireContext()))
+
         val singleProductsViewModelProviderFactory =
             SingleProductViewModelFactory(requireActivity().application, repository)
+
+        val CurrancyViewModelFactory =
+            CurrancyViewModelFactory(requireActivity().application, CurrancyRepository())
+
         viewModel = ViewModelProvider(
             this,
             singleProductsViewModelProviderFactory
         )[SingleProductViewModel::class.java]
+
+        currancyviewModel = ViewModelProvider(
+            this,
+            CurrancyViewModelFactory
+        )[CurrancyViewModel::class.java]
+
         return binding.root
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        currancy=getString(R.string.eg)
         ProgressBarSetting().setProgress(requireActivity())
         sharedPref = SharedPreferencesProvider(requireActivity())
         productId = arguments?.getLong(PRODUCT)
@@ -94,21 +109,32 @@ class ProductFragment : Fragment() {
                 requireContext().getSharedPreferences("currency", 0)
             var value = sharedPreferences.getString("currency", "EGP")
             when (value) {
-                "EGP" -> binding.tvPrice.text =
-                    it.product.variants.get(0).price + " " + getString(R.string.eg)
+                "EGP" -> { //binding.tvPrice.text =
+                    currancy=getString(R.string.eg)
+
+                    initViews("EGP",(it.product.variants.get(0).price).toDouble() )
+                            currancyObserve()
+                }
                 "USA" -> {
-                    var usCurrancy = ((it.product.variants.get(0).price).toDouble() / (15.71))
-                    val number: Double = String.format("%.2f", usCurrancy).toDouble()
-                    binding.tvPrice.text = number.toString() + " " + "$"
+                    currancy=getString(R.string.us)
+
+                    //val number: Double = String.format("%.2f", usCurrancy).toDouble()
+                    initViews("USD",(it.product.variants.get(0).price).toDouble() )
+
+                    currancyObserve()
 
                 }
                 "EUR" -> {
-                    var ureCurrancy = ((it.product.variants.get(0).price).toDouble() / (17.10))
-                    val number: Double = String.format("%.2f", ureCurrancy).toDouble()
-                    binding.tvPrice.text = number.toString() + " " + getString(R.string.eur)
+                    currancy=getString(R.string.eur)
+
+                    initViews("EUR",(it.product.variants.get(0).price).toDouble() )
+
+                    currancyObserve()
+                   // binding.tvPrice.text = number.toString() + " " + getString(R.string.eur)
                 }
-                else -> binding.tvPrice.text =
-                    it.product.variants.get(0).price + " " + getString(R.string.eg)
+                else ->{
+                    initViews("EGP",(it.product.variants.get(0).price).toDouble() )
+                    currancyObserve()}
 
             }
             binding.tvTitle.text = it.product.title
@@ -242,5 +268,20 @@ class ProductFragment : Fragment() {
 
     }
 
+    private fun initViews( to: String,amount:Double) {
+        currancyviewModel.changeCurrancy(to, amount)
+    }
 
-}
+    fun currancyObserve(){
+        currancyviewModel.currancyLiveData.observeForever{
+val number: Double = String.format("%.2f", it.result).toDouble()
+           binding.tvPrice.text=number.toString()+currancy
+
+
+
+
+        }
+
+
+
+}}

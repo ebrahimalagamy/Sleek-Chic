@@ -14,11 +14,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.hema.e_commerce.R
 import com.hema.e_commerce.adapter.cart.CartAdapter
 import com.hema.e_commerce.databinding.CartFragmentBinding
+import com.hema.e_commerce.model.remote.currancynetwork.CurrancyRepository
 import com.hema.e_commerce.model.repository.Repository
 import com.hema.e_commerce.model.room.RoomData
 import com.hema.e_commerce.model.room.cartroom.CartProductData
 import com.hema.e_commerce.model.viewModelFactory.CartViewModelFactory
+import com.hema.e_commerce.model.viewModelFactory.CurrancyViewModelFactory
 import com.hema.e_commerce.model.viewmodels.CartViewModel
+import com.hema.e_commerce.model.viewmodels.CurrancyViewModel
 import com.hema.e_commerce.util.SharedPreferencesProvider
 
 class Cart : Fragment() {
@@ -27,6 +30,10 @@ class Cart : Fragment() {
     private lateinit var viewModel: CartViewModel
     private lateinit var sharedPref: SharedPreferencesProvider
     lateinit var totalPriceWithoutSimp:String
+    lateinit var currancyviewModel: CurrancyViewModel
+   lateinit var currancy:String
+
+
 
 
     override fun onCreateView(
@@ -38,13 +45,17 @@ class Cart : Fragment() {
         val repository = Repository(RoomData(requireContext()))
         val cartViewModelProviderFactory =
             CartViewModelFactory(requireActivity().application, repository)
+        val currancyViewModelFactory =
+            CurrancyViewModelFactory(requireActivity().application, CurrancyRepository())
         viewModel = ViewModelProvider(this, cartViewModelProviderFactory)[CartViewModel::class.java]
+        currancyviewModel = ViewModelProvider(this, currancyViewModelFactory)[CurrancyViewModel::class.java]
 
         return cartFragmentBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        currancy=getString(R.string.eg)
         sharedPref = SharedPreferencesProvider(requireActivity())
 
         setupRecyclerView()
@@ -68,51 +79,61 @@ class Cart : Fragment() {
                     requireContext().getSharedPreferences("currency", 0)
                 when (sharedPreferences.getString("currency", "EGP")) {
                     "EGP" -> {
-                        cartFragmentBinding.textTotalprice.text =
-                            totalCalc(product).toString() + " " + getString(R.string.eg)
+                        currancy=requireContext().getString(R.string.eg)
 
-                        cartFragmentBinding.tvSubTotal.text =
-                            totalCalc(product).toString() + " " + getString(R.string.eg)
+                        initViews("EGP",(totalCalc(product)) )
+                        currancyObserve()
+
+///
+                        initViews("EGP",((totalCalc(product))) )
+
+                        subObserve()
 
                         totalPriceWithoutSimp = totalCalc(product).toString()
 
                     }
                     "USA" -> {
-                        val usCurrancy = ((totalCalc(product).toString()).toDouble() / (15.71))
-                        val number: Double = String.format("%.2f", usCurrancy).toDouble()
-                        cartFragmentBinding.textTotalprice.text =
-                            number.toString() + " " + getString(R.string.us)
-                        //
-                        val usCurrancySub = ((totalCalc(product).toString()).toDouble() / (15.71))
-                        val numberSub: Double = String.format("%.2f", usCurrancySub).toDouble()
-                        cartFragmentBinding.tvSubTotal.text =
-                            numberSub.toString() + " " + getString(R.string.us)
+                        currancy=requireContext().getString(R.string.us)
 
-                        totalPriceWithoutSimp = number.toString()
+                        //val number: Double = String.format("%.2f", usCurrancy).toDouble()
+                        initViews("USD",((totalCalc(product))) )
+
+                        currancyObserve()
+
+
+
+
+                        //
+                        initViews("USD",(totalCalc(product)))
+                        subObserve()
+                     //   totalPriceWithoutSimp = number.toString()
 
 
                     }
                     "EUR" -> {
-                        val ureCurrancy = ((totalCalc(product).toString()).toDouble() / (17.10))
-                        val number: Double = String.format("%.2f", ureCurrancy).toDouble()
-                        cartFragmentBinding.textTotalprice.text =
-                            number.toString() + " " + getString(R.string.eur)
+                        currancy=requireContext().getString(R.string.eur)
+
+                        initViews("EUR",(totalCalc(product)))
+                        currancyObserve()
                         //
 
-                        val ureCurrancySub = ((totalCalc(product).toString()).toDouble() / (17.10))
-                        val numberSub: Double = String.format("%.2f", ureCurrancySub).toDouble()
-                        cartFragmentBinding.tvSubTotal.text =
-                            numberSub.toString() + " " + getString(R.string.eur)
-                        totalPriceWithoutSimp = number.toString()
+                        initViews("EUR",(totalCalc(product)))
+                        subObserve()
+                        //
+                       // totalPriceWithoutSimp = number.toString()
 
                     }
                     else -> {
-                        cartFragmentBinding.textTotalprice.text =
-                            totalCalc(product).toString() + " " + getString(R.string.eg)
-                        cartFragmentBinding.tvSubTotal.text =
-                            totalCalc(product).toString() + " " + getString(R.string.eg)
+                        currancy=requireContext().getString(R.string.eg)
+
+                        initViews("EGP",(totalCalc(product)) )
+                        currancyObserve()
+                        //
+                        initViews("EGP",(totalCalc(product)) )
+                        subObserve()
 
                         totalPriceWithoutSimp = totalCalc(product).toString()
+
 
 
                     }
@@ -159,11 +180,51 @@ class Cart : Fragment() {
     }
     private fun setupRecyclerView() {
 
-        cartAdapter = CartAdapter(viewModel,requireContext())
+        cartAdapter = CartAdapter(currancyviewModel,viewModel,requireContext())
         cartFragmentBinding.cartRec.apply {
             adapter = cartAdapter
             layoutManager = LinearLayoutManager(context)
         }
     }
+
+    private fun initViews( to: String,amount:Double) {
+        currancyviewModel.changeCurrancy(to, amount)
+    }
+
+    fun currancyObserve(){
+        currancyviewModel.currancyLiveData.observeForever{
+            //
+            val number: Double = String.format("%.2f", it.result).toDouble()
+            cartFragmentBinding.textTotalprice.text=number.toString()+currancy
+            //
+//             cartFragmentBinding.textTotalprice.text=it.result.toString()+currancy
+            totalPriceWithoutSimp = it.result.toString()+currancy
+
+
+
+
+        }
+
+
+}
+
+
+    fun subObserve(){
+        currancyviewModel.currancyLiveData.observeForever{
+//
+
+
+            val number: Double = String.format("%.2f", it.result).toDouble()
+            cartFragmentBinding.tvSubTotal.text =number.toString()+currancy
+            //
+            totalPriceWithoutSimp = it.result.toString()+currancy
+
+
+
+
+        }}
+
+
+
 
 }
