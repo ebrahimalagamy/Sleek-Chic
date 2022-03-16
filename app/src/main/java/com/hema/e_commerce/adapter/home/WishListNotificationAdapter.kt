@@ -16,4 +16,9 @@ class WishListNotificationAdapter(view: View) {
         else
             wishListCounter.visibility = View.INVISIBLE
     }
+
+    fun hideNumber(){
+            wishListCounter.visibility = View.INVISIBLE
+    }
+
 }

@@ -158,6 +158,7 @@ class MainActivity : AppCompatActivity() {
             grantResults = grantResults
         )
     }
+
     lateinit  var cartBadge: BadgeDrawable
     @RequiresApi(Build.VERSION_CODES.M)
     fun cartIconBadge() {

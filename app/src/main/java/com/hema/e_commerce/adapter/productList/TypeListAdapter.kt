@@ -56,7 +56,11 @@ class TypeListAdapter(private val productList: List<Product>,private val viewMod
 
         holder.itemView.setOnClickListener{
             val bundle = bundleOf(PRODUCT to  products.id)
-            navController.navigate(R.id.action_typeListProductFragment2_to_productFragment,bundle)
+            navController.navigate(R.id.productFragment,bundle)
+
+        }
+        holder.itemBinding.imageButton.setOnClickListener {
+
 
         }
 
@@ -79,6 +83,8 @@ class TypeListAdapter(private val productList: List<Product>,private val viewMod
     override fun getItemCount(): Int {
         return productList.size
     }
+
+
 
 
 /*
