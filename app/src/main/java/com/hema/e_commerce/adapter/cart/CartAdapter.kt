@@ -180,8 +180,7 @@ class CartAdapter(private val currencyViewModel: CurrancyViewModel,private val c
         currencyViewModel.currancyLiveData.observeForever{
 
 
-            val number: Double = String.format("%.2f", it.result).toDouble()
-            holder.itemCartBinding.price.text =number.toString()+currancy
+            holder.itemCartBinding.price.text =String.format("%.2f", it.result)+currancy
 
 
         }

@@ -200,11 +200,10 @@ class Cart : Fragment() {
     fun currancyObserve(){
         currancyviewModel.currancyLiveData.observeForever{
             //
-            val number: Double = String.format("%.2f", it.result).toDouble()
-            cartFragmentBinding.textTotalprice.text=number.toString()+currancy
+            cartFragmentBinding.textTotalprice.text=String.format("%.2f", it.result)+currancy
             //
 //             cartFragmentBinding.textTotalprice.text=it.result.toString()+currancy
-            totalPriceWithoutSimp = it.result.toString()+currancy
+            totalPriceWithoutSimp = String.format("%.2f", it.result)+currancy
 
 
 
@@ -220,10 +219,9 @@ class Cart : Fragment() {
 //
 
 
-            val number: Double = String.format("%.2f", it.result).toDouble()
-            cartFragmentBinding.tvSubTotal.text =number.toString()+currancy
+            cartFragmentBinding.tvSubTotal.text = String.format("%.2f", it.result)+currancy
             //
-            totalPriceWithoutSimp = it.result.toString()+currancy
+            totalPriceWithoutSimp =  String.format("%.2f", it.result)+currancy
 
 
 

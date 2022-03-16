@@ -273,8 +273,8 @@ class ProductFragment : Fragment() {
 
     fun currancyObserve() {
         currancyviewModel.currancyLiveData.observeForever {
-            val number: Double = String.format("%.2f", it.result).toDouble()
-            binding.tvPrice.text = number.toString() + currancy
+          //  val number: Float = String.format("%.2f", it.result).toFloat()
+            binding.tvPrice.text =  String.format("%.2f", it.result) + currancy
 
 
         }

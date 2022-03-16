@@ -137,8 +137,9 @@ class WishListAdapter(private val currencyViewModel: CurrancyViewModel, val cont
     fun currancyObserve(holder:ViewHolder){
         currencyViewModel.currancyLiveData.observeForever{
 
-            val number: Double = String.format("%.2f", it.result).toDouble()
-            holder.binding.tvPrice.text =number.toString()+currancy
+           // val number: Float = String.format("%.2f", it.result).toFloat()
+            holder.binding.tvPrice.text =String.format("%.2f", it.result)+currancy
+
 
 
         }
