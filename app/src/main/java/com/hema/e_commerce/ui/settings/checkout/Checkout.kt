@@ -19,7 +19,6 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.hema.e_commerce.R
 import com.hema.e_commerce.databinding.FragmentCheckoutBinding
 import com.hema.e_commerce.model.dataclass.test.LineItem
-import com.hema.e_commerce.model.dataclass.test.Order
 import com.hema.e_commerce.model.repository.Repository
 import com.hema.e_commerce.model.room.RoomData
 import com.hema.e_commerce.model.room.orderroom.OrderData
@@ -42,10 +41,6 @@ class Checkout : Fragment() {
     private lateinit var viewModel: CheckoutViewModel
     private lateinit var config: PayPalConfiguration
     private lateinit var sharedPref: SharedPreferencesProvider
-
-    private val vm by lazy {
-        CheckOuttViewModel.create(this)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -94,9 +89,18 @@ class Checkout : Fragment() {
     private fun bindUI() {
         val orderId = Random.nextLong(1000000, 10000000)
         val address = sharedPref.getAddress()
-        val customerName = address?.firstName?:"Select Address"
-        val customerAddress = address?.address1?:""
-        val customerPhone = address?.phone?:""
+
+        var customerName = address?.firstName
+        var customerAddress = address?.address1
+        var customerPhone = address?.phone
+        if (customerName!!.isEmpty()){
+            customerName = sharedPref.getUserInfo().customer?.firstName
+        }else if(customerAddress!!.isEmpty()){
+
+            customerAddress = sharedPref.getLocation[2]
+        }else if (customerPhone!!.isEmpty()){
+            customerPhone = sharedPref.getUserInfo().customer?.phone
+        }
 
         binding.tvCustomerAddress.text = customerAddress
         binding.tvCustomerName.text = customerName
@@ -105,10 +109,10 @@ class Checkout : Fragment() {
         var paymentMethod: String? = null
         val totalPrice = binding.tvTotalPrice.text.toString()
 
-        var lineItem: MutableList<LineItem> = arrayListOf()
-        val id = 7604694319335
-
-        lineItem.add(LineItem(1, id.toInt()))
+//        var lineItem: MutableList<LineItem> = arrayListOf()
+//        val id = 7604694319335
+//
+//        lineItem.add(LineItem(1, id.toInt()))
 
 
         binding.btnOrder.setOnClickListener {
@@ -118,9 +122,6 @@ class Checkout : Fragment() {
                 paymentMethod = btn.text.toString()
             }
 
-            if (customerAddress.isNotEmpty() ||customerName.isNotEmpty()||customerPhone.isNotEmpty() ){
-
-
             when (paymentMethod) {
                 getString(R.string.pay_with_cash) -> {
                     MaterialAlertDialogBuilder(requireActivity())
@@ -128,14 +129,18 @@ class Checkout : Fragment() {
                         .setMessage(getString(R.string.do_you_want_confirm_your_order))
                         .setPositiveButton(getString(R.string.ok)) { _, _ ->
                             viewModel.deleteALL(sharedPref.getUserInfo().customer?.customerId!!)
-                            Toast.makeText(requireActivity(), getString(R.string.confirmed), Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                requireActivity(),
+                                getString(R.string.confirmed),
+                                Toast.LENGTH_SHORT
+                            ).show()
                             CoroutineScope(Dispatchers.IO).launch {
                                 viewModel.addOrder(
                                     OrderData(
                                         orderId,
                                         sharedPref.getUserInfo().customer?.customerId,
                                         totalPrice,
-                                        customerName,
+                                        customerName!!,
                                         customerAddress!!,
                                         customerPhone!!,
                                         paymentMethod!!,
@@ -178,39 +183,33 @@ class Checkout : Fragment() {
                 }
 
             }
-            }else{
-                Toast.makeText(
-                    requireActivity(),
-                   "Add Information Address",
-                    Toast.LENGTH_LONG
-                ).show()
-            }
+
         }
 
 
-        binding.btnOrderRepo.setOnClickListener {
-            val order =
-                Order(
-//                    billing_address = null,
-//                    discount_codes =null ,
-                    email = sharedPref.getUserInfo().customer?.email.toString(),
-                    financial_status = "cash",
-                    line_items = lineItem,
-                    phone = sharedPref.getUserInfo().customer?.phone.toString()
-//                    shipping_address = ,
-//                    transactions =
-
-
-                )
-
-            vm.postOrder(order)
-            vm.orderSuccess.observe(viewLifecycleOwner) {
-                if (it == true) {
-                    Toast.makeText(requireContext(), "Successfully", Toast.LENGTH_LONG).show()
-//                    findNavController().navigate(R.id.signInFragment)
-                } else Toast.makeText(requireContext(), "Try again", Toast.LENGTH_LONG).show()
-            }
-        }
+//        binding.btnOrderRepo.setOnClickListener {
+//            val order =
+//                Order(
+////                    billing_address = null,
+////                    discount_codes =null ,
+//                    email = sharedPref.getUserInfo().customer?.email.toString(),
+//                    financial_status = "cash",
+//                    line_items = lineItem,
+//                    phone = sharedPref.getUserInfo().customer?.phone.toString()
+////                    shipping_address = ,
+////                    transactions =
+//
+//
+//                )
+//
+//            vm.postOrder(order)
+//            vm.orderSuccess.observe(viewLifecycleOwner) {
+//                if (it == true) {
+//                    Toast.makeText(requireContext(), "Successfully", Toast.LENGTH_LONG).show()
+////                    findNavController().navigate(R.id.signInFragment)
+//                } else Toast.makeText(requireContext(), "Try again", Toast.LENGTH_LONG).show()
+//            }
+//        }
 
         binding.ivBack.setOnClickListener { findNavController().popBackStack() }
 

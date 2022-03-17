@@ -16,10 +16,15 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.hema.e_commerce.R
 import com.hema.e_commerce.adapter.address.AddressAdapter
 import com.hema.e_commerce.databinding.FragmentAddressBinding
+import com.hema.e_commerce.model.room.orderroom.OrderData
 import com.hema.e_commerce.util.SharedPreferencesProvider
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class Address : Fragment() {
@@ -77,10 +82,25 @@ class Address : Fragment() {
             @RequiresApi(Build.VERSION_CODES.M)
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, swipeDir: Int) {
                 val position = viewHolder.adapterPosition
-                val id = adapter.removeItem(position)
-                viewModel.delete(id)
-                adapter.notifyDataSetChanged()
-                Toast.makeText(requireActivity(), "Location deleted", Toast.LENGTH_SHORT).show()
+
+                MaterialAlertDialogBuilder(requireActivity())
+                    .setTitle("Address")
+                    .setMessage("Do you want delete this address")
+                    .setPositiveButton(getString(R.string.ok)) { _, _ ->
+                        val id = adapter.removeItem(position)
+                        viewModel.delete(id)
+                        adapter.notifyDataSetChanged()
+                        Toast.makeText(requireActivity(), "Location deleted", Toast.LENGTH_SHORT).show()                    }
+                    .setNegativeButton(getString(R.string.cancel)) { _, _ ->
+                        adapter.notifyDataSetChanged()
+                        Toast.makeText(
+                            requireActivity(),
+                            getString(R.string.order_oanceled),
+                            Toast.LENGTH_SHORT
+                        )
+                            .show()
+                    }.show()
+
             }
         }
         val itemTouchHelper = ItemTouchHelper(simpleItemTouchCallback)

@@ -293,20 +293,20 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/constraintLayout3"
                     tools:ignore="MissingConstraints" />
-                <Button
-                    android:id="@+id/btnOrderRepo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="5dp"
-                    android:text="repo"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout3"
-                    tools:ignore="MissingConstraints" />
+<!--                <Button-->
+<!--                    android:id="@+id/btnOrderRepo"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="5dp"-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    android:layout_marginEnd="5dp"-->
+<!--                    android:text="repo"-->
+<!--                    android:textAllCaps="false"-->
+<!--                    android:textColor="@color/white"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout3"-->
+<!--                    tools:ignore="MissingConstraints" />-->
             </LinearLayout>
         </ScrollView>
     </LinearLayout>

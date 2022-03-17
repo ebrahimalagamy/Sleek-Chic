@@ -47,6 +47,7 @@ class SignInFragment : Fragment() {
                 viewModel.mldSignIn.observe(viewLifecycleOwner) {
                     if (it!!) {
                         Toast.makeText(requireContext(), "Successfully Login", Toast.LENGTH_LONG).show()
+
                         viewModel.AuthRepo.sharedPref.checkSignIn(true)
                         val brandBundle=Bundle().apply {
                             putBoolean(SIGN_IN,true)
