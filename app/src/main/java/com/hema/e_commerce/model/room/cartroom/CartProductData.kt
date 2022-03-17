@@ -18,7 +18,7 @@ data class CartProductData(
     @ColumnInfo(name="title")
     val title: String,
     @ColumnInfo(name="price")
-    val price: String,
+    var price: String,
     @ColumnInfo(name="variants")
     var inventory_quantity: Int,
     @ColumnInfo(name = "count")
