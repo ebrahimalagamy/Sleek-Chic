@@ -124,8 +124,7 @@
         <action
             android:id="@+id/action_editAddress_to_address"
             app:destination="@id/address"
-            app:popUpTo="@id/editAddress"
-            app:popUpToInclusive="true" />
+            app:popUpTo="@id/editAddress" />
     </fragment>
     <fragment
         android:id="@+id/mapFragment"

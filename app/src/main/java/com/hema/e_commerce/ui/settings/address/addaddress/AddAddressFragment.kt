@@ -99,7 +99,8 @@ class AddAddressFragment : Fragment() {
                         viewModel.add.postValue(false)
                         Toast.makeText(requireContext(), "Successfully", Toast.LENGTH_LONG).show()
                         findNavController().popBackStack()
-                    } else Toast.makeText(requireContext(), "Try again", Toast.LENGTH_LONG).show()
+                    } else
+                        Toast.makeText(requireContext(), "Try again", Toast.LENGTH_LONG).show()
                 }
             }
         }

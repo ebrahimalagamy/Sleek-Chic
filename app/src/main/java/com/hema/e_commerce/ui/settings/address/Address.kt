@@ -94,6 +94,7 @@ class Address : Fragment() {
         }
         binding.ivBack.setOnClickListener {
             findNavController().popBackStack()
+
         }
 
 

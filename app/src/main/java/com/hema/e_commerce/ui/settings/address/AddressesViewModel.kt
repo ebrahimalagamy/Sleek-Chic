@@ -115,7 +115,7 @@ class AddressesViewModel(application: Application, val AuthRepo: AuthRepo) :
                     list.postValue(response.data!!)
                     if (pref.getAddress() == null)
                         if (response.data.addresses!!.isNotEmpty()) {
-                            pref.saveAddress(response.data.addresses?.get(0)!!)
+                            pref.saveAddress(response.data.addresses[0]!!)
                         }
 
                 }

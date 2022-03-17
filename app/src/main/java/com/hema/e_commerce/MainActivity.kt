@@ -39,7 +39,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var viewModel: MainActivityViewModel
     private lateinit var sharedPref: SharedPreferencesProvider
 
-
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -159,28 +158,28 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
-    lateinit  var cartBadge: BadgeDrawable
+    lateinit var cartBadge: BadgeDrawable
+
     @RequiresApi(Build.VERSION_CODES.M)
     fun cartIconBadge() {
-         cartBadge = binding.bottomNavView.getOrCreateBadge(R.id.cart)
+        cartBadge = binding.bottomNavView.getOrCreateBadge(R.id.cart)
         cartBadge.badgeTextColor = getColor(R.color.myRed)
         cartBadge.maxCharacterCount = 5000
         cartBadge.badgeTextColor = getColor(R.color.white)
 
-            viewModel.getCartProducts(sharedPref.getUserInfo().customer?.customerId!!)
-                .observe(this, Observer {
-                    cartBadge.number = it.size
-                    cartBadge.isVisible = it.isNotEmpty()
+        viewModel.getCartProducts(sharedPref.getUserInfo().customer?.customerId!!)
+            .observe(this, Observer {
+                cartBadge.number = it.size
+                cartBadge.isVisible = it.isNotEmpty()
 
-                })
-        }
-
-    fun clearCartIconBadge(){
-        cartBadge = binding.bottomNavView.getOrCreateBadge(R.id.cart)
-        cartBadge.isVisible=false
-
+            })
     }
 
+    fun clearCartIconBadge() {
+        cartBadge = binding.bottomNavView.getOrCreateBadge(R.id.cart)
+        cartBadge.isVisible = false
+
+    }
 
 
 }

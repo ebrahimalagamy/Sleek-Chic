@@ -94,12 +94,14 @@ class Checkout : Fragment() {
     private fun bindUI() {
         val orderId = Random.nextLong(1000000, 10000000)
         val address = sharedPref.getAddress()
-        val customerName = address?.firstName.toString()
-        val customerAddress = address?.address1
-        val customerPhone = address?.phone
+        val customerName = address?.firstName?:"Select Address"
+        val customerAddress = address?.address1?:""
+        val customerPhone = address?.phone?:""
+
         binding.tvCustomerAddress.text = customerAddress
         binding.tvCustomerName.text = customerName
         binding.tvCustomerPhone.text = customerPhone
+
         var paymentMethod: String? = null
         val totalPrice = binding.tvTotalPrice.text.toString()
 
@@ -115,6 +117,9 @@ class Checkout : Fragment() {
             if (btn != null) {
                 paymentMethod = btn.text.toString()
             }
+
+            if (customerAddress.isNotEmpty() ||customerName.isNotEmpty()||customerPhone.isNotEmpty() ){
+
 
             when (paymentMethod) {
                 getString(R.string.pay_with_cash) -> {
@@ -177,8 +182,15 @@ class Checkout : Fragment() {
                 }
 
             }
-
+            }else{
+                Toast.makeText(
+                    requireActivity(),
+                   "Add Information Address",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
         }
+
 
         binding.btnOrderRepo.setOnClickListener {
             val order =

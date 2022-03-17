@@ -26,6 +26,7 @@ class SignUpFragment : Fragment() {
     private lateinit var userPassword: String
     private lateinit var userConfirmPassword: String
     lateinit var sharedPref: SharedPreferencesProvider
+    var lineItem: MutableList<Address> = arrayListOf()
 
 //    private lateinit var phone: String
 
@@ -54,12 +55,10 @@ class SignUpFragment : Fragment() {
 
     @RequiresApi(Build.VERSION_CODES.M)
     private fun bindNav() {
-        val id = Random.nextLong(1, 1000000)
-        val address = sharedPref.getLocation[2]
-        val lastName = ""
-        val defult :Boolean =false
-//        var lineItem: MutableList<Address> = arrayListOf()
-//        lineItem.add(Address(id,address,"","firstName","lastName","",defult,""))
+//        val id = Random.nextLong(1, 1000000)
+//        val address = sharedPref.getLocation[2]
+//        val lastName = ""
+//        val defult: Boolean = true
         binding.btnSignUp.setOnClickListener {
             if (validateForm()) {
 
@@ -70,7 +69,7 @@ class SignUpFragment : Fragment() {
                         email = userEmail,
                         password = userPassword,
                         passwordConfirmation = userConfirmPassword,
-//                        addresses =lineItem
+//                        addresses = lineItem
 //                        phone = phone
                     )
                 )
@@ -87,6 +86,7 @@ class SignUpFragment : Fragment() {
     }
 
     private fun validateForm(): Boolean {
+        lineItem.add(Address(55555, "fffdsfsdf", "ddd", "firstName", "lastName", "55", true, "01026241542"))
         firstName = binding.etUsername.text.toString()
         userEmail = binding.etEmail.text.toString()
         userPassword = binding.etPassword.text.toString()
