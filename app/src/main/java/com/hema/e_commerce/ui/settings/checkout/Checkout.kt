@@ -91,17 +91,17 @@ class Checkout : Fragment() {
         val orderId = Random.nextLong(1000000, 10000000)
         val address = sharedPref.getAddress()
 
-        var customerName = address?.firstName
+        var customerName = address?.firstName ?:"Please Select address"
         var customerAddress = address?.address1
         var customerPhone = address?.phone
-        if (customerName!!.isEmpty()){
-            customerName = sharedPref.getUserInfo().customer?.firstName
-        }else if(customerAddress!!.isEmpty()){
-
-            customerAddress = sharedPref.getLocation[2]
-        }else if (customerPhone!!.isEmpty()){
-            customerPhone = sharedPref.getUserInfo().customer?.phone
-        }
+//        if (customerName!!.isEmpty()){
+//            customerName = sharedPref.getUserInfo().customer?.firstName
+//        }else if(customerAddress!!.isEmpty()){
+//
+//            customerAddress = sharedPref.getLocation[2]
+//        }else if (customerPhone!!.isEmpty()){
+//            customerPhone = sharedPref.getUserInfo().customer?.phone
+//        }
 
         binding.tvCustomerAddress.text = customerAddress
         binding.tvCustomerName.text = customerName
@@ -122,72 +122,76 @@ class Checkout : Fragment() {
             if (btn != null) {
                 paymentMethod = btn.text.toString()
             }
-
-            when (paymentMethod) {
-                getString(R.string.pay_with_cash) -> {
-                    MaterialAlertDialogBuilder(requireActivity())
-                        .setTitle(getString(R.string.currency))
-                        .setMessage(getString(R.string.do_you_want_confirm_your_order))
-                        .setPositiveButton(getString(R.string.ok)) { _, _ ->
-                            viewModel.deleteALL(sharedPref.getUserInfo().customer?.customerId!!)
-                            Toast.makeText(
-                                requireActivity(),
-                                getString(R.string.confirmed),
-                                Toast.LENGTH_SHORT
-                            ).show()
-                            CoroutineScope(Dispatchers.IO).launch {
-                                viewModel.addOrder(
-                                    OrderData(
-                                        orderId,
-                                        sharedPref.getUserInfo().customer?.customerId,
-                                        totalPrice,
-                                        customerName!!,
-                                        customerAddress!!,
-                                        customerPhone!!,
-                                        paymentMethod!!,
-                                        "ACTIVE"
+//            if (customerName == "Select Address") {
+                when (paymentMethod) {
+                    getString(R.string.pay_with_cash) -> {
+                        MaterialAlertDialogBuilder(requireActivity())
+                            .setTitle(getString(R.string.currency))
+                            .setMessage(getString(R.string.do_you_want_confirm_your_order))
+                            .setPositiveButton(getString(R.string.ok)) { _, _ ->
+                                viewModel.deleteALL(sharedPref.getUserInfo().customer?.customerId!!)
+                                Toast.makeText(
+                                    requireActivity(),
+                                    getString(R.string.confirmed),
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                CoroutineScope(Dispatchers.IO).launch {
+                                    viewModel.addOrder(
+                                        OrderData(
+                                            orderId,
+                                            sharedPref.getUserInfo().customer?.customerId,
+                                            totalPrice,
+                                            customerName!!,
+                                            customerAddress!!,
+                                            customerPhone!!,
+                                            paymentMethod!!,
+                                            "ACTIVE"
+                                        )
                                     )
-                                )
 
-                                (activity as MainActivity?)?. clearCartIconBadge()
+                                    (activity as MainActivity?)?.clearCartIconBadge()
+                                }
+                                findNavController().popBackStack()
                             }
-                            findNavController().popBackStack()
-                        }
-                        .setNegativeButton(getString(R.string.cancel)) { _, _ ->
-                            Toast.makeText(
-                                requireActivity(),
-                                getString(R.string.order_oanceled),
-                                Toast.LENGTH_SHORT
-                            )
-                                .show()
-                        }.show()
+                            .setNegativeButton(getString(R.string.cancel)) { _, _ ->
+                                Toast.makeText(
+                                    requireActivity(),
+                                    getString(R.string.order_oanceled),
+                                    Toast.LENGTH_SHORT
+                                )
+                                    .show()
+                            }.show()
 
 
-                }
-                getString(R.string.pay_with_paypal) -> {
-                    val totalPaypal = totalPrice.toDouble() / 15.7
-                    var payment = PayPalPayment(
-                        BigDecimal.valueOf(totalPaypal),
-                        "USD",
-                        "Checkout",
-                        PayPalPayment.PAYMENT_INTENT_SALE
-                    )
-                    val intent = Intent(requireActivity(), PaymentActivity::class.java)
-                    intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config)
-                    intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payment)
-                    requireActivity().startActivityForResult(intent, 123)
-                }
-                else -> {
-                    Toast.makeText(
-                        requireActivity(),
-                        getString(R.string.select_way_to_pay),
-                        Toast.LENGTH_LONG
-                    ).show()
-                }
+                    }
+                    getString(R.string.pay_with_paypal) -> {
+                        val totalPaypal = totalPrice.toDouble() / 15.7
+                        var payment = PayPalPayment(
+                            BigDecimal.valueOf(totalPaypal),
+                            "USD",
+                            "Checkout",
+                            PayPalPayment.PAYMENT_INTENT_SALE
+                        )
+                        val intent = Intent(requireActivity(), PaymentActivity::class.java)
+                        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config)
+                        intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payment)
+                        requireActivity().startActivityForResult(intent, 123)
+                    }
+                    else -> {
+                        Toast.makeText(
+                            requireActivity(),
+                            getString(R.string.select_way_to_pay),
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
 
+                }
             }
+//            else{
+//                Toast.makeText(context, "Please Add Address", Toast.LENGTH_SHORT).show()
+//            }
 
-        }
+//        }
 
 
 //        binding.btnOrderRepo.setOnClickListener {

@@ -6,8 +6,6 @@ import androidx.lifecycle.*
 import com.hema.e_commerce.model.repository.Repository
 import com.hema.e_commerce.model.room.cartroom.CartProductData
 import com.hema.e_commerce.model.room.favoriteRoom.FavoriteProduct
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 
@@ -16,6 +14,10 @@ class CartViewModel(private val repo: Repository,app: Application) : AndroidView
     private val ChangeQuntityListener = MutableLiveData<Boolean>()
     private val order = MutableLiveData<Long>()
     private val favOrder = MutableLiveData<CartProductData>()
+    fun deleteOnItemCart(cartItem: CartProductData)=repo.deleteOneCartItem(cartItem)
+    var deleteItem : MutableLiveData<CartProductData> = MutableLiveData()
+    fun getFavProducts(customerId:Long) = repo.getAllFav(customerId)
+
 
 
     fun onCountChange(item:Int){
@@ -39,19 +41,14 @@ class CartViewModel(private val repo: Repository,app: Application) : AndroidView
 
 
     fun getCartProducts(customerId:Long)= repo.getAllCartProduct(customerId)
-    fun getFavProducts(customerId:Long) = repo.getAllFav(customerId)
-
-    //  fun getCartProductCount(id:Long)= repo.getCartproduct(id)
+  //  fun getCartProductCount(id:Long)= repo.getCartproduct(id)
 
 
 
     fun deleteOneItemCart(cartItem: CartProductData)=repo.deleteOneCartItem(cartItem)
 
-
-
     fun updateItemCount(cartItem: CartProductData)=repo.updateCountChange(cartItem)
     fun insertFav(favoriteProduct: FavoriteProduct)=repo.insert(favoriteProduct)
-    fun getOneItemFromRoom(id: Long,customerId:Long) = repo.getOneItem(id,customerId)
 
 
 

@@ -89,8 +89,7 @@ class AddAddressFragment : Fragment() {
                         firstName = firstName,
                         lastName = lastName,
                         zip = "000",
-                        default = isDefult.toBoolean()
-                        , phone = phone
+                        default = isDefult.toBoolean(), phone = phone
                     )
                 )
                 viewModel.postData(address)

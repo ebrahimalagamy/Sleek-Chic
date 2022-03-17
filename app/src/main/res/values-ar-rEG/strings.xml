@@ -92,8 +92,8 @@
     <string name="currency">العملة</string>
     <string name="apply">تطبيق</string>
     <string name="free">مجانا</string>
-    <string name="pay_with_cash">الدفع نقدا</string>
-    <string name="pay_with_paypal">الدفع بواسط  Paypal</string>
+    <string name="pay_with_cash">Pay With Cash</string>
+    <string name="pay_with_paypal">Pay With Paypal</string>
     <string name="order">طلب</string>
     <string name="shipping_fee">رسوم الشحن</string>
     <string name="subtotal">المجموع الفرعي</string>
@@ -115,6 +115,11 @@
     <string name="alertdelteMessage">هل تريد مسح هذا الطلب ؟</string>
     <string name="product_details">Product Details</string>
     <string name="sign_in_message">يرجى تسجيل الدخول للاستمتاع بكافه الخدمات المتوفره</string>
-    <string name="select">Select</string>
+    <string name="select">اختار</string>
+    <string name="addToFavorite">الاضافه الى المفضله</string>
+    <string name="shopping_bag">حقيبة التسوق</string>
+    <string name="address_line">العنوان</string>
+    <string name="first_name">الاسم الاول</string>
+    <string name="last_name">اسم العائلة</string>
 
 </resources>

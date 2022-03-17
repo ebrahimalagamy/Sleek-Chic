@@ -20,16 +20,21 @@
         <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/fragment_add_address.xml" value="0.20416666666666666" />
         <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/fragment_address.xml" value="0.20416666666666666" />
         <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/fragment_checkout.xml" value="0.20416666666666666" />
+        <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/fragment_edit_profile.xml" value="0.1" />
         <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/fragment_order.xml" value="0.18" />
         <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/fragment_product.xml" value="0.25" />
+        <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/fragment_profile.xml" value="0.20416666666666666" />
         <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/fragment_search.xml" value="0.2" />
+        <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/fragment_select_address.xml" value="0.20416666666666666" />
         <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/fragment_type_list_product.xml" value="0.30701754385964913" />
         <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/fragment_wishlist.xml" value="0.20416666666666666" />
         <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/home_fragment.xml" value="0.33" />
+        <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/item_adresses.xml" value="0.1" />
         <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/item_cart.xml" value="0.20416666666666666" />
         <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/item_favorite.xml" value="0.4717208182912154" />
         <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/item_order.xml" value="0.33" />
         <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/item_product_list.xml" value="0.33" />
+        <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/item_select_adresses.xml" value="0.1" />
         <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/item_wishlist.xml" value="0.25" />
         <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/list_toolbar_view.xml" value="0.33" />
         <entry key="..\:/ITI_Project/FinalProject/E-Commerce/app/src/main/res/layout/loading_progress.xml" value="0.20416666666666666" />
