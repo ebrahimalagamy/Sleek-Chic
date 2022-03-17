@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.hema.e_commerce.MainActivity
 import com.hema.e_commerce.R
 import com.hema.e_commerce.databinding.FragmentCheckoutBinding
 import com.hema.e_commerce.model.dataclass.test.LineItem
@@ -143,7 +144,9 @@ class Checkout : Fragment() {
                                     )
                                 )
 
+                                (activity as MainActivity?)?. clearCartIconBadge()
                             }
+                            findNavController().popBackStack()
                         }
                         .setNegativeButton(getString(R.string.cancel)) { _, _ ->
                             Toast.makeText(
