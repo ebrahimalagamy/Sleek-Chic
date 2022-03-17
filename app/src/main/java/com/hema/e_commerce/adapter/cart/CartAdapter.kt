@@ -2,8 +2,6 @@ package com.hema.e_commerce.adapter.cart
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.provider.Settings.Global.getString
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
@@ -20,9 +18,13 @@ import com.hema.e_commerce.model.viewmodels.CartViewModel
 import com.hema.e_commerce.model.viewmodels.CurrancyViewModel
 import com.hema.e_commerce.util.SharedPreferencesProvider
 
-class CartAdapter(private val currencyViewModel: CurrancyViewModel,private val cartViewModel: CartViewModel,private val context: Context) : RecyclerView.Adapter<CartAdapter.ViewHolder>() {
+class CartAdapter(
+    private val currencyViewModel: CurrancyViewModel,
+    private val cartViewModel: CartViewModel,
+    private val context: Context
+) : RecyclerView.Adapter<CartAdapter.ViewHolder>() {
     private lateinit var sharedPref: SharedPreferencesProvider
-    var currancy=context.getString(R.string.eg)
+    var currancy = context.getString(R.string.eg)
 
 
     inner class ViewHolder(itemCartBinding: ItemCartBinding) :
@@ -55,33 +57,33 @@ class CartAdapter(private val currencyViewModel: CurrancyViewModel,private val c
         var value = sharedPreferences.getString("currency", "EGP")
         when (value) {
             "EGP" -> {
-                    currancy=context.getString(R.string.eg)
+                currancy = context.getString(R.string.eg)
 
-                initViews("EGP",(differ.currentList[position].price).toDouble() )
-                currancyObserve(holder)
+                initViews("EGP", (differ.currentList[position].price).toDouble())
+                currancyObserve(holder, position)
 
             }
             "USA" -> {
-                currancy=context.getString(R.string.us)
+                currancy = context.getString(R.string.us)
 
                 //val number: Double = String.format("%.2f", usCurrancy).toDouble()
-                initViews("USD",(differ.currentList[position].price).toDouble() )
+                initViews("USD", (differ.currentList[position].price).toDouble())
 
-                currancyObserve(holder)
+                currancyObserve(holder, position)
 
             }
             "EUR" -> {
-                currancy=context.getString(R.string.eur)
+                currancy = context.getString(R.string.eur)
 
-                initViews("EUR",(differ.currentList[position].price).toDouble() )
+                initViews("EUR", (differ.currentList[position].price).toDouble())
 
-                currancyObserve(holder)
+                currancyObserve(holder, position)
             }
             else -> {
-                currancy=context.getString(R.string.eg)
+                currancy = context.getString(R.string.eg)
 
-                initViews("EGP",(differ.currentList[position].price).toDouble() )
-                currancyObserve(holder)
+                initViews("EGP", (differ.currentList[position].price).toDouble())
+                currancyObserve(holder, position)
             }
         }
         holder.itemCartBinding.copoun.text = "free delevery"
@@ -94,7 +96,7 @@ class CartAdapter(private val currencyViewModel: CurrancyViewModel,private val c
 
         holder.itemCartBinding.tvcount.text = differ.currentList[position].count.toString()
         holder.itemCartBinding.minCount.setOnClickListener {
-            if (holder.itemCartBinding.tvcount.text.toString().toInt() >1) {
+            if (holder.itemCartBinding.tvcount.text.toString().toInt() > 1) {
                 var counter = holder.itemCartBinding.tvcount.text.toString().toInt()
                 counter -= 1
                 val cartitem = CartProductData(
@@ -104,29 +106,34 @@ class CartAdapter(private val currencyViewModel: CurrancyViewModel,private val c
                     differ.currentList[position].title,
                     differ.currentList[position].price,
                     differ.currentList[position].inventory_quantity,
-                    counter)
+                    counter
+                )
                 cartViewModel.updateItemCount(cartitem)
                 cartViewModel.onChangeQuntity()
                 cartViewModel.onCountChange(counter)
             }
         }
         holder.itemCartBinding.increCount.setOnClickListener {
-                if (holder.itemCartBinding.tvcount.text.toString().toInt() < differ.currentList[position].inventory_quantity) {
+            if (holder.itemCartBinding.tvcount.text.toString()
+                    .toInt() < differ.currentList[position].inventory_quantity
+            ) {
                 var counter = holder.itemCartBinding.tvcount.text.toString().toInt()
                 counter += 1
-                    val cartitem = CartProductData(
-                        differ.currentList[position].id,
-                        sharedPref.getUserInfo().customer?.customerId,
-                        differ.currentList[position].image,
-                        differ.currentList[position].title,
-                        differ.currentList[position].price,
-                        differ.currentList[position].inventory_quantity,
-                        counter)
-                    cartViewModel.updateItemCount(cartitem)
-                    cartViewModel.onChangeQuntity()
-                    cartViewModel. onCountChange(counter)
-            }else{
-                Toast.makeText(context, "No More Pieces In Inventory", Toast.LENGTH_SHORT).show() }
+                val cartitem = CartProductData(
+                    differ.currentList[position].id,
+                    sharedPref.getUserInfo().customer?.customerId,
+                    differ.currentList[position].image,
+                    differ.currentList[position].title,
+                    differ.currentList[position].price,
+                    differ.currentList[position].inventory_quantity,
+                    counter
+                )
+                cartViewModel.updateItemCount(cartitem)
+                cartViewModel.onChangeQuntity()
+                cartViewModel.onCountChange(counter)
+            } else {
+                Toast.makeText(context, "No More Pieces In Inventory", Toast.LENGTH_SHORT).show()
+            }
         }
 
 
@@ -160,35 +167,37 @@ class CartAdapter(private val currencyViewModel: CurrancyViewModel,private val c
     }
 
 
-
-
     // util to see only change in articles to refresh it only not like we give list and we refresh all list
-    private val differCallBack = object : DiffUtil.ItemCallback<CartProductData>(){
-        override fun areItemsTheSame(oldItem: CartProductData,newItem:CartProductData):Boolean{
+    private val differCallBack = object : DiffUtil.ItemCallback<CartProductData>() {
+        override fun areItemsTheSame(oldItem: CartProductData, newItem: CartProductData): Boolean {
             return oldItem.id == newItem.id
         }
-        override fun areContentsTheSame(oldItem: CartProductData, newItem: CartProductData): Boolean {
+
+        override fun areContentsTheSame(
+            oldItem: CartProductData,
+            newItem: CartProductData
+        ): Boolean {
             return oldItem == newItem
         }
     }
 
     //Async list differ take two list and compare them to change the difference only it run on background
-    val differ= AsyncListDiffer(this,differCallBack)
+    val differ = AsyncListDiffer(this, differCallBack)
 //currancy
 
 
-    private fun initViews( to: String,amount:Double) {
+    private fun initViews(to: String, amount: Double) {
         currencyViewModel.changeCurrancy(to, amount)
     }
 
-    fun currancyObserve(holder: ViewHolder){
-        currencyViewModel.currancyLiveData.observeForever{
-
-
-            val number: Double = String.format("%.2f", it.result).toDouble()
-            holder.itemCartBinding.price.text =number.toString()+currancy
+    fun currancyObserve(holder: ViewHolder, position: Int) {
+        currencyViewModel.currancyLiveData.observeForever {
+//            differ.currentList[position].price = it.result.toString() + currancy
+//            val number: Double = String.format("%.2f", it.result).toDouble()
+            holder.itemCartBinding.price.text = differ.currentList[position].price + currancy
 
 
         }
 
-    }}
+    }
+}

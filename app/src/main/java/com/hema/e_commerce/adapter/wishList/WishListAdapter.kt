@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.hema.e_commerce.R
-import com.hema.e_commerce.adapter.cart.CartAdapter
 import com.hema.e_commerce.databinding.ItemFavoriteBinding
 import com.hema.e_commerce.model.room.cartroom.CartProductData
 import com.hema.e_commerce.model.room.favoriteRoom.FavoriteProduct
@@ -26,22 +25,26 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class WishListAdapter(private val currencyViewModel: CurrancyViewModel, val context:Context, var viewModel:WishListViewModel) : RecyclerView.Adapter<WishListAdapter.ViewHolder>() {
+class WishListAdapter(
+    private val currencyViewModel: CurrancyViewModel,
+    val context: Context,
+    var viewModel: WishListViewModel
+) : RecyclerView.Adapter<WishListAdapter.ViewHolder>() {
     private lateinit var navController: NavController
     private lateinit var sharedPref: SharedPreferencesProvider
-    var currancy=context.getString(R.string.eg)
+    var currancy = context.getString(R.string.eg)
 
 
-
-    inner class ViewHolder( val binding: ItemFavoriteBinding) : RecyclerView.ViewHolder(binding.root)
-
+    inner class ViewHolder(val binding: ItemFavoriteBinding) : RecyclerView.ViewHolder(binding.root)
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        navController= Navigation.findNavController(parent)
+        navController = Navigation.findNavController(parent)
         sharedPref = SharedPreferencesProvider(context)
-        return ViewHolder(DataBindingUtil.inflate(LayoutInflater.from(parent.context),
-            R.layout.item_favorite, parent, false
+        return ViewHolder(
+            DataBindingUtil.inflate(
+                LayoutInflater.from(parent.context),
+                R.layout.item_favorite, parent, false
             )
         )
 
@@ -50,61 +53,62 @@ class WishListAdapter(private val currencyViewModel: CurrancyViewModel, val cont
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.tvTitlefav.text = differ.currentList[position].title
         //Handle Currency
-        val sharedPreferences: SharedPreferences =context.getSharedPreferences("currency", 0)
-        var value = sharedPreferences.getString("currency","EGP")
-        when(value){
-            "USA"-> {
+        val sharedPreferences: SharedPreferences = context.getSharedPreferences("currency", 0)
+        var value = sharedPreferences.getString("currency", "EGP")
+        when (value) {
+            "USA" -> {
 
 
-                currancy=context.getString(R.string.us)
+                currancy = context.getString(R.string.us)
 
                 //val number: Double = String.format("%.2f", usCurrancy).toDouble()
-                initViews("USD",(differ.currentList[position].price).toDouble() )
+                initViews("USD", (differ.currentList[position].price).toDouble())
 
                 currancyObserve(holder)
 
             }
-            "EUR"->      {
-                currancy=context.getString(R.string.eur)
+            "EUR" -> {
+                currancy = context.getString(R.string.eur)
 
-                initViews("EUR",(differ.currentList[position].price).toDouble() )
+                initViews("EUR", (differ.currentList[position].price).toDouble())
 
                 currancyObserve(holder)
             }
-            else-> {  // holder.binding.tvPrice.text = differ.currentList[position].price+" "+"EGP"
-                currancy=context.getString(R.string.eg)
+            else -> {  // holder.binding.tvPrice.text = differ.currentList[position].price+" "+"EGP"
+                currancy = context.getString(R.string.eg)
 
-                initViews("EGP",(differ.currentList[position].price).toDouble() )
+                initViews("EGP", (differ.currentList[position].price).toDouble())
                 currancyObserve(holder)
 
-             }
+            }
 
         }
 
-      //  holder.binding.tvDescription.text = differ.currentList[position].body_html
+        //  holder.binding.tvDescription.text = differ.currentList[position].body_html
 
-        CoroutineScope(Dispatchers.Main).launch{
+        CoroutineScope(Dispatchers.Main).launch {
             Glide.with(holder.binding.imgFavProduct.context)
                 .load(differ.currentList[position].image).into(holder.binding.imgFavProduct)
         }
 
-        holder.itemView.setOnClickListener{
-            val bundle = bundleOf(Constant.PRODUCT to  differ.currentList[position].id)
+        holder.itemView.setOnClickListener {
+            val bundle = bundleOf(Constant.PRODUCT to differ.currentList[position].id)
 
-            navController.navigate(R.id.productFragment,bundle)
+            navController.navigate(R.id.productFragment, bundle)
 
         }
 
         holder.binding.btnAddToCart.setOnClickListener(View.OnClickListener {
-        val cart=CartProductData(
-            differ.currentList[position].id,
-            sharedPref.getUserInfo().customer?.customerId,
-            differ.currentList[position].image,
-            differ.currentList[position].title,
-            differ.currentList[position].price,
-            differ.currentList[position].inventory_quantity,
-            1)
-        viewModel.saveCartList(cart)
+            val cart = CartProductData(
+                differ.currentList[position].id,
+                sharedPref.getUserInfo().customer?.customerId,
+                differ.currentList[position].image,
+                differ.currentList[position].title,
+                differ.currentList[position].price,
+                differ.currentList[position].inventory_quantity,
+                1
+            )
+            viewModel.saveCartList(cart)
 
 
         })
@@ -118,28 +122,32 @@ class WishListAdapter(private val currencyViewModel: CurrancyViewModel, val cont
 
 
     // util to see only change in articles to refresh it only not like we give list and we refresh all list
-    private val differCallBack = object : DiffUtil.ItemCallback<FavoriteProduct>(){
-        override fun areItemsTheSame(oldItem: FavoriteProduct,newItem: FavoriteProduct):Boolean{
+    private val differCallBack = object : DiffUtil.ItemCallback<FavoriteProduct>() {
+        override fun areItemsTheSame(oldItem: FavoriteProduct, newItem: FavoriteProduct): Boolean {
             return oldItem.id == newItem.id
         }
-        override fun areContentsTheSame(oldItem: FavoriteProduct, newItem: FavoriteProduct): Boolean {
+
+        override fun areContentsTheSame(
+            oldItem: FavoriteProduct,
+            newItem: FavoriteProduct
+        ): Boolean {
             return oldItem == newItem
         }
     }
 
     //Async list differ take two list and compare them to change the difference only it run on background
-    val differ= AsyncListDiffer(this,differCallBack)
+    val differ = AsyncListDiffer(this, differCallBack)
 
-    private fun initViews( to: String,amount:Double) {
+    private fun initViews(to: String, amount: Double) {
         currencyViewModel.changeCurrancy(to, amount)
     }
 
-    fun currancyObserve(holder:ViewHolder){
-        currencyViewModel.currancyLiveData.observeForever{
+    fun currancyObserve(holder: ViewHolder) {
+        currencyViewModel.currancyLiveData.observeForever {
 
-            val number: Double = String.format("%.2f", it.result).toDouble()
-            holder.binding.tvPrice.text =number.toString()+currancy
-
+//            val number: Double = String.format("%.2f", it.result).toDouble()
+            holder.binding.tvPrice.text = it.result.toString() + currancy
 
         }
-}}
+    }
+}
