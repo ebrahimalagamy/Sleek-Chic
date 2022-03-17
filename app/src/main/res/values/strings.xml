@@ -92,13 +92,13 @@
 
     <string name="chooselanguage">Choose Language</string>
     <string name="home_page">Home Page</string>
-    <string name="kid">KID</string>
-    <string name="men">MEN</string>
-    <string name="sale">SALE</string>
-    <string name="woman">WOMEN</string>
-    <string name="tshirt">T-SHIRTS</string>
-    <string name="shoes">SHOES</string>
-    <string name="accessories">ACCESSORIES</string>
+    <string name="kid" translatable="false">KID</string>
+    <string name="men" translatable="false">MEN</string>
+    <string name="sale" translatable="false">SALE</string>
+    <string name="woman" translatable="false">WOMEN</string>
+    <string name="tshirt" translatable="false">T-SHIRTS</string>
+    <string name="shoes" translatable="false">SHOES</string>
+    <string name="accessories" translatable="false">ACCESSORIES</string>
     <string name="loading">Loading...!!</string>
 
     <string name="me">Me</string>

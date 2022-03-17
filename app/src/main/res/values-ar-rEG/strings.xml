@@ -80,13 +80,8 @@
     <string name="no">لا</string>
     <string name="chooselanguage">اختار لغه</string>
     <string name="home_page">الصفحه الرئيسيه</string>
-    <string name="kid">اطفال</string>
-    <string name="men">رجال</string>
-    <string name="sale">تخفيضات</string>
-    <string name="woman">نساء</string>
-    <string name="shoes">احذيه</string>
-    <string name="accessories">اكسسورات</string>
-    <string name="tshirt">تي شيرت</string>
+
+
     <string name="loading">تحميل</string>
     <string name="me">انا</string>
     <string name="alertActiveMessage2">هل تريد الغاء هذا الطلب</string>

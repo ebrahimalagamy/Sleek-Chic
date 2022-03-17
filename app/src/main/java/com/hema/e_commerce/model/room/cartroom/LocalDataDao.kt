@@ -21,8 +21,8 @@ interface LocalDataDao {
     @Delete
     suspend  fun deleteOnCartItem(cartProduct: CartProductData)
 
-    @Query("DELETE FROM ProductCart")
-    suspend fun deleteAll()
+    @Query("DELETE FROM ProductCart Where customer_id= :customerId")
+    suspend fun deleteAll(customerId:Long)
 
 
 

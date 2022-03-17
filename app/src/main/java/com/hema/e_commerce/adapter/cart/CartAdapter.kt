@@ -166,6 +166,11 @@ class CartAdapter(private val cartViewModel: CartViewModel,private val context: 
         holder.itemCartBinding.cancel.setOnClickListener {
             cartViewModel.deleteOneItemCart(cartProduct)
         }
+/*
+        holder.itemCartBinding.favBt.setOnClickListener {
+            fav(differ.currentList[position])
+        }*/
+
 
     }
 
