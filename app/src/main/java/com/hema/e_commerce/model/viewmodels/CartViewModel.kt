@@ -6,6 +6,8 @@ import androidx.lifecycle.*
 import com.hema.e_commerce.model.repository.Repository
 import com.hema.e_commerce.model.room.cartroom.CartProductData
 import com.hema.e_commerce.model.room.favoriteRoom.FavoriteProduct
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 
@@ -45,8 +47,11 @@ class CartViewModel(private val repo: Repository,app: Application) : AndroidView
 
     fun deleteOneItemCart(cartItem: CartProductData)=repo.deleteOneCartItem(cartItem)
 
+
+
     fun updateItemCount(cartItem: CartProductData)=repo.updateCountChange(cartItem)
     fun insertFav(favoriteProduct: FavoriteProduct)=repo.insert(favoriteProduct)
+    fun getOneItemFromRoom(id: Long,customerId:Long) = repo.getOneItem(id,customerId)
 
 
 

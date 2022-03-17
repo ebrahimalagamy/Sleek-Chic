@@ -147,6 +147,11 @@ class CartAdapter(private val currencyViewModel: CurrancyViewModel,private val c
         holder.itemCartBinding.cancel.setOnClickListener {
             cartViewModel.deleteOneItemCart(cartProduct)
         }
+/*
+        holder.itemCartBinding.favBt.setOnClickListener {
+            fav(differ.currentList[position])
+        }*/
+
 
     }
 

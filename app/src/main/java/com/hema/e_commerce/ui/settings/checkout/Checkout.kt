@@ -127,12 +127,8 @@ class Checkout : Fragment() {
                         .setTitle(getString(R.string.currency))
                         .setMessage(getString(R.string.do_you_want_confirm_your_order))
                         .setPositiveButton(getString(R.string.ok)) { _, _ ->
-                            Toast.makeText(
-                                requireActivity(),
-                                getString(R.string.confirmed),
-                                Toast.LENGTH_SHORT
-                            )
-                                .show()
+                            viewModel.deleteALL(sharedPref.getUserInfo().customer?.customerId!!)
+                            Toast.makeText(requireActivity(), getString(R.string.confirmed), Toast.LENGTH_SHORT).show()
                             CoroutineScope(Dispatchers.IO).launch {
                                 viewModel.addOrder(
                                     OrderData(

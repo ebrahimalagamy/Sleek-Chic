@@ -209,6 +209,9 @@ class Repository(private val db: RoomData) {
 
     }
 
+
+
+
     fun insert(favoriteProduct: FavoriteProduct) {
         GlobalScope.launch(Dispatchers.IO) {
             fetchFav(favoriteProduct)
@@ -254,6 +257,10 @@ class Repository(private val db: RoomData) {
         db.getLocalDataObject().deleteOnCartItem(cartList)
     }
 
+    private suspend fun deleteAll(customerId:Long) {
+        db.getLocalDataObject().deleteAll(customerId)
+    }
+
     //Method to handle data
     fun insert(cartList: CartProductData) {
         GlobalScope.launch(Dispatchers.IO) {
@@ -270,6 +277,11 @@ class Repository(private val db: RoomData) {
     fun deleteOneCartItem(cartList: CartProductData) {
         GlobalScope.launch(Dispatchers.IO) {
             deleteOneItemOnCart(cartList)
+        }
+    }
+    fun deleteALL(customerId:Long) {
+        GlobalScope.launch(Dispatchers.IO) {
+            deleteAll(customerId)
         }
     }
 
