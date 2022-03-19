@@ -125,21 +125,21 @@
                 android:alpha=".5"
                 android:background="@color/light_gray" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="@string/security_information"
-                android:textSize="12sp"
-                android:textStyle="bold" />
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="20dp"-->
+<!--                android:text="@string/security_information"-->
+<!--                android:textSize="12sp"-->
+<!--                android:textStyle="bold" />-->
 
-            <Button
-                android:id="@+id/button"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_marginTop="10dp"
-                android:text="@string/change_password"
-                android:textSize="12dp" />
+<!--            <Button-->
+<!--                android:id="@+id/button"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:text="@string/change_password"-->
+<!--                android:textSize="12dp" />-->
         </LinearLayout>
 
 

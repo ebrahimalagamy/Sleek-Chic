@@ -119,18 +119,18 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/imageSlider" />
 
-                <TextView
-                    android:id="@+id/tv_Coupon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
-                    android:background="#EDEDED"
-                    android:padding="@dimen/_10sdp"
-                    android:text="GET COUPON"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageSlider"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/imageSlider" />
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_Coupon"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginBottom="12dp"-->
+<!--                    android:background="#EDEDED"-->
+<!--                    android:padding="@dimen/_10sdp"-->
+<!--                    android:text="GET COUPON"-->
+<!--                    app:layout_constraintBottom_toBottomOf="@+id/imageSlider"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="@+id/imageSlider" />-->
 
                 <TextView
                     android:id="@+id/brandsHeadLine"

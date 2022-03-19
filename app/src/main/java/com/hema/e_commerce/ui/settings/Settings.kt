@@ -162,7 +162,7 @@ class Settings : Fragment() {
         val sharedPreferences: SharedPreferences =
             requireContext().getSharedPreferences("language", 0)
 
-        selectedLanguageIndex = sharedPreferences.getInt("languageindex", -1)
+        selectedLanguageIndex = sharedPreferences.getInt("languageindex", 1)
         Log.i("setting language", "showChangeLang: " + selectedLanguageIndex)
 
 
