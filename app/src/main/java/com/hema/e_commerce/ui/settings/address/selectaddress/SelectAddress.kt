@@ -36,7 +36,6 @@ class SelectAddress : Fragment() {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_select_address, container, false)
         binding.vm = viewModel
-
         return binding.root
 
     }

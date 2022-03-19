@@ -2,6 +2,7 @@ package com.hema.e_commerce.adapter.cart
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
@@ -58,9 +59,8 @@ class CartAdapter(
         when (value) {
             "EGP" -> {
                 currancy = context.getString(R.string.eg)
-
                 initViews("EGP", (differ.currentList[position].price).toDouble())
-                currancyObserve(holder, position)
+                currancyObserve(holder)
 
             }
             "USA" -> {
@@ -69,21 +69,18 @@ class CartAdapter(
                 //val number: Double = String.format("%.2f", usCurrancy).toDouble()
                 initViews("USD", (differ.currentList[position].price).toDouble())
 
-                currancyObserve(holder, position)
+                currancyObserve(holder)
 
             }
             "EUR" -> {
                 currancy = context.getString(R.string.eur)
-
                 initViews("EUR", (differ.currentList[position].price).toDouble())
-
-                currancyObserve(holder, position)
+                currancyObserve(holder)
             }
             else -> {
                 currancy = context.getString(R.string.eg)
-
                 initViews("EGP", (differ.currentList[position].price).toDouble())
-                currancyObserve(holder, position)
+                currancyObserve(holder)
             }
         }
         holder.itemCartBinding.copoun.text = "free delevery"
@@ -190,11 +187,13 @@ class CartAdapter(
         currencyViewModel.changeCurrancy(to, amount)
     }
 
-    fun currancyObserve(holder: ViewHolder, position: Int) {
+    fun currancyObserve(holder: ViewHolder) {
         currencyViewModel.currancyLiveData.observeForever {
 //            differ.currentList[position].price = it.result.toString() + currancy
 //            val number: Double = String.format("%.2f", it.result).toDouble()
-            holder.itemCartBinding.price.text = differ.currentList[position].price + currancy
+            holder.itemCartBinding.price.text = it.result.toString()
+//            Log.d("price",""+differ.currentList[position].price)
+            Log.d("price", "" + it.result.toString())
 
 
         }

@@ -91,7 +91,7 @@ class Cart : Fragment() {
                             currancyObserve()
 
 ///
-                            initViews("EGP", ((totalCalc(product))))
+//                            initViews("EGP", ((totalCalc(product))))
 
                             subObserve()
 
@@ -108,7 +108,7 @@ class Cart : Fragment() {
 
 
                             //
-                            initViews("USD", (totalCalc(product)))
+//                            initViews("USD", (totalCalc(product)))
                             subObserve()
                             //   totalPriceWithoutSimp = number.toString()
 
@@ -121,7 +121,7 @@ class Cart : Fragment() {
                             currancyObserve()
                             //
 
-                            initViews("EUR", (totalCalc(product)))
+//                            initViews("EUR", (totalCalc(product)))
                             subObserve()
                             //
                             // totalPriceWithoutSimp = number.toString()
@@ -133,7 +133,7 @@ class Cart : Fragment() {
                             initViews("EGP", (totalCalc(product)))
                             currancyObserve()
                             //
-                            initViews("EGP", (totalCalc(product)))
+//                            initViews("EGP", (totalCalc(product)))
                             subObserve()
 
                             totalPriceWithoutSimp = totalCalc(product).toString()

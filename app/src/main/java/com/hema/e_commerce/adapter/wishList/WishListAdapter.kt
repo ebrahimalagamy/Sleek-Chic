@@ -57,13 +57,9 @@ class WishListAdapter(
         var value = sharedPreferences.getString("currency", "EGP")
         when (value) {
             "USA" -> {
-
-
                 currancy = context.getString(R.string.us)
-
                 //val number: Double = String.format("%.2f", usCurrancy).toDouble()
                 initViews("USD", (differ.currentList[position].price).toDouble())
-
                 currancyObserve(holder)
 
             }
