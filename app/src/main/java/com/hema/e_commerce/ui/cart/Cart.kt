@@ -31,7 +31,7 @@ class Cart : Fragment() {
     lateinit var cartFragmentBinding: CartFragmentBinding
     private lateinit var viewModel: CartViewModel
     private lateinit var sharedPref: SharedPreferencesProvider
-    lateinit var totalPriceWithoutSimp:String
+    private lateinit var totalPriceWithoutSimp:String
 
 
     override fun onCreateView(
